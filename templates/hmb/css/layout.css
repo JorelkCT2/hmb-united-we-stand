@@ -1,0 +1,1274 @@
+/**
+ * HMB Template — Layout & Floating Login CSS
+ * Appended to template.css
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   HEADER 2 FILAS
+   ═══════════════════════════════════════════════════════════ */
+.hmb-header-top {
+  border-bottom: 1px solid #111;
+}
+
+.hmb-header-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 90px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.hmb-header-banner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hmb-header-banner img {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+
+.hmb-header-nav {
+  background: var(--steel);
+  border-bottom: 2px solid var(--blood);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NOTICIAS — fila completa
+   ═══════════════════════════════════════════════════════════ */
+.hmb-row-noticias {
+  background: var(--dark);
+  padding: 3rem 0;
+  border-bottom: 1px solid #111;
+}
+
+.hmb-row-noticias .hmb-module-title {
+  font-family: 'Metal Mania', cursive;
+  font-size: 28px;
+  color: var(--white);
+  padding: 0 0 0.75rem;
+  margin-bottom: 1.5rem;
+  background: none;
+  border-left: none;
+  border-bottom: 2px solid var(--blood);
+  letter-spacing: 2px;
+}
+
+/* Grid de noticias: 3 columnas en desktop */
+.hmb-row-noticias .hmb-module-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+}
+
+/* Cada artículo dentro del módulo de noticias */
+.hmb-row-noticias .items-row,
+.hmb-row-noticias .item {
+  background: var(--steel);
+  overflow: hidden;
+  transition: transform 0.3s;
+  border-left: 3px solid transparent;
+}
+
+.hmb-row-noticias .items-row:hover,
+.hmb-row-noticias .item:hover {
+  transform: translateY(-3px);
+  border-left-color: var(--fire);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.hmb-row-noticias .items-row img,
+.hmb-row-noticias .item img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+  transition: filter 0.3s;
+}
+
+.hmb-row-noticias .items-row:hover img,
+.hmb-row-noticias .item:hover img {
+  filter: brightness(1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDER — fila completa
+   ═══════════════════════════════════════════════════════════ */
+.hmb-row-slider {
+  background: var(--darker);
+  padding: 0;
+  border-bottom: 1px solid #111;
+  overflow: hidden;
+}
+
+/* slider mismo ancho que otros modulos */
+
+.hmb-row-slider img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EFEMÉRIDES + FRASES — 2 columnas
+   ═══════════════════════════════════════════════════════════ */
+.hmb-row-ef-frases {
+  background: var(--dark);
+  padding: 3rem 0;
+  border-bottom: 1px solid #111;
+}
+
+.hmb-row-ef-frases-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.hmb-col-ef {
+  background: var(--steel);
+  padding: 2rem;
+  border-top: 3px solid var(--blood);
+  position: relative;
+  overflow: hidden;
+}
+
+.hmb-col-ef::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse at top left, rgba(139,0,0,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hmb-col-ef .hmb-module-title {
+  font-family: 'Metal Mania', cursive;
+  font-size: 22px;
+  color: var(--white);
+  padding: 0 0 0.6rem;
+  margin-bottom: 1.2rem;
+  background: none;
+  border-left: none;
+  border-bottom: 1px solid var(--blood);
+  letter-spacing: 1px;
+}
+
+.hmb-col-ef .hmb-module-content {
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+/* Efemérides: lista de ítems */
+.hmb-col-ef .hmb-module-content p,
+.hmb-col-ef .hmb-module-content li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #1a1a1a;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.hmb-col-ef .hmb-module-content p::before,
+.hmb-col-ef .hmb-module-content li::before {
+  content: '▸';
+  color: var(--fire);
+  font-size: 11px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* Frases: cita estilizada */
+.hmb-col-ef .hmb-module-content blockquote,
+.hmb-col-ef .hmb-module-content .frase {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--gold-light);
+  border-left: 3px solid var(--fire);
+  padding-left: 1.2rem;
+  margin: 0.5rem 0;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FLOATING LOGIN — fijo en pantalla
+   ═══════════════════════════════════════════════════════════ */
+.hmb-float-login {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9000;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Tab lateral — siempre visible */
+.hmb-float-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(180deg, var(--fire), var(--blood));
+  border: none;
+  border-radius: 6px 0 0 6px;
+  padding: 14px 8px;
+  cursor: pointer;
+  color: var(--white);
+  box-shadow: -4px 0 20px rgba(139,0,0,0.4);
+  transition: all 0.3s;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  min-height: 100px;
+  position: relative;
+  z-index: 2;
+}
+
+.hmb-float-tab:hover {
+  background: linear-gradient(180deg, var(--ember), var(--fire));
+  box-shadow: -6px 0 30px rgba(204,34,0,0.6);
+}
+
+.hmb-float-icon {
+  font-size: 20px;
+  writing-mode: horizontal-tb;
+  animation: hmbBreath 3s ease-in-out infinite;
+}
+
+.hmb-float-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+/* Panel desplegable */
+.hmb-float-panel {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  background: var(--steel);
+  border: 1px solid #222;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.8);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(20px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.hmb-float-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Botón cerrar dentro del panel */
+.hmb-float-close {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 10;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.hmb-float-close:hover { color: var(--ember); }
+
+/* Fallback si no hay módulo login asignado */
+.hmb-float-fallback {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hmb-float-fallback-title {
+  font-family: 'Metal Mania', cursive;
+  font-size: 20px;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px rgba(204,34,0,0.4);
+}
+
+.hmb-float-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #333;
+  color: var(--white);
+  padding: 10px 14px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.hmb-float-input:focus { border-color: var(--fire); }
+
+.hmb-float-btn {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--fire), var(--blood));
+  color: var(--white);
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+}
+
+.hmb-float-btn:hover { background: linear-gradient(135deg, var(--ember), var(--fire)); color: var(--white); }
+
+.hmb-float-register {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  transition: color 0.2s;
+}
+
+.hmb-float-register:hover { color: var(--gold-light); }
+
+/* Escala el módulo login dentro del panel flotante */
+.hmb-float-panel .hmb-login-module,
+.hmb-float-panel .hmb-module {
+  max-width: 100%;
+}
+
+.hmb-float-panel .hmb-login-inner,
+.hmb-float-panel .hmb-inner {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MÓDULO GENÉRICO CHROME
+   ═══════════════════════════════════════════════════════════ */
+.hmb-module {
+  margin-bottom: 0;
+}
+
+.hmb-module-title {
+  font-family: 'Metal Mania', cursive;
+  font-size: 20px;
+  color: var(--white);
+  padding: 0.75rem 1.2rem;
+  background: linear-gradient(90deg, var(--blood), transparent);
+  border-left: 3px solid var(--fire);
+  margin-bottom: 0;
+  letter-spacing: 1px;
+}
+
+.hmb-module-content {
+  padding: 1.2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE COMPLETO
+   ═══════════════════════════════════════════════════════════ */
+
+/* Tablet grande */
+@media (max-width: 1024px) {
+  .hmb-row-noticias .hmb-module-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  /* Header */
+  .hmb-header-top-inner {
+    flex-wrap: wrap;
+    min-height: auto;
+    padding: 1rem 0;
+    gap: 0.75rem;
+  }
+
+  .hmb-header-banner {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Menú hamburguesa */
+  .hmb-menu-toggle { display: flex; }
+
+  .hmb-menu-wrap {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,5,5,0.98);
+    z-index: 998;
+    padding: 5rem 1.5rem 2rem;
+    overflow-y: auto;
+  }
+
+  .hmb-menu-wrap.is-open { display: block; }
+
+  .hmb-menu-wrap ul { flex-direction: column; flex-wrap: wrap; }
+  .hmb-menu-wrap ul li { display: block; }
+  .hmb-menu-wrap ul li > a {
+    font-size: 18px;
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  /* Noticias: 1 columna */
+  .hmb-row-noticias .hmb-module-content {
+    grid-template-columns: 1fr;
+  }
+
+  /* Slider: misma anchura que otros módulos en tablet */
+  .hmb-row-slider img { max-height: 250px; }
+
+  /* Efemérides + Frases: 1 columna */
+  .hmb-row-ef-frases-inner {
+    grid-template-columns: 1fr;
+  }
+
+  /* Login flotante: tab más pequeño en móvil */
+  .hmb-float-tab {
+    padding: 10px 6px;
+    min-height: 80px;
+  }
+
+  .hmb-float-panel {
+    width: calc(100vw - 50px);
+    max-width: 300px;
+    border-radius: 8px 0 0 8px;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+  .hmb-row-noticias,
+  .hmb-row-ef-frases { padding: 2rem 0; }
+
+  .hmb-col-ef { padding: 1.5rem 1rem; }
+
+  .hmb-float-panel { width: calc(100vw - 44px); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FIX MENÚ HORIZONTAL — fuerza dirección fila
+   ═══════════════════════════════════════════════════════════ */
+.hmb-header-nav .hmb-menu-wrap {
+  display: flex !important;
+  align-items: stretch;
+  width: 100%;
+}
+
+.hmb-header-nav .hmb-menu-wrap > * {
+  width: 100%;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul,
+.hmb-header-nav .hmb-menu-wrap ol,
+.hmb-header-nav .hmb-menu-wrap .nav,
+.hmb-header-nav .hmb-menu-wrap .navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  gap: 0 !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul li,
+.hmb-header-nav .hmb-menu-wrap .nav-item {
+  display: flex !important;
+  align-items: stretch !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul li > a,
+.hmb-header-nav .hmb-menu-wrap ul li > span,
+.hmb-header-nav .hmb-menu-wrap .nav-link {
+  display: flex !important;
+  align-items: center !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: var(--text-dim) !important;
+  text-decoration: none !important;
+  padding: 14px 18px !important;
+  white-space: nowrap !important;
+  position: relative !important;
+  transition: color 0.3s, background 0.3s !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul li > a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 2px !important;
+  background: var(--fire) !important;
+  transition: width 0.3s !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul li:hover > a,
+.hmb-header-nav .hmb-menu-wrap ul li.active > a,
+.hmb-header-nav .hmb-menu-wrap .nav-link:hover,
+.hmb-header-nav .hmb-menu-wrap .active .nav-link {
+  color: var(--white) !important;
+  background: rgba(139,0,0,0.15) !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul li:hover > a::after,
+.hmb-header-nav .hmb-menu-wrap ul li.active > a::after {
+  width: 100% !important;
+}
+
+/* Submenús dropdown */
+.hmb-header-nav .hmb-menu-wrap ul ul,
+.hmb-header-nav .hmb-menu-wrap .dropdown-menu {
+  display: none !important;
+  flex-direction: column !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  width: auto !important;
+  min-width: 200px !important;
+  background: var(--steel) !important;
+  border: 1px solid #222 !important;
+  border-top: 2px solid var(--fire) !important;
+  z-index: 500 !important;
+  padding: 0.4rem 0 !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul li:hover > ul,
+.hmb-header-nav .hmb-menu-wrap .nav-item:hover .dropdown-menu {
+  display: flex !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul ul li {
+  display: block !important;
+  width: 100% !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul ul li > a {
+  padding: 9px 20px !important;
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
+  color: var(--text-dim) !important;
+  background: none !important;
+  border-bottom: 1px solid #1a1a1a !important;
+}
+
+.hmb-header-nav .hmb-menu-wrap ul ul li > a::after { display: none !important; }
+
+.hmb-header-nav .hmb-menu-wrap ul ul li:hover > a {
+  color: var(--ember) !important;
+  background: rgba(139,0,0,0.1) !important;
+}
+
+/* Móvil: vuelve a vertical */
+@media (max-width: 768px) {
+  .hmb-header-nav .hmb-menu-wrap ul,
+  .hmb-header-nav .hmb-menu-wrap .nav {
+    flex-direction: column !important;
+  }
+  .hmb-header-nav .hmb-menu-wrap ul li {
+    display: block !important;
+    width: 100% !important;
+  }
+  .hmb-header-nav .hmb-menu-wrap ul ul {
+    display: flex !important;
+    position: static !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-top: none !important;
+    padding-left: 1rem !important;
+    background: transparent !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MENÚ OVERRIDE LIMPIO — hmb-nav-list
+   ═══════════════════════════════════════════════════════════ */
+
+/* Lista principal horizontal */
+.hmb-header-nav .hmb-nav-list {
+  list-style: none !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.hmb-header-nav .hmb-nav-list > li {
+  position: relative !important;
+  display: flex !important;
+  align-items: stretch !important;
+  flex-shrink: 0 !important;
+}
+
+/* Links de primer nivel */
+.hmb-header-nav .hmb-nav-list > li > a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: var(--text-dim) !important;
+  text-decoration: none !important;
+  padding: 0 18px !important;
+  height: 100% !important;
+  white-space: nowrap !important;
+  position: relative !important;
+  transition: color 0.3s, background 0.3s !important;
+  border-bottom: 2px solid transparent !important;
+}
+
+.hmb-header-nav .hmb-nav-list > li > a:hover,
+.hmb-header-nav .hmb-nav-list > li.active > a {
+  color: var(--white) !important;
+  background: rgba(139,0,0,0.15) !important;
+  border-bottom-color: var(--fire) !important;
+}
+
+.hmb-header-nav .hmb-nav-list > li[aria-current="page"] > a,
+.hmb-header-nav .hmb-nav-list > li.active > a {
+  color: var(--ember) !important;
+  border-bottom-color: var(--fire) !important;
+}
+
+/* Caret ▾ */
+.hmb-nav-caret {
+  font-size: 10px !important;
+  opacity: 0.6 !important;
+  transition: transform 0.2s !important;
+}
+
+.hmb-header-nav .hmb-nav-list > li:hover .hmb-nav-caret {
+  transform: rotate(180deg) !important;
+}
+
+/* ── Dropdown ── */
+.hmb-nav-dropdown {
+  display: none !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  min-width: 220px !important;
+  background: var(--steel) !important;
+  border: 1px solid #222 !important;
+  border-top: 2px solid var(--fire) !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0.4rem 0 !important;
+  z-index: 500 !important;
+  flex-direction: column !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6) !important;
+}
+
+/* Mostrar al hover */
+.hmb-header-nav .hmb-nav-list > li:hover > .hmb-nav-dropdown,
+.hmb-header-nav .hmb-nav-list > li:focus-within > .hmb-nav-dropdown {
+  display: flex !important;
+}
+
+/* Items del dropdown */
+.hmb-nav-dropdown li {
+  display: block !important;
+  width: 100% !important;
+}
+
+.hmb-nav-dropdown li a {
+  display: block !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  color: var(--text-dim) !important;
+  text-decoration: none !important;
+  padding: 9px 20px !important;
+  border-bottom: 1px solid #1a1a1a !important;
+  transition: color 0.2s, background 0.2s, padding-left 0.2s !important;
+  white-space: nowrap !important;
+}
+
+.hmb-nav-dropdown li a:hover {
+  color: var(--ember) !important;
+  background: rgba(139,0,0,0.1) !important;
+  padding-left: 26px !important;
+}
+
+.hmb-nav-dropdown li.active a {
+  color: var(--ember) !important;
+  border-left: 2px solid var(--fire) !important;
+}
+
+/* Submenú de tercer nivel */
+.hmb-nav-dropdown .hmb-nav-dropdown {
+  top: 0 !important;
+  left: 100% !important;
+  border-top: 2px solid var(--fire) !important;
+}
+
+/* ── Móvil: menú vertical ── */
+@media (max-width: 768px) {
+  .hmb-header-nav .hmb-nav-list {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .hmb-header-nav .hmb-nav-list > li {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .hmb-header-nav .hmb-nav-list > li > a {
+    padding: 14px 0 !important;
+    height: auto !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    font-size: 18px !important;
+    letter-spacing: 3px !important;
+  }
+
+  .hmb-nav-dropdown {
+    display: flex !important;
+    position: static !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-top: none !important;
+    background: transparent !important;
+    padding-left: 1.2rem !important;
+    min-width: 0 !important;
+  }
+
+  .hmb-nav-dropdown li a {
+    font-size: 14px !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid #111 !important;
+  }
+
+  .hmb-nav-caret { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PORTADA — ocultar título de página y breadcrumbs en home
+   ═══════════════════════════════════════════════════════════ */
+
+/* Joomla añade clase .home al <body> en la portada */
+body.home .page-header,
+body.home .com-content-article__header,
+body.home h1.page-title,
+body.home .item-page > h1,
+body.home .blog-featured > .page-header { 
+  display: none !important; 
+}
+
+/* Ocultar breadcrumbs en portada */
+body.home .hmb-breadcrumbs,
+body.home .breadcrumb-wrapper,
+body.home nav[aria-label="breadcrumb"] { 
+  display: none !important; 
+}
+
+/* Si el componente queda vacío en portada, colapsar el espacio */
+body.home .hmb-main-wrap:not(:has(.hmb-component-inner *)) {
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+
+/* Ocultar contenedor del componente en portada si no tiene módulos de sidebar */
+body.home.hmb-main-full .hmb-main-wrap { 
+  padding-top: 0 !important; 
+  padding-bottom: 0 !important; 
+}
+
+/* ═══════════════════════════════════════════════════════════
+   OCULTAR TÍTULO "INICIO" — selectores extendidos
+   ═══════════════════════════════════════════════════════════ */
+
+/* Ocultar en portada */
+body.home .page-header,
+body.home .page-header h1,
+body.home h1.page-title,
+body.home .item-page h1,
+body.home .item-page > h1:first-child,
+body.home .blog > .page-header,
+body.home .com-content-featured__header,
+body.home .hmb-breadcrumbs,
+body.home nav.breadcrumb,
+body.home ol.breadcrumb { 
+  display: none !important; 
+}
+
+/* Ocultar la línea roja debajo del h1 en portada */
+body.home .page-header + hr,
+body.home .item-page h1 + hr { 
+  display: none !important; 
+}
+
+/* Colapsar espacio vacío del componente en portada */
+body.home .hmb-main-wrap { 
+  padding-top: 0 !important; 
+  padding-bottom: 0 !important; 
+}
+
+body.home .hmb-component-inner:empty,
+body.home .hmb-component-inner > .item-page:empty {
+  display: none !important;
+}
+
+/* Nuclear: si el componente en portada solo tiene el h1 vacío, ocultar todo el main */
+body.home .hmb-main-wrap .hmb-layout {
+  margin: 0 !important;
+}
+
+
+/* ── Móvil: menú horizontal scrollable ── */
+@media (max-width: 768px) {
+  /* Ocultar hamburguesa — no la necesitamos */
+  .hmb-menu-toggle { display: none !important; }
+
+  /* Menú siempre visible y scrollable en horizontal */
+  .hmb-menu-wrap,
+  .hmb-header-nav .hmb-menu-wrap {
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    width: 100% !important;
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .hmb-menu-wrap::-webkit-scrollbar,
+  .hmb-header-nav .hmb-menu-wrap::-webkit-scrollbar { display: none !important; }
+
+  /* Lista horizontal con scroll */
+  .hmb-header-nav .hmb-nav-list,
+  .hmb-header-nav .hmb-menu-wrap ul,
+  .hmb-header-nav .hmb-menu-wrap .nav {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    min-width: 100% !important;
+  }
+
+  /* Items en fila */
+  .hmb-header-nav .hmb-nav-list > li,
+  .hmb-header-nav .hmb-menu-wrap ul li {
+    display: flex !important;
+    align-items: stretch !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+  }
+
+  /* Links más compactos en móvil */
+  .hmb-header-nav .hmb-nav-list > li > a,
+  .hmb-header-nav .hmb-menu-wrap ul li > a {
+    font-size: 11px !important;
+    padding: 0 12px !important;
+    height: 44px !important;
+    letter-spacing: 1.5px !important;
+    white-space: nowrap !important;
+    border-bottom: none !important;
+  }
+
+  /* Submenús: dropdown normal hacia abajo */
+  .hmb-nav-dropdown,
+  .hmb-header-nav .hmb-menu-wrap ul ul {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    flex-direction: column !important;
+    min-width: 180px !important;
+    background: var(--steel) !important;
+    border-top: 2px solid var(--fire) !important;
+    z-index: 500 !important;
+    display: none !important;
+  }
+
+  .hmb-header-nav .hmb-nav-list > li:hover > .hmb-nav-dropdown,
+  .hmb-header-nav .hmb-menu-wrap ul li:hover > ul {
+    display: flex !important;
+  }
+
+  .hmb-nav-dropdown li,
+  .hmb-header-nav .hmb-menu-wrap ul ul li {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .hmb-nav-dropdown li a,
+  .hmb-header-nav .hmb-menu-wrap ul ul li a {
+    padding: 10px 16px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    border-bottom: 1px solid #1a1a1a !important;
+  }
+}
+/* ═══════════════════════════════════════════════════════════
+   VIDEOS — fila completa entre noticias y slider
+   ═══════════════════════════════════════════════════════════ */
+.hmb-row-videos {
+  background: var(--darker);
+  padding: 3rem 0;
+  border-bottom: 1px solid #111;
+}
+
+.hmb-row-videos .hmb-module-title {
+  font-family: 'Metal Mania', cursive;
+  font-size: 28px;
+  color: var(--white);
+  padding: 0 0 0.75rem;
+  margin-bottom: 1.5rem;
+  background: none;
+  border-left: none;
+  border-bottom: 2px solid var(--blood);
+  letter-spacing: 2px;
+}
+
+/* Grid de videos: 3 columnas */
+.hmb-row-videos .hmb-module-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* Iframes y embeds responsivos */
+.hmb-row-videos iframe,
+.hmb-row-videos video,
+.hmb-row-videos .video-container,
+.hmb-row-videos .video-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  display: block;
+  background: #000;
+}
+
+/* Wrapper para iframes sin contenedor */
+.hmb-row-videos .hmb-module-content > * {
+  overflow: hidden;
+  background: var(--steel);
+  border-top: 2px solid var(--blood);
+}
+
+@media (max-width: 1024px) {
+  .hmb-row-videos .hmb-module-content { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .hmb-row-videos .hmb-module-content { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FIX BANNER — asegurar visibilidad en header
+   ═══════════════════════════════════════════════════════════ */
+.hmb-header-banner {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  min-height: 60px !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.hmb-header-banner img,
+.hmb-header-banner a img,
+.hmb-header-banner .mod-image img {
+  max-height: 80px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+/* Si el banner es texto (mod_custom / HTML) */
+.hmb-header-banner .custom,
+.hmb-header-banner p {
+  margin: 0 !important;
+  color: var(--white) !important;
+  text-align: center !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FIX SUBMENÚS EN MÓVIL — touch friendly
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* El li padre necesita position relative para el dropdown */
+  .hmb-header-nav .hmb-nav-list > li,
+  .hmb-header-nav .hmb-menu-wrap ul > li {
+    position: relative !important;
+  }
+
+  /* Submenús ocultos por defecto */
+  .hmb-nav-dropdown,
+  .hmb-header-nav .hmb-menu-wrap ul ul {
+    display: none !important;
+    position: fixed !important;
+    top: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    background: rgba(10,10,10,0.98) !important;
+    border-top: 2px solid var(--fire) !important;
+    border-bottom: 2px solid var(--blood) !important;
+    z-index: 600 !important;
+    padding: 0.5rem 0 !important;
+    min-width: unset !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.8) !important;
+  }
+
+  /* Mostrar al hacer tap (clase añadida por JS) */
+  .hmb-header-nav .hmb-nav-list > li.is-open > .hmb-nav-dropdown,
+  .hmb-header-nav .hmb-menu-wrap ul li.is-open > ul {
+    display: flex !important;
+  }
+
+  /* Items del submenu móvil */
+  .hmb-nav-dropdown li a,
+  .hmb-header-nav .hmb-menu-wrap ul ul li a {
+    font-size: 13px !important;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    letter-spacing: 1px !important;
+    color: var(--text) !important;
+    display: block !important;
+  }
+
+  .hmb-nav-dropdown li a:hover,
+  .hmb-header-nav .hmb-menu-wrap ul ul li a:hover {
+    color: var(--ember) !important;
+    background: rgba(139,0,0,0.1) !important;
+  }
+
+  /* Indicador de que tiene submenu */
+  .hmb-header-nav .hmb-nav-list > li.has-children > a::after,
+  .hmb-header-nav .hmb-menu-wrap ul li.has-children > a::after {
+    content: ' ▾' !important;
+    font-size: 9px !important;
+    opacity: 0.6 !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ELIMINAR ESPACIO MUERTO EN PORTADA
+   El <main> se renderiza siempre pero en home está vacío
+   ═══════════════════════════════════════════════════════════ */
+body.home .hmb-main-home {
+  padding:    0 !important;
+  margin:     0 !important;
+  min-height: 0 !important;
+}
+
+body.home .hmb-main-home .hmb-layout {
+  margin:  0 !important;
+  gap:     0 !important;
+}
+
+body.home .hmb-main-home .hmb-component,
+body.home .hmb-main-home .hmb-component-inner,
+body.home .hmb-main-home .hmb-main-top,
+body.home .hmb-main-home .hmb-main-bottom,
+body.home .hmb-main-home .hmb-breadcrumbs {
+  display: none !important;
+}
+
+/* Colapsar también el contenedor interior */
+body.home .hmb-main-home > .hmb-container,
+body.home .hmb-main-home > .hmb-container-fluid {
+  padding-top:    0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRÓXIMOS CONCIERTOS — antes de noticias
+   ═══════════════════════════════════════════════════════════ */
+.hmb-row-conciertos {
+  background: var(--steel);
+  padding: 2rem 0;
+  border-bottom: 2px solid var(--blood);
+  border-top: 1px solid #111;
+}
+
+.hmb-row-conciertos .hmb-module-title {
+  font-family: 'Metal Mania', cursive;
+  font-size: 24px;
+  color: var(--white);
+  padding: 0 0 0.6rem;
+  margin-bottom: 1.2rem;
+  background: none;
+  border-left: none;
+  border-bottom: 2px solid var(--blood);
+  letter-spacing: 2px;
+}
+
+.hmb-row-conciertos .hmb-module-content {
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TEMAS — reproductor debajo de frases
+   ═══════════════════════════════════════════════════════════ */
+
+/* Columna derecha: frases arriba, temas abajo */
+.hmb-col-ef-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hmb-subcol-frases,
+.hmb-subcol-temas {
+  flex: 1;
+}
+
+.hmb-subcol-temas {
+  background: var(--steel);
+  border-top: 3px solid var(--blood);
+  position: relative;
+  overflow: hidden;
+}
+
+.hmb-subcol-temas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at bottom right, rgba(139,0,0,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hmb-subcol-temas .hmb-module-title {
+  font-family: 'Metal Mania', cursive;
+  font-size: 22px;
+  color: var(--white);
+  padding: 0 0 0.6rem;
+  margin: 0 0 1rem;
+  background: none;
+  border-left: none;
+  border-bottom: 1px solid var(--blood);
+  letter-spacing: 1px;
+}
+
+.hmb-subcol-temas .hmb-module-content {
+  padding: 0;
+}
+
+/* Reproductores embebidos (Spotify, Soundcloud, Bandcamp, YouTube) */
+.hmb-subcol-temas iframe,
+.hmb-subcol-temas audio,
+.hmb-subcol-temas .audio-player {
+  width: 100% !important;
+  display: block !important;
+  border: none !important;
+  background: #000 !important;
+}
+
+/* Audio nativo */
+.hmb-subcol-temas audio {
+  filter: invert(1) hue-rotate(180deg);
+  height: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hmb-col-ef-right { gap: 2px; }
+  .hmb-subcol-temas { min-height: 120px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ARTÍCULO HMB — Estilos de presentación
+   Clases para artículos de Joomla sin necesidad de <style>
+   ═══════════════════════════════════════════════════════════ */
+
+/* Banner superior */
+.hmb-art-banner { width: 100%; overflow: hidden; border-bottom: 3px solid var(--blood); margin-bottom: 0; display: block; }
+.hmb-art-banner img { width: 100%; height: 260px; object-fit: cover; object-position: center 30%; display: block; filter: brightness(.8); }
+
+/* Layout 3 columnas */
+.hmb-art-presentacion { display: grid; grid-template-columns: 160px 1fr 160px; gap: 0; background: var(--darker); align-items: start; }
+
+/* Fotos laterales */
+.hmb-art-foto { position: relative; overflow: hidden; }
+.hmb-art-foto img { width: 160px; height: 220px; object-fit: cover; object-position: top center; display: block; filter: brightness(.85) contrast(1.1); transition: filter .4s; }
+.hmb-art-foto:hover img { filter: brightness(1) contrast(1.1); }
+.hmb-art-foto-izq { border-right: 2px solid var(--blood); }
+.hmb-art-foto-der { border-left: 2px solid var(--blood); }
+.hmb-art-foto-label { background: #0d0000; padding: .6rem .5rem; text-align: center; border-top: 1px solid #1a0000; }
+.hmb-art-foto-label span { font-family: 'Metal Mania', cursive; font-size: 16px; color: var(--white); letter-spacing: 2px; text-shadow: 0 0 10px rgba(204,34,0,.5); display: block; line-height: 1.2; }
+.hmb-art-foto-label small { font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); }
+
+/* Texto central */
+.hmb-art-texto { padding: 2.5rem 2rem; background: var(--darker); border-top: 3px solid var(--blood); }
+.hmb-art-texto h2 { font-family: 'Metal Mania', cursive; font-size: clamp(24px, 3.5vw, 42px); color: var(--white); margin: 0 0 1.5rem; text-align: center; text-shadow: 0 0 30px rgba(204,34,0,.4); letter-spacing: 2px; line-height: 1.1; }
+.hmb-art-texto h2::after { content: ''; display: block; width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--fire), transparent); margin: .75rem auto 0; }
+.hmb-art-texto p { font-size: 15.5px; line-height: 1.85; color: #B8B8B8; margin-bottom: 1.4rem; text-align: justify; }
+.hmb-art-texto p:first-of-type::first-letter { font-family: 'Metal Mania', cursive; font-size: 60px; float: left; line-height: .75; margin: .05em .12em 0 0; color: var(--fire); text-shadow: 0 0 20px rgba(204,34,0,.5); }
+
+/* Separador decorativo */
+.hmb-art-separador { text-align: center; margin: 2rem 0; color: var(--blood); font-size: 18px; letter-spacing: 8px; }
+
+/* Cita destacada */
+.hmb-art-cita { border-left: 3px solid var(--fire); padding: 1rem 1.5rem; margin: 2rem 0; background: rgba(139,0,0,.08); }
+.hmb-art-cita p { font-family: 'Cinzel', serif; font-style: italic; font-size: 16px; color: var(--gold-light) !important; text-align: left !important; margin: 0 !important; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hmb-art-banner img { height: 180px; }
+  .hmb-art-presentacion { grid-template-columns: 1fr; }
+  .hmb-art-foto img { width: 100%; height: 220px; }
+  .hmb-art-foto-izq { border-right: none; border-bottom: 2px solid var(--blood); }
+  .hmb-art-foto-der { border-left: none; border-top: 2px solid var(--blood); order: 3; }
+  .hmb-art-texto { padding: 1.5rem 1rem; border-top: none; order: 2; }
+}

@@ -1,0 +1,30 @@
+# Ignorar todo por defecto
+/*
+/*/
+
+# Excepciones: archivos raíz personalizados
+!.gitignore
+!.gitattributes
+!.htaccess
+!README.md
+!favicon.ico
+!favicon.png
+!favicon.svg
+!robots.txt
+!HMBSiteMap.xml
+!HMBSiteMap_urlset.xsl
+
+# Excepciones: solo el template personalizado
+!templates/
+templates/*
+!templates/hmb/
+
+# Todo dentro del template hmb
+!templates/hmb/**
+
+# Nunca subir credenciales ni caché
+configuration.php
+cache/
+tmp/
+logs/
+images/

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="template" client="site" version="4.0" method="upgrade">
+	<name>hmb</name>
+	<version>7.5.31.0</version>
+	<creationDate>2026-05-12</creationDate>
+	<author>Heavy Metal Brothers</author>
+	<authorEmail>admin@heavymetalbrothers.com</authorEmail>
+	<authorUrl>https://heavymetalbrothers.com</authorUrl>
+	<copyright>Copyright (C) 2026 Heavy Metal Brothers. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<description>TPL_HMB_XML_DESCRIPTION</description>
+	<inheritable>0</inheritable>
+
+	<scriptfile>script.php</scriptfile>
+	<files>
+		<filename>script.php</filename>
+		<filename>index.php</filename>
+		<filename>component.php</filename>
+		<filename>error.php</filename>
+		<filename>offline.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>css/template.css</filename>
+		<filename>css/modules.css</filename>
+		<filename>css/layout.css</filename>
+		<filename>css/hmb-base.css</filename>
+		<filename>css/hmb-modules.css</filename>
+		<filename>css/hmb-layout.css</filename>
+		<filename>js/template.js</filename>
+		<folder>images</folder>
+		<folder>html</folder>
+		<folder>language</folder>
+	</files>
+
+	<positions>
+		<position>topbar</position>
+		<position>header</position>
+		<position>banner</position>
+		<position>menu</position>
+		<position>login</position>
+		<position>hero</position>
+		<position>conciertos</position>
+		<position>noticias</position>
+		<position>videos</position>
+		<position>slider</position>
+		<position>efemerides</position>
+		<position>frases</position>
+		<position>temas</position>
+		<position>main-top</position>
+		<position>breadcrumbs</position>
+		<position>sidebar-left</position>
+		<position>sidebar-right</position>
+		<position>main-bottom</position>
+		<position>content-top</position>
+		<position>content-bottom</position>
+		<position>footer</position>
+		<position>debug</position>
+	</positions>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/tpl_hmb.ini</language>
+		<language tag="en-GB">en-GB/tpl_hmb.sys.ini</language>
+		<language tag="es-ES">es-ES/tpl_hmb.ini</language>
+		<language tag="es-ES">es-ES/tpl_hmb.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field name="fluidContainer" type="radio" default="0"
+					label="TPL_HMB_FLUID_CONTAINER"
+					layout="joomla.form.field.radio.switcher" filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="stickyHeader" type="radio" default="1"
+					label="TPL_HMB_STICKY_HEADER"
+					layout="joomla.form.field.radio.switcher" filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="showTopBar" type="radio" default="1"
+					label="TPL_HMB_SHOW_TOPBAR"
+					layout="joomla.form.field.radio.switcher" filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="topBarText" type="text"
+					default="⚡ HEAVY METAL BROTHERS ⚡"
+					label="TPL_HMB_TOPBAR_TEXT" filter="string" />
+				<field name="colorName" type="list" default="red"
+					label="TPL_HMB_COLOR_SCHEME">
+					<option value="red">Sangre Roja</option>
+					<option value="gold">Oro Oscuro</option>
+					<option value="green">Verde Venenoso</option>
+					<option value="blue">Azul Acero</option>
+					<option value="purple">Violeta Profundo</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="destacados" label="Accesos destacados">
+				<field name="showDestacados" type="radio" default="1"
+					label="Mostrar franja de accesos (solo portada)"
+					description="Muestra 4 tarjetas grandes bajo el menú para resaltar las secciones más importantes. Si no rellenas las URLs, la franja no aparece."
+					layout="joomla.form.field.radio.switcher" filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="destacadosTitle" type="text" default="Explora"
+					label="Título de la sección" filter="string"
+					description="Deja en blanco para no mostrar título." />
+
+				<field name="destacado1_icon" type="text" default="🎟️" label="① Icono (emoji)" filter="raw" />
+				<field name="destacado1_label" type="text" default="Conciertos" label="① Texto" filter="string" />
+				<field name="destacado1_url" type="text" default="" label="① Enlace (URL)" filter="string"
+					description="Ej: index.php/conciertos  ·  /agenda  ·  https://..." />
+				<field name="destacado1_img" type="text" default="" label="① Imagen de fondo (URL)" filter="string"
+					description="Opcional. Si la rellenas, la tarjeta usa esta imagen en vez del emoji. Ej: images/destacados/quiz.jpg" />
+
+				<field name="destacado2_icon" type="text" default="📺" label="② Icono (emoji)" filter="raw" />
+				<field name="destacado2_label" type="text" default="Vídeos" label="② Texto" filter="string" />
+				<field name="destacado2_url" type="text" default="" label="② Enlace (URL)" filter="string" />
+				<field name="destacado2_img" type="text" default="" label="② Imagen de fondo (URL)" filter="string" />
+
+				<field name="destacado3_icon" type="text" default="📷" label="③ Icono (emoji)" filter="raw" />
+				<field name="destacado3_label" type="text" default="Galería" label="③ Texto" filter="string" />
+				<field name="destacado3_url" type="text" default="" label="③ Enlace (URL)" filter="string" />
+				<field name="destacado3_img" type="text" default="" label="③ Imagen de fondo (URL)" filter="string" />
+
+				<field name="destacado4_icon" type="text" default="📰" label="④ Icono (emoji)" filter="raw" />
+				<field name="destacado4_label" type="text" default="Noticias" label="④ Texto" filter="string" />
+				<field name="destacado4_url" type="text" default="" label="④ Enlace (URL)" filter="string" />
+				<field name="destacado4_img" type="text" default="" label="④ Imagen de fondo (URL)" filter="string" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

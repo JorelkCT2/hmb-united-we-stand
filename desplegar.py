@@ -114,7 +114,9 @@ def main():
 
     if distintos:
         lista = ('\n'.join(distintos) + '\n').encode('utf-8')
-        r = ssh('cd %s && mkdir -p tmp/hmb_backups && tar czf tmp/hmb_backups/%s.tar.gz -T -'
+        # tmp/ cuelga de la web: la carpeta de copias se cierra siempre al acceso publico.
+        r = ssh('cd %s && mkdir -p tmp/hmb_backups && printf "Require all denied\\nDeny from all\\n" '
+                '> tmp/hmb_backups/.htaccess && tar czf tmp/hmb_backups/%s.tar.gz -T -'
                 % (c.RAIZ_REMOTA, sello), lista)
 
         if r.returncode != 0:

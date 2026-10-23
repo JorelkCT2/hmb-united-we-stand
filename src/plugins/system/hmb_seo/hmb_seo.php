@@ -103,6 +103,20 @@ class PlgSystemHmb_seo extends CMSPlugin
             }, $body, 1);
         }
 
+        // <img> sin alt: se deduce del nombre del fichero ("DIMMU BORGIR - 5.jpg" -> "DIMMU BORGIR");
+        // las que no tienen src (marcadores de la lightbox) quedan como decorativas.
+        $body = preg_replace_callback('#<img(?![^>]*\balt=)([^>]*)>#i', static function ($m) {
+            $alt = '';
+
+            if (preg_match('#\bsrc="([^"]+)"#i', $m[1], $s) && $s[1] !== '') {
+                $name = rawurldecode(pathinfo(parse_url($s[1], PHP_URL_PATH) ?: '', PATHINFO_FILENAME));
+                $name = trim(preg_replace('#[\s_\-]+(\d+|copia|copy)$#i', '', $name));
+                $alt  = trim(preg_replace('#[\s_]+#', ' ', $name));
+            }
+
+            return '<img alt="' . htmlspecialchars($alt, ENT_QUOTES, 'UTF-8') . '"' . $m[1] . '>';
+        }, $body);
+
         $app->setBody($body);
     }
 }

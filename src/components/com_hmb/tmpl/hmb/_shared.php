@@ -68,9 +68,9 @@ $byeDelay    = max(1000, (int) $modCfg->get('bye_delay', 3500));
 $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 ?>
 <style>
-.hmb-cw{--r:#b41414;--rh:#e02020;--g:#c9a84c;--gd:#7a6030;--sv:#888;--t:#d4d4d4;--b:#252525;--s:#0f0f0f;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:var(--font-body, 'Rajdhani', sans-serif);--ra:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--t);width:100%}
+.hmb-cw{--r:var(--fire, #CC2200);--rh:var(--fire, #CC2200);--g:var(--gold-light, #DAA520);--gd:var(--gold-dim, #7A6030);--sv:var(--grey-8, #888888);--t:#d4d4d4;--b:var(--steel, #1A1A1A);--s:var(--dark, #0A0A0A);--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:var(--font-body, 'Rajdhani', sans-serif);--ra:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--t);width:100%}
 .hmb-ci{position:relative;background:var(--s);border:1px solid var(--b);border-radius:var(--ra);box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 24px 64px rgba(0,0,0,.85),0 0 60px rgba(180,20,20,.06)}
-.hmb-ci::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3a0000,var(--r) 30%,var(--g) 50%,var(--r) 70%,#3a0000);background-size:200% 100%;animation:hmbB 4s ease infinite;z-index:2;border-radius:var(--ra) var(--ra) 0 0}
+.hmb-ci::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--wine, #3A0000),var(--r) 30%,var(--g) 50%,var(--r) 70%,var(--wine, #3A0000));background-size:200% 100%;animation:hmbB 4s ease infinite;z-index:2;border-radius:var(--ra) var(--ra) 0 0}
 @keyframes hmbB{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
 .hmb-cn{position:absolute;width:18px;height:18px;border-color:var(--gd);border-style:solid;opacity:.4;z-index:3}
 .hmb-cn.a{top:8px;left:8px;border-width:1px 0 0 1px}.hmb-cn.b{top:8px;right:8px;border-width:1px 1px 0 0}
@@ -87,8 +87,8 @@ $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 .hmb-bd{padding:2rem 3rem 2.25rem;position:relative;z-index:1}
 /* Alert */
 .hmb-al{border-radius:var(--ra);padding:.68rem .9rem;font-size:.82rem;margin-bottom:1.2rem;border:1px solid;line-height:1.5}
-.hmb-er{background:rgba(180,20,20,.1);border-color:rgba(180,20,20,.4);color:#ff7070}
-.hmb-ok{background:rgba(30,120,60,.1);border-color:rgba(30,120,60,.4);color:#66d98e}
+.hmb-er{background:rgba(180,20,20,.1);border-color:rgba(180,20,20,.4);color:var(--fire-light, #FF7070)}
+.hmb-ok{background:rgba(30,120,60,.1);border-color:rgba(30,120,60,.4);color:var(--ok-light, #66D98E)}
 /* Form */
 .hmb-fm{display:flex;flex-direction:column;gap:.9rem}
 .hmb-rw{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem}
@@ -100,7 +100,7 @@ $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 .hmb-in{width:100%;box-sizing:border-box;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:var(--ra);color:#fff !important;font-family:var(--fb);font-size:.9rem;font-weight:500 !important;padding:.62rem 2.3rem .62rem .88rem;transition:border-color var(--sp) var(--e),background var(--sp) var(--e),box-shadow var(--sp) var(--e);-webkit-appearance:none;appearance:none}
 .hmb-in::placeholder{color:rgba(136,136,136,.28);font-style:italic;font-weight:300}
 .hmb-in:focus{outline:none;border-color:var(--r);background:rgba(180,20,20,.05);box-shadow:0 0 0 3px rgba(180,20,20,.12)}
-.hmb-in:-webkit-autofill,.hmb-in:-webkit-autofill:focus{-webkit-text-fill-color:#fff !important;-webkit-box-shadow:0 0 0 1000px #120202 inset}
+.hmb-in:-webkit-autofill,.hmb-in:-webkit-autofill:focus{-webkit-text-fill-color:#fff !important;-webkit-box-shadow:0 0 0 1000px var(--wine-black, #0A0000) inset}
 .hmb-ic{position:absolute;right:.72rem;top:50%;transform:translateY(-50%);color:#484848;pointer-events:none;display:flex;align-items:center}
 .hmb-ic svg{width:.95rem;height:.95rem}
 .hmb-ey{position:absolute;right:.65rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#484848;padding:.2rem;display:flex;align-items:center;transition:color var(--sp) var(--e)}
@@ -115,7 +115,7 @@ $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 .hmb-cb:checked+.hmb-cbox::after{transform:rotate(45deg) scale(1)}
 .hmb-ctx{font-family:var(--fh);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:#b0b0b0}
 /* Button */
-.hmb-bt{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;margin-top:.2rem;padding:.82rem;background:linear-gradient(160deg,#c01010,#7a0a0a);border:1px solid rgba(180,20,20,.5);border-radius:var(--ra);color:#fff;font-family:var(--fh);font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;position:relative;overflow:hidden;transition:transform var(--sp) var(--e),box-shadow var(--sp) var(--e),filter var(--sp) var(--e)}
+.hmb-bt{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;margin-top:.2rem;padding:.82rem;background:linear-gradient(160deg,var(--fire, #CC2200),var(--blood, #8B0000));border:1px solid rgba(180,20,20,.5);border-radius:var(--ra);color:#fff;font-family:var(--fh);font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;position:relative;overflow:hidden;transition:transform var(--sp) var(--e),box-shadow var(--sp) var(--e),filter var(--sp) var(--e)}
 .hmb-bt::after{content:'';position:absolute;top:0;left:-110%;width:60%;height:100%;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.08) 50%,transparent 70%);transition:left .5s var(--e)}
 .hmb-bt:hover::after{left:150%}
 .hmb-bt:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(180,20,20,.45);filter:brightness(1.12)}

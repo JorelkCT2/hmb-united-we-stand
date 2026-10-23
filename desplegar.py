@@ -135,10 +135,14 @@ def main():
     if r.returncode != 0:
         sys.exit('Subida FALLIDA (nada pisado): ' + r.stderr.decode('utf-8', 'replace'))
 
-    orden = ' && '.join(
-        'mkdir -p "$(dirname "%s/%s")" && mv -f "%s/%s" "%s/%s"'
-        % (c.RAIZ_REMOTA, f, prep, f, c.RAIZ_REMOTA, f) for f in cambios)
-    r = ssh(orden + ' && rm -rf ' + prep)
+    # El script va por stdin: con decenas de ficheros la orden seria demasiado larga para un argumento.
+    prep_rel = prep[len(c.RAIZ_REMOTA) + 1:]  # el script ya hace cd a la raiz
+    lineas = ['set -e', 'cd %s' % c.RAIZ_REMOTA]
+    for f in cambios:
+        lineas.append('mkdir -p "$(dirname "%s")" && mv -f "%s/%s" "%s"' % (f, prep_rel, f, f))
+    lineas.append('rm -rf "%s"' % prep_rel)
+    guion = '\n'.join(lineas) + '\n'
+    r = ssh('sh -s', guion.encode('utf-8'))
 
     if r.returncode != 0:
         sys.exit('Movimiento FALLIDO: ' + r.stderr.decode('utf-8', 'replace') +

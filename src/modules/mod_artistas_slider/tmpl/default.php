@@ -34,7 +34,7 @@ $mostrarTitulo = ($module->showtitle ?? 1) == 1;
     overflow: hidden;
     cursor: pointer;
     aspect-ratio: 3/4;
-    background: #111;
+    background: var(--mid, #111111);
     border: 1px solid rgba(180,140,60,.25);
     box-shadow: 0 4px 18px rgba(0,0,0,.6);
     transition: transform .25s, box-shadow .25s;
@@ -68,7 +68,7 @@ $mostrarTitulo = ($module->showtitle ?? 1) == 1;
 }
 #<?= $moduleId ?> .mas-genre {
     font-size: .68rem;
-    color: #d4bb8a;
+    color: var(--gold-pale, #D4BB8A);
     font-weight: 400;
     text-transform: none;
     letter-spacing: 0;
@@ -79,13 +79,13 @@ $mostrarTitulo = ($module->showtitle ?? 1) == 1;
     width:100%; height:100%;
     display:flex; align-items:center; justify-content:center;
     font-size: 3.5rem;
-    background: linear-gradient(135deg, #1a1208, #2a1e08);
+    background: linear-gradient(135deg, var(--steel, #1A1A1A), #2a1e08);
 }
 .mas-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
     background: rgba(180,140,60,.25);
     border: 1px solid rgba(200,160,60,.4);
-    color: #d4bb8a;
+    color: var(--gold-pale, #D4BB8A);
     width: 42px; height: 42px;
     border-radius: 50%;
     font-size: 1.3rem;
@@ -107,7 +107,7 @@ $mostrarTitulo = ($module->showtitle ?? 1) == 1;
     border: 1px solid rgba(200,160,60,.4);
     cursor: pointer; transition: background .2s;
 }
-.mas-dot.active { background: #d4bb8a; }
+.mas-dot.active { background: var(--gold-pale, #D4BB8A); }
 
 @media (max-width: 768px) {
     #<?= $moduleId ?> .mas-card {

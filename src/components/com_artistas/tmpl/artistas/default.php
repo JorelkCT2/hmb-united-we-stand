@@ -42,7 +42,7 @@ try {
 
 <style>
 /* ===== ARTISTAS LISTADO - DARK THEME ===== */
-.al-wrap { color: #e8e0d5; }
+.al-wrap { color: var(--cream, #E8E0D5); }
 
 /* Filtros */
 .al-filtros {
@@ -57,10 +57,10 @@ try {
 .al-filtros .form-select {
     background: rgba(255,255,255,.07) !important;
     border: 1px solid rgba(180,140,60,.4) !important;
-    color: #f0e8d8 !important;
+    color: var(--cream, #E8E0D5) !important;
     border-radius: 6px;
 }
-.al-filtros .form-control::placeholder { color: #6a5f4a !important; }
+.al-filtros .form-control::placeholder { color: var(--gold-dim, #7A6030) !important; }
 .al-filtros .form-control:focus,
 .al-filtros .form-select:focus {
     background: rgba(255,255,255,.12) !important;
@@ -68,7 +68,7 @@ try {
     box-shadow: 0 0 0 3px rgba(180,130,30,.25) !important;
     color: #fff !important;
 }
-.al-filtros .form-select option { background:#1a1208; color:#f0e0c0; }
+.al-filtros .form-select option { background:var(--steel, #1A1A1A); color:var(--cream, #E8E0D5); }
 .al-btn-search {
     background: linear-gradient(135deg,#b00000,#7a0000);
     border: 1px solid rgba(180,40,40,.5);
@@ -82,7 +82,7 @@ try {
     transition: all .2s;
     font-family: inherit;
 }
-.al-btn-search:hover { background: linear-gradient(135deg,#cc0000,#900000); transform:translateY(-1px); box-shadow:0 4px 14px rgba(180,0,0,.4); }
+.al-btn-search:hover { background: linear-gradient(135deg,var(--fire, #CC2200),#900000); transform:translateY(-1px); box-shadow:0 4px 14px rgba(180,0,0,.4); }
 .al-btn-reset {
     background: transparent;
     border: 1px solid rgba(180,140,60,.4);
@@ -95,7 +95,7 @@ try {
     text-decoration: none;
     display: inline-block;
 }
-.al-btn-reset:hover { border-color:rgba(200,160,60,.8); color:#f5c842; }
+.al-btn-reset:hover { border-color:rgba(200,160,60,.8); color:var(--gold-light, #DAA520); }
 
 /* Barra de ordenación */
 .al-sort-bar {
@@ -109,7 +109,7 @@ try {
     gap: 6px;
     flex-wrap: wrap;
 }
-.al-sort-bar span { color:#8a7a60; font-size:.82rem; margin-right:4px; }
+.al-sort-bar span { color:var(--gold-dim, #7A6030); font-size:.82rem; margin-right:4px; }
 .al-sort-btn {
     background: rgba(255,255,255,.05);
     border: 1px solid rgba(180,140,60,.25);
@@ -124,11 +124,11 @@ try {
     align-items:center;
     gap:5px;
 }
-.al-sort-btn:hover { background:rgba(180,130,20,.2); border-color:rgba(200,160,60,.5); color:#f5c842; }
-.al-sort-btn.active { background:rgba(180,130,20,.25); border-color:rgba(200,160,60,.6); color:#f5c842; }
+.al-sort-btn:hover { background:rgba(180,130,20,.2); border-color:rgba(200,160,60,.5); color:var(--gold-light, #DAA520); }
+.al-sort-btn.active { background:rgba(180,130,20,.25); border-color:rgba(200,160,60,.6); color:var(--gold-light, #DAA520); }
 
 /* Contador */
-.al-count { color:#6a5f4a; font-size:.85rem; margin-left:auto; }
+.al-count { color:var(--gold-dim, #7A6030); font-size:.85rem; margin-left:auto; }
 
 /* Grid de artistas */
 .al-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
@@ -164,7 +164,7 @@ try {
     display: inline-block;
     background: rgba(180,120,20,.35);
     border: 1px solid rgba(180,140,60,.4);
-    color: #d4bb8a;
+    color: var(--gold-pale, #D4BB8A);
     font-size: .75rem;
     font-weight: 700;
     padding: 2px 10px;
@@ -182,8 +182,8 @@ try {
     line-height: 1.2;
 }
 .al-card__name a { color: inherit; text-decoration: none; }
-.al-card__name a:hover { color: #f5c842; }
-.al-card__desc { color: #8a7a60; font-size: .85rem; margin: 6px 0 0; line-height: 1.4; }
+.al-card__name a:hover { color: var(--gold-light, #DAA520); }
+.al-card__desc { color: var(--gold-dim, #7A6030); font-size: .85rem; margin: 6px 0 0; line-height: 1.4; }
 
 .al-card__footer {
     padding: 10px 16px 14px;
@@ -198,10 +198,10 @@ try {
     align-items: center;
     font-size: .82rem;
 }
-.al-stars { color: #f5c842; letter-spacing: -1px; }
+.al-stars { color: var(--gold-light, #DAA520); letter-spacing: -1px; }
 .al-stars-empty { color: #3a3020; }
-.al-rating-val { color: #8a7a60; font-size: .78rem; margin-left: 4px; }
-.al-location { color: #6a5f4a; font-size: .8rem; }
+.al-rating-val { color: var(--gold-dim, #7A6030); font-size: .78rem; margin-left: 4px; }
+.al-location { color: var(--gold-dim, #7A6030); font-size: .8rem; }
 .al-formats { display:flex; flex-wrap:wrap; gap:4px; }
 .al-fmt-badge {
     background: rgba(255,255,255,.06);
@@ -235,16 +235,16 @@ try {
     border-radius: 10px;
     padding: 40px;
     text-align: center;
-    color: #6a5f4a;
+    color: var(--gold-dim, #7A6030);
     grid-column: 1/-1;
 }
-.al-empty a { color: #d4bb8a; }
+.al-empty a { color: var(--gold-pale, #D4BB8A); }
 
 /* Paginación */
 .al-pagination { margin-top: 28px; display:flex; justify-content:center; }
 .al-pagination .pagination { gap: 4px; }
 .al-pagination .page-link { background:rgba(10,8,6,.8); border-color:rgba(180,140,60,.3); color:#c9b890; }
-.al-pagination .page-link:hover { background:rgba(180,130,20,.3); color:#f5c842; border-color:rgba(200,160,60,.5); }
+.al-pagination .page-link:hover { background:rgba(180,130,20,.3); color:var(--gold-light, #DAA520); border-color:rgba(200,160,60,.5); }
 .al-pagination .page-item.active .page-link { background:rgba(180,120,20,.6); border-color:rgba(200,160,60,.6); color:#fff; }
 </style>
 

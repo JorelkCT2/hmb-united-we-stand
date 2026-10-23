@@ -19,15 +19,15 @@ if (!$currentUser->guest) {
 }
 ?>
 <style>
-.an { color:#e8e0d5; }
+.an { color:var(--cream, #E8E0D5); }
 .an-card { background:rgba(10,8,6,.82); border:1px solid rgba(180,140,80,.3); border-radius:10px; margin-bottom:1.2rem; overflow:hidden; display:flex; gap:0; }
 .an-img { width:180px; min-width:180px; object-fit:cover; }
 .an-body { padding:1.2rem 1.4rem; flex:1; }
 .an-badge-c { background:#0d6efd; color:#fff; font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:4px; }
 .an-badge-a { background:#ffc107; color:#000; font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:4px; }
-.an-title { color:#f0e0c0; font-size:1.05rem; font-weight:700; margin:.4rem 0 .3rem; }
+.an-title { color:var(--cream, #E8E0D5); font-size:1.05rem; font-weight:700; margin:.4rem 0 .3rem; }
 .an-intro { color:#9a8a6a; font-size:.88rem; }
-.an-artista { color:#6a5f4a; font-size:.8rem; }
+.an-artista { color:var(--gold-dim, #7A6030); font-size:.8rem; }
 @media(max-width:600px){ .an-img { display:none; } }
 </style>
 

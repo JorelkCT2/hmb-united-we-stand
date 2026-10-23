@@ -81,33 +81,33 @@ $icons = ['🤘','💿','🎸','👕','🔥','⚡','💀','🎵'];
 @media(max-width:959px){.hmb-cat-premium+.hmb-cat-premium{border-left:none;border-top:1px solid rgba(255,255,255,.04)}}
 .hmb-cat-p-bg{position:absolute;inset:0;z-index:0}
 .hmb-cat-p-img{position:absolute;inset:-8%;background-size:cover;background-position:center;filter:brightness(.55) saturate(.8);transition:transform .8s cubic-bezier(.25,.46,.45,.94),filter .6s ease;will-change:transform}
-.hmb-cat-p-noimg{background:linear-gradient(135deg,#1a1a1a,#0d0000);display:flex;align-items:center;justify-content:center;font-size:5rem;color:#8B0000;filter:none;transition:color .4s}
+.hmb-cat-p-noimg{background:linear-gradient(135deg,var(--steel, #1A1A1A),#0d0000);display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--blood, #8B0000);filter:none;transition:color .4s}
 .hmb-cat-premium:hover .hmb-cat-p-img{transform:scale(1.08) translateY(-2%);filter:brightness(.7) saturate(1.1)}
-.hmb-cat-premium:hover .hmb-cat-p-noimg{color:#CC2200}
+.hmb-cat-premium:hover .hmb-cat-p-noimg{color:var(--fire, #CC2200)}
 .hmb-cat-p-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,0,0,.95) 0%,rgba(5,0,0,.6) 40%,rgba(5,0,0,.15) 70%,transparent 100%),linear-gradient(to right,rgba(139,0,0,.2) 0%,transparent 50%);transition:background .5s}
 .hmb-cat-premium:hover .hmb-cat-p-overlay{background:linear-gradient(to top,rgba(80,0,0,.92) 0%,rgba(20,0,0,.65) 40%,rgba(5,0,0,.2) 70%,transparent 100%),linear-gradient(to right,rgba(204,34,0,.25) 0%,transparent 60%)}
-.hmb-cat-p-sideline{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,#CC2200,#8B0000,transparent);transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.22,.68,0,1.2);z-index:3}
+.hmb-cat-p-sideline{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--fire, #CC2200),var(--blood, #8B0000),transparent);transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.22,.68,0,1.2);z-index:3}
 .hmb-cat-premium:hover .hmb-cat-p-sideline{transform:scaleY(1)}
 .hmb-cat-p-sparks{position:absolute;bottom:0;left:0;right:0;height:120px;z-index:2;pointer-events:none;overflow:hidden}
-.sp{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:#CC2200;opacity:0}
+.sp{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--fire, #CC2200);opacity:0}
 .hmb-cat-premium:hover .sp{animation:hmb-spark 1.2s ease-in-out infinite}
-.sp1{left:15%}.sp2{left:30%;width:4px;height:4px;animation-delay:.2s!important}.sp3{left:50%;background:#FF4500;animation-delay:.4s!important}.sp4{left:70%;animation-delay:.1s!important}.sp5{left:85%;width:2px;height:2px;animation-delay:.3s!important}
+.sp1{left:15%}.sp2{left:30%;width:4px;height:4px;animation-delay:.2s!important}.sp3{left:50%;background:var(--ember, #FF4500);animation-delay:.4s!important}.sp4{left:70%;animation-delay:.1s!important}.sp5{left:85%;width:2px;height:2px;animation-delay:.3s!important}
 @keyframes hmb-spark{0%{opacity:0;transform:translateY(0)}20%{opacity:.9}80%{opacity:.3}100%{opacity:0;transform:translateY(-90px) scale(.4)}}
 .hmb-cat-p-content{position:absolute;bottom:0;left:0;right:0;z-index:4;padding:2.5rem;display:flex;align-items:flex-end;gap:1.5rem;transform:translateY(8px);transition:transform .45s cubic-bezier(.22,.68,0,1.2)}
 .hmb-cat-premium:hover .hmb-cat-p-content{transform:translateY(0)}
 .hmb-cat-p-number{font-family:'Metal Mania',cursive;font-size:4.5rem;line-height:1;color:rgba(204,34,0,.18);flex-shrink:0;transition:color .4s,transform .4s;user-select:none;transform:translateX(-6px)}
 .hmb-cat-premium:hover .hmb-cat-p-number{color:rgba(204,34,0,.35);transform:translateX(0)}
 .hmb-cat-p-text{flex:1}
-.hmb-cat-p-title{font-family:'Metal Mania',cursive;font-size:clamp(1.8rem,3.5vw,2.6rem);color:#EFEFEF;letter-spacing:2px;margin:0 0 .6rem;text-shadow:0 2px 20px rgba(0,0,0,.8);line-height:1.1;transition:color .3s,text-shadow .3s}
+.hmb-cat-p-title{font-family:'Metal Mania',cursive;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--white, #EFEFEF);letter-spacing:2px;margin:0 0 .6rem;text-shadow:0 2px 20px rgba(0,0,0,.8);line-height:1.1;transition:color .3s,text-shadow .3s}
 .hmb-cat-premium:hover .hmb-cat-p-title{text-shadow:0 0 30px rgba(204,34,0,.4),0 2px 20px rgba(0,0,0,.8)}
 .hmb-cat-p-desc{font-family:'Rajdhani',sans-serif;font-size:1rem;color:rgba(200,200,200,.75);line-height:1.5;margin:0 0 1.2rem;max-width:420px;opacity:.8;transform:translateY(6px);transition:opacity .4s .05s,transform .4s .05s}
 .hmb-cat-premium:hover .hmb-cat-p-desc{opacity:1;transform:translateY(0)}
 .hmb-cat-p-cta{display:inline-flex;align-items:center;gap:.7rem;opacity:0;transform:translateX(-12px);transition:opacity .35s .1s,transform .35s .1s}
 .hmb-cat-premium:hover .hmb-cat-p-cta{opacity:1;transform:translateX(0)}
-.hmb-cat-p-cta-text{font-family:'Oswald',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#CC2200}
-.hmb-cat-p-cta-arrow{color:#CC2200;display:flex;align-items:center;transition:transform .3s}
+.hmb-cat-p-cta-text{font-family:'Oswald',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--fire, #CC2200)}
+.hmb-cat-p-cta-arrow{color:var(--fire, #CC2200);display:flex;align-items:center;transition:transform .3s}
 .hmb-cat-premium:hover .hmb-cat-p-cta-arrow{transform:translateX(6px)}
-.hmb-cat-p-reflection{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#CC2200,#8B0000,transparent);transform:scaleX(0);transition:transform .5s .1s cubic-bezier(.22,.68,0,1.2);z-index:5}
+.hmb-cat-p-reflection{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--fire, #CC2200),var(--blood, #8B0000),transparent);transform:scaleX(0);transition:transform .5s .1s cubic-bezier(.22,.68,0,1.2);z-index:5}
 .hmb-cat-premium:hover .hmb-cat-p-reflection{transform:scaleX(1)}
 @media(max-width:768px){.hmb-cat-premium{min-height:320px}.hmb-cat-p-content{padding:1.75rem 1.5rem;gap:1rem}.hmb-cat-p-number{font-size:3rem}.hmb-cat-p-cta{opacity:1;transform:none}.hmb-cat-p-desc{opacity:.9;transform:none}}
 </style>

@@ -13,14 +13,14 @@ $musicoUrl = 'index.php?option=com_artistas&view=musico' . (RouteHelper::getItem
 $provincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila','Badajoz','Barcelona','Burgos','Cáceres','Cádiz','Cantabria','Castellón','Ciudad Real','Córdoba','La Coruña','Cuenca','Girona','Granada','Guadalajara','Gipuzkoa','Huelva','Huesca','Islas Baleares','Jaén','León','Lleida','La Rioja','Lugo','Madrid','Málaga','Melilla','Murcia','Navarra','Ourense','Palencia','Las Palmas','Pontevedra','Salamanca','Santa Cruz de Tenerife','Segovia','Sevilla','Soria','Tarragona','Teruel','Toledo','Valencia','Valladolid','Vizcaya','Zamora','Zaragoza'];
 ?>
 <style>
-.mu-list { color:#e8e0d5; }
+.mu-list { color:var(--cream, #E8E0D5); }
 .mu-card { background:rgba(10,8,6,.82); border:1px solid rgba(180,140,80,.3); border-radius:10px; padding:1.2rem; margin-bottom:1rem; display:flex; gap:1.2rem; align-items:flex-start; }
 .mu-avatar { width:70px; min-width:70px; height:70px; border-radius:50%; object-fit:cover; }
 .mu-avatar-ph { width:70px; min-width:70px; height:70px; border-radius:50%; background:rgba(180,140,60,.15); display:flex; align-items:center; justify-content:center; font-size:2rem; }
-.mu-nombre { color:#f0e0c0; font-weight:700; font-size:1rem; margin-bottom:2px; }
-.mu-inst { color:#d4bb8a; font-size:.88rem; }
-.mu-meta { color:#6a5f4a; font-size:.78rem; margin-top:4px; }
-.mu-badge { display:inline-block; background:rgba(180,120,20,.25); border:1px solid rgba(180,140,60,.3); color:#d4bb8a; border-radius:4px; padding:1px 8px; font-size:.75rem; margin:2px; }
+.mu-nombre { color:var(--cream, #E8E0D5); font-weight:700; font-size:1rem; margin-bottom:2px; }
+.mu-inst { color:var(--gold-pale, #D4BB8A); font-size:.88rem; }
+.mu-meta { color:var(--gold-dim, #7A6030); font-size:.78rem; margin-top:4px; }
+.mu-badge { display:inline-block; background:rgba(180,120,20,.25); border:1px solid rgba(180,140,60,.3); color:var(--gold-pale, #D4BB8A); border-radius:4px; padding:1px 8px; font-size:.75rem; margin:2px; }
 </style>
 
 <div class="mu-list">

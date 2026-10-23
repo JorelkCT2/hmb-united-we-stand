@@ -7,35 +7,35 @@ $mostrarYoutube = (bool) $params->get('mostrar_youtube', 1);
 $total          = count($temas);
 ?>
 <style>
-.hmbw{display:block;width:100%;box-sizing:border-box;background:#0d0d0d;color:#e8ddd0;font-family:system-ui,sans-serif;border:1px solid #222}
-.hmbw-head{text-align:center;padding:.55rem .5rem;border-bottom:1px solid #2a2a2a;background:#111}
-.hmbw-head span{font-family:'Cinzel',Georgia,serif;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:#e8ddd0}
-.hmbw-fila{display:grid;grid-template-columns:1.6rem 1fr auto auto;align-items:center;gap:.4rem;padding:.5rem .65rem;border-bottom:1px solid #1a1a1a;cursor:pointer;transition:background .15s}
+.hmbw{display:block;width:100%;box-sizing:border-box;background:var(--dark, #0A0A0A);color:var(--cream, #E8E0D5);font-family:system-ui,sans-serif;border:1px solid var(--steel2, #222222)}
+.hmbw-head{text-align:center;padding:.55rem .5rem;border-bottom:1px solid var(--grey-2, #2A2A2A);background:var(--mid, #111111)}
+.hmbw-head span{font-family:'Cinzel',Georgia,serif;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream, #E8E0D5)}
+.hmbw-fila{display:grid;grid-template-columns:1.6rem 1fr auto auto;align-items:center;gap:.4rem;padding:.5rem .65rem;border-bottom:1px solid var(--steel, #1A1A1A);cursor:pointer;transition:background .15s}
 .hmbw-fila:hover{background:#161616}
-.hmbw-fila.act .hmbw-t{color:#cc0000}
+.hmbw-fila.act .hmbw-t{color:var(--fire, #CC2200)}
 .hmbw-fila.act .hmbw-n{opacity:0}
-.hmbw-n{font-size:.65rem;color:#444;text-align:right}
+.hmbw-n{font-size:.65rem;color:var(--grey-4, #444444);text-align:right}
 .hmbw-info{min-width:0}
-.hmbw-t{font-family:'Cinzel',Georgia,serif;font-size:.78rem;color:#e8ddd0;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}
-.hmbw-a{font-size:.62rem;color:#555;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hmbw-t{font-family:'Cinzel',Georgia,serif;font-size:.78rem;color:var(--cream, #E8E0D5);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}
+.hmbw-a{font-size:.62rem;color:var(--grey-5, #555555);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hmbw-btns{display:flex;gap:.3rem;align-items:center}
-.hmbw-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid #2a2a2a;text-decoration:none;color:#555;transition:all .15s;flex-shrink:0}
-.hmbw-ico:hover{border-color:#cc0000;color:#cc0000}
-.hmbw-dl:hover{border-color:#d4a017 !important;color:#d4a017 !important}
+.hmbw-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--grey-2, #2A2A2A);text-decoration:none;color:var(--grey-5, #555555);transition:all .15s;flex-shrink:0}
+.hmbw-ico:hover{border-color:var(--fire, #CC2200);color:var(--fire, #CC2200)}
+.hmbw-dl:hover{border-color:var(--gold-light, #DAA520) !important;color:var(--gold-light, #DAA520) !important}
 .hmbw-sp:hover{border-color:#1DB954 !important;color:#1DB954 !important}
-.hmbw-dur{font-family:monospace;font-size:.65rem;color:#555;min-width:2.4rem;text-align:right;white-space:nowrap}
-.hmbw-sound{display:inline-flex;align-items:center;color:#cc0000;opacity:0;width:.8rem}
+.hmbw-dur{font-family:monospace;font-size:.65rem;color:var(--grey-5, #555555);min-width:2.4rem;text-align:right;white-space:nowrap}
+.hmbw-sound{display:inline-flex;align-items:center;color:var(--fire, #CC2200);opacity:0;width:.8rem}
 .hmbw-fila.act .hmbw-sound{opacity:1}
 .hmbw-pulse{animation:hmb-p 1.2s ease-in-out infinite}
 @keyframes hmb-p{0%,100%{opacity:.3}50%{opacity:1}}
 /* Extra oculto por defecto — display:none es más fiable que max-height */
 #hmbw-extra{display:none}
-.hmbw-btn{width:100%;background:#111;border:none;border-top:1px solid #2a2a2a;
-  color:#666;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+.hmbw-btn{width:100%;background:var(--mid, #111111);border:none;border-top:1px solid var(--grey-2, #2A2A2A);
+  color:var(--grey-6, #666666);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
   padding:.45rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.35rem;
   transition:color .2s}
-.hmbw-btn:hover{color:#cc0000}
-.hmbw-btn.open{color:#cc0000;border-top-color:#cc0000;background:#120000}
+.hmbw-btn:hover{color:var(--fire, #CC2200)}
+.hmbw-btn.open{color:var(--fire, #CC2200);border-top-color:var(--fire, #CC2200);background:#120000}
 </style>
 
 <div class="hmbw">

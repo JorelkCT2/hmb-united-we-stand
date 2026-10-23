@@ -15,7 +15,7 @@ $interval    = $cfg['interval'];
    HMB CARRUSEL — <?php echo $id; ?>
 ══════════════════════════════════════════ */
 #<?php echo $id; ?>{
-    --cr:#CC2200;--cr2:#8B0000;--cdk:#050000;--cdkst:#0a0000;
+    --cr:var(--fire, #CC2200);--cr2:var(--blood, #8B0000);--cdk:var(--wine-black, #0A0000);--cdkst:var(--wine-black, #0A0000);
     --cth:72px;
     font-family:'Oswald',Arial,sans-serif;
     user-select:none;
@@ -100,7 +100,7 @@ $interval    = $cfg['interval'];
     z-index:10;
     background:rgba(5,0,0,.7);
     border:1px solid var(--cr2);
-    color:#CC2200;
+    color:var(--fire, #CC2200);
     font-size:22px;
     line-height:1;
     width:44px;height:44px;
@@ -124,7 +124,7 @@ $interval    = $cfg['interval'];
     z-index:10;
     background:rgba(5,0,0,.7);
     border:1px solid var(--cr2);
-    color:#CC2200;
+    color:var(--fire, #CC2200);
     font-size:16px;
     width:36px;height:36px;
     display:flex;align-items:center;justify-content:center;
@@ -143,8 +143,8 @@ $interval    = $cfg['interval'];
 .<?php echo $id; ?>-dot{
     width:8px;height:8px;
     border-radius:50%;
-    background:#333;
-    border:1px solid #2a0000;
+    background:var(--grey-3, #333333);
+    border:1px solid var(--wine, #3A0000);
     cursor:pointer;
     transition:background .2s,transform .2s;
 }
@@ -269,7 +269,7 @@ $interval    = $cfg['interval'];
 
 .<?php echo $id; ?>-lb-caption{
     font-family:'Metal Mania',cursive,'Oswald',sans-serif;
-    color:#bbb;
+    color:var(--grey-b, #BBBBBB);
     font-size:14px;
     letter-spacing:2px;
     margin-top:12px;
@@ -279,7 +279,7 @@ $interval    = $cfg['interval'];
 }
 .<?php echo $id; ?>-lb-counter{
     font-family:'Oswald',sans-serif;
-    color:#555;
+    color:var(--grey-5, #555555);
     font-size:11px;
     letter-spacing:2px;
     margin-top:4px;

@@ -10,10 +10,10 @@
   --logo-h:    80px;
   --logo-h-md: 60px;
   --logo-h-sm: 44px;
-  --fire:      #CC2200;
-  --blood:     #8B0000;
-  --ember:     #FF4500;
-  --gold:      #DAA520;
+  --fire:      var(--fire, #CC2200);
+  --blood:     var(--blood, #8B0000);
+  --ember:     var(--ember, #FF4500);
+  --gold:      var(--gold-light, #DAA520);
 
   display: inline-flex;
   align-items: center;
@@ -136,7 +136,7 @@
 .hmb-logo-text-fallback {
   font-family: 'Metal Mania', cursive, sans-serif;
   font-size: 28px;
-  color: #EFEFEF;
+  color: var(--white, #EFEFEF);
   text-shadow: 0 0 20px rgba(204,34,0,0.5);
   letter-spacing: 1px;
   white-space: nowrap;
@@ -358,7 +358,7 @@
 }
 
 .hmb-logo-link:focus-visible {
-  outline: 2px solid #CC2200;
+  outline: 2px solid var(--fire, #CC2200);
   outline-offset: 6px;
   border-radius: 4px;
 }

@@ -73,7 +73,7 @@ $medals = ['🥇', '🥈', '🥉'];
 }
 .hmbq-rank-mod .hmbq-rank-row:last-child { border-bottom: 0; }
 .hmbq-rank-mod .hmbq-rank-pos {
-	width: 1.9rem; text-align: center; font-weight: 700; color: #c1121f; flex: 0 0 auto;
+	width: 1.9rem; text-align: center; font-weight: 700; color: var(--fire, #CC2200); flex: 0 0 auto;
 }
 .hmbq-rank-mod .hmbq-top3 .hmbq-rank-pos { font-size: 1.15rem; }
 .hmbq-rank-mod .hmbq-rank-name { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -7,7 +7,7 @@
    HEADER 2 FILAS
    ═══════════════════════════════════════════════════════════ */
 .hmb-header-top {
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--mid, #111111);
 }
 
 .hmb-header-top-inner {
@@ -45,7 +45,7 @@
 .hmb-row-noticias {
   background: var(--dark);
   padding: 3rem 0;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--mid, #111111);
 }
 
 .hmb-row-noticias .hmb-module-title {
@@ -104,7 +104,7 @@
 .hmb-row-slider {
   background: var(--darker);
   padding: 0;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--mid, #111111);
   overflow: hidden;
 }
 
@@ -123,7 +123,7 @@
 .hmb-row-ef-frases {
   background: var(--dark);
   padding: 3rem 0;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--mid, #111111);
 }
 
 .hmb-row-ef-frases-inner {
@@ -172,7 +172,7 @@
 .hmb-col-ef .hmb-module-content p,
 .hmb-col-ef .hmb-module-content li {
   padding: 0.4rem 0;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid var(--steel, #1A1A1A);
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -261,7 +261,7 @@
   transform: translateY(-50%);
   width: 320px;
   background: var(--steel);
-  border: 1px solid #222;
+  border: 1px solid var(--steel2, #222222);
   border-right: none;
   border-radius: 8px 0 0 8px;
   box-shadow: -8px 0 40px rgba(0,0,0,0.8);
@@ -316,7 +316,7 @@
 
 .hmb-float-input {
   background: rgba(255,255,255,0.05);
-  border: 1px solid #333;
+  border: 1px solid var(--grey-3, #333333);
   color: var(--white);
   padding: 10px 14px;
   font-family: 'Rajdhani', sans-serif;
@@ -444,7 +444,7 @@
   .hmb-menu-wrap ul li > a {
     font-size: 18px;
     padding: 12px 0;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid var(--steel, #1A1A1A);
   }
 
   /* Noticias: 1 columna */
@@ -572,7 +572,7 @@
   width: auto !important;
   min-width: 200px !important;
   background: var(--steel) !important;
-  border: 1px solid #222 !important;
+  border: 1px solid var(--steel2, #222222) !important;
   border-top: 2px solid var(--fire) !important;
   z-index: 500 !important;
   padding: 0.4rem 0 !important;
@@ -594,7 +594,7 @@
   letter-spacing: 1px !important;
   color: var(--text-dim) !important;
   background: none !important;
-  border-bottom: 1px solid #1a1a1a !important;
+  border-bottom: 1px solid var(--steel, #1A1A1A) !important;
 }
 
 .hmb-header-nav .hmb-menu-wrap ul ul li > a::after { display: none !important; }
@@ -700,7 +700,7 @@
   left: 0 !important;
   min-width: 220px !important;
   background: var(--steel) !important;
-  border: 1px solid #222 !important;
+  border: 1px solid var(--steel2, #222222) !important;
   border-top: 2px solid var(--fire) !important;
   list-style: none !important;
   margin: 0 !important;
@@ -732,7 +732,7 @@
   color: var(--text-dim) !important;
   text-decoration: none !important;
   padding: 9px 20px !important;
-  border-bottom: 1px solid #1a1a1a !important;
+  border-bottom: 1px solid var(--steel, #1A1A1A) !important;
   transition: color 0.2s, background 0.2s, padding-left 0.2s !important;
   white-space: nowrap !important;
 }
@@ -770,7 +770,7 @@
   .hmb-header-nav .hmb-nav-list > li > a {
     padding: 14px 0 !important;
     height: auto !important;
-    border-bottom: 1px solid #1a1a1a !important;
+    border-bottom: 1px solid var(--steel, #1A1A1A) !important;
     font-size: 18px !important;
     letter-spacing: 3px !important;
   }
@@ -789,7 +789,7 @@
   .hmb-nav-dropdown li a {
     font-size: 14px !important;
     padding: 8px 0 !important;
-    border-bottom: 1px solid #111 !important;
+    border-bottom: 1px solid var(--mid, #111111) !important;
   }
 
   .hmb-nav-caret { display: none !important; }
@@ -951,7 +951,7 @@ body.home .hmb-main-wrap .hmb-layout {
     padding: 10px 16px !important;
     font-size: 11px !important;
     white-space: nowrap !important;
-    border-bottom: 1px solid #1a1a1a !important;
+    border-bottom: 1px solid var(--steel, #1A1A1A) !important;
   }
 }
 /* ═══════════════════════════════════════════════════════════
@@ -960,7 +960,7 @@ body.home .hmb-main-wrap .hmb-layout {
 .hmb-row-videos {
   background: var(--darker);
   padding: 3rem 0;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--mid, #111111);
 }
 
 .hmb-row-videos .hmb-module-title {
@@ -1081,7 +1081,7 @@ body.home .hmb-main-wrap .hmb-layout {
   .hmb-header-nav .hmb-menu-wrap ul ul li a {
     font-size: 13px !important;
     padding: 12px 20px !important;
-    border-bottom: 1px solid #1a1a1a !important;
+    border-bottom: 1px solid var(--steel, #1A1A1A) !important;
     letter-spacing: 1px !important;
     color: var(--text) !important;
     display: block !important;
@@ -1139,7 +1139,7 @@ body.home .hmb-main-home > .hmb-container-fluid {
   background: var(--steel);
   padding: 2rem 0;
   border-bottom: 2px solid var(--blood);
-  border-top: 1px solid #111;
+  border-top: 1px solid var(--mid, #111111);
 }
 
 .hmb-row-conciertos .hmb-module-title {
@@ -1245,7 +1245,7 @@ body.home .hmb-main-home > .hmb-container-fluid {
 .hmb-art-foto:hover img { filter: brightness(1) contrast(1.1); }
 .hmb-art-foto-izq { border-right: 2px solid var(--blood); }
 .hmb-art-foto-der { border-left: 2px solid var(--blood); }
-.hmb-art-foto-label { background: #0d0000; padding: .6rem .5rem; text-align: center; border-top: 1px solid #1a0000; }
+.hmb-art-foto-label { background: #0d0000; padding: .6rem .5rem; text-align: center; border-top: 1px solid var(--wine-dark, #1A0000); }
 .hmb-art-foto-label span { font-family: 'Metal Mania', cursive; font-size: 16px; color: var(--white); letter-spacing: 2px; text-shadow: 0 0 10px rgba(204,34,0,.5); display: block; line-height: 1.2; }
 .hmb-art-foto-label small { font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); }
 
@@ -1289,7 +1289,7 @@ body.home .hmb-main-home > .hmb-container-fluid {
     height: 100% !important; min-height: 100vh !important;
     overflow-y: auto !important; overflow-x: hidden !important;
     background: #080000 !important;
-    border-right: 2px solid #8B0000 !important;
+    border-right: 2px solid var(--blood, #8B0000) !important;
     z-index: 9999 !important;
     transition: left .3s ease !important;
     padding: 0 0 2rem !important;
@@ -1311,15 +1311,15 @@ body.home .hmb-main-home > .hmb-container-fluid {
     display: flex !important; justify-content: space-between !important;
     align-items: center !important; padding: 14px 20px !important;
     height: auto !important; font-size: 13px !important;
-    letter-spacing: 2px !important; color: #C8C8C8 !important;
-    border-bottom: 1px solid #1a0000 !important;
+    letter-spacing: 2px !important; color: var(--text, #C8C8C8) !important;
+    border-bottom: 1px solid var(--wine-dark, #1A0000) !important;
     border-left: 3px solid transparent !important;
     white-space: nowrap !important;
   }
   .hmb-header-nav .hmb-menu-wrap ul li > a:hover,
   .hmb-header-nav .hmb-menu-wrap ul li.active > a {
-    color: #FF4500 !important; background: rgba(139,0,0,.2) !important;
-    border-left-color: #CC2200 !important;
+    color: var(--ember, #FF4500) !important; background: rgba(139,0,0,.2) !important;
+    border-left-color: var(--fire, #CC2200) !important;
   }
   .hmb-header-nav .hmb-menu-wrap ul li:not(.has-children) > a::after { display: none !important; }
   .hmb-header-nav .hmb-menu-wrap ul li.has-children > a::after {
@@ -1337,7 +1337,7 @@ body.home .hmb-main-home > .hmb-container-fluid {
   .hmb-header-nav .hmb-menu-wrap ul li.is-open > ul { display: block !important; }
   .hmb-header-nav .hmb-menu-wrap ul ul li a {
     padding: 11px 20px 11px 36px !important; font-size: 12px !important;
-    color: #888 !important; border-bottom: 1px solid #0d0000 !important;
+    color: var(--grey-8, #888888) !important; border-bottom: 1px solid #0d0000 !important;
     display: block !important; height: auto !important;
   }
 

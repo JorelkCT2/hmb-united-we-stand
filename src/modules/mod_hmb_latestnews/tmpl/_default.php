@@ -26,12 +26,12 @@ $effectCSS = match($imageEffect) {
 <style>
 .hmb-latestnews{
     --hmb-accent:    <?php echo $accentHex; ?>;
-    --hmb-dark:      #0d0d0d;
-    --hmb-dark2:     #1a1a1a;
-    --hmb-dark3:     #222;
-    --hmb-border:    #333;
+    --hmb-dark:      var(--dark, #0A0A0A);
+    --hmb-dark2:     var(--steel, #1A1A1A);
+    --hmb-dark3:     var(--steel2, #222222);
+    --hmb-border:    var(--grey-3, #333333);
     --hmb-text:      #e8e8e8;
-    --hmb-text-muted:#999;
+    --hmb-text-muted:var(--grey-9, #999999);
     --hmb-white:     #fff;
     font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
 }
@@ -82,7 +82,7 @@ $effectCSS = match($imageEffect) {
 .hmb-latestnews .hmb-card__image-placeholder{
     width:100%;aspect-ratio:<?php echo $aspect; ?>;
     display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--hmb-dark3),#111);
+    background:linear-gradient(135deg,var(--hmb-dark3),var(--mid, #111111));
     color:var(--hmb-border);
 }
 
@@ -136,7 +136,7 @@ $effectCSS = match($imageEffect) {
 .hmb-latestnews .hmb-card__image-wrap .hmb-img-caption{
     position:absolute;bottom:0;left:0;right:0;z-index:2;
     background:rgba(0,0,0,.65);
-    color:#ccc;
+    color:var(--grey-c, #CCCCCC);
     font-size:.72rem;
     padding:4px 10px;
     line-height:1.4;
@@ -150,7 +150,7 @@ $effectCSS = match($imageEffect) {
 
 /* ── Texto más grande y claro ── */
 .hmb-latestnews .hmb-card__title{font-size:1.1rem;}
-.hmb-latestnews .hmb-card__intro{font-size:.92rem;color:#bbb;}
+.hmb-latestnews .hmb-card__intro{font-size:.92rem;color:var(--grey-b, #BBBBBB);}
 .hmb-latestnews .hmb-date__text{font-size:.78rem;}
 .hmb-latestnews .hmb-badge{font-size:.72rem;padding:3px 10px;}
 .hmb-latestnews .hmb-readmore{font-size:.84rem;}

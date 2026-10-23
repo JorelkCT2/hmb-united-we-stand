@@ -76,7 +76,7 @@ $pagination = $this->pagination ?? null;
    HMB — LISTADO DE ARTÍCULOS (layout BLOG)
 ══════════════════════════════════════════ */
 .hmb-art-list{
-    background:#050000;
+    background:var(--wine-black, #0A0000);
     padding:2rem 0;
     font-family:'Oswald',Arial,sans-serif;
 }
@@ -84,7 +84,7 @@ $pagination = $this->pagination ?? null;
 /* Cabecera de categoría */
 .hmb-art-header{
     max-width:1200px;margin:0 auto 2.5rem;padding:0 1.5rem;
-    border-left:4px solid #CC2200;
+    border-left:4px solid var(--fire, #CC2200);
 }
 .hmb-art-header h1{
     font-family:'Metal Mania',cursive;
@@ -93,7 +93,7 @@ $pagination = $this->pagination ?? null;
     text-shadow:0 0 30px rgba(204,34,0,.5);
 }
 .hmb-art-header p{
-    font-size:14px;color:#555;letter-spacing:1px;margin:0;
+    font-size:14px;color:var(--grey-5, #555555);letter-spacing:1px;margin:0;
 }
 
 /* Grid */
@@ -115,7 +115,7 @@ $pagination = $this->pagination ?? null;
     overflow:hidden;
     min-height:260px;
     cursor:pointer;
-    background:#0a0000;
+    background:var(--wine-black, #0A0000);
     display:flex;flex-direction:column;
     text-decoration:none;
 }
@@ -175,7 +175,7 @@ $pagination = $this->pagination ?? null;
 .hmb-art-card::before{
     content:'';position:absolute;top:0;left:0;right:0;
     height:3px;
-    background:linear-gradient(90deg,#CC2200,#8B0000,transparent);
+    background:linear-gradient(90deg,var(--fire, #CC2200),var(--blood, #8B0000),transparent);
     z-index:5;
     transform:scaleX(0);transform-origin:left;
     transition:transform .35s ease;
@@ -241,7 +241,7 @@ $pagination = $this->pagination ?? null;
 .hmb-art-cta{
     display:inline-flex;align-items:center;gap:6px;
     font-size:10px;letter-spacing:2px;text-transform:uppercase;
-    color:#CC2200;
+    color:var(--fire, #CC2200);
     border:1px solid rgba(139,0,0,.5);
     padding:5px 14px;
     transition:all .25s;
@@ -249,7 +249,7 @@ $pagination = $this->pagination ?? null;
 .hmb-art-card:hover .hmb-art-cta{
     color:#fff;
     background:rgba(139,0,0,.4);
-    border-color:#CC2200;
+    border-color:var(--fire, #CC2200);
 }
 .hmb-art-cta-arrow{transition:transform .25s;}
 .hmb-art-card:hover .hmb-art-cta-arrow{transform:translateX(4px);}
@@ -267,9 +267,9 @@ $pagination = $this->pagination ?? null;
 .hmb-art-pag .pagination li span{
     display:flex;align-items:center;justify-content:center;
     min-width:36px;height:36px;
-    background:#0a0000;
-    border:1px solid #2a0000;
-    color:#888;
+    background:var(--wine-black, #0A0000);
+    border:1px solid var(--wine, #3A0000);
+    color:var(--grey-8, #888888);
     font-family:'Oswald',sans-serif;
     font-size:12px;letter-spacing:1px;
     text-decoration:none;
@@ -277,11 +277,11 @@ $pagination = $this->pagination ?? null;
     transition:all .2s;
 }
 .hmb-art-pag .pagination li a:hover{
-    background:#1a0000;border-color:#CC2200;color:#fff;
+    background:var(--wine-dark, #1A0000);border-color:var(--fire, #CC2200);color:#fff;
 }
 .hmb-art-pag .pagination li.active span,
 .hmb-art-pag .pagination li.active a{
-    background:#CC2200;border-color:#CC2200;color:#fff;
+    background:var(--fire, #CC2200);border-color:var(--fire, #CC2200);color:#fff;
 }
 .hmb-art-pag .pagination li.disabled span{
     opacity:.3;cursor:default;
@@ -289,7 +289,7 @@ $pagination = $this->pagination ?? null;
 
 /* Sin artículos */
 .hmb-art-empty{
-    text-align:center;padding:4rem 2rem;color:#333;
+    text-align:center;padding:4rem 2rem;color:var(--grey-3, #333333);
     font-family:'Oswald',sans-serif;letter-spacing:2px;
 }
 </style>

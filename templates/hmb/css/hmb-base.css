@@ -22,6 +22,29 @@
   --radius: 0px;
   --transition: 0.3s ease;
 
+  /* Escala ampliada: todo color de extension sale de aqui */
+  --fire-light: #FF7070;
+  --wine: #3A0000;
+  --wine-dark: #1A0000;
+  --wine-black: #0A0000;
+  --gold-pale: #D4BB8A;
+  --gold-dim: #7A6030;
+  --cream: #E8E0D5;
+  --grey-2: #2A2A2A;
+  --grey-3: #333333;
+  --grey-4: #444444;
+  --grey-5: #555555;
+  --grey-6: #666666;
+  --grey-8: #888888;
+  --grey-9: #999999;
+  --grey-a: #AAAAAA;
+  --grey-b: #BBBBBB;
+  --grey-c: #CCCCCC;
+  --grey-d: #DDDDDD;
+  --grey-e: #E0E0E0;
+  --ok: #4CAF50;
+  --ok-light: #66D98E;
+
   /* Tipografia: cuatro roles, ninguna familia mas */
   --font-display: 'Metal Mania', cursive;            /* logotipos y numeros grandes */
   --font-title:   'Oswald', sans-serif;               /* titulos, menus, etiquetas */

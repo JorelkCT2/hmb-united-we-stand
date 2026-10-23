@@ -38,3 +38,10 @@ Método: rastreo de las 877 URLs del sitemap, recorrido en navegador (escritorio
 Hecho y verificado: 500 de músicos (módulo quiz), H1/viewport/canonical únicos, CSS y archivos huérfanos fuera, página de error sin mensajes internos, redirección heavymetalbrothers.com → www (301), sitemap regenerado sin `/component/` (214 URLs, 211 con 200).
 Pendiente: 3 URLs 404 de noticias de artistas (`…/noticias-de-nuestros-artistas/-n4`, `-n5`, `-n6`: slug `-nID` que no resuelve; el generador está fuera de com_artistas), 137 imágenes sin `alt`, banner de portada recortado, fase 2 (sistema de diseño).
 Copias en el servidor: `tmp/hmb_backups/` (htaccess_20261023, sitemap_20261023.tar.gz, jlsitemap_params_20261023.json, huerfanos_20261023.tar.gz).
+
+## Fase 2 (24/10/2026)
+- Tipografía: 4 roles (`--font-display/title/body/accent`) en `hmb-base.css`; sin Arial ni Raleway; sin `@import` de fuentes en extensiones.
+- CSS: los 35 KB inline de `index.php` están en `hmb-components.css`; las hojas de plantilla versionan por `filemtime`.
+- Color: 1288 literales de 59 ficheros de extensiones/overrides pasaron a `var(--token, #valor)` (escala de grises, rojos de marca, dorados, cremas). Los casi-iguales se alinearon con la marca (p. ej. `#cc0000`, `#c1121f` → `--fire`; `#d4af37` → `--gold-light`). Comprobado con histograma de colores computados en 5 páginas: solo cambian esos valores.
+- Fuera de alcance a propósito: CSS de administración (Atum), hoja de Phoca (se retira con la tienda), colores de redes sociales y verdes/azules de estado.
+- Pendiente: 45 bloques `<style>` dentro de PHP de extensiones (mover a hojas), `style=""` sueltos.

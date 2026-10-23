@@ -36,7 +36,7 @@
     font-family: 'Cinzel', serif;
     font-size: .78rem;
     font-weight: 600;
-    color: #c9a84c;
+    color: var(--gold-light, #DAA520);
     letter-spacing: .06em;
     text-transform: uppercase;
 }
@@ -83,7 +83,7 @@
     background: rgba(180, 20, 20, .12);
     border: 1px solid rgba(180, 20, 20, .35);
     border-radius: 3px;
-    color: #c9a84c;
+    color: var(--gold-light, #DAA520);
     font-family: 'Cinzel', serif;
     font-size: .62rem;
     font-weight: 600;

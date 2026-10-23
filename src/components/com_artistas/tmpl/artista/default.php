@@ -88,7 +88,7 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
 ?>
 
 <style>
-.af { color:#e8e0d5; }
+.af { color:var(--cream, #E8E0D5); }
 .af-hero { position:relative; height:420px; border-radius:12px; overflow:hidden; margin-bottom:1.5rem; }
 .af-hero img {
     width:100%; height:100%;
@@ -106,24 +106,24 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
 .af-card { background:rgba(10,8,6,.82); border:1px solid rgba(180,140,80,.3); border-radius:10px; margin-bottom:1.2rem; overflow:hidden; backdrop-filter:blur(4px); }
 .af-card-h { background:rgba(180,120,30,.6); border-bottom:1px solid rgba(200,150,50,.3); padding:.75rem 1.2rem; font-weight:700; font-size:.9rem; color:#fff; text-transform:uppercase; letter-spacing:.5px; }
 .af-card-b { padding:1.2rem 1.4rem; }
-.af-badge { display:inline-block; background:rgba(180,120,20,.35); border:1px solid rgba(180,140,60,.4); color:#d4bb8a; font-size:.75rem; font-weight:700; padding:2px 10px; border-radius:4px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:.5rem; }
-.af-stars { color:#f5c842; letter-spacing:-1px; }
+.af-badge { display:inline-block; background:rgba(180,120,20,.35); border:1px solid rgba(180,140,60,.4); color:var(--gold-pale, #D4BB8A); font-size:.75rem; font-weight:700; padding:2px 10px; border-radius:4px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:.5rem; }
+.af-stars { color:var(--gold-light, #DAA520); letter-spacing:-1px; }
 .af-stars-e { color:#3a3020; letter-spacing:-1px; }
 .af-prov-badge { display:inline-block; background:rgba(255,255,255,.06); border:1px solid rgba(180,140,60,.25); color:#9a8a6a; font-size:.78rem; padding:2px 8px; border-radius:3px; margin:2px; }
 .af-sidebar { background:rgba(10,8,6,.85); border:1px solid rgba(180,140,80,.3); border-radius:10px; overflow:hidden; }
-.af-sidebar-h { background:linear-gradient(135deg,#b87d1e,#8a5a10); padding:1rem; text-align:center; color:#fff; font-weight:700; }
+.af-sidebar-h { background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); padding:1rem; text-align:center; color:#fff; font-weight:700; }
 .af-sidebar-b { padding:1.2rem; }
 .af-btn-phone { display:block; text-align:center; background:rgba(20,120,50,.5); border:1px solid rgba(40,160,70,.4); color:#8feba8; padding:.6rem; border-radius:6px; text-decoration:none; margin-bottom:.5rem; font-weight:600; }
 .af-btn-web { display:block; text-align:center; background:rgba(255,255,255,.06); border:1px solid rgba(180,140,60,.3); color:#c9b890; padding:.4rem; border-radius:6px; text-decoration:none; font-size:.85rem; margin-bottom:.8rem; }
 .af-social { display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); transition:all .2s; text-decoration:none; }
 .af-social:hover { background:rgba(255,255,255,.18); transform:scale(1.1); }
-.af-form-ctrl { background:rgba(255,255,255,.07)!important; border:1px solid rgba(180,140,60,.4)!important; color:#f0e8d8!important; border-radius:6px; width:100%; padding:.4rem .6rem; margin-bottom:.5rem; font-size:.85rem; }
-.af-form-ctrl::placeholder { color:#6a5f4a!important; }
-.af-btn-submit { background:linear-gradient(135deg,#b87d1e,#8a5a10); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; width:100%; padding:.7rem; border-radius:6px; cursor:pointer; }
+.af-form-ctrl { background:rgba(255,255,255,.07)!important; border:1px solid rgba(180,140,60,.4)!important; color:var(--cream, #E8E0D5)!important; border-radius:6px; width:100%; padding:.4rem .6rem; margin-bottom:.5rem; font-size:.85rem; }
+.af-form-ctrl::placeholder { color:var(--gold-dim, #7A6030)!important; }
+.af-btn-submit { background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; width:100%; padding:.7rem; border-radius:6px; cursor:pointer; }
 .af-resena-stars { display:flex; flex-direction:row-reverse; justify-content:flex-end; }
 .af-resena-stars input { display:none; }
-.af-resena-stars label { font-size:1.6rem; color:#ccc; cursor:pointer; }
-.af-resena-stars input:checked ~ label, .af-resena-stars label:hover, .af-resena-stars label:hover ~ label { color:#f5c842; }
+.af-resena-stars label { font-size:1.6rem; color:var(--grey-c, #CCCCCC); cursor:pointer; }
+.af-resena-stars input:checked ~ label, .af-resena-stars label:hover, .af-resena-stars label:hover ~ label { color:var(--gold-light, #DAA520); }
 </style>
 
 <div class="af">

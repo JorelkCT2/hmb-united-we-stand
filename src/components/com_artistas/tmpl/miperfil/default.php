@@ -56,18 +56,18 @@ try {
 } catch (\Exception $e) { $__noticias = []; }
 ?>
 <style>
-.mp { color:#e8e0d5; }
+.mp { color:var(--cream, #E8E0D5); }
 .mp-card { background:rgba(10,8,6,.82); border:1px solid rgba(180,140,80,.3); border-radius:10px; margin-bottom:1.5rem; overflow:hidden; }
-.mp-card-h { background:rgba(100,70,20,.5); padding:.7rem 1.2rem; font-weight:700; font-size:.85rem; color:#d4bb8a; text-transform:uppercase; letter-spacing:.4px; display:flex; justify-content:space-between; align-items:center; }
+.mp-card-h { background:rgba(100,70,20,.5); padding:.7rem 1.2rem; font-weight:700; font-size:.85rem; color:var(--gold-pale, #D4BB8A); text-transform:uppercase; letter-spacing:.4px; display:flex; justify-content:space-between; align-items:center; }
 .mp-card-b { padding:1.2rem 1.4rem; }
-.mp-label { display:block; color:#8a7a60; font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
-.mp-ctrl { width:100%; background:rgba(255,255,255,.06)!important; border:1px solid rgba(180,140,60,.3)!important; color:#f0e8d8!important; border-radius:6px; padding:.45rem .7rem; font-size:.9rem; margin-bottom:0; }
+.mp-label { display:block; color:var(--gold-dim, #7A6030); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
+.mp-ctrl { width:100%; background:rgba(255,255,255,.06)!important; border:1px solid rgba(180,140,60,.3)!important; color:var(--cream, #E8E0D5)!important; border-radius:6px; padding:.45rem .7rem; font-size:.9rem; margin-bottom:0; }
 .mp-ctrl:focus { border-color:rgba(200,160,60,.8)!important; outline:none!important; color:#fff!important; }
-.mp-ctrl option { background:#1a1208; color:#f0e0c0; }
-.mp-btn-save { background:linear-gradient(135deg,#b87d1e,#8a5a10); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; font-size:.9rem; padding:.6rem 2rem; border-radius:7px; cursor:pointer; }
+.mp-ctrl option { background:var(--steel, #1A1A1A); color:var(--cream, #E8E0D5); }
+.mp-btn-save { background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; font-size:.9rem; padding:.6rem 2rem; border-radius:7px; cursor:pointer; }
 .mp-btn-save:hover { background:linear-gradient(135deg,#d4941e,#a06a15); }
 .mp-status-ok { background:rgba(30,120,60,.25); border:1px solid rgba(60,160,80,.3); border-radius:8px; padding:.7rem 1.2rem; color:#8feba8; font-size:.9rem; margin-bottom:1rem; }
-.mp-status-pend { background:rgba(180,120,20,.25); border:1px solid rgba(200,160,50,.3); border-radius:8px; padding:.7rem 1.2rem; color:#f5c842; font-size:.9rem; margin-bottom:1rem; }
+.mp-status-pend { background:rgba(180,120,20,.25); border:1px solid rgba(200,160,50,.3); border-radius:8px; padding:.7rem 1.2rem; color:var(--gold-light, #DAA520); font-size:.9rem; margin-bottom:1rem; }
 </style>
 
 <div class="mp">

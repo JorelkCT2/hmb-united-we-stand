@@ -166,7 +166,7 @@ foreach ($items as $item) {
     overflow:hidden;
     min-height:320px;
     cursor:pointer;
-    background:#050000;
+    background:var(--wine-black, #0A0000);
 }
 .hmb-cat-card:first-child{
     min-height:480px;
@@ -215,8 +215,8 @@ foreach ($items as $item) {
     background:
         repeating-linear-gradient(
             45deg,
-            #0a0000 0px, #0a0000 2px,
-            #050000 2px, #050000 20px
+            var(--wine-black, #0A0000) 0px, var(--wine-black, #0A0000) 2px,
+            var(--wine-black, #0A0000) 2px, var(--wine-black, #0A0000) 20px
         );
 }
 
@@ -250,7 +250,7 @@ foreach ($items as $item) {
     position:absolute;
     top:0;left:0;right:0;
     height:3px;
-    background:linear-gradient(90deg,#CC2200,#8B0000,transparent);
+    background:linear-gradient(90deg,var(--fire, #CC2200),var(--blood, #8B0000),transparent);
     z-index:10;
 }
 /* Línea lateral izquierda */
@@ -259,7 +259,7 @@ foreach ($items as $item) {
     position:absolute;
     top:0;left:0;bottom:0;
     width:3px;
-    background:linear-gradient(180deg,#CC2200,transparent);
+    background:linear-gradient(180deg,var(--fire, #CC2200),transparent);
     z-index:10;
 }
 
@@ -277,7 +277,7 @@ foreach ($items as $item) {
     align-items:center;
     gap:6px;
     background:rgba(139,0,0,.85);
-    border:1px solid #CC2200;
+    border:1px solid var(--fire, #CC2200);
     color:#fff;
     font-family:'Oswald',sans-serif;
     font-size:10px;
@@ -290,7 +290,7 @@ foreach ($items as $item) {
 .hmb-cat-count-dot{
     width:5px;height:5px;
     border-radius:50%;
-    background:#FF4500;
+    background:var(--ember, #FF4500);
     animation:hmb-blink 1.4s ease-in-out infinite;
 }
 @keyframes hmb-blink{0%,100%{opacity:1;}50%{opacity:.3;}}
@@ -314,7 +314,7 @@ foreach ($items as $item) {
 /* Separador rojo */
 .hmb-cat-sep{
     width:50px;height:2px;
-    background:linear-gradient(90deg,#CC2200,transparent);
+    background:linear-gradient(90deg,var(--fire, #CC2200),transparent);
     margin:0 0 12px;
 }
 
@@ -343,9 +343,9 @@ foreach ($items as $item) {
     font-weight:700;
     letter-spacing:3px;
     text-transform:uppercase;
-    color:#CC2200;
+    color:var(--fire, #CC2200);
     text-decoration:none;
-    border:1px solid #8B0000;
+    border:1px solid var(--blood, #8B0000);
     padding:7px 18px;
     transition:all .25s;
     position:relative;
@@ -360,7 +360,7 @@ foreach ($items as $item) {
 }
 .hmb-cat-card:hover .hmb-cat-cta{
     color:#fff;
-    border-color:#CC2200;
+    border-color:var(--fire, #CC2200);
 }
 .hmb-cat-card:hover .hmb-cat-cta::before{
     background:rgba(139,0,0,.4);
@@ -385,7 +385,7 @@ foreach ($items as $item) {
     background:rgba(255,255,255,.3);
     transition:background .3s;
 }
-.hmb-cat-dot.on{background:#CC2200;}
+.hmb-cat-dot.on{background:var(--fire, #CC2200);}
 
 /* Sin zoom al hover: el scroll vertical lo hace la animación de cada slide */
 .hmb-cat-slides{overflow:hidden;}

@@ -32,8 +32,8 @@ $imgHeight = $imgH[$tamano] ?? '220px';
     width:<?php echo $ancho; ?>px;
     max-width:calc(100vw - 24px);
     background:#060000;
-    border:2px solid #8B0000;
-    border-top:4px solid #CC2200;
+    border:2px solid var(--blood, #8B0000);
+    border-top:4px solid var(--fire, #CC2200);
     box-shadow:0 0 60px rgba(139,0,0,.5), 0 20px 60px rgba(0,0,0,.9);
     display:none;
     flex-direction:column;
@@ -70,15 +70,15 @@ $imgHeight = $imgH[$tamano] ?? '220px';
 
 /* ── Cabecera ── */
 .<?php echo $mid; ?>-head{
-    background:linear-gradient(135deg,#1a0000,#0a0000);
-    border-bottom:2px solid #2a0000;
+    background:linear-gradient(135deg,var(--wine-dark, #1A0000),var(--wine-black, #0A0000));
+    border-bottom:2px solid var(--wine, #3A0000);
     padding:14px 16px 12px;
     display:flex;align-items:flex-start;gap:10px;
     position:relative;
 }
 .<?php echo $mid; ?>-badge{
     flex-shrink:0;
-    background:linear-gradient(135deg,#CC2200,#8B0000);
+    background:linear-gradient(135deg,var(--fire, #CC2200),var(--blood, #8B0000));
     color:#fff;
     font-family:'Oswald',sans-serif;
     font-size:8px;font-weight:700;letter-spacing:2px;
@@ -107,9 +107,9 @@ $imgHeight = $imgH[$tamano] ?? '220px';
 .<?php echo $mid; ?>-close{
     position:absolute;
     top:10px;right:10px;
-    background:#1a0000;
-    border:1px solid #8B0000;
-    color:#CC2200;
+    background:var(--wine-dark, #1A0000);
+    border:1px solid var(--blood, #8B0000);
+    color:var(--fire, #CC2200);
     width:32px;height:32px;
     border-radius:3px;
     font-size:18px;line-height:1;
@@ -118,14 +118,14 @@ $imgHeight = $imgH[$tamano] ?? '220px';
     transition:background .2s,color .2s;
     flex-shrink:0;
 }
-.<?php echo $mid; ?>-close:hover{ background:#8B0000;color:#fff; }
+.<?php echo $mid; ?>-close:hover{ background:var(--blood, #8B0000);color:#fff; }
 
 /* ── Imagen ── */
 .<?php echo $mid; ?>-img{
     width:100%;
     max-height:<?php echo $imgHeight; ?>;
     overflow:hidden;
-    border-bottom:2px solid #1a0000;
+    border-bottom:2px solid var(--wine-dark, #1A0000);
     position:relative;
 }
 .<?php echo $mid; ?>-img img{
@@ -152,8 +152,8 @@ $imgHeight = $imgH[$tamano] ?? '220px';
 
 /* ── Barra autoclose ── */
 .<?php echo $mid; ?>-bar-wrap{
-    background:#0a0000;
-    border-top:1px solid #1a0000;
+    background:var(--wine-black, #0A0000);
+    border-top:1px solid var(--wine-dark, #1A0000);
     padding:8px 14px;
     display:none;
     align-items:center;
@@ -162,17 +162,17 @@ $imgHeight = $imgH[$tamano] ?? '220px';
 .<?php echo $mid; ?>-bar-wrap.visible{ display:flex; }
 .<?php echo $mid; ?>-bar-bg{
     flex:1;height:3px;
-    background:#1a0000;border-radius:2px;overflow:hidden;
+    background:var(--wine-dark, #1A0000);border-radius:2px;overflow:hidden;
 }
 .<?php echo $mid; ?>-bar-fill{
     height:100%;width:100%;
-    background:linear-gradient(90deg,#CC2200,#FF4500);
+    background:linear-gradient(90deg,var(--fire, #CC2200),var(--ember, #FF4500));
     transform-origin:left;
     transition:transform linear;
 }
 .<?php echo $mid; ?>-bar-txt{
     font-family:'Oswald',sans-serif;
-    font-size:10px;letter-spacing:1px;color:#444;
+    font-size:10px;letter-spacing:1px;color:var(--grey-4, #444444);
     white-space:nowrap;flex-shrink:0;
 }
 
@@ -180,7 +180,7 @@ $imgHeight = $imgH[$tamano] ?? '220px';
 #<?php echo $mid; ?>::before,#<?php echo $mid; ?>::after{
     content:'';position:absolute;
     width:12px;height:12px;
-    border-color:#CC2200;border-style:solid;
+    border-color:var(--fire, #CC2200);border-style:solid;
 }
 #<?php echo $mid; ?>::before{ top:4px;left:4px;border-width:2px 0 0 2px; }
 #<?php echo $mid; ?>::after{  bottom:4px;right:4px;border-width:0 2px 2px 0; }

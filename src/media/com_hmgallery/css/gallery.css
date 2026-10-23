@@ -11,19 +11,19 @@
 ───────────────────────────────────────────────────────────────────────────── */
 :root {
     --hmg-black:       #000000;
-    --hmg-dark:        #0a0a0a;
-    --hmg-dark2:       #111111;
-    --hmg-dark3:       #1a1a1a;
-    --hmg-dark4:       #222222;
-    --hmg-red:         #cc0000;
+    --hmg-dark:        var(--dark, #0A0A0A);
+    --hmg-dark2:       var(--mid, #111111);
+    --hmg-dark3:       var(--steel, #1A1A1A);
+    --hmg-dark4:       var(--steel2, #222222);
+    --hmg-red:         var(--fire, #CC2200);
     --hmg-red-bright:  #ff2200;
     --hmg-red-glow:    rgba(204,0,0,0.6);
     --hmg-orange:      #ff6600;
     --hmg-gold:        #c8a000;
-    --hmg-silver:      #aaaaaa;
-    --hmg-text:        #cccccc;
-    --hmg-text-dim:    #777777;
-    --hmg-border:      #2a2a2a;
+    --hmg-silver:      var(--grey-a, #AAAAAA);
+    --hmg-text:        var(--grey-c, #CCCCCC);
+    --hmg-text-dim:    var(--text-dim, #777777);
+    --hmg-border:      var(--grey-2, #2A2A2A);
     --hmg-border-red:  #550000;
     --hmg-font-metal:  'Metal Mania', cursive;
     --hmg-font-mono:   'Share Tech Mono', monospace;

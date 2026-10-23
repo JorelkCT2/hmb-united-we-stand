@@ -32,17 +32,17 @@ foreach ($instGuardados as $inst) {
 while (count($instSelects) < 4) $instSelects[] = '';
 ?>
 <style>
-.mu { color:#e8e0d5; max-width:780px; margin:0 auto; }
+.mu { color:var(--cream, #E8E0D5); max-width:780px; margin:0 auto; }
 .mu-card { background:rgba(10,8,6,.82); border:1px solid rgba(180,140,80,.3); border-radius:10px; margin-bottom:1.5rem; overflow:hidden; }
-.mu-card-h { background:rgba(100,70,20,.5); padding:.7rem 1.2rem; font-weight:700; color:#d4bb8a; text-transform:uppercase; font-size:.85rem; letter-spacing:.4px; }
+.mu-card-h { background:rgba(100,70,20,.5); padding:.7rem 1.2rem; font-weight:700; color:var(--gold-pale, #D4BB8A); text-transform:uppercase; font-size:.85rem; letter-spacing:.4px; }
 .mu-card-b { padding:1.2rem 1.4rem; }
-.mu-label { display:block; color:#8a7a60; font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
-.mu-ctrl { width:100%; background:rgba(255,255,255,.06)!important; border:1px solid rgba(180,140,60,.3)!important; color:#f0e8d8!important; border-radius:6px; padding:.45rem .7rem; font-size:.9rem; }
+.mu-label { display:block; color:var(--gold-dim, #7A6030); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
+.mu-ctrl { width:100%; background:rgba(255,255,255,.06)!important; border:1px solid rgba(180,140,60,.3)!important; color:var(--cream, #E8E0D5)!important; border-radius:6px; padding:.45rem .7rem; font-size:.9rem; }
 .mu-ctrl:focus { border-color:rgba(200,160,60,.8)!important; outline:none!important; color:#fff!important; }
-.mu-ctrl option { background:#1a1208; color:#f0e0c0; }
-.mu-btn { background:linear-gradient(135deg,#b87d1e,#8a5a10); border:none; color:#fff; font-weight:700; padding:.7rem 2rem; border-radius:7px; cursor:pointer; font-size:.95rem; }
-.estilo-tag { display:inline-flex; align-items:center; gap:4px; background:rgba(180,120,20,.25); border:1px solid rgba(180,140,60,.3); color:#d4bb8a; border-radius:4px; padding:3px 10px; margin:3px; font-size:.82rem; cursor:pointer; }
-.estilo-tag input { accent-color:#b87d1e; }
+.mu-ctrl option { background:var(--steel, #1A1A1A); color:var(--cream, #E8E0D5); }
+.mu-btn { background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); border:none; color:#fff; font-weight:700; padding:.7rem 2rem; border-radius:7px; cursor:pointer; font-size:.95rem; }
+.estilo-tag { display:inline-flex; align-items:center; gap:4px; background:rgba(180,120,20,.25); border:1px solid rgba(180,140,60,.3); color:var(--gold-pale, #D4BB8A); border-radius:4px; padding:3px 10px; margin:3px; font-size:.82rem; cursor:pointer; }
+.estilo-tag input { accent-color:var(--gold, #B8860B); }
 </style>
 
 <div class="mu">

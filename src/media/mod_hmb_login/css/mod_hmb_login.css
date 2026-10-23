@@ -7,17 +7,17 @@
 /* ─── Design Tokens (same as register) ──────────────────── */
 .hmb-login-module {
     --c-bg:         #080808;
-    --c-surface:    #0f0f0f;
-    --c-border:     #2a2a2a;
-    --c-red:        #b41414;
-    --c-red-hi:     #e02020;
+    --c-surface:    var(--dark, #0A0A0A);
+    --c-border:     var(--grey-2, #2A2A2A);
+    --c-red:        var(--fire, #CC2200);
+    --c-red-hi:     var(--fire, #CC2200);
     --c-red-glow:   rgba(180, 20, 20, 0.35);
-    --c-gold:       #c9a84c;
-    --c-gold-dim:   #7a6030;
-    --c-silver:     #888;
-    --c-muted:      #555;
+    --c-gold:       var(--gold-light, #DAA520);
+    --c-gold-dim:   var(--gold-dim, #7A6030);
+    --c-silver:     var(--grey-8, #888888);
+    --c-muted:      var(--grey-5, #555555);
     --c-text:       #d4d4d4;
-    --c-text-hi:    #f0ebe0;
+    --c-text-hi:    var(--cream, #E8E0D5);
     --f-display:    'Cinzel Decorative', 'Cinzel', serif;
     --f-heading:    'Cinzel', serif;
     --f-body:       var(--font-body, 'Rajdhani', sans-serif);
@@ -53,9 +53,9 @@
     top: 0; left: 0; right: 0;
     height: 3px;
     background: linear-gradient(90deg,
-        #3a0000 0%, var(--c-red) 30%,
+        var(--wine, #3A0000) 0%, var(--c-red) 30%,
         var(--c-gold) 50%,
-        var(--c-red) 70%, #3a0000 100%
+        var(--c-red) 70%, var(--wine, #3A0000) 100%
     );
     background-size: 200% 100%;
     animation: hmbBarShift 4s ease infinite;
@@ -170,8 +170,8 @@
     from { opacity: 0; transform: translateY(-4px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-.hmb-alert-error   { background: rgba(180,20,20,0.1); border-color: rgba(180,20,20,0.4); color: #ff7070; }
-.hmb-alert-success { background: rgba(30,120,60,0.1); border-color: rgba(30,120,60,0.4); color: #66d98e; }
+.hmb-alert-error   { background: rgba(180,20,20,0.1); border-color: rgba(180,20,20,0.4); color: var(--fire-light, #FF7070); }
+.hmb-alert-success { background: rgba(30,120,60,0.1); border-color: rgba(30,120,60,0.4); color: var(--ok-light, #66D98E); }
 
 /* ─── Form ───────────────────────────────────────────────── */
 .hmb-form {
@@ -235,7 +235,7 @@
 .hmb-input:-webkit-autofill,
 .hmb-input:-webkit-autofill:focus {
     -webkit-text-fill-color: var(--c-text-hi);
-    -webkit-box-shadow: 0 0 0 1000px #120202 inset;
+    -webkit-box-shadow: 0 0 0 1000px var(--wine-black, #0A0000) inset;
 }
 
 /* User icon inside input */
@@ -333,7 +333,7 @@
     width: 100%;
     margin-top: 0.25rem;
     padding: 0.82rem 1.5rem;
-    background: linear-gradient(160deg, #c01010 0%, #7a0a0a 100%);
+    background: linear-gradient(160deg, var(--fire, #CC2200) 0%, var(--blood, #8B0000) 100%);
     border: 1px solid rgba(180,20,20,0.5);
     border-bottom-color: rgba(60,5,5,0.8);
     border-radius: var(--radius);
@@ -373,11 +373,11 @@
 
 /* Logout button variant */
 .hmb-btn-logout {
-    background: linear-gradient(160deg, #2a2a2a 0%, #111 100%);
+    background: linear-gradient(160deg, var(--grey-2, #2A2A2A) 0%, var(--mid, #111111) 100%);
     border-color: var(--c-border);
 }
 .hmb-btn-logout:hover {
-    background: linear-gradient(160deg, #3a3a3a 0%, #1a1a1a 100%);
+    background: linear-gradient(160deg, #3a3a3a 0%, var(--steel, #1A1A1A) 100%);
     box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 

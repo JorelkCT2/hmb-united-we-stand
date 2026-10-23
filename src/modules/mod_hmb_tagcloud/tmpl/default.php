@@ -2,7 +2,7 @@
 
 <style>
 #<?php echo $moduleId; ?>{
-  --fire:#CC2200;--blood:#8B0000;--ember:#FF4500;--gold:#DAA520;
+  --fire:var(--fire, #CC2200);--blood:var(--blood, #8B0000);--ember:var(--ember, #FF4500);--gold:var(--gold-light, #DAA520);
 }
 #<?php echo $moduleId; ?> .hmb-tc{
   display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:4px 0;
@@ -14,10 +14,10 @@
   text-transform:uppercase;
   letter-spacing:1px;
   text-decoration:none;
-  color:#888;
-  background:linear-gradient(145deg,#1a1a1a,#0d0d0d);
-  border:1px solid #2a2a2a;
-  border-top-color:#333;
+  color:var(--grey-8, #888888);
+  background:linear-gradient(145deg,var(--steel, #1A1A1A),var(--dark, #0A0A0A));
+  border:1px solid var(--grey-2, #2A2A2A);
+  border-top-color:var(--grey-3, #333333);
   border-bottom-color:#000;
   border-radius:2px;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 2px 4px rgba(0,0,0,.5);

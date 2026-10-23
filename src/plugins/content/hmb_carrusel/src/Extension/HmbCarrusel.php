@@ -81,7 +81,7 @@ final class HmbCarrusel extends CMSPlugin
         $json   = json_encode(array_values($fotos));
 
         $h  = '<style>';
-        $h .= '#'.$id.'{--cr:#CC2200;--cr2:#8B0000;--cdk:#050000;--cdk2:#0a0000;--cth:70px;font-family:\'Oswald\',Arial,sans-serif;user-select:none;margin:2rem 0;}';
+        $h .= '#'.$id.'{--cr:var(--fire, #CC2200);--cr2:var(--blood, #8B0000);--cdk:var(--wine-black, #0A0000);--cdk2:var(--wine-black, #0A0000);--cth:70px;font-family:\'Oswald\',Arial,sans-serif;user-select:none;margin:2rem 0;}';
         $h .= '.'.$id.'-wrap{background:var(--cdk);border:2px solid var(--cr2);border-top:3px solid var(--cr);overflow:hidden;}';
         $h .= '.'.$id.'-track{position:relative;width:100%;height:'.$altura.'px;overflow:hidden;cursor:zoom-in;}';
         $h .= '@media(max-width:600px){.'.$id.'-track{height:'.$altS.'px;}}';
@@ -99,7 +99,7 @@ final class HmbCarrusel extends CMSPlugin
         $h .= '.'.$id.'-wm{position:absolute;bottom:10px;right:10px;z-index:7;background:rgba(0,0,0,.55);color:rgba(255,255,255,.65);font-family:\'Oswald\',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px 3px 8px;border-radius:20px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);pointer-events:none;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .4s .2s;}';
         $h .= '.'.$id.'-sl.on .'.$id.'-wm{opacity:1;}';
         $h .= '.'.$id.'-dots{display:flex;justify-content:center;gap:6px;padding:7px 0 5px;background:var(--cdk2);}';
-        $h .= '.'.$id.'-dot{width:8px;height:8px;border-radius:50%;background:#333;border:1px solid #2a0000;cursor:pointer;transition:background .2s,transform .2s;}';
+        $h .= '.'.$id.'-dot{width:8px;height:8px;border-radius:50%;background:var(--grey-3, #333333);border:1px solid var(--wine, #3A0000);cursor:pointer;transition:background .2s,transform .2s;}';
         $h .= '.'.$id.'-dot.on{background:var(--cr);transform:scale(1.3);}';
         if ($thumbs) {
             $h .= '.'.$id.'-ths{display:flex;justify-content:center;gap:3px;background:var(--cdk2);padding:4px;border-top:2px solid var(--cr2);overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--cr2) var(--cdk);height:var(--cth);box-sizing:content-box;}';
@@ -117,8 +117,8 @@ final class HmbCarrusel extends CMSPlugin
         $h .= '.'.$id.'-lbpn:hover{background:var(--cr2);color:#fff;}';
         $h .= '.'.$id.'-lbp{left:8px;}.'.$id.'-lbn{right:8px;}';
         $h .= '.'.$id.'-lbf{text-align:center;margin-top:10px;}';
-        $h .= '.'.$id.'-lbf p{font-family:\'Metal Mania\',cursive;color:#bbb;font-size:14px;letter-spacing:2px;margin:0 0 3px;}';
-        $h .= '.'.$id.'-lbf small{font-family:\'Oswald\',sans-serif;color:#444;font-size:11px;letter-spacing:2px;}';
+        $h .= '.'.$id.'-lbf p{font-family:\'Metal Mania\',cursive;color:var(--grey-b, #BBBBBB);font-size:14px;letter-spacing:2px;margin:0 0 3px;}';
+        $h .= '.'.$id.'-lbf small{font-family:\'Oswald\',sans-serif;color:var(--grey-4, #444444);font-size:11px;letter-spacing:2px;}';
         $h .= '</style>';
 
         $h .= '<div id="'.$id.'"><div class="'.$id.'-wrap"><div class="'.$id.'-track" id="'.$id.'-track">';

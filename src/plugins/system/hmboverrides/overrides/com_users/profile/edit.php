@@ -39,11 +39,11 @@ foreach ($fieldsets as $name => $fieldset) {
 <style>
 
 /* ── Tokens ── */
-.hmb-edit{--c-s:#0f0f0f;--c-b:#252525;--c-r:#b41414;--c-rh:#e02020;--c-g:#c9a84c;--c-gd:#7a6030;--c-sv:#888;--c-t:#d4d4d4;--c-th:#f0ebe0;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:var(--font-body, 'Rajdhani', sans-serif);--r:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--c-t);max-width:680px;margin:2rem auto;padding:0 1rem}
+.hmb-edit{--c-s:var(--dark, #0A0A0A);--c-b:var(--steel, #1A1A1A);--c-r:var(--fire, #CC2200);--c-rh:var(--fire, #CC2200);--c-g:var(--gold-light, #DAA520);--c-gd:var(--gold-dim, #7A6030);--c-sv:var(--grey-8, #888888);--c-t:#d4d4d4;--c-th:var(--cream, #E8E0D5);--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:var(--font-body, 'Rajdhani', sans-serif);--r:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--c-t);max-width:680px;margin:2rem auto;padding:0 1rem}
 
 /* ── Card ── */
 .hmb-card{position:relative;background:var(--c-s);border:1px solid var(--c-b);border-radius:var(--r);box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 24px 64px rgba(0,0,0,.85),0 0 80px rgba(180,20,20,.06)}
-.hmb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3a0000 0%,var(--c-r) 30%,var(--c-g) 50%,var(--c-r) 70%,#3a0000 100%);background-size:200% 100%;animation:hmbBar 4s ease infinite;z-index:2;border-radius:var(--r) var(--r) 0 0}
+.hmb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--wine, #3A0000) 0%,var(--c-r) 30%,var(--c-g) 50%,var(--c-r) 70%,var(--wine, #3A0000) 100%);background-size:200% 100%;animation:hmbBar 4s ease infinite;z-index:2;border-radius:var(--r) var(--r) 0 0}
 @keyframes hmbBar{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
 .hmb-cn{position:absolute;width:18px;height:18px;border-color:var(--c-gd);border-style:solid;opacity:.4;z-index:3}
 .hmb-cn.tl{top:8px;left:8px;border-width:1px 0 0 1px}.hmb-cn.tr{top:8px;right:8px;border-width:1px 1px 0 0}
@@ -76,7 +76,7 @@ foreach ($fieldsets as $name => $fieldset) {
 .hmb-edit .controls textarea:focus,
 .hmb-edit .controls select:focus{outline:none;border-color:var(--c-r);background:rgba(180,20,20,.05);box-shadow:0 0 0 3px rgba(180,20,20,.12)}
 .hmb-edit .controls input:-webkit-autofill,
-.hmb-edit .controls input:-webkit-autofill:focus{-webkit-text-fill-color:var(--c-th);-webkit-box-shadow:0 0 0 1000px #120202 inset}
+.hmb-edit .controls input:-webkit-autofill:focus{-webkit-text-fill-color:var(--c-th);-webkit-box-shadow:0 0 0 1000px var(--wine-black, #0A0000) inset}
 .hmb-edit .controls input::placeholder{color:rgba(136,136,136,.28);font-style:italic}
 
 /* Ocultar description/hint innecesarios de Joomla */
@@ -93,7 +93,7 @@ foreach ($fieldsets as $name => $fieldset) {
 .hmb-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.5rem;border-radius:var(--r);font-family:var(--fh);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;position:relative;overflow:hidden;transition:transform var(--sp) var(--e),box-shadow var(--sp) var(--e),filter var(--sp) var(--e)}
 .hmb-btn::after{content:'';position:absolute;top:0;left:-110%;width:60%;height:100%;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.08) 50%,transparent 70%);transition:left .5s var(--e)}
 .hmb-btn:hover::after{left:150%}
-.hmb-btn-p{background:linear-gradient(160deg,#c01010 0%,#7a0a0a 100%);border:1px solid rgba(180,20,20,.5);color:var(--c-th)}
+.hmb-btn-p{background:linear-gradient(160deg,var(--fire, #CC2200) 0%,var(--blood, #8B0000) 100%);border:1px solid rgba(180,20,20,.5);color:var(--c-th)}
 .hmb-btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(180,20,20,.4);filter:brightness(1.1);color:var(--c-th);text-decoration:none}
 .hmb-btn-s{background:rgba(255,255,255,.04);border:1px solid var(--c-b);color:var(--c-sv)}
 .hmb-btn-s:hover{border-color:#404040;color:var(--c-th);transform:translateY(-1px);text-decoration:none}

@@ -16,7 +16,7 @@ $allProvincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila',
 ?>
 
 <style>
-.reg { color:#e8e0d5; max-width:680px; margin:0 auto; }
+.reg { color:var(--cream, #E8E0D5); max-width:680px; margin:0 auto; }
 .reg h1 { font-size:2rem; font-weight:800; color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.8); margin-bottom:.3rem; }
 .reg .subtitulo { color:#c9b99a; margin-bottom:2rem; font-size:1rem; }
 
@@ -24,8 +24,8 @@ $allProvincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila',
 .reg-bloque-titulo { background:rgba(180,120,30,.65); padding:.7rem 1.2rem; font-weight:700; font-size:.85rem; color:#fff; text-transform:uppercase; letter-spacing:.5px; }
 .reg-bloque-body { padding:1.4rem; }
 
-.reg label { display:block; color:#d4bb8a; font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px; }
-.reg .ayuda { color:#6a5f4a; font-size:.8rem; margin-top:3px; margin-bottom:.8rem; }
+.reg label { display:block; color:var(--gold-pale, #D4BB8A); font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px; }
+.reg .ayuda { color:var(--gold-dim, #7A6030); font-size:.8rem; margin-top:3px; margin-bottom:.8rem; }
 .reg .obligatorio { color:#f07070; }
 
 .reg input[type=text],
@@ -36,7 +36,7 @@ $allProvincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila',
     width:100%;
     background:rgba(255,255,255,.07) !important;
     border:1px solid rgba(180,140,60,.4) !important;
-    color:#f0e8d8 !important;
+    color:var(--cream, #E8E0D5) !important;
     border-radius:6px;
     padding:.5rem .7rem;
     font-size:.95rem;
@@ -50,18 +50,18 @@ $allProvincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila',
     color:#fff !important;
 }
 .reg input::placeholder, .reg textarea::placeholder { color:#5a4f3a !important; }
-.reg select option { background:#1a1208; color:#f0e0c0; }
+.reg select option { background:var(--steel, #1A1A1A); color:var(--cream, #E8E0D5); }
 
 .reg-campo { margin-bottom:1.2rem; }
 .reg-campo:last-child { margin-bottom:0; }
 
 .reg-login-box { background:rgba(10,8,6,.85); border:1px solid rgba(180,140,60,.4); border-radius:10px; padding:2rem; text-align:center; margin-bottom:1.5rem; }
-.reg-login-btn { display:inline-block; background:linear-gradient(135deg,#b87d1e,#8a5a10); color:#fff; font-weight:700; padding:.8rem 2.5rem; border-radius:8px; text-decoration:none; font-size:1rem; margin:.5rem 0; }
+.reg-login-btn { display:inline-block; background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); color:#fff; font-weight:700; padding:.8rem 2.5rem; border-radius:8px; text-decoration:none; font-size:1rem; margin:.5rem 0; }
 .reg-ya-tienes { background:rgba(180,130,20,.15); border:1px solid rgba(180,140,60,.4); border-radius:10px; padding:1.5rem; text-align:center; margin-bottom:1.5rem; }
 
-.reg-btn-enviar { width:100%; background:linear-gradient(135deg,#b87d1e,#8a5a10); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; font-size:1.1rem; padding:.9rem; border-radius:8px; cursor:pointer; letter-spacing:.5px; transition:all .2s; }
+.reg-btn-enviar { width:100%; background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; font-size:1.1rem; padding:.9rem; border-radius:8px; cursor:pointer; letter-spacing:.5px; transition:all .2s; }
 .reg-btn-enviar:hover { background:linear-gradient(135deg,#d4941e,#a06a15); transform:translateY(-1px); }
-.reg-nota { color:#6a5f4a; font-size:.8rem; text-align:center; margin-top:.8rem; }
+.reg-nota { color:var(--gold-dim, #7A6030); font-size:.8rem; text-align:center; margin-top:.8rem; }
 </style>
 
 <div class="reg">

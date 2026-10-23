@@ -1,13 +1,13 @@
 <?php defined('_JEXEC') or die; ?>
 <style>
 .hmb-colab{font-family:'Oswald',sans-serif;padding:2rem 0 1rem;}
-.hmb-colab-title{text-align:center;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#555;margin:0 0 1.5rem;position:relative;}
-.hmb-colab-title::before,.hmb-colab-title::after{content:'';display:inline-block;width:40px;height:1px;background:#2a0000;vertical-align:middle;margin:0 12px;}
+.hmb-colab-title{text-align:center;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--grey-5, #555555);margin:0 0 1.5rem;position:relative;}
+.hmb-colab-title::before,.hmb-colab-title::after{content:'';display:inline-block;width:40px;height:1px;background:var(--wine, #3A0000);vertical-align:middle;margin:0 12px;}
 .hmb-colab-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1.2rem;max-width:1100px;margin:0 auto;padding:0 1rem;}
-.hmb-colab-item{display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid #1a0000;border-radius:6px;padding:.8rem;transition:all .3s ease;text-decoration:none;position:relative;}
-.hmb-colab-item:hover{background:rgba(204,34,0,.08);border-color:#8B0000;transform:translateY(-3px);text-decoration:none;}
+.hmb-colab-item{display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--wine-dark, #1A0000);border-radius:6px;padding:.8rem;transition:all .3s ease;text-decoration:none;position:relative;}
+.hmb-colab-item:hover{background:rgba(204,34,0,.08);border-color:var(--blood, #8B0000);transform:translateY(-3px);text-decoration:none;}
 .hmb-colab-item img{display:block;object-fit:contain;}
-.hmb-colab-nombre{font-size:11px;line-height:1.3;letter-spacing:1px;color:#aaa;text-align:center;margin-top:.5rem;max-width:100%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;opacity:0;height:28px;transition:opacity .25s;}
+.hmb-colab-nombre{font-size:11px;line-height:1.3;letter-spacing:1px;color:var(--grey-a, #AAAAAA);text-align:center;margin-top:.5rem;max-width:100%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;opacity:0;height:28px;transition:opacity .25s;}
 .hmb-colab-item:hover .hmb-colab-nombre{opacity:1;}
 .hmb-colab-gris img{filter:grayscale(1) brightness(1.4) contrast(.9);opacity:.55;transition:filter .35s,opacity .35s;}
 .hmb-colab-gris .hmb-colab-item:hover img{filter:grayscale(0) brightness(1) contrast(1);opacity:1;}

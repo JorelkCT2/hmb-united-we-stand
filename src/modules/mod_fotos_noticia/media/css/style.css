@@ -32,7 +32,7 @@
 .lightbox-content {
     max-width: 90%;
     max-height: 90%;
-    border: 3px solid #666;
+    border: 3px solid var(--grey-6, #666666);
     border-radius: 8px;
     box-shadow: 0 0 25px rgba(255,255,255,0.3);
     transition: transform 0.2s ease;
@@ -51,7 +51,7 @@
 }
 
 .close:hover {
-    color: #aaa;
+    color: var(--grey-a, #AAAAAA);
 }
 
 /* Flechas metálicas */
@@ -60,7 +60,7 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 60px;
-    color: #ccc;
+    color: var(--grey-c, #CCCCCC);
     cursor: pointer;
     padding: 10px;
     user-select: none;

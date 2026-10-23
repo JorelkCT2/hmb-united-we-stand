@@ -123,44 +123,44 @@ $discos = $this->discos;
 </section>
 
 <style>
-.hmb-discos{background:#0a0a0a;padding:2.5rem 1.5rem;min-height:400px}
-.hmb-discos__empty{text-align:center;color:#555;font-size:.85rem;padding:4rem;text-transform:uppercase;letter-spacing:.1em}
+.hmb-discos{background:var(--dark, #0A0A0A);padding:2.5rem 1.5rem;min-height:400px}
+.hmb-discos__empty{text-align:center;color:var(--grey-5, #555555);font-size:.85rem;padding:4rem;text-transform:uppercase;letter-spacing:.1em}
 .hmb-discos__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
 /* Tarjeta */
-.hmb-disco-card{background:#111;border:1px solid #222;border-radius:4px;overflow:hidden;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
-.hmb-disco-card:hover{transform:translateY(-3px);border-color:#cc0000}
+.hmb-disco-card{background:var(--mid, #111111);border:1px solid var(--steel2, #222222);border-radius:4px;overflow:hidden;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
+.hmb-disco-card:hover{transform:translateY(-3px);border-color:var(--fire, #CC2200)}
 /* Portada */
-.hmb-disco-card__cover{position:relative;aspect-ratio:1;overflow:hidden;background:#1a1a1a;flex-shrink:0}
+.hmb-disco-card__cover{position:relative;aspect-ratio:1;overflow:hidden;background:var(--steel, #1A1A1A);flex-shrink:0}
 .hmb-disco-card__cover img{width:100%;height:100%;object-fit:cover;transition:filter .3s}
 .hmb-disco-card:hover .hmb-disco-card__cover img{filter:brightness(.6)}
-.hmb-disco-card__cover-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;color:#333}
+.hmb-disco-card__cover-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--grey-3, #333333)}
 .hmb-disco-card__overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
 .hmb-disco-card:hover .hmb-disco-card__overlay{opacity:1}
 /* Botón play sobre portada */
-.hmb-disco-play-btn{background:#cc0000;border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:transform .2s,background .2s;box-shadow:0 2px 12px rgba(0,0,0,.6)}
+.hmb-disco-play-btn{background:var(--fire, #CC2200);border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:transform .2s,background .2s;box-shadow:0 2px 12px rgba(0,0,0,.6)}
 .hmb-disco-play-btn:hover{background:#e60000;transform:scale(1.1)}
 /* Cuerpo */
 .hmb-disco-card__body{padding:.85rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
-.hmb-disco-card__titulo{font-family:'Cinzel',Georgia,serif;font-size:.9rem;letter-spacing:.05em;color:#e8ddd0;margin:0;line-height:1.3}
-.hmb-disco-card__grupo{font-size:.75rem;color:#cc0000;margin:0;letter-spacing:.05em;text-transform:uppercase}
+.hmb-disco-card__titulo{font-family:'Cinzel',Georgia,serif;font-size:.9rem;letter-spacing:.05em;color:var(--cream, #E8E0D5);margin:0;line-height:1.3}
+.hmb-disco-card__grupo{font-size:.75rem;color:var(--fire, #CC2200);margin:0;letter-spacing:.05em;text-transform:uppercase}
 .hmb-disco-card__meta{display:flex;flex-wrap:wrap;gap:.5rem}
-.hmb-disco-card__meta-item{font-size:.68rem;color:#666;display:flex;align-items:center;gap:.25rem}
-.hmb-disco-card__genero{font-size:.68rem;color:#888;margin:0;font-style:italic;letter-spacing:.03em}
+.hmb-disco-card__meta-item{font-size:.68rem;color:var(--grey-6, #666666);display:flex;align-items:center;gap:.25rem}
+.hmb-disco-card__genero{font-size:.68rem;color:var(--grey-8, #888888);margin:0;font-style:italic;letter-spacing:.03em}
 /* Mini player */
-.hmb-disco-card__player{background:#0d0000;border:1px solid #cc0000;border-radius:3px;padding:.4rem .6rem;margin-top:.25rem}
+.hmb-disco-card__player{background:#0d0000;border:1px solid var(--fire, #CC2200);border-radius:3px;padding:.4rem .6rem;margin-top:.25rem}
 .hmb-disco-card__player-inner{display:flex;align-items:center;gap:.5rem}
-.hmb-disco-card__now{font-size:.62rem;color:#cc0000;white-space:nowrap;letter-spacing:.05em}
-.hmb-disco-card__bar-wrap{flex:1;height:3px;background:#333;border-radius:2px;cursor:pointer}
-.hmb-disco-card__bar-prog{height:100%;background:#cc0000;border-radius:2px;width:0%;transition:width .4s linear}
-.hmb-disco-card__time{font-family:monospace;font-size:.62rem;color:#777;white-space:nowrap}
+.hmb-disco-card__now{font-size:.62rem;color:var(--fire, #CC2200);white-space:nowrap;letter-spacing:.05em}
+.hmb-disco-card__bar-wrap{flex:1;height:3px;background:var(--grey-3, #333333);border-radius:2px;cursor:pointer}
+.hmb-disco-card__bar-prog{height:100%;background:var(--fire, #CC2200);border-radius:2px;width:0%;transition:width .4s linear}
+.hmb-disco-card__time{font-family:monospace;font-size:.62rem;color:var(--text-dim, #777777);white-space:nowrap}
 /* Descripción */
-.hmb-disco-card__desc{font-size:.72rem;color:#666;margin:0;line-height:1.5}
+.hmb-disco-card__desc{font-size:.72rem;color:var(--grey-6, #666666);margin:0;line-height:1.5}
 /* YouTube */
 .hmb-disco-card__yt{margin-top:.25rem}
-.hmb-disco-card__yt-label{font-size:.62rem;color:#555;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.3rem}
+.hmb-disco-card__yt-label{font-size:.62rem;color:var(--grey-5, #555555);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.3rem}
 .hmb-disco-card__yt-links{display:flex;flex-wrap:wrap;gap:.3rem}
-.hmb-disco-card__yt-link{display:inline-flex;align-items:center;gap:.3rem;background:#1a0000;border:1px solid #cc0000;color:#cc0000;font-size:.68rem;padding:.2rem .5rem;border-radius:3px;text-decoration:none;transition:all .15s}
-.hmb-disco-card__yt-link:hover{background:#cc0000;color:#fff}
+.hmb-disco-card__yt-link{display:inline-flex;align-items:center;gap:.3rem;background:var(--wine-dark, #1A0000);border:1px solid var(--fire, #CC2200);color:var(--fire, #CC2200);font-size:.68rem;padding:.2rem .5rem;border-radius:3px;text-decoration:none;transition:all .15s}
+.hmb-disco-card__yt-link:hover{background:var(--fire, #CC2200);color:#fff}
 /* Responsive */
 @media(max-width:600px){.hmb-discos__grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}}
 </style>

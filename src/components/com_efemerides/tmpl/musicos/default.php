@@ -118,41 +118,41 @@ $GLOBALS['_mu_banda']  = $this->bandaFiltro ?: '';
 
 <style>
 .hmb-list-wrap{max-width:1100px;margin:0 auto;font-family:inherit}
-.hmb-list-hero{background:#0a0a0a;border:1px solid #1e1e1e;border-top:4px solid #d4af37;padding:18px 22px;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:0}
+.hmb-list-hero{background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);border-top:4px solid var(--gold-light, #DAA520);padding:18px 22px;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:0}
 .hmb-list-h1{font-size:1.4rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin:0}
-.hmb-list-total{font-size:.7rem;color:#555;letter-spacing:.1em}
-.hmb-list-form{background:#0d0d0d;border:1px solid #1a1a1a;border-top:none;padding:10px 14px;margin-bottom:16px}
+.hmb-list-total{font-size:.7rem;color:var(--grey-5, #555555);letter-spacing:.1em}
+.hmb-list-form{background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);border-top:none;padding:10px 14px;margin-bottom:16px}
 .hmb-list-form-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
-.hmb-list-search-g{flex:1;min-width:200px;display:flex;background:#111;border:1px solid #222}
-.hmb-list-search-g:focus-within{border-color:#d4af37}
-.hmb-list-input{flex:1;background:transparent;border:none;color:#ddd;padding:8px 11px;font-size:.8rem;outline:none}
-.hmb-list-sbtn{background:#d4af37;border:none;color:#000;padding:8px 12px;cursor:pointer;font-weight:700;font-size:.9rem}
-.hmb-list-sel{background:#111;border:1px solid #222;color:#aaa;padding:8px 10px;font-size:.78rem;cursor:pointer;outline:none}
-.hmb-list-sel:focus{border-color:#d4af37}
-.hmb-list-clr{padding:6px 12px;background:#1a1a1a;border:1px solid #333;color:#888;text-decoration:none;font-size:.72rem;font-weight:700}
-.hmb-list-clr:hover{border-color:#d4af37;color:#d4af37}
+.hmb-list-search-g{flex:1;min-width:200px;display:flex;background:var(--mid, #111111);border:1px solid var(--steel2, #222222)}
+.hmb-list-search-g:focus-within{border-color:var(--gold-light, #DAA520)}
+.hmb-list-input{flex:1;background:transparent;border:none;color:var(--grey-d, #DDDDDD);padding:8px 11px;font-size:.8rem;outline:none}
+.hmb-list-sbtn{background:var(--gold-light, #DAA520);border:none;color:#000;padding:8px 12px;cursor:pointer;font-weight:700;font-size:.9rem}
+.hmb-list-sel{background:var(--mid, #111111);border:1px solid var(--steel2, #222222);color:var(--grey-a, #AAAAAA);padding:8px 10px;font-size:.78rem;cursor:pointer;outline:none}
+.hmb-list-sel:focus{border-color:var(--gold-light, #DAA520)}
+.hmb-list-clr{padding:6px 12px;background:var(--steel, #1A1A1A);border:1px solid var(--grey-3, #333333);color:var(--grey-8, #888888);text-decoration:none;font-size:.72rem;font-weight:700}
+.hmb-list-clr:hover{border-color:var(--gold-light, #DAA520);color:var(--gold-light, #DAA520)}
 .hmb-musicos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
-.hmb-musico-card{display:flex;flex-direction:column;align-items:center;background:#111;border:1px solid #1e1e1e;padding:16px 10px 12px;text-decoration:none;transition:all .2s;position:relative}
-.hmb-musico-card:hover{background:#1a0a0a;border-color:#cc0000}
+.hmb-musico-card{display:flex;flex-direction:column;align-items:center;background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A);padding:16px 10px 12px;text-decoration:none;transition:all .2s;position:relative}
+.hmb-musico-card:hover{background:#1a0a0a;border-color:var(--fire, #CC2200)}
 .hmb-musico-card--def{opacity:.8}
 .hmb-musico-foto-w{position:relative;margin-bottom:10px}
-.hmb-musico-foto{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #2a2a2a;display:block}
-.hmb-musico-ph{width:80px;height:80px;border-radius:50%;background:#1a1a1a;border:2px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
-.hmb-musico-rip{position:absolute;bottom:0;right:0;background:#cc0000;color:#fff;font-size:.6rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.hmb-musico-sol{position:absolute;top:0;right:0;background:#d4af37;color:#000;font-size:.55rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
-.hmb-musico-sol-txt{color:#d4af37 !important;font-style:italic}
-.hmb-musico-nombre{font-size:.82rem;font-weight:700;color:#e0e0e0;text-align:center;display:block;margin-bottom:4px;line-height:1.3}
-.hmb-musico-banda{font-size:.7rem;color:#d4af37;text-align:center;display:block}
-.hmb-musico-anios{font-size:.65rem;color:#555;text-align:center;display:block;margin-top:3px}
-.hmb-list-pag{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 0;border-top:1px solid #1a1a1a;margin-bottom:14px}
-.hmb-list-pag-info{font-size:.75rem;color:#555}
+.hmb-musico-foto{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--grey-2, #2A2A2A);display:block}
+.hmb-musico-ph{width:80px;height:80px;border-radius:50%;background:var(--steel, #1A1A1A);border:2px solid var(--grey-2, #2A2A2A);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.hmb-musico-rip{position:absolute;bottom:0;right:0;background:var(--fire, #CC2200);color:#fff;font-size:.6rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hmb-musico-sol{position:absolute;top:0;right:0;background:var(--gold-light, #DAA520);color:#000;font-size:.55rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
+.hmb-musico-sol-txt{color:var(--gold-light, #DAA520) !important;font-style:italic}
+.hmb-musico-nombre{font-size:.82rem;font-weight:700;color:var(--grey-e, #E0E0E0);text-align:center;display:block;margin-bottom:4px;line-height:1.3}
+.hmb-musico-banda{font-size:.7rem;color:var(--gold-light, #DAA520);text-align:center;display:block}
+.hmb-musico-anios{font-size:.65rem;color:var(--grey-5, #555555);text-align:center;display:block;margin-top:3px}
+.hmb-list-pag{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 0;border-top:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
+.hmb-list-pag-info{font-size:.75rem;color:var(--grey-5, #555555)}
 .hmb-list-pag-nav{display:flex;gap:3px}
-.hmb-pb{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 6px;background:#111;border:1px solid #1e1e1e;color:#777;text-decoration:none;font-size:.75rem;font-weight:700;transition:all .2s}
-.hmb-pb:hover{border-color:#d4af37;color:#d4af37}
-.hmb-pb-on{background:#d4af37 !important;border-color:#d4af37 !important;color:#000 !important}
-.hmb-list-empty{padding:40px;text-align:center;color:#666;background:#0d0d0d;border:1px solid #1e1e1e;margin-bottom:14px}
-.hmb-ficha-footer{text-align:center;padding:12px;border-top:1px solid #1a1a1a;font-size:.76rem}
-.hmb-lnk{color:#cc0000;text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.72rem}
+.hmb-pb{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 6px;background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A);color:var(--text-dim, #777777);text-decoration:none;font-size:.75rem;font-weight:700;transition:all .2s}
+.hmb-pb:hover{border-color:var(--gold-light, #DAA520);color:var(--gold-light, #DAA520)}
+.hmb-pb-on{background:var(--gold-light, #DAA520) !important;border-color:var(--gold-light, #DAA520) !important;color:#000 !important}
+.hmb-list-empty{padding:40px;text-align:center;color:var(--grey-6, #666666);background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
+.hmb-ficha-footer{text-align:center;padding:12px;border-top:1px solid var(--steel, #1A1A1A);font-size:.76rem}
+.hmb-lnk{color:var(--fire, #CC2200);text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.72rem}
 .hmb-lnk:hover{color:#ff2222}
 @media(max-width:500px){.hmb-musicos-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
 </style>

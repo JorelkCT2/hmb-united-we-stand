@@ -30,7 +30,7 @@ $title = htmlspecialchars($c->title ?: (!empty($c->headlinersList) ? $c->headlin
 ?>
 
 <style>
-#<?= $uid ?>{position:relative;overflow:hidden;border-radius:12px;background:#111;color:#fff;
+#<?= $uid ?>{position:relative;overflow:hidden;border-radius:12px;background:var(--mid, #111111);color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0}
 #<?= $uid ?> .nc-bg{position:absolute;inset:0;background-size:cover;background-position:center top;
   filter:blur(20px) brightness(.3) saturate(1.5);transform:scale(1.12)}
@@ -45,40 +45,40 @@ $title = htmlspecialchars($c->title ?: (!empty($c->headlinersList) ? $c->headlin
 @keyframes ncPan<?= $uid ?>{0%{transform:translateY(0)}100%{transform:translateY(calc(-100% + 220px))}}
 #<?= $uid ?> .nc-pw:hover .nc-pi{animation-play-state:paused}
 #<?= $uid ?> .nc-nfo{flex:1;min-width:0}
-#<?= $uid ?> .nc-lbl{font-size:.68rem;font-weight:700;letter-spacing:2.5px;color:#e63329;
+#<?= $uid ?> .nc-lbl{font-size:.68rem;font-weight:700;letter-spacing:2.5px;color:var(--fire, #CC2200);
   text-transform:uppercase;margin-bottom:.5rem}
 #<?= $uid ?> .nc-ttl{font-size:clamp(1.3rem,3.5vw,2rem);font-weight:800;margin:0 0 .3rem;
   color:#fff;line-height:1.15}
 #<?= $uid ?> .nc-hl{color:#ff9500;font-weight:600;font-size:.9rem;margin-bottom:.2rem}
-#<?= $uid ?> .nc-sup{color:#999;font-size:.8rem;margin-bottom:.4rem}
-#<?= $uid ?> .nc-dt{font-size:1rem;font-weight:800;color:#e63329;margin:.5rem 0 .2rem;
+#<?= $uid ?> .nc-sup{color:var(--grey-9, #999999);font-size:.8rem;margin-bottom:.4rem}
+#<?= $uid ?> .nc-dt{font-size:1rem;font-weight:800;color:var(--fire, #CC2200);margin:.5rem 0 .2rem;
   letter-spacing:.5px}
-#<?= $uid ?> .nc-ven{font-size:.85rem;color:#ccc;margin-bottom:.15rem}
-#<?= $uid ?> .nc-pv{color:#888}
-#<?= $uid ?> .nc-hr{font-size:.78rem;color:#aaa;margin-bottom:.55rem}
+#<?= $uid ?> .nc-ven{font-size:.85rem;color:var(--grey-c, #CCCCCC);margin-bottom:.15rem}
+#<?= $uid ?> .nc-pv{color:var(--grey-8, #888888)}
+#<?= $uid ?> .nc-hr{font-size:.78rem;color:var(--grey-a, #AAAAAA);margin-bottom:.55rem}
 #<?= $uid ?> .nc-prs{display:flex;flex-wrap:wrap;gap:.3rem;margin:.4rem 0 .2rem}
 #<?= $uid ?> .nc-pr{background:rgba(230,51,41,.15);border:1px solid rgba(230,51,41,.4);
-  color:#e63329;border-radius:20px;padding:.18rem .6rem;font-size:.74rem;font-weight:600}
+  color:var(--fire, #CC2200);border-radius:20px;padding:.18rem .6rem;font-size:.74rem;font-weight:600}
 #<?= $uid ?> .nc-pr.sold{background:rgba(255,80,80,.1);border-color:rgba(255,80,80,.3);color:#f88}
 #<?= $uid ?> .nc-stag{background:#7a2020;color:#fff;border-radius:8px;padding:1px 5px;
   font-size:.64rem;margin-left:3px}
-#<?= $uid ?> .nc-dis{font-size:.64rem;color:#555;font-style:italic;margin-bottom:.5rem}
+#<?= $uid ?> .nc-dis{font-size:.64rem;color:var(--grey-5, #555555);font-style:italic;margin-bottom:.5rem}
 #<?= $uid ?> .nc-act{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.65rem;align-items:center}
 #<?= $uid ?> .nc-btn{display:inline-flex;align-items:center;gap:.25rem;font-size:.78rem;
   font-weight:700;padding:.32rem .85rem;border-radius:6px;cursor:pointer;
   text-decoration:none;border:none;line-height:1.4;white-space:nowrap;transition:opacity .2s}
 #<?= $uid ?> .nc-btn:hover{opacity:.82;text-decoration:none}
-#<?= $uid ?> .btix{background:#e63329;color:#fff}
+#<?= $uid ?> .btix{background:var(--fire, #CC2200);color:#fff}
 #<?= $uid ?> .bweb{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)!important}
 #<?= $uid ?> .bcal{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)!important}
-#<?= $uid ?> .bmore{background:transparent;color:#e63329;border:1px solid #e63329!important}
+#<?= $uid ?> .bmore{background:transparent;color:var(--fire, #CC2200);border:1px solid var(--fire, #CC2200)!important}
 #<?= $uid ?> .nc-cw{position:relative}
-#<?= $uid ?> .nc-cm{display:none;position:absolute;bottom:110%;left:0;background:#1a1a1a;
-  border:1px solid #444;border-radius:8px;min-width:190px;z-index:999;overflow:hidden;
+#<?= $uid ?> .nc-cm{display:none;position:absolute;bottom:110%;left:0;background:var(--steel, #1A1A1A);
+  border:1px solid var(--grey-4, #444444);border-radius:8px;min-width:190px;z-index:999;overflow:hidden;
   box-shadow:0 4px 20px rgba(0,0,0,.7)}
 #<?= $uid ?> .nc-cm.open{display:block}
-#<?= $uid ?> .nc-cm a{display:block;padding:.5rem 1rem;color:#ccc;text-decoration:none;font-size:.82rem}
-#<?= $uid ?> .nc-cm a:hover{background:#252525;color:#fff}
+#<?= $uid ?> .nc-cm a{display:block;padding:.5rem 1rem;color:var(--grey-c, #CCCCCC);text-decoration:none;font-size:.82rem}
+#<?= $uid ?> .nc-cm a:hover{background:var(--steel, #1A1A1A);color:#fff}
 @media(max-width:580px){
   #<?= $uid ?> .nc-in{flex-direction:column}
   #<?= $uid ?> .nc-pw{width:100%;height:180px}

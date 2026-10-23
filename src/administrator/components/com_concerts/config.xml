@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <fieldset name="component" label="Opciones de la agenda">
+        <field name="show_past" type="radio" label="Mostrar conciertos pasados"
+               default="0" layout="joomla.form.field.radio.switcher">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </field>
+        <field name="concerts_per_page" type="number" label="Conciertos por página"
+               default="30" min="5" max="200" class="form-control" />
+        <field name="default_country" type="text" label="País por defecto (código ISO 2 letras)"
+               default="ES" size="5" class="form-control" />
+    </fieldset>
+</config>

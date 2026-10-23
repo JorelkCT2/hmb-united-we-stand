@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+    <name>plg_content_hmb_carrusel</name>
+    <version>2.0.0</version>
+    <creationDate>2026</creationDate>
+    <author>Heavy Metal Brothers</author>
+    <license>GNU/GPL Version 2 or later</license>
+    <description>Procesa {hmb_carrusel}...{/hmb_carrusel} y muestra el carrusel de fotos HMB</description>
+    <namespace path="src">Joomla\Plugin\Content\HmbCarrusel</namespace>
+    <files>
+        <filename plugin="hmb_carrusel">hmb_carrusel.php</filename>
+        <folder>services</folder>
+        <folder>src</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Ajustes">
+                <field name="altura" type="list" label="Altura" default="420">
+                    <option value="280">Pequeño (280px)</option>
+                    <option value="380">Mediano (380px)</option>
+                    <option value="420">Normal (420px)</option>
+                    <option value="520">Grande (520px)</option>
+                </field>
+                <field name="autoplay" type="radio" label="Autoplay" default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="interval" type="list" label="Velocidad" default="4000">
+                    <option value="2000">Rápido (2s)</option>
+                    <option value="4000">Normal (4s)</option>
+                    <option value="6000">Lento (6s)</option>
+                </field>
+                <field name="thumbs" type="radio" label="Miniaturas" default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="module" method="upgrade">
+    <name>mod_hmb_carrusel</name>
+    <version>1.0.0</version>
+    <creationDate>2026</creationDate>
+    <author>Heavy Metal Brothers</author>
+    <license>GNU/GPL Version 2 or later</license>
+    <description>Carrusel de fotos HMB — estilo metal, responsivo, con lightbox</description>
+    <files>
+        <filename module="mod_hmb_carrusel">mod_hmb_carrusel.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+
+            <!-- ═══ AJUSTES GENERALES ═══ -->
+            <fieldset name="general" label="Ajustes generales">
+                <field name="autoplay" type="radio" label="Autoplay"
+                    default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="interval" type="list" label="Velocidad autoplay" default="4000">
+                    <option value="2000">Rápido (2s)</option>
+                    <option value="4000">Normal (4s)</option>
+                    <option value="6000">Lento (6s)</option>
+                    <option value="8000">Muy lento (8s)</option>
+                </field>
+                <field name="altura" type="list" label="Altura del carrusel" default="420">
+                    <option value="280">Pequeño (280px)</option>
+                    <option value="380">Mediano (380px)</option>
+                    <option value="420">Normal (420px)</option>
+                    <option value="520">Grande (520px)</option>
+                    <option value="620">Muy grande (620px)</option>
+                </field>
+                <field name="show_thumbs" type="radio" label="Mostrar miniaturas"
+                    default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="show_caption" type="radio" label="Mostrar títulos"
+                    default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+            </fieldset>
+
+            <!-- ═══ FOTO 1 ═══ -->
+            <fieldset name="foto1" label="Foto 1">
+                <field name="f1_media" type="media" label="Archivo (gestor de medios)"
+                    description="Selecciona una imagen desde el gestor de medios de Joomla"
+                    preview="true" types="images" />
+                <field name="f1_url" type="text" label="URL externa (alternativa)"
+                    description="Pega una URL de imagen externa. Se usa si no hay archivo seleccionado arriba."
+                    filter="url" size="60" />
+                <field name="f1_titulo" type="text" label="Título / pie de foto"
+                    filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 2 ═══ -->
+            <fieldset name="foto2" label="Foto 2">
+                <field name="f2_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f2_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f2_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 3 ═══ -->
+            <fieldset name="foto3" label="Foto 3">
+                <field name="f3_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f3_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f3_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 4 ═══ -->
+            <fieldset name="foto4" label="Foto 4">
+                <field name="f4_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f4_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f4_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 5 ═══ -->
+            <fieldset name="foto5" label="Foto 5">
+                <field name="f5_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f5_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f5_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 6 ═══ -->
+            <fieldset name="foto6" label="Foto 6">
+                <field name="f6_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f6_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f6_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 7 ═══ -->
+            <fieldset name="foto7" label="Foto 7">
+                <field name="f7_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f7_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f7_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 8 ═══ -->
+            <fieldset name="foto8" label="Foto 8">
+                <field name="f8_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f8_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f8_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 9 ═══ -->
+            <fieldset name="foto9" label="Foto 9">
+                <field name="f9_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f9_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f9_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+            <!-- ═══ FOTO 10 ═══ -->
+            <fieldset name="foto10" label="Foto 10">
+                <field name="f10_media" type="media" label="Archivo" preview="true" types="images" />
+                <field name="f10_url" type="text" label="URL externa" filter="url" size="60" />
+                <field name="f10_titulo" type="text" label="Título" filter="string" size="60" />
+            </fieldset>
+
+        </fields>
+    </config>
+</extension>

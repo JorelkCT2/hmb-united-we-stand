@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <fields name="params">
+        <fieldset name="basic">
+            <field name="api_key" type="text" label="API Key Anthropic" size="80" maxlength="200" filter="raw"/>
+            <field name="default_category" type="number" label="Categoria destino" default="21"/>
+            <field name="articles_per_run" type="number" label="Articulos por importacion" default="2" min="1" max="15"/>
+            <field name="article_state" type="list" label="Estado de publicacion" default="0">
+                <option value="0">Despublicado</option>
+                <option value="1">Publicado</option>
+            </field>
+            <field name="article_language" type="text" label="Idioma" default="es-ES"/>
+        </fieldset>
+    </fields>
+</config>

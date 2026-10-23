@@ -1,0 +1,6 @@
+nombre,wikipedia_url,foto,fecha_nacimiento,fecha_defuncion,banda
+"Ozzy Osbourne","https://es.wikipedia.org/wiki/Ozzy_Osbourne","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ozzy_Osbourne_1991.jpg/220px-Ozzy_Osbourne_1991.jpg",1948-12-03,,"Black Sabbath"
+"Bruce Dickinson","https://es.wikipedia.org/wiki/Bruce_Dickinson","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Bruce_Dickinson.jpg/220px-Bruce_Dickinson.jpg",1958-08-07,,"Iron Maiden"
+"James Hetfield","https://es.wikipedia.org/wiki/James_Hetfield","https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/JamesHetfieldPlaying.jpg/220px-JamesHetfieldPlaying.jpg",1963-08-03,,"Metallica"
+"Ronnie James Dio","https://es.wikipedia.org/wiki/Ronnie_James_Dio","https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Dio_1978.jpg/220px-Dio_1978.jpg",1942-07-10,2010-05-16,"Black Sabbath"
+"Freddie Mercury","https://es.wikipedia.org/wiki/Freddie_Mercury","https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Freddie_Mercury_performing_in_New_Haven_CT_1977.jpg/220px-Freddie_Mercury_performing_in_New_Haven_CT_1977.jpg",1946-09-05,1991-11-24,"Queen"

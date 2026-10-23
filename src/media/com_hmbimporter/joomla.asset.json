@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_hmbimporter",
+  "version": "1.0.3",
+  "assets": [
+    { "name": "com_hmbimporter.admin", "type": "style",  "uri": "com_hmbimporter/css/admin.css" },
+    { "name": "com_hmbimporter.admin", "type": "script", "uri": "com_hmbimporter/js/admin.js"   }
+  ]
+}

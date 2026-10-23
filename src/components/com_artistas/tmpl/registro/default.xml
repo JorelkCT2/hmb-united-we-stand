@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="Registro de Artista">
+        <message><![CDATA[Formulario para que los artistas se registren y envíen su ficha para revisión.]]></message>
+    </layout>
+</metadata>

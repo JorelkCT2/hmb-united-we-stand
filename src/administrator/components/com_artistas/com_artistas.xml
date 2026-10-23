@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_artistas</name>
+    <author>Fran Moreno</author>
+    <creationDate>2026</creationDate>
+    <version>1.1.0</version>
+    <description>Directorio de artistas y grupos musicales para Joomla 6.x. Requiere PHP 8.1+. Compatible con cualquier template Joomla.</description>
+    <phpminimum>8.1</phpminimum>
+    <description>Gestión de artistas y grupos musicales.</description>
+    <namespace path="src">Joomla\Component\Artistas</namespace>
+
+    <scriptfile>script.php</scriptfile>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <!-- Secciones vacías: el script.php copia los ficheros en preflight() -->
+    <!-- evitando el bug del instalador de Joomla 6.1 con el atributo folder -->
+    <files folder="components/com_artistas">
+    </files>
+
+    <administration>
+        <menu link="option=com_artistas">Artistas</menu>
+        <submenu>
+            <menu link="option=com_artistas&amp;view=cpanel">Panel de Control</menu>
+            <menu link="option=com_artistas&amp;view=artistas">Artistas</menu>
+            <menu link="option=com_artistas&amp;view=artista&amp;layout=edit">Nuevo Artista</menu>
+            <menu link="option=com_artistas&amp;view=generos">Géneros musicales</menu>
+            <menu link="option=com_artistas&amp;view=resenas">Reseñas</menu>
+            <menu link="option=com_artistas&amp;view=presupuestos">Presupuestos</menu>
+            <menu link="option=com_artistas&amp;view=noticias">📰 Noticias de grupos</menu>
+        </submenu>
+        <files folder="administrator/components/com_artistas">
+        </files>
+        <languages folder="administrator/language">
+            <language tag="es-ES">es-ES/com_artistas.ini</language>
+            <language tag="es-ES">es-ES/com_artistas.sys.ini</language>
+        </languages>
+    </administration>
+
+    <media destination="com_artistas" folder="media/com_artistas" />
+    <plugins folder="plugins" />
+</extension>

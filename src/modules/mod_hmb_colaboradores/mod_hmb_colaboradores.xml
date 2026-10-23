@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="module" method="upgrade">
+    <name>mod_hmb_colaboradores</name>
+    <version>1.0.0</version>
+    <author>Heavy Metal Brothers</author>
+    <description>Grid de logos de colaboradores/patrocinadores para el footer</description>
+    <files>
+        <filename module="mod_hmb_colaboradores">mod_hmb_colaboradores.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="general" label="General">
+                <field name="titulo" type="text" label="Título de la sección" default="Colaboradores" filter="string"/>
+                <field name="mostrar_titulo" type="radio" label="Mostrar título" default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="efecto_gris" type="radio" label="Logos en gris (color al pasar el ratón)" default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="tamano_logo" type="list" label="Tamaño de cada logo" default="90">
+                    <option value="70">Pequeño (70px)</option>
+                    <option value="90">Mediano (90px)</option>
+                    <option value="110">Grande (110px)</option>
+                    <option value="130">Muy grande (130px)</option>
+                </field>
+            </fieldset>
+
+            <fieldset name="logos" label="Logos">
+                <field name="colaboradores" type="subform" label="Colaboradores" multiple="true" min="1" max="40"
+                    buttons="add,remove,move" layout="joomla.form.field.subform.repeatable-table">
+                    <form hidden="true">
+                        <field name="logo" type="media" label="Logo (cuadrado, fondo transparente recomendado)" preview="true" types="images"/>
+                        <field name="nombre" type="text" label="Nombre" filter="string"/>
+                        <field name="url" type="url" label="Enlace (web del colaborador)" filter="url"/>
+                    </form>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

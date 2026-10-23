@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="Listado completo de efemérides">
+        <message>Muestra todas las efemérides con búsqueda, filtros y paginación.</message>
+    </layout>
+    <fields name="params">
+        <fieldset name="basic" label="Opciones">
+            <field name="limite_paginacion" type="list" label="Resultados por página" default="20">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </field>
+        </fieldset>
+    </fields>
+</metadata>

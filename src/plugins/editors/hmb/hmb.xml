@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.9" type="plugin" group="editors" method="upgrade">
+    <name>plg_editors_hmb</name>
+    <version>2.0.0</version>
+    <creationDate>2026</creationDate>
+    <author>Heavy Metal Brothers</author>
+    <license>GNU/GPL Version 2 or later</license>
+    <description>Editor simplificado HMB para Joomla 6</description>
+
+    <namespace path="src">Joomla\Plugin\Editors\Hmb</namespace>
+
+    <files folder="plugins/editors/hmb">
+        <file plugin="hmb">hmb.php</file>
+        <folder>layouts</folder>
+        <folder>services</folder>
+        <folder>src</folder>
+    </files>
+</extension>

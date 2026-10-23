@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_hmb_quiz</name>
+	<author>Heavy Metal Brothers</author>
+	<creationDate>2026</creationDate>
+	<version>1.10.0</version>
+	<description>MOD_HMB_QUIZ_XML_DESCRIPTION</description>
+	<namespace path="src">Hmb\Module\HmbQuiz</namespace>
+
+	<files>
+		<filename module="mod_hmb_quiz">mod_hmb_quiz.php</filename>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+	</files>
+
+	<languages folder="language">
+		<language tag="es-ES">es-ES/mod_hmb_quiz.ini</language>
+		<language tag="es-ES">es-ES/mod_hmb_quiz.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic" label="MOD_HMB_QUIZ_BASIC">
+				<field name="compact" type="radio" layout="joomla.form.field.radio.switcher"
+					default="1" label="MOD_HMB_QUIZ_COMPACT" description="MOD_HMB_QUIZ_COMPACT_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="show_board" type="radio" layout="joomla.form.field.radio.switcher"
+					default="1" label="MOD_HMB_QUIZ_SHOW_BOARD" description="MOD_HMB_QUIZ_SHOW_BOARD_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="board_limit" type="number" default="10" min="3" max="50"
+					label="MOD_HMB_QUIZ_BOARD_LIMIT" description="MOD_HMB_QUIZ_BOARD_LIMIT_DESC" />
+			</fieldset>
+
+			<fieldset name="advanced" label="JGLOBAL_FIELDSET_ADVANCED">
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" module="mod_hmb_quiz" />
+				<field name="moduleclass_sfx" type="textarea" rows="3" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" />
+				<field name="cache" type="list" label="COM_MODULES_FIELD_CACHING_LABEL" default="0">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

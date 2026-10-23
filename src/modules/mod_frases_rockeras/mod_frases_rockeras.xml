@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>mod_frases_rockeras</name>
+    <author>Tu Nombre</author>
+    <creationDate>2026</creationDate>
+    <version>1.0.0</version>
+    <description>Muestra una frase mítica aleatoria del rock y el metal con estilo.</description>
+    <namespace path="src">Joomla\Module\FrasesRockeras</namespace>
+    <files>
+        <filename module="mod_frases_rockeras">mod_frases_rockeras.php</filename>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Configuración">
+                <field name="autor_filtro" type="text" label="Filtrar por autor"
+                       description="Dejar vacío para mostrar de todos los autores"
+                       default="" class="form-control" />
+                <field name="mostrar_fecha" type="radio" label="Mostrar años del autor"
+                       default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="autorefresh" type="number" label="Cambiar frase cada X segundos"
+                       description="0 = desactivado" default="0" min="0" class="form-control" />
+                <field name="moduleclass_sfx" type="text" label="Sufijo CSS" default="" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

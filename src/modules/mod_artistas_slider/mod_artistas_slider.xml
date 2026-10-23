@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>mod_artistas_slider</name>
+    <author>Heavy Metal Brothers</author>
+    <version>1.0.0</version>
+    <description>Slider de artistas para el frontend</description>
+    <files>
+        <filename module="mod_artistas_slider">mod_artistas_slider.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="ordenar" type="list" label="Ordenar por" default="hits">
+                    <option value="hits">Más visitados</option>
+                    <option value="created">Más recientes</option>
+                    <option value="name">Alfabético</option>
+                    <option value="rating">Mejor valorados</option>
+                    <option value="random">Aleatorio</option>
+                </field>
+                <field name="limite" type="number" label="Número de artistas" default="12" min="4" max="50" />
+                <field name="solo_publicados" type="radio" label="Solo publicados" default="1">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="autoplay" type="radio" label="Autoplay" default="1">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="velocidad" type="number" label="Velocidad autoplay (ms)" default="3000" min="1000" max="10000" />
+                <field name="cards_visibles" type="number" label="Tarjetas visibles (escritorio)" default="5" min="2" max="8" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

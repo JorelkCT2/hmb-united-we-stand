@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<access component="com_hmbtemas">
+    <section name="component">
+        <action name="core.admin"   title="Administrar" />
+        <action name="core.manage"  title="Gestionar"   />
+        <action name="core.create"  title="Crear"       />
+        <action name="core.delete"  title="Eliminar"    />
+        <action name="core.edit"    title="Editar"      />
+    </section>
+</access>

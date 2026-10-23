@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="details" label="Datos del tema">
+
+        <field name="id" type="hidden" default="0" />
+
+        <field name="title" type="text" label="Título del tema"
+               required="true" maxlength="255" class="inputbox w-100" />
+
+        <field name="album" type="text" label="Álbum"
+               maxlength="255" class="inputbox w-100" />
+
+        <field name="album_year" type="number" label="Año del álbum"
+               min="1900" max="2099" step="1" default="2024" class="inputbox" />
+
+        <field name="track_number" type="number" label="Número de pista"
+               min="0" max="99" step="1" default="0" class="inputbox" />
+
+        <field name="duration" type="text" label="Duración (mm:ss)"
+               description="Ejemplo: 3:47" maxlength="10" class="inputbox" hint="3:47" />
+
+        <field name="audio_file" type="text" label="Archivo de audio (MP3)"
+               description="Ruta relativa al MP3. Ejemplo: images/Canciones/cancion.mp3"
+               maxlength="500" class="inputbox w-100" hint="images/Canciones/cancion.mp3" />
+
+        <field
+            name="cover_image"
+            type="media"
+            label="Portada del álbum"
+            description="Selecciona la imagen de portada desde el gestor de medios."
+            preview="true"
+            class="inputbox w-100"
+        />
+
+        <field name="spotify_url" type="url" label="URL de Spotify"
+               maxlength="500" class="inputbox w-100" hint="https://open.spotify.com/track/..." />
+
+        <field name="youtube_url" type="url" label="URL de YouTube"
+               maxlength="500" class="inputbox w-100" hint="https://www.youtube.com/watch?v=..." />
+
+        <field name="description" type="textarea" label="Descripción"
+               rows="4" class="inputbox w-100" />
+
+        <field name="published" type="list" label="Estado" default="1" class="form-select">
+            <option value="1">Publicado</option>
+            <option value="0">No publicado</option>
+        </field>
+
+        <field name="ordering" type="number" label="Orden" default="0" class="inputbox" />
+
+    </fieldset>
+</form>

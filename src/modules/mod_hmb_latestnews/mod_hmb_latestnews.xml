@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>MOD_HMB_LATESTNEWS</name>
+    <author>Heavy Metal Brothers</author>
+    <authorEmail>webmaster@heavymetalbrothers.com</authorEmail>
+    <authorUrl>https://www.heavymetalbrothers.com</authorUrl>
+    <creationDate>2025-05-14</creationDate>
+    <copyright>Copyright (C) 2025 Heavy Metal Brothers.</copyright>
+    <license>GNU/GPL v2 or later</license>
+    <version>2.6.0</version>
+    <description>MOD_HMB_LATESTNEWS_DESC</description>
+
+    <files>
+        <filename module="mod_hmb_latestnews">mod_hmb_latestnews.php</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <languages>
+        <language tag="es-ES">language/es-ES/mod_hmb_latestnews.ini</language>
+        <language tag="es-ES">language/es-ES/mod_hmb_latestnews.sys.ini</language>
+        <language tag="en-GB">language/en-GB/mod_hmb_latestnews.ini</language>
+        <language tag="en-GB">language/en-GB/mod_hmb_latestnews.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+
+            <fieldset name="basic" label="MOD_HMB_LATESTNEWS_FIELDSET_CONTENT">
+
+                <field name="count"
+                    type="number"
+                    label="MOD_HMB_LATESTNEWS_COUNT_LABEL"
+                    description="MOD_HMB_LATESTNEWS_COUNT_DESC"
+                    default="6" min="1" max="50" />
+
+                <field name="categories"
+                    type="subform"
+                    label="MOD_HMB_LATESTNEWS_CATEGORIES_LABEL"
+                    description="MOD_HMB_LATESTNEWS_CATEGORIES_DESC"
+                    multiple="true"
+                    min="0"
+                    max="14"
+                    layout="joomla.form.field.subform.repeatable-table"
+                    groupByFieldset="false"
+                >
+                    <form>
+                        <field name="catid"
+                            type="category"
+                            label="MOD_HMB_LATESTNEWS_CAT_ID_LABEL"
+                            extension="com_content"
+                            default=""
+                            hide_none="true"
+                            hide_default="true"
+                        />
+                        <field name="max_count"
+                            type="number"
+                            label="MOD_HMB_LATESTNEWS_CAT_MAX_LABEL"
+                            description="MOD_HMB_LATESTNEWS_CAT_MAX_DESC"
+                            default="3" min="1" max="20"
+                        />
+                    </form>
+                </field>
+
+                <field name="show_featured"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_FEATURED_LABEL"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                    <option value="2">MOD_HMB_LATESTNEWS_FEATURED_ONLY</option>
+                </field>
+
+                <field name="ordering"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_ORDERING_LABEL"
+                    default="created_desc">
+                    <option value="created_desc">MOD_HMB_LATESTNEWS_ORDER_CREATED_DESC</option>
+                    <option value="created_asc">MOD_HMB_LATESTNEWS_ORDER_CREATED_ASC</option>
+                    <option value="modified_desc">MOD_HMB_LATESTNEWS_ORDER_MODIFIED_DESC</option>
+                    <option value="hits_desc">MOD_HMB_LATESTNEWS_ORDER_HITS</option>
+                    <option value="rand">MOD_HMB_LATESTNEWS_ORDER_RANDOM</option>
+                </field>
+
+                <field name="show_date"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWDATE_LABEL"
+                    default="created">
+                    <option value="">JNONE</option>
+                    <option value="created">MOD_HMB_LATESTNEWS_DATE_CREATED</option>
+                    <option value="modified">MOD_HMB_LATESTNEWS_DATE_MODIFIED</option>
+                    <option value="publish_up">MOD_HMB_LATESTNEWS_DATE_PUBLISHED</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="display" label="MOD_HMB_LATESTNEWS_FIELDSET_DISPLAY">
+
+                <field name="layout"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_LAYOUT_LABEL"
+                    default="grid">
+                    <option value="grid">MOD_HMB_LATESTNEWS_LAYOUT_GRID</option>
+                    <option value="list">MOD_HMB_LATESTNEWS_LAYOUT_LIST</option>
+                    <option value="featured">MOD_HMB_LATESTNEWS_LAYOUT_FEATURED</option>
+                    <option value="ticker">MOD_HMB_LATESTNEWS_LAYOUT_TICKER</option>
+                </field>
+
+                <field name="columns"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_COLUMNS_LABEL"
+                    default="3">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </field>
+
+                <field name="show_image"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWIMAGE_LABEL"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="image_effect"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_IMGEFFECT_LABEL"
+                    description="MOD_HMB_LATESTNEWS_IMGEFFECT_DESC"
+                    default="pan_down">
+                    <option value="none">MOD_HMB_LATESTNEWS_EFFECT_NONE</option>
+                    <option value="zoom_in">MOD_HMB_LATESTNEWS_EFFECT_ZOOMIN</option>
+                    <option value="zoom_out">MOD_HMB_LATESTNEWS_EFFECT_ZOOMOUT</option>
+                    <option value="pan_down">MOD_HMB_LATESTNEWS_EFFECT_PANDOWN</option>
+                    <option value="pan_up">MOD_HMB_LATESTNEWS_EFFECT_PANUP</option>
+                </field>
+
+                <field name="image_aspect"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_IMGASPECT_LABEL"
+                    default="16/9">
+                    <option value="16/9">16:9</option>
+                    <option value="4/3">4:3</option>
+                    <option value="3/2">3:2</option>
+                    <option value="1/1">1:1</option>
+                    <option value="21/9">21:9</option>
+                </field>
+
+                <field name="image_width"
+                    type="number"
+                    label="MOD_HMB_LATESTNEWS_IMGWIDTH_LABEL"
+                    default="400" min="50" max="1200" />
+
+                <field name="image_height"
+                    type="number"
+                    label="MOD_HMB_LATESTNEWS_IMGHEIGHT_LABEL"
+                    default="220" min="50" max="900" />
+
+                <field name="show_category_badge"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWCATBADGE_LABEL"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="show_introtext"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWINTRO_LABEL"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="introtext_limit"
+                    type="number"
+                    label="MOD_HMB_LATESTNEWS_INTROLIMIT_LABEL"
+                    default="120" min="0" max="500" />
+
+                <field name="show_author"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWAUTHOR_LABEL"
+                    default="0">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="show_hits"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWHITS_LABEL"
+                    default="0">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="show_readmore"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWREADMORE_LABEL"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="readmore_text"
+                    type="text"
+                    label="MOD_HMB_LATESTNEWS_READMORETEXT_LABEL"
+                    default="Leer más" filter="string" />
+
+
+                <field name="show_share"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_SHOWSHARE_LABEL"
+                    description="MOD_HMB_LATESTNEWS_SHOWSHARE_DESC"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="share_facebook" type="list" label="— Facebook" default="1">
+                    <option value="1">JYES</option><option value="0">JNO</option>
+                </field>
+                <field name="share_x" type="list" label="— X (Twitter)" default="1">
+                    <option value="1">JYES</option><option value="0">JNO</option>
+                </field>
+                <field name="share_whatsapp" type="list" label="— WhatsApp" default="1">
+                    <option value="1">JYES</option><option value="0">JNO</option>
+                </field>
+                <field name="share_telegram" type="list" label="— Telegram" default="1">
+                    <option value="1">JYES</option><option value="0">JNO</option>
+                </field>
+                <field name="share_linkedin" type="list" label="— LinkedIn" default="0">
+                    <option value="1">JYES</option><option value="0">JNO</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="style" label="MOD_HMB_LATESTNEWS_FIELDSET_STYLE">
+
+                <field name="dark_mode"
+                    type="list"
+                    label="MOD_HMB_LATESTNEWS_DARKMODE_LABEL"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="accent_color"
+                    type="text"
+                    label="MOD_HMB_LATESTNEWS_ACCENTCOLOR_LABEL"
+                    description="MOD_HMB_LATESTNEWS_ACCENTCOLOR_DESC"
+                    default="#CC0000" filter="string" />
+
+                <field name="module_class_sfx"
+                    type="text"
+                    label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                    description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+                    filter="string" />
+
+            </fieldset>
+
+            <fieldset name="advanced">
+                <field name="cache"
+                    type="list"
+                    label="JGLOBAL_FIELD_CACHE_LABEL"
+                    default="1">
+                    <option value="1">JGLOBAL_USE_GLOBAL</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="cache_time"
+                    type="number"
+                    label="JGLOBAL_FIELD_CACHE_TIME_LABEL"
+                    default="900" min="0" />
+            </fieldset>
+
+        </fields>
+    </config>
+</extension>

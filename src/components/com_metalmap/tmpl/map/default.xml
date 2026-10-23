@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_METALMAP_MENU_MAP_TITLE" option="COM_METALMAP_MENU_MAP_OPTION">
+        <message>COM_METALMAP_MENU_MAP_DESC</message>
+    </layout>
+    <fields name="request">
+        <fieldset name="request">
+            <!-- No params needed -->
+        </fieldset>
+    </fields>
+</metadata>

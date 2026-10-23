@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Búsqueda global de Efemérides">
+        <message><![CDATA[Búsqueda en efemérides, músicos, fallecidos y frases míticas]]></message>
+    </layout>
+    <fields name="params"></fields>
+</metadata>

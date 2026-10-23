@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="basic" label="Datos del Concierto">
+        <field name="id" type="hidden" />
+        <field name="title" type="text" label="Título del evento" required="true" size="80" class="form-control" />
+        <field name="alias" type="text" label="Alias (URL)" size="80" class="form-control" />
+        <field name="state" type="list" label="Estado" default="1">
+            <option value="1">Publicado</option>
+            <option value="0">Sin publicar</option>
+            <option value="-1">Cancelado</option>
+        </field>
+        <field name="headliners" type="hidden" />
+        <field name="support_bands" type="text" label="Teloneras (separadas por coma)" size="400" class="form-control" />
+        <field name="genre_ids" type="sql"
+               label="Géneros musicales"
+               query="SELECT id, name FROM #__artistas_generos WHERE state=1 ORDER BY name ASC"
+               key_field="id" value_field="name"
+               multiple="true" class="form-select" size="6" />
+    </fieldset>
+    <fieldset name="dates" label="Fechas y Horario">
+        <field name="date_start" type="calendar" label="Fecha de inicio" required="true" format="%Y-%m-%d" class="form-control" />
+        <field name="date_end" type="calendar" label="Fecha de fin (festivales)" format="%Y-%m-%d" class="form-control" />
+        <field name="doors_time" type="text" label="Apertura de puertas" size="8" class="form-control" hint="20:00" />
+        <field name="concert_time" type="text" label="Hora de inicio" size="8" class="form-control" hint="21:00" />
+    </fieldset>
+    <fieldset name="venue" label="Lugar">
+        <field name="venue" type="text" label="Recinto / Sala" required="true" size="300" class="form-control" />
+        <field name="city" type="text" label="Ciudad" required="true" size="150" class="form-control" />
+        <field name="province" type="text" label="Provincia" size="150" class="form-control" />
+        <field name="country_code" type="list" label="País" default="ES" class="form-select">
+            <option value="ES">Espana</option><option value="DE">Alemania</option>
+            <option value="AT">Austria</option><option value="BE">Belgica</option>
+            <option value="BG">Bulgaria</option><option value="HR">Croacia</option>
+            <option value="CZ">Rep. Checa</option><option value="DK">Dinamarca</option>
+            <option value="SK">Eslovaquia</option><option value="SI">Eslovenia</option>
+            <option value="EE">Estonia</option><option value="FI">Finlandia</option>
+            <option value="FR">Francia</option><option value="GR">Grecia</option>
+            <option value="HU">Hungria</option><option value="IE">Irlanda</option>
+            <option value="IS">Islandia</option><option value="IT">Italia</option>
+            <option value="LV">Letonia</option><option value="LT">Lituania</option>
+            <option value="LU">Luxemburgo</option><option value="MT">Malta</option>
+            <option value="NO">Noruega</option><option value="NL">Paises Bajos</option>
+            <option value="PL">Polonia</option><option value="PT">Portugal</option>
+            <option value="GB">Reino Unido</option><option value="RO">Rumania</option>
+            <option value="SE">Suecia</option><option value="CH">Suiza</option>
+        </field>
+        <field name="address" type="text" label="Direccion completa" size="400" class="form-control" />
+    </fieldset>
+    <fieldset name="tickets" label="Entradas y Web">
+        <field name="prices" type="hidden" />
+        <field name="ticket_url" type="text" label="URL compra de entradas" size="600" class="form-control" />
+        <field name="website_url" type="text" label="Web oficial del concierto" size="600" class="form-control" />
+    </fieldset>
+    <fieldset name="media" label="Cartel y Descripcion">
+        <field name="poster_url" type="text" label="URL del cartel (PNG o JPG)" size="600" class="form-control" />
+        <field name="description" type="editor" label="Descripcion / Notas" filter="safehtml" buttons="true" />
+    </fieldset>
+</form>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Agenda de Conciertos">
+        <message>
+            <![CDATA[Muestra la agenda de próximos conciertos con filtros por país, provincia y género.]]>
+        </message>
+    </layout>
+    <fields name="params">
+        <fieldset name="basic" label="Opciones">
+            <field name="show_past" type="radio" label="Mostrar conciertos pasados"
+                   default="0" layout="joomla.form.field.radio.switcher">
+                <option value="0">No</option>
+                <option value="1">Sí</option>
+            </field>
+            <field name="default_country" type="text" label="País por defecto (código ISO)"
+                   default="ES" size="5" class="form-control" />
+        </fieldset>
+    </fields>
+</metadata>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details">
+		<field name="id" type="hidden" />
+
+		<field name="content_type" type="list" default="song"
+			label="COM_HMB_QUIZ_CONTENT_TYPE" description="COM_HMB_QUIZ_CONTENT_TYPE_DESC">
+			<option value="song">COM_HMB_QUIZ_CONTENT_SONG</option>
+			<option value="movie">COM_HMB_QUIZ_CONTENT_MOVIE</option>
+		</field>
+
+		<field name="movie" type="text" size="60"
+			label="COM_HMB_QUIZ_MOVIE" description="COM_HMB_QUIZ_MOVIE_DESC" />
+
+		<field name="original_title" type="text" size="60"
+			label="COM_HMB_QUIZ_ORIGINAL_TITLE" description="COM_HMB_QUIZ_ORIGINAL_TITLE_DESC" />
+
+		<field name="movie_year" type="text" size="10"
+			label="COM_HMB_QUIZ_MOVIE_YEAR" description="COM_HMB_QUIZ_MOVIE_YEAR_DESC" />
+
+		<field name="director" type="text" size="60"
+			label="COM_HMB_QUIZ_DIRECTOR" description="COM_HMB_QUIZ_DIRECTOR_DESC" />
+
+		<field name="poster_url" type="url" size="60" validate="url"
+			label="COM_HMB_QUIZ_POSTER_URL" description="COM_HMB_QUIZ_POSTER_URL_DESC"
+			hint="https://..." filter="url" />
+
+		<field name="title" type="text" required="true" size="60"
+			label="COM_HMB_QUIZ_VIDEO_TITLE" description="COM_HMB_QUIZ_FIELD_TITLE_DESC" />
+
+		<field name="youtube_id" type="text" required="true" size="60"
+			label="COM_HMB_QUIZ_YOUTUBE_ID" description="COM_HMB_QUIZ_FIELD_YT_DESC"
+			hint="https://www.youtube.com/watch?v=XXXXXXXXXXX" />
+
+		<field name="band" type="text" size="60"
+			label="COM_HMB_QUIZ_BAND" description="COM_HMB_QUIZ_FIELD_BAND_DESC" />
+
+		<field name="difficulty" type="list" default="1"
+			label="COM_HMB_QUIZ_DIFFICULTY" description="COM_HMB_QUIZ_DIFFICULTY_DESC">
+			<option value="1">COM_HMB_QUIZ_LEVEL_EASY</option>
+			<option value="2">COM_HMB_QUIZ_LEVEL_MEDIUM</option>
+			<option value="3">COM_HMB_QUIZ_LEVEL_HARD</option>
+		</field>
+
+		<field name="genre" type="genre" addfieldprefix="Hmb\Component\Quiz\Administrator\Field"
+			label="COM_HMB_QUIZ_GENRE" description="COM_HMB_QUIZ_FIELD_GENRE_DESC" />
+
+		<field name="album" type="text" size="60"
+			label="COM_HMB_QUIZ_ALBUM" description="COM_HMB_QUIZ_FIELD_ALBUM_DESC" />
+
+		<field name="cover_url" type="url" size="60" validate="url"
+			label="COM_HMB_QUIZ_COVER_URL" description="COM_HMB_QUIZ_COVER_URL_DESC"
+			hint="https://..." filter="url" />
+
+		<field name="origin" type="text" size="60"
+			label="COM_HMB_QUIZ_ORIGIN" description="COM_HMB_QUIZ_FIELD_ORIGIN_DESC" />
+
+		<field name="year" type="text" size="10"
+			label="COM_HMB_QUIZ_YEAR" description="COM_HMB_QUIZ_FIELD_YEAR_DESC" />
+
+		<field name="singer" type="text" size="60"
+			label="COM_HMB_QUIZ_SINGER" description="COM_HMB_QUIZ_SINGER_DESC" />
+
+		<field name="start_time" type="number" default="0" min="0" max="3600"
+			label="COM_HMB_QUIZ_START_TIME" description="COM_HMB_QUIZ_START_TIME_DESC" />
+
+		<field name="clip_length" type="number" default="10" min="0" max="60"
+			label="COM_HMB_QUIZ_CLIP_LENGTH" description="COM_HMB_QUIZ_CLIP_LENGTH_DESC" />
+
+		<field name="state" type="list" default="1"
+			label="JSTATUS" description="">
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field name="ordering" type="number" default="0" label="JFIELD_ORDERING_LABEL" />
+	</fieldset>
+</form>

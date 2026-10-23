@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_hmb_quiz_ranking</name>
+	<author>Heavy Metal Brothers</author>
+	<creationDate>2026</creationDate>
+	<version>1.1.0</version>
+	<description>MOD_HMB_QUIZ_RANKING_XML_DESCRIPTION</description>
+	<namespace path="src">Hmb\Module\HmbQuizRanking</namespace>
+
+	<files>
+		<filename module="mod_hmb_quiz_ranking">mod_hmb_quiz_ranking.php</filename>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+	</files>
+
+	<languages folder="language">
+		<language tag="es-ES">es-ES/mod_hmb_quiz_ranking.ini</language>
+		<language tag="es-ES">es-ES/mod_hmb_quiz_ranking.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic" label="MOD_HMB_QUIZ_RANKING_BASIC">
+				<field name="source" type="list" default="scores"
+					label="MOD_HMB_QUIZ_RANKING_SOURCE" description="MOD_HMB_QUIZ_RANKING_SOURCE_DESC">
+					<option value="scores">MOD_HMB_QUIZ_RANKING_SOURCE_SCORES</option>
+					<option value="league">MOD_HMB_QUIZ_RANKING_SOURCE_LEAGUE</option>
+				</field>
+
+				<field name="styled_title" type="radio" layout="joomla.form.field.radio.switcher" default="1"
+					label="MOD_HMB_QUIZ_RANKING_STYLED_TITLE" description="MOD_HMB_QUIZ_RANKING_STYLED_TITLE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="limit" type="number" default="10" min="1" max="100"
+					label="MOD_HMB_QUIZ_RANKING_LIMIT" description="MOD_HMB_QUIZ_RANKING_LIMIT_DESC" />
+
+				<field name="period" type="list" default="" showon="source:scores"
+					label="MOD_HMB_QUIZ_RANKING_PERIOD" description="MOD_HMB_QUIZ_RANKING_PERIOD_DESC">
+					<option value="">MOD_HMB_QUIZ_RANKING_PERIOD_ALL</option>
+					<option value="today">MOD_HMB_QUIZ_RANKING_PERIOD_TODAY</option>
+					<option value="week">MOD_HMB_QUIZ_RANKING_PERIOD_WEEK</option>
+					<option value="month">MOD_HMB_QUIZ_RANKING_PERIOD_MONTH</option>
+				</field>
+
+				<field name="show_medals" type="radio" layout="joomla.form.field.radio.switcher" default="1"
+					label="MOD_HMB_QUIZ_RANKING_MEDALS" description="MOD_HMB_QUIZ_RANKING_MEDALS_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="show_detail" type="radio" layout="joomla.form.field.radio.switcher" default="1"
+					label="MOD_HMB_QUIZ_RANKING_DETAIL" description="MOD_HMB_QUIZ_RANKING_DETAIL_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="advanced" label="JGLOBAL_FIELDSET_ADVANCED">
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" module="mod_hmb_quiz_ranking" />
+				<field name="moduleclass_sfx" type="textarea" rows="3" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" />
+				<field name="cache" type="list" label="COM_MODULES_FIELD_CACHING_LABEL" default="1">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field name="cache_time" type="number" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" default="5" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

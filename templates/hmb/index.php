@@ -32,15 +32,22 @@ $fluid        = $params->get('fluidContainer', 0);
 
 // Accesos destacados (franja de portada)
 $showDestacados = $params->get('showDestacados', 1);
-$destTitle      = trim((string) $params->get('destacadosTitle', 'Explora'));
+$showDestTitle  = $params->get('showDestacadosTitle', 1);
+$destTitle      = trim((string) $params->get('destacadosTitle', ''));
 $destItems      = [];
 for ($i = 1; $i <= 4; $i++) {
     $l  = trim((string) $params->get("destacado{$i}_label", ''));
     $u  = trim((string) $params->get("destacado{$i}_url", ''));
     $ic = trim((string) $params->get("destacado{$i}_icon", ''));
     $im = trim((string) $params->get("destacado{$i}_img", ''));
-    if ($l !== '' && $u !== '') {
-        $destItems[] = ['label' => $l, 'url' => $u, 'icon' => $ic, 'img' => $im];
+    $tp = trim((string) $params->get("destacado{$i}_type", 'icon'));
+    // Validez según el tipo: imagen exige img; icono exige texto. La URL siempre.
+    $ok = ($u !== '');
+    if ($tp === 'image')          { $ok = $ok && ($im !== ''); }
+    elseif ($tp === 'imagetext')  { $ok = $ok && ($im !== '') && ($l !== ''); }
+    else                          { $ok = $ok && ($l !== ''); }
+    if ($ok) {
+        $destItems[] = ['label' => $l, 'url' => $u, 'icon' => $ic, 'img' => $im, 'type' => $tp];
     }
 }
 
@@ -85,7 +92,14 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 <!DOCTYPE html>
 <html lang="<?php echo $lang; ?>" dir="<?php echo $dir; ?>">
 <head>
-	<meta charset="utf-8">
+	<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NR9JTB73');</script>
+<!-- End Google Tag Manager -->
+<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXP1DXHHLN"></script>
 	<script>
@@ -467,12 +481,14 @@ if ($isHome) $bodyClasses .= ' home';
 	.hmb-dest-label{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#cccccc;transition:color .25s;position:relative;z-index:2;}
 	.hmb-dest-card:hover .hmb-dest-label{color:#fff;}
 	.hmb-dest-icon{position:relative;z-index:2;}
-	/* Tarjetas con imagen de fondo */
-	.hmb-dest-card.has-img{background:#0a0000 center/cover no-repeat;min-height:160px;justify-content:flex-end;}
-	.hmb-dest-card.has-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,.45) 45%,rgba(0,0,0,.82) 100%);z-index:1;transition:background .3s;}
-	.hmb-dest-card.has-img:hover::after{background:linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.40) 45%,rgba(0,0,0,.80) 100%);}
-	.hmb-dest-card.has-img .hmb-dest-label{color:#fff;font-size:15px;text-shadow:0 2px 10px rgba(0,0,0,.9);}
-	.hmb-dest-card.has-img .hmb-dest-icon{filter:drop-shadow(0 2px 8px rgba(0,0,0,.9));}
+	/* Tarjetas tipo imagen / banner (recomendado 400×100) */
+	.hmb-dest-card.is-banner{padding:0;min-height:0;background:#0a0000;}
+	.hmb-dest-banner{display:block;width:100%;height:auto;}
+	/* Tarjetas imagen + texto (imagen de fondo con el texto encima, sin icono) */
+	.hmb-dest-card.is-imgtext{background:#0a0000 center/cover no-repeat;min-height:150px;justify-content:flex-end;padding:1.2rem;}
+	.hmb-dest-card.is-imgtext::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.45) 45%,rgba(0,0,0,.85) 100%);z-index:1;transition:background .3s;}
+	.hmb-dest-card.is-imgtext:hover::after{background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.4) 45%,rgba(0,0,0,.8) 100%);}
+	.hmb-dest-card.is-imgtext .hmb-dest-label{color:#fff;font-size:15px;text-shadow:0 2px 10px rgba(0,0,0,.9);}
 	@media(max-width:768px){
 		.hmb-destacados{padding:1.6rem 0 1.3rem;}
 		.hmb-destacados-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:0 .75rem;}
@@ -482,7 +498,7 @@ if ($isHome) $bodyClasses .= ' home';
 	}
 </style>
 <section class="hmb-destacados" aria-label="Accesos destacados">
-	<?php if ($destTitle !== ''): ?>
+	<?php if ($showDestTitle && $destTitle !== ''): ?>
 	<h2 class="hmb-destacados-title"><?php echo htmlspecialchars($destTitle, ENT_QUOTES); ?></h2>
 	<?php endif; ?>
 	<div class="hmb-destacados-grid">
@@ -491,20 +507,31 @@ if ($isHome) $bodyClasses .= ' home';
 			$href = preg_match('~^https?://~i', $u)
 				? $u
 				: (str_starts_with($u, '/') ? $u : $destRoot . '/' . ltrim($u, '/'));
-			$hasImg = ($d['img'] !== '');
-			$imgUrl = '';
-			if ($hasImg) {
-				$imgUrl = preg_match('~^https?://~i', $d['img'])
+			$cardImg = '';
+			if (($d['type'] === 'image' || $d['type'] === 'imagetext') && $d['img'] !== '') {
+				$cardImg = preg_match('~^https?://~i', $d['img'])
 					? $d['img']
 					: (str_starts_with($d['img'], '/') ? $d['img'] : $destRoot . '/' . ltrim($d['img'], '/'));
 			}
+			$isBanner    = ($d['type'] === 'image'     && $cardImg !== '');
+			$isImageText = ($d['type'] === 'imagetext' && $cardImg !== '');
 		?>
-		<a class="hmb-dest-card<?php echo $hasImg ? ' has-img' : ''; ?>" href="<?php echo htmlspecialchars($href, ENT_QUOTES); ?>"<?php echo $hasImg ? ' style="background-image:url(\'' . htmlspecialchars($imgUrl, ENT_QUOTES) . '\')"' : ''; ?>>
+		<?php if ($isBanner): ?>
+		<a class="hmb-dest-card is-banner" href="<?php echo htmlspecialchars($href, ENT_QUOTES); ?>">
+			<img class="hmb-dest-banner" src="<?php echo htmlspecialchars($cardImg, ENT_QUOTES); ?>" alt="<?php echo htmlspecialchars($d['label'], ENT_QUOTES); ?>" loading="lazy">
+		</a>
+		<?php elseif ($isImageText): ?>
+		<a class="hmb-dest-card is-imgtext" href="<?php echo htmlspecialchars($href, ENT_QUOTES); ?>" style="background-image:url('<?php echo htmlspecialchars($cardImg, ENT_QUOTES); ?>')">
+			<span class="hmb-dest-label"><?php echo htmlspecialchars($d['label'], ENT_QUOTES); ?></span>
+		</a>
+		<?php else: ?>
+		<a class="hmb-dest-card" href="<?php echo htmlspecialchars($href, ENT_QUOTES); ?>">
 			<?php if ($d['icon'] !== ''): ?>
 			<span class="hmb-dest-icon"><?php echo $d['icon']; ?></span>
 			<?php endif; ?>
 			<span class="hmb-dest-label"><?php echo htmlspecialchars($d['label'], ENT_QUOTES); ?></span>
 		</a>
+		<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
 </section>
@@ -614,6 +641,25 @@ if ($isHome) $bodyClasses .= ' home';
 	</div>
 </div>
 <jdoc:include type="modules" name="debug" style="none" />
+<script>
+/* HMB — Red de seguridad: reescribe enlaces nativos de usuarios a las rutas /registro */
+(function(){
+  var root = '<?php echo rtrim(\Joomla\CMS\Uri\Uri::root(), '/'); ?>';
+  var map = [
+    [/component\/users\/registration/i, '/index.php/registro?layout=register'],
+    [/component\/users\/login/i,        '/index.php/registro'],
+    [/component\/users\/remind/i,       '/index.php/registro/recordar-usuario'],
+    [/component\/users\/reset/i,        '/index.php/registro/contrasena-olvidada'],
+    [/component\/users\/profile/i,      '/index.php/registro/perfil-usuario']
+  ];
+  document.querySelectorAll('a[href*="component/users/"]').forEach(function(a){
+    var h = a.getAttribute('href') || '';
+    for (var i=0;i<map.length;i++){
+      if (map[i][0].test(h)){ a.setAttribute('href', root + map[i][1]); break; }
+    }
+  });
+})();
+</script>
 <script>
 (function(){
   var ftab=document.getElementById('hmb-float-tab');
@@ -839,5 +885,9 @@ if ($isHome) $bodyClasses .= ' home';
 </script>
 
 <jdoc:include type="scripts" />
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR9JTB73"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 </body>
 </html>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="6.0" type="module" client="site" method="upgrade">
+    <name>mod_hmb_logo</name>
+    <title>HMB Logo</title>
+    <description>Módulo de logo para Heavy Metal Brothers. PNG con efectos de glow, fuego, sangre, plata u oro. Tamaño adaptable por dispositivo.</description>
+    <version>1.0.0</version>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+
+    <files>
+        <filename module="mod_hmb_logo">mod_hmb_logo.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="mod_hmb_logo" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <config>
+        <fields name="params">
+
+            <fieldset name="logo" label="Logo">
+
+                <field name="logo_image"
+                       type="media"
+                       label="Imagen del logo (PNG recomendado)"
+                       description="Sube tu logo PNG con fondo transparente para que los efectos luzcan mejor." />
+
+                <field name="logo_alt"
+                       type="text"
+                       label="Texto alternativo / nombre del sitio"
+                       default="Heavy Metal Brothers"
+                       filter="string" />
+
+                <field name="logo_link"
+                       type="url"
+                       label="Enlace al hacer clic"
+                       description="Deja vacío para que apunte al inicio del sitio."
+                       default=""
+                       filter="url" />
+
+                <field name="open_new_tab"
+                       type="radio"
+                       label="Abrir enlace en nueva pestaña"
+                       default="0"
+                       layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="size" label="Tamaño">
+
+                <field name="logo_height"
+                       type="number"
+                       label="Alto en desktop (px)"
+                       default="80"
+                       min="20"
+                       max="300"
+                       step="5" />
+
+                <field name="logo_height_tablet"
+                       type="number"
+                       label="Alto en tablet (px)"
+                       description="Pantallas hasta 1024px"
+                       default="60"
+                       min="20"
+                       max="200"
+                       step="5" />
+
+                <field name="logo_height_mobile"
+                       type="number"
+                       label="Alto en móvil (px)"
+                       description="Pantallas hasta 767px"
+                       default="44"
+                       min="20"
+                       max="120"
+                       step="4" />
+
+            </fieldset>
+
+            <fieldset name="visibility" label="Visibilidad por dispositivo">
+
+                <field name="show_desktop"
+                       type="radio"
+                       label="Mostrar en desktop"
+                       description="Pantallas mayores de 1024px"
+                       default="1"
+                       class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="show_tablet"
+                       type="radio"
+                       label="Mostrar en tablet"
+                       description="Pantallas entre 768px y 1024px"
+                       default="1"
+                       class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="show_mobile"
+                       type="radio"
+                       label="Mostrar en móvil"
+                       description="Pantallas menores de 768px"
+                       default="1"
+                       class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="effect" label="Efecto">
+
+                <field name="effect"
+                       type="list"
+                       label="Efecto de iluminación"
+                       description="Elige el resplandor que mejor encaje con tu logo"
+                       default="glow">
+                    <option value="glow">🔴 Glow Rojo (recomendado)</option>
+                    <option value="ember">🔥 Ember Naranja/Fuego</option>
+                    <option value="blood">🩸 Blood Rojo Oscuro</option>
+                    <option value="gold">✨ Gold Dorado</option>
+                    <option value="silver">⚔️ Silver Metálico</option>
+                    <option value="none">— Sin efecto</option>
+                </field>
+
+            </fieldset>
+
+        </fields>
+    </config>
+
+</extension>

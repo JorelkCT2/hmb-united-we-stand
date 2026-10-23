@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field name="id" type="hidden" />
+
+    <field name="artista" type="text" label="Artista / Banda" required="true" maxlength="255" class="form-control" />
+
+    <field name="fecha_fallecimiento" type="calendar" label="Fecha de fallecimiento"
+           format="%Y-%m-%d" filter="date" class="form-control" />
+
+    <field name="efemeride_id" type="sql" label="Efeméride relacionada"
+           query="SELECT id AS value, CONCAT('[', DATE_FORMAT(fecha_evento,'%d/%m/%Y'), '] ', IFNULL(artista,''), ' — ', titulo) AS text FROM #__efemerides WHERE state=1 ORDER BY fecha_evento DESC"
+           key_field="value" value_field="text" class="form-select"
+           first_option="-- Sin efeméride relacionada --" first_option_value="0" />
+
+    <field name="foto_interna" type="media" label="Foto (Media Manager de Joomla)"
+           description="Selecciona una imagen del gestor de medios de Joomla" />
+
+    <field name="foto" type="text" label="URL de foto (interna o externa)"
+           description="Ruta relativa (images/artistas/foto.jpg) o URL completa (https://...jpg). Tiene prioridad sobre el Media Manager."
+           maxlength="500" class="form-control"
+           placeholder="images/artistas/nombre.jpg  ó  https://ejemplo.com/foto.jpg" />
+
+    <field name="wikipedia_url" type="text" label="Enlace Wikipedia"
+           description="URL completa a la Wikipedia del artista"
+           maxlength="500" class="form-control"
+           placeholder="https://es.wikipedia.org/wiki/Nombre_Artista" />
+
+    <field name="notas" type="editor" label="Notas / Bibliografía"
+           description="Información adicional sobre el artista" filter="safehtml" />
+
+    <field name="state" type="list" label="Estado" class="form-select">
+        <option value="1">Publicado</option>
+        <option value="0">Despublicado</option>
+    </field>
+</form>

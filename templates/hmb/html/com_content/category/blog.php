@@ -18,13 +18,26 @@ $root = rtrim(Uri::root(), '/');
 if (!function_exists('hmb_article_img')) {
     function hmb_article_img(object $article, string $root): string
     {
-        $raw = $article->images ?? '';
-        if (!$raw) return '';
+        $raw  = $article->images ?? '';
         $data = is_string($raw) ? json_decode($raw) : $raw;
-        if (!$data) return '';
-        $img = $data->image_intro ?: ($data->image_fulltext ?? '');
+        $img  = '';
+        if ($data) {
+            $img = $data->image_intro ?: ($data->image_fulltext ?? '');
+        }
+        // Fallback: primera imagen incrustada en el cuerpo del artículo
+        if (!$img) {
+            $html = ($article->introtext ?? '') . ($article->fulltext ?? '');
+            if ($html && preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', $html, $m)) {
+                $img = $m[1];
+            }
+        }
         if (!$img) return '';
-        return preg_match('/^https?:\/\//i', $img) ? $img : $root . '/' . ltrim($img, '/');
+        $img = explode('#', $img)[0];                 // quitar sufijo #joomlaImage://...
+        if ($img === '') return '';
+        if (!preg_match('~^https?://~i', $img)) {
+            $img = $root . '/' . ltrim($img, '/');
+        }
+        return str_replace(' ', '%20', $img);
     }
 }
 
@@ -110,14 +123,16 @@ $pagination = $this->pagination ?? null;
 
 /* Imagen de fondo */
 .hmb-art-bg{
-    position:absolute;inset:0;
+    position:absolute;left:0;right:0;top:0;
+    height:175%;                 /* más alta que la tarjeta: deja recorrido vertical */
     background-size:cover;
-    background-position:center;
-    transition:transform .5s ease,filter .5s ease;
+    background-position:center top;
+    transition:transform 3.5s ease,filter .5s ease;
     filter:brightness(.45) saturate(1.1);
+    will-change:transform;
 }
 .hmb-art-card:hover .hmb-art-bg{
-    transform:scale(1.06);
+    transform:translateY(-42.85%); /* (175-100)/175 → revela la imagen hasta abajo */
     filter:brightness(.6) saturate(1.3);
 }
 

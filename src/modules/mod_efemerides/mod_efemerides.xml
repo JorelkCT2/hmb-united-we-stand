@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>mod_efemerides</name>
+    <author>Tu Nombre</author>
+    <creationDate>2026</creationDate>
+    <version>2.6.6</version>
+    <description>Muestra las N efemérides más cercanas al día de hoy (antes o después), sin importar el año.</description>
+    <namespace path="src">Joomla\Module\Efemerides</namespace>
+
+    <files>
+        <filename module="mod_efemerides">mod_efemerides.php</filename>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Configuración básica">
+
+                <field
+                    name="limite"
+                    type="number"
+                    label="Número de efemérides a mostrar"
+                    description="Muestra las N más próximas al día de hoy (pueden ser antes o después)"
+                    default="5"
+                    min="1"
+                    max="50"
+                />
+
+                <field
+                    name="categorias"
+                    type="sql"
+                    label="Categorías a mostrar"
+                    description="Ctrl+clic (o Cmd+clic en Mac) para seleccionar varias. Sin selección = todas."
+                    query="SELECT id AS value, name AS text FROM #__efemerides_categorias WHERE state=1 ORDER BY ordering ASC"
+                    key_field="value"
+                    value_field="text"
+                    multiple="true"
+                    size="5"
+                    class="form-select"
+                />
+
+                <field
+                    name="mostrar_artista"
+                    type="radio"
+                    label="Mostrar artista / banda"
+                    default="1"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field
+                    name="mostrar_descripcion"
+                    type="radio"
+                    label="Mostrar descripción breve"
+                    default="1"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field
+                    name="mostrar_categoria"
+                    type="radio"
+                    label="Mostrar etiqueta de categoría"
+                    default="1"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field
+                    name="mostrar_detalles"
+                    type="radio"
+                    label="Mostrar detalles de disco / concierto"
+                    default="1"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field
+                    name="enlace_memorial"
+                    type="radio"
+                    label="Mostrar enlace al memorial de fallecidos"
+                    default="1"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field
+                    name="url_componente"
+                    type="text"
+                    label="URL del memorial de fallecidos"
+                    description="Crea un ítem de menú apuntando a com_efemerides (vista: Fallecidos) y pega aquí su URL. Ejemplo: /memorial-artistas"
+                    default=""
+                    placeholder="/memorial-artistas"
+                />
+
+            </fieldset>
+
+            <fieldset name="advanced" label="Opciones avanzadas">
+                <field name="layout" type="modulelayout" label="Layout alternativo" module="mod_efemerides" />
+                <field name="moduleclass_sfx" type="text" label="Sufijo CSS" default="" />
+                <field name="cache" type="list" label="Caché" default="0">
+                    <option value="1">Usar caché global</option>
+                    <option value="0">Sin caché</option>
+                </field>
+                <field name="cache_time" type="number" label="Tiempo caché (min)" default="60" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

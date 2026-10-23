@@ -7,8 +7,14 @@
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Session\Session;
 
-$return = base64_encode($redirectLogin);
+// HMB — Retornos forzados a las rutas personalizadas (evita component/users/*)
+$hmbRoot      = rtrim(Uri::root(), '/');
+$hmbReturnIn  = base64_encode($hmbRoot . '/index.php/registro/perfil-usuario');
+$hmbReturnOut = base64_encode($hmbRoot . '/index.php/registro?hmbbye=1');
+$hmbToken     = Session::getFormToken();
+$return       = $hmbReturnIn;
 ?>
 
 <div id="<?php echo $moduleId; ?>" class="hmb-login-module <?php echo htmlspecialchars($params->get('moduleclass_sfx', ''), ENT_QUOTES); ?>">
@@ -56,8 +62,8 @@ $return = base64_encode($redirectLogin);
             method="post"
             novalidate>
 
-            <input type="hidden" name="return"           value="<?php echo $return; ?>">
-            <input type="hidden" name="<?php echo $token; ?>" value="1">
+            <input type="hidden" name="return"           value="<?php echo $hmbReturnIn; ?>">
+            <input type="hidden" name="<?php echo $hmbToken; ?>" value="1">
 
             <!-- Username -->
             <div class="hmb-field">
@@ -168,8 +174,8 @@ $return = base64_encode($redirectLogin);
 
     <div class="hmb-login-body">
         <form action="<?php echo Route::_('index.php?option=com_users&task=user.logout'); ?>" method="post">
-            <input type="hidden" name="return"           value="<?php echo base64_encode($redirectLogout); ?>">
-            <input type="hidden" name="<?php echo $token; ?>" value="1">
+            <input type="hidden" name="return"           value="<?php echo $hmbReturnOut; ?>">
+            <input type="hidden" name="<?php echo $hmbToken; ?>" value="1">
             <button type="submit" class="hmb-btn-submit hmb-btn-logout">
                 <span class="hmb-btn-text"><?php echo Text::_('MOD_HMB_LOGIN_BTN_LOGOUT'); ?></span>
                 <span class="hmb-btn-icon" aria-hidden="true">&#9658;</span>
@@ -187,7 +193,7 @@ $return = base64_encode($redirectLogin);
                 <?php echo Text::_('MOD_HMB_LOGIN_REGISTER'); ?>
             </a>
         <?php else : ?>
-            <a href="<?php echo Route::_('index.php?option=com_users&view=profile'); ?>">
+            <a href="<?php echo htmlspecialchars($hmbRoot . '/index.php/registro/perfil-usuario', ENT_QUOTES); ?>">
                 <?php echo Text::_('MOD_HMB_LOGIN_MY_PROFILE'); ?>
             </a>
         <?php endif; ?>

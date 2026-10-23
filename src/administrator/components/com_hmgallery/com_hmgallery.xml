@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_hmgallery</name>
+    <author>Heavy Metal Brothers Dev Team</author>
+    <creationDate>2025</creationDate>
+    <version>2.0.0</version>
+    <description>Heavy Metal Brothers Photo Gallery</description>
+    <namespace path="src">Joomla\Component\Hmgallery</namespace>
+    <scriptfile>script.php</scriptfile>
+    <install>
+        <sql><file driver="mysql" charset="utf8mb4">sql/install.mysql.utf8.sql</file></sql>
+    </install>
+    <uninstall>
+        <sql><file driver="mysql" charset="utf8mb4">sql/uninstall.mysql.utf8.sql</file></sql>
+    </uninstall>
+    <files folder="components/com_hmgallery">
+        <folder>services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+    <administration>
+        <menu link="option=com_hmgallery">HMB Fotos</menu>
+        <files folder="administrator/components/com_hmgallery">
+            <folder>forms</folder>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+    </administration>
+    <media folder="media/com_hmgallery" destination="com_hmgallery">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+    <languages folder="administrator/language">
+        <language tag="es-ES">es-ES/com_hmgallery.ini</language>
+        <language tag="es-ES">es-ES/com_hmgallery.sys.ini</language>
+        <language tag="en-GB">en-GB/com_hmgallery.ini</language>
+        <language tag="en-GB">en-GB/com_hmgallery.sys.ini</language>
+    </languages>
+    <languages folder="language">
+        <language tag="es-ES">es-ES/com_hmgallery.ini</language>
+        <language tag="en-GB">en-GB/com_hmgallery.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Configuración de la Galería"
+                      addfieldprefix="Joomla\Component\Hmgallery\Administrator\Field">
+                <field name="base_path"
+                    type="text"
+                    label="Carpeta base de imágenes"
+                    description="Raíz donde están las fotos. Por defecto: images"
+                    default="images"
+                    hint="images"/>
+                <field name="allowed_folders"
+                    type="HmgFolder"
+                    label="Carpetas visibles en la galería"
+                    description="Marca SOLO las carpetas que quieres mostrar en la galería pública. Sin selección se muestran todas."
+                    multiple="true"/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" version="6.0" client="site" method="upgrade">
+    <name>mod_sorteo</name>
+    <author>MuJG</author>
+    <creationDate>2024-01-01</creationDate>
+    <version>1.0.0</version>
+    <description>Módulo de sorteo con cuenta atrás y ruleta tipo tragaperras para Joomla 6 / Gantry 5</description>
+    <namespace path="src">MuJG\Module\Sorteo\Site</namespace>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/install.mysql.sql</file>
+        </sql>
+    </install>
+
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/uninstall.mysql.sql</file>
+        </sql>
+    </uninstall>
+
+    <files>
+        <filename module="mod_sorteo">mod_sorteo.php</filename>
+        <filename>mod_sorteo.xml</filename>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="mod_sorteo" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <languages>
+        <language tag="es-ES">language/es-ES/mod_sorteo.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Configuración del Sorteo">
+
+                <field
+                    name="titulo"
+                    type="text"
+                    label="Título del Sorteo"
+                    description="Texto que aparecerá como título principal del módulo"
+                    default="¡Gran Sorteo!"
+                    filter="string"
+                />
+
+                <field
+                    name="fecha_sorteo"
+                    type="calendar"
+                    label="Fecha y Hora del Sorteo"
+                    description="Selecciona cuándo comenzará el sorteo. Al llegar esta fecha aparecerá la ruleta."
+                    format="%Y-%m-%d %H:%M:%S"
+                    filter="datetime"
+                    showtime="true"
+                    timeformat="24"
+                    default=""
+                    required="true"
+                />
+
+                <field
+                    name="max_usuarios"
+                    type="number"
+                    label="Máximo de participantes"
+                    description="Número máximo de usuarios registrados que participarán en el sorteo (0 = todos)"
+                    default="200"
+                    min="0"
+                    step="10"
+                    filter="integer"
+                />
+
+                <field
+                    name="excluir_ids"
+                    type="text"
+                    label="IDs de usuarios a excluir"
+                    description="IDs de usuarios separados por comas que no participarán (ej: 1,2,42)"
+                    default="1"
+                    filter="string"
+                />
+
+                <field
+                    name="solo_grupo"
+                    type="grouplist"
+                    label="Filtrar por Grupo de Usuario"
+                    description="Limitar participantes a un grupo específico. Dejar en blanco para todos."
+                    multiple="false"
+                    filter="integer"
+                    default=""
+                >
+                    <option value="">- Todos los grupos -</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

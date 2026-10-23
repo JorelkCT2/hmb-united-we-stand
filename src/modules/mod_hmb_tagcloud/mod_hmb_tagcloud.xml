@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="6.0" type="module" client="site" method="upgrade">
+    <name>mod_hmb_tagcloud</name>
+    <title>HMB Nube de Tags</title>
+    <description>Nube de etiquetas Heavy Metal Brothers. Estética metálica oscura. Tamaño proporcional al número de usos. Ayuda al SEO interno y a la navegación por contenido.</description>
+    <version>1.0.0</version>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+
+    <files>
+        <filename module="mod_hmb_tagcloud">mod_hmb_tagcloud.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Configuración">
+
+                <field name="max_tags" type="number"
+                    label="Número máximo de tags"
+                    default="40" min="5" max="200" step="5" />
+
+                <field name="min_count" type="number"
+                    label="Mínimo de usos para aparecer"
+                    description="Tags con menos usos que este número no aparecen"
+                    default="1" min="1" max="20" step="1" />
+
+                <field name="ordering" type="list"
+                    label="Ordenar por" default="count">
+                    <option value="count">Más usados primero</option>
+                    <option value="title">Alfabético</option>
+                    <option value="random">Aleatorio</option>
+                </field>
+
+                <field name="min_size" type="number"
+                    label="Tamaño mínimo de fuente (px)"
+                    default="11" min="8" max="24" step="1" />
+
+                <field name="max_size" type="number"
+                    label="Tamaño máximo de fuente (px)"
+                    default="28" min="14" max="48" step="2" />
+
+                <field name="show_count" type="radio"
+                    label="Mostrar contador de usos"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

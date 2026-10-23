@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>plg_system_hmbimporterfixer</name>
+    <author>Heavy Metal Brothers</author>
+    <version>1.0.1</version>
+    <description>HMB Importer Fixer: tablas + registro + carga de clases</description>
+    <scriptfile>installer.php</scriptfile>
+    <files>
+        <filename plugin="hmbimporterfixer">hmbimporterfixer.php</filename>
+    </files>
+</extension>

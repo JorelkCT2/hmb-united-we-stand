@@ -13,6 +13,10 @@
 !robots.txt
 !HMBSiteMap.xml
 !HMBSiteMap_urlset.xsl
+!*.py
+!*.md
+!src/
+!src/**
 
 # Excepciones: solo el template personalizado
 !templates/
@@ -28,3 +32,5 @@ cache/
 tmp/
 logs/
 images/
+dist/
+__pycache__/

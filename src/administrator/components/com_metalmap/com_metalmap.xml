@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_metalmap</name>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+    <version>1.3.0</version>
+    <description>Mapa interactivo de festivales y conciertos de metal en Europa. Importación CSV, mapa con zoom, banderas y enlaces oficiales.</description>
+    <phpminimum>8.1</phpminimum>
+
+    <namespace path="src">Joomla\Component\Metalmap</namespace>
+
+    <scriptfile>script.php</scriptfile>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <!-- Secciones VACÍAS: el script.php copia los ficheros en preflight()
+         para evitar el bug del instalador de Joomla 6.1 con el atributo folder -->
+    <files folder="components/com_metalmap">
+    </files>
+
+    <administration>
+        <menu link="option=com_metalmap" img="class:map-marker">🎸 Mapa Metal</menu>
+        <submenu>
+            <menu link="option=com_metalmap&amp;view=festivals" img="class:list">Festivales y Conciertos</menu>
+            <menu link="option=com_metalmap&amp;view=importer" img="class:upload">Importar CSV</menu>
+        </submenu>
+        <files folder="administrator/components/com_metalmap">
+        </files>
+        <languages folder="administrator/language">
+        </languages>
+    </administration>
+
+    <media destination="com_metalmap" folder="media/com_metalmap" />
+</extension>

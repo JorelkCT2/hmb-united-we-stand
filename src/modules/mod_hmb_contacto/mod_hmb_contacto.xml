@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="module" method="upgrade">
+    <name>mod_hmb_contacto</name>
+    <version>1.0.0</version>
+    <author>Heavy Metal Brothers</author>
+    <description>Página de contacto y contratación HMB</description>
+    <files>
+        <filename module="mod_hmb_contacto">mod_hmb_contacto.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="general" label="General">
+                <field name="titulo_pagina" type="text" label="Título" default="Contáctanos" filter="string"/>
+                <field name="subtitulo" type="text" label="Subtítulo" default="Contratación · Colaboraciones · Prensa" filter="string"/>
+                <field name="imagen_hero" type="media" label="Imagen de fondo" preview="true" types="images"/>
+                <field name="texto_intro" type="editor" label="Texto de presentación" filter="safehtml" buttons="false" hide="pagebreak,readmore"/>
+                <field name="texto_contratacion" type="editor" label="Texto de contratación" filter="safehtml" buttons="false" hide="pagebreak,readmore"/>
+            </fieldset>
+            <fieldset name="motivos" label="Motivos de contacto">
+                <field name="motivos_lista" type="textarea" label="Opciones del desplegable (una por línea)" rows="8"
+                    default="Contratación para concierto
+Contratación para festival
+Colaboración artística
+Prensa y medios
+Sponsoring y patrocinio
+Merchandise
+Otro motivo"/>
+            </fieldset>
+            <fieldset name="contacto" label="Datos de contacto">
+                <field name="email_contacto" type="text" label="Email de contacto" filter="string"/>
+                <field name="email_visible" type="radio" label="Mostrar email en la página" default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="whatsapp_numero" type="text" label="WhatsApp — Número (sin + ni espacios)" description="Ej: 34612345678" filter="string"/>
+                <field name="whatsapp_texto" type="text" label="Texto predefinido WhatsApp" default="Hola! Contacto desde la web HMB." filter="string"/>
+                <field name="whatsapp_canal" type="text" label="Canal de WhatsApp (URL completa)" filter="url"/>
+            </fieldset>
+            <fieldset name="redes" label="Redes sociales">
+                <field name="red_instagram"  type="url" label="Instagram"   filter="url"/>
+                <field name="red_facebook"   type="url" label="Facebook"    filter="url"/>
+                <field name="red_youtube"    type="url" label="YouTube"     filter="url"/>
+                <field name="red_tiktok"     type="url" label="TikTok"      filter="url"/>
+                <field name="red_spotify"    type="url" label="Spotify"     filter="url"/>
+                <field name="red_twitter"    type="url" label="X / Twitter" filter="url"/>
+                <field name="red_soundcloud" type="url" label="SoundCloud"  filter="url"/>
+                <field name="red_bandcamp"   type="url" label="Bandcamp"    filter="url"/>
+            </fieldset>
+            <fieldset name="fotos" label="Galería de fotos">
+                <field name="foto_1" type="media" label="Foto 1" preview="true" types="images"/>
+                <field name="foto_2" type="media" label="Foto 2" preview="true" types="images"/>
+                <field name="foto_3" type="media" label="Foto 3" preview="true" types="images"/>
+                <field name="foto_4" type="media" label="Foto 4" preview="true" types="images"/>
+                <field name="foto_5" type="media" label="Foto 5" preview="true" types="images"/>
+                <field name="foto_6" type="media" label="Foto 6" preview="true" types="images"/>
+            </fieldset>
+            <fieldset name="formulario" label="Formulario">
+                <field name="form_activo" type="radio" label="Activar formulario" default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="form_prefijo" type="text" label="Prefijo del asunto" default="[HMB Contacto]" filter="string"/>
+                <field name="form_msg_ok"  type="text" label="Mensaje de éxito" default="¡Mensaje enviado! Nos pondremos en contacto pronto. 🤘" filter="string"/>
+                <field name="form_msg_err" type="text" label="Mensaje de error" default="Error al enviar. Escríbenos directamente al email." filter="string"/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

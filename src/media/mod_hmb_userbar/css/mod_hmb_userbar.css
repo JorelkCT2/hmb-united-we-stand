@@ -1,0 +1,107 @@
+/* HMB Userbar */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Raleway:wght@400;600&display=swap');
+
+.hmb-userbar {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Avatar + nombre */
+.hmb-ub-profile {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    text-decoration: none;
+    transition: opacity .2s ease;
+}
+.hmb-ub-profile:hover { opacity: .85; text-decoration: none; }
+
+.hmb-ub-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid rgba(201, 168, 76, .5);
+    flex-shrink: 0;
+}
+
+.hmb-ub-welcome {
+    font-size: .72rem;
+    color: rgba(212, 212, 212, .6);
+    letter-spacing: .04em;
+}
+
+.hmb-ub-name {
+    font-family: 'Cinzel', serif;
+    font-size: .78rem;
+    font-weight: 600;
+    color: #c9a84c;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+/* Separador */
+.hmb-userbar::before {
+    display: none;
+}
+
+/* Botón desconectar */
+.hmb-ub-logout-form { margin: 0; padding: 0; display: flex; }
+
+.hmb-ub-logout {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .75rem;
+    background: rgba(180, 20, 20, .15);
+    border: 1px solid rgba(180, 20, 20, .4);
+    border-radius: 3px;
+    color: #ff8080;
+    font-family: 'Cinzel', serif;
+    font-size: .62rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+    white-space: nowrap;
+}
+.hmb-ub-logout:hover {
+    background: rgba(180, 20, 20, .3);
+    border-color: rgba(180, 20, 20, .7);
+    color: #ffaaaa;
+}
+.hmb-ub-logout svg { width: .85rem; height: .85rem; flex-shrink: 0; }
+
+/* Login link */
+.hmb-ub-login {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .75rem;
+    background: rgba(180, 20, 20, .12);
+    border: 1px solid rgba(180, 20, 20, .35);
+    border-radius: 3px;
+    color: #c9a84c;
+    font-family: 'Cinzel', serif;
+    font-size: .62rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .2s ease;
+    white-space: nowrap;
+}
+.hmb-ub-login:hover {
+    background: rgba(180, 20, 20, .25);
+    text-decoration: none;
+    color: #d4a020;
+}
+.hmb-ub-login svg { width: .85rem; height: .85rem; flex-shrink: 0; }
+
+@media (max-width: 480px) {
+    .hmb-ub-welcome { display: none; }
+    .hmb-ub-name { font-size: .72rem; }
+}

@@ -1,0 +1,6 @@
+nombre,wikipedia_url,foto,fecha_formacion,fecha_disolucion,pais,genero,descripcion
+"Black Sabbath","https://es.wikipedia.org/wiki/Black_Sabbath","https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Black_Sabbath_-_1970.jpg/220px-Black_Sabbath_-_1970.jpg",1968,,"Reino Unido","Heavy Metal","Pioneros del heavy metal"
+"Iron Maiden","https://es.wikipedia.org/wiki/Iron_Maiden","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Iron_Maiden_logo.png/220px-Iron_Maiden_logo.png",1975,,"Reino Unido","Heavy Metal",""
+"Metallica","https://es.wikipedia.org/wiki/Metallica","https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Metallica_Logo.svg/220px-Metallica_Logo.svg.png",1981,,"Estados Unidos","Thrash Metal",""
+"Led Zeppelin","https://es.wikipedia.org/wiki/Led_Zeppelin","https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Led_Zeppelin_logo.svg/220px-Led_Zeppelin_logo.svg.png",1968,1980,"Reino Unido","Hard Rock",""
+"AC/DC","https://es.wikipedia.org/wiki/AC/DC","https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/AC_DC_logo.svg/220px-AC_DC_logo.svg.png",1973,,"Australia","Hard Rock",""

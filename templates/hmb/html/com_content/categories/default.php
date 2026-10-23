@@ -29,10 +29,10 @@ if (isset($this->item) && !empty($this->items[$this->item->id])) {
 /**
  * Obtiene las imágenes de los últimos artículos de una categoría
  */
-function hmb_getCatImages(object $db, int $catId, int $limit = 6): array
+function hmb_getCatImages(object $db, int $catId, string $root, int $limit = 6): array
 {
     $query = $db->getQuery(true)
-        ->select([$db->quoteName('images')])
+        ->select([$db->quoteName('images'), $db->quoteName('introtext'), $db->quoteName('fulltext')])
         ->from($db->quoteName('#__content'))
         ->where($db->quoteName('catid') . ' = ' . $catId)
         ->where($db->quoteName('state') . ' = 1')
@@ -43,12 +43,38 @@ function hmb_getCatImages(object $db, int $catId, int $limit = 6): array
 
     $imgs = [];
     foreach ($rows as $row) {
+        $img  = '';
         $data = json_decode($row->images ?? '');
-        if (!$data) continue;
-        $img = $data->image_intro ?? ($data->image_fulltext ?? '');
-        if ($img) $imgs[] = $img;
+        if ($data) {
+            // ?: (no ??) para caer a image_fulltext cuando image_intro está vacío
+            $img = $data->image_intro ?: ($data->image_fulltext ?? '');
+        }
+        // Fallback: primera imagen incrustada en el cuerpo del artículo
+        if (!$img) {
+            $html = ($row->introtext ?? '') . ($row->fulltext ?? '');
+            if ($html && preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', $html, $m)) {
+                $img = $m[1];
+            }
+        }
+        if (!$img) continue;
+        $u = hmb_imgUrl($img, $root);
+        if ($u !== '') $imgs[] = $u;
     }
     return $imgs;
+}
+
+/**
+ * Normaliza una ruta de imagen a URL absoluta usable:
+ * quita el sufijo #joomlaImage://..., respeta URLs http(s) y codifica espacios
+ */
+function hmb_imgUrl(string $img, string $root): string
+{
+    $img = explode('#', $img)[0];
+    if ($img === '') return '';
+    if (!preg_match('~^https?://~i', $img)) {
+        $img = $root . '/' . ltrim($img, '/');
+    }
+    return str_replace(' ', '%20', $img);
 }
 
 /**
@@ -82,7 +108,7 @@ foreach ($items as $item) {
     $alias = (string) hmb_prop($item, 'alias', '');
     if (!$id) continue;
 
-    $imgs = hmb_getCatImages($db, $id);
+    $imgs = hmb_getCatImages($db, $id, $root);
 
     // Fallback: buscar imagen en templates/hmb/images/cat-{alias}.jpg|png|webp
     if (empty($imgs)) {
@@ -159,12 +185,13 @@ foreach ($items as $item) {
 }
 .hmb-cat-slide{
     position:absolute;
-    inset:0;
+    left:0;right:0;top:0;
+    height:175%;                 /* más alta que la tarjeta: recorrido vertical */
     opacity:0;
     transition:opacity 1.2s ease;
     background-size:cover;
-    background-position:center;
-    transform:scale(1);
+    background-position:center top;
+    transform:translateY(0);
     animation:none;
 }
 .hmb-cat-slide.on{
@@ -176,10 +203,10 @@ foreach ($items as $item) {
     transition:opacity 1.4s ease;
 }
 
-/* Ken Burns — zoom lento */
+/* Scroll vertical lento — de arriba a abajo */
 @keyframes hmb-kb{
-    0%  {transform:scale(1)   translateX(0)   translateY(0);}
-    100%{transform:scale(1.1) translateX(-2%) translateY(-1%);}
+    0%  {transform:translateY(0);}
+    100%{transform:translateY(-42.85%);}  /* (175-100)/175 → revela hasta abajo */
 }
 
 /* Slide sin imagen */
@@ -360,9 +387,8 @@ foreach ($items as $item) {
 }
 .hmb-cat-dot.on{background:#CC2200;}
 
-/* Hover: escala sutil de la imagen */
-.hmb-cat-slides{transition:transform .6s ease;}
-.hmb-cat-card:hover .hmb-cat-slides{transform:scale(1.02);}
+/* Sin zoom al hover: el scroll vertical lo hace la animación de cada slide */
+.hmb-cat-slides{overflow:hidden;}
 
 /* Nº de categoría decorativo */
 .hmb-cat-num{
@@ -407,7 +433,7 @@ foreach ($items as $item):
     <?php if (!empty($imgs)): ?>
         <?php foreach ($imgs as $ii => $img): ?>
         <div class="hmb-cat-slide<?php echo $ii === 0 ? ' on' : ''; ?>"
-             style="background-image:url('<?php echo htmlspecialchars($root . '/' . ltrim($img, '/'), ENT_QUOTES); ?>');">
+             style="background-image:url('<?php echo htmlspecialchars($img, ENT_QUOTES); ?>');">
         </div>
         <?php endforeach; ?>
     <?php else: ?>

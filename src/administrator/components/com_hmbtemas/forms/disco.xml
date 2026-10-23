@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="details">
+        <field name="id" type="hidden" default="0" />
+
+        <field name="grupo" type="text" label="Grupo / Banda"
+               required="true" maxlength="255" class="inputbox w-100" />
+
+        <field name="titulo" type="text" label="Nombre del álbum"
+               required="true" maxlength="255" class="inputbox w-100" />
+
+        <field name="productora" type="text" label="Productora / Sello"
+               maxlength="255" class="inputbox w-100" />
+
+        <field name="genero" type="text" label="Género musical"
+               description="Ej: Heavy Metal, Power Metal, Thrash Metal..."
+               maxlength="100" class="inputbox w-100" hint="Heavy Metal" />
+
+        <field name="anno" type="text" label="Fecha de publicación"
+               description="Introduce el año (ej: 2024) o fecha completa (ej: 15/06/2024)."
+               maxlength="20" class="inputbox" hint="2024 ó 15/06/2024" />
+
+        <field name="portada" type="text" label="Portada"
+               description="Ruta relativa o URL externa. Ej: images/hmb/portadas/album.jpg"
+               maxlength="500" class="inputbox w-100" hint="images/hmb/portadas/album.jpg" />
+
+        <field name="audio_file" type="text" label="Archivo de audio (MP3)"
+               description="Ruta relativa: images/Canciones/cancion.mp3"
+               maxlength="500" class="inputbox w-100" hint="images/Canciones/cancion.mp3" />
+
+        <!-- URL de YouTube como fuente de audio -->
+        <field name="youtube_audio_url" type="url" label="YouTube como audio"
+               description="URL de YouTube para reproducir en la tarjeta. Prioridad sobre MP3."
+               maxlength="500" class="inputbox w-100" hint="https://www.youtube.com/watch?v=..." />
+
+        <!-- youtube_links se gestiona con JS en el template edit.php -->
+        <field name="youtube_links" type="hidden" default="" />
+
+        <field name="descripcion" type="textarea" label="Descripción"
+               rows="3" class="inputbox w-100" />
+
+        <field name="published" type="list" label="Estado" default="1" class="form-select">
+            <option value="1">Publicado</option>
+            <option value="0">No publicado</option>
+        </field>
+
+        <field name="ordering" type="number" label="Orden" default="0" class="inputbox" />
+    </fieldset>
+</form>

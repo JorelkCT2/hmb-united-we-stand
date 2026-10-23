@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="Ficha de Artista">
+        <message><![CDATA[Muestra la ficha completa de un artista o grupo musical.]]></message>
+    </layout>
+    <fields name="request">
+        <fieldset name="request" label="Opciones">
+            <field
+                name="id"
+                type="number"
+                label="ID del artista"
+                description="Deja 0 para que la URL determine qué artista mostrar."
+                default="0"
+            />
+        </fieldset>
+    </fields>
+</metadata>

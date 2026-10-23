@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_HMB_OPENGRAPH</name>
+    <author>Heavy Metal Brothers</author>
+    <authorEmail>webmaster@heavymetalbrothers.com</authorEmail>
+    <authorUrl>https://www.heavymetalbrothers.com</authorUrl>
+    <creationDate>2025-06-01</creationDate>
+    <copyright>Copyright (C) 2025 Heavy Metal Brothers.</copyright>
+    <license>GNU/GPL v2 or later</license>
+    <version>1.0.0</version>
+    <description>PLG_SYSTEM_HMB_OPENGRAPH_DESC</description>
+    <files>
+        <filename plugin="hmb_opengraph">hmb_opengraph.php</filename>
+    </files>
+    <languages>
+        <language tag="es-ES">language/es-ES/plg_system_hmb_opengraph.ini</language>
+        <language tag="es-ES">language/es-ES/plg_system_hmb_opengraph.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="fallback_image"
+                    type="text"
+                    label="PLG_SYSTEM_HMB_OPENGRAPH_FALLBACK_LABEL"
+                    description="PLG_SYSTEM_HMB_OPENGRAPH_FALLBACK_DESC"
+                    default=""
+                    filter="string"
+                />
+                <field name="site_name"
+                    type="text"
+                    label="PLG_SYSTEM_HMB_OPENGRAPH_SITENAME_LABEL"
+                    default="Heavy Metal Brothers"
+                    filter="string"
+                />
+                <field name="twitter_card"
+                    type="list"
+                    label="PLG_SYSTEM_HMB_OPENGRAPH_TWITTER_LABEL"
+                    default="summary_large_image">
+                    <option value="summary">summary</option>
+                    <option value="summary_large_image">summary_large_image</option>
+                </field>
+                <field name="twitter_site"
+                    type="text"
+                    label="PLG_SYSTEM_HMB_OPENGRAPH_TWITTERSITE_LABEL"
+                    description="PLG_SYSTEM_HMB_OPENGRAPH_TWITTERSITE_DESC"
+                    default=""
+                    filter="string"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

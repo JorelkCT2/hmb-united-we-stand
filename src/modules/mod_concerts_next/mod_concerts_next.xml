@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>mod_concerts_next</name>
+    <author>Tu Empresa</author>
+    <creationDate>2026</creationDate>
+    <version>1.0.2</version>
+    <description>Muestra el próximo concierto de la agenda como banner.</description>
+
+    <files>
+        <filename module="mod_concerts_next">mod_concerts_next.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <languages folder="language">
+        <language tag="es-ES">es-ES/mod_concerts_next.ini</language>
+        <language tag="es-ES">es-ES/mod_concerts_next.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Opciones">
+                <field name="country_code" type="text"
+                       label="Filtrar por país (código ISO)"
+                       description="Ej: ES, DE, FR. Vacío = todos los países."
+                       default="" size="5" class="form-control" />
+                <field name="show_poster" type="radio" label="Mostrar cartel" default="1"
+                       layout="joomla.form.field.radio.switcher">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="show_prices" type="radio" label="Mostrar precios" default="1"
+                       layout="joomla.form.field.radio.switcher">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="agenda_itemid" type="text"
+                       label="Itemid del menú de la agenda"
+                       description="ID numérico del ítem de menú que muestra la Agenda de Conciertos (ej: 105). Imprescindible para que los enlaces lleven la URL correcta del menú en vez de la URL directa del componente."
+                       default="" class="form-control" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

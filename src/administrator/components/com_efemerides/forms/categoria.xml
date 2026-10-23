@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field name="id" type="hidden" />
+
+    <field
+        name="name"
+        type="text"
+        label="Nombre de la categoría"
+        required="true"
+        maxlength="255"
+        class="form-control"
+    />
+
+    <field
+        name="ordering"
+        type="number"
+        label="Orden"
+        default="0"
+        class="form-control"
+    />
+
+    <field
+        name="state"
+        type="list"
+        label="Estado"
+        class="form-select"
+    >
+        <option value="1">Activa</option>
+        <option value="0">Inactiva</option>
+    </field>
+</form>

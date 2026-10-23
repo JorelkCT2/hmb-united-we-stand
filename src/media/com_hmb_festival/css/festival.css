@@ -1,0 +1,477 @@
+/* HMB Festival Mode v0.1.0 — todo bajo #hmbfest-app para no pisar hmb_template */
+
+#hmbfest-app {
+  --hmbf-bg: #0b0b0d;
+  --hmbf-card: #141417;
+  --hmbf-line: #26262c;
+  --hmbf-red: #c8102e;
+  --hmbf-red-dark: #8c0b20;
+  --hmbf-text: #e8e6e1;
+  --hmbf-muted: #8a8a92;
+  background: var(--hmbf-bg);
+  color: var(--hmbf-text);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* ----- cabecera ----- */
+
+#hmbfest-app .hmbfest-hero {
+  text-align: center;
+  padding: 1.5rem 0 1rem;
+  border-bottom: 3px solid var(--hmbf-red);
+  margin-bottom: 1.25rem;
+}
+
+#hmbfest-app .hmbfest-eyebrow {
+  display: block;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--hmbf-muted);
+}
+
+#hmbfest-app .hmbfest-title {
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0.25rem 0;
+  color: var(--hmbf-text);
+}
+
+#hmbfest-app .hmbfest-title em {
+  font-style: normal;
+  color: var(--hmbf-red);
+}
+
+#hmbfest-app .hmbfest-sub {
+  color: var(--hmbf-muted);
+  margin: 0;
+}
+
+/* ----- pestañas ----- */
+
+#hmbfest-app .hmbfest-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+#hmbfest-app .hmbfest-tab {
+  background: transparent;
+  border: 1px solid var(--hmbf-line);
+  color: var(--hmbf-muted);
+  padding: 0.55rem 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+#hmbfest-app .hmbfest-tab:hover { color: var(--hmbf-text); }
+
+#hmbfest-app .hmbfest-tab.is-active {
+  color: var(--hmbf-text);
+  border-color: var(--hmbf-red);
+  box-shadow: inset 0 -3px 0 var(--hmbf-red);
+}
+
+#hmbfest-app .hmbfest-tab:focus-visible,
+#hmbfest-app .hmbfest-btn:focus-visible,
+#hmbfest-app .hmbfest-mini:focus-visible,
+#hmbfest-app .hmbfest-chip:focus-visible,
+#hmbfest-app .hmbfest-matchrow:focus-visible,
+#hmbfest-app input:focus-visible {
+  outline: 2px solid var(--hmbf-red);
+  outline-offset: 2px;
+}
+
+#hmbfest-app .hmbfest-panel { display: none; }
+#hmbfest-app .hmbfest-panel.is-active { display: block; }
+
+/* ----- tarjetas ----- */
+
+#hmbfest-app .hmbfest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+#hmbfest-app .hmbfest-card {
+  background: var(--hmbf-card);
+  border: 1px solid var(--hmbf-line);
+  border-left: 4px solid var(--hmbf-red-dark);
+  padding: 1rem;
+}
+
+#hmbfest-app .hmbfest-card h3 {
+  margin: 0.25rem 0 0.4rem;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--hmbf-text);
+}
+
+#hmbfest-app .hmbfest-fest.is-in { border-left-color: var(--hmbf-red); }
+
+#hmbfest-app .hmbfest-fest-dates {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--hmbf-red);
+  font-weight: 700;
+}
+
+#hmbfest-app .hmbfest-count {
+  color: var(--hmbf-muted);
+  font-size: 0.85rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+#hmbfest-app .hmbfest-muted { color: var(--hmbf-muted); margin: 0; font-size: 0.85rem; }
+
+#hmbfest-app .hmbfest-empty {
+  color: var(--hmbf-muted);
+  border: 1px dashed var(--hmbf-line);
+  padding: 1.5rem;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+/* ----- botones ----- */
+
+#hmbfest-app .hmbfest-btn {
+  background: var(--hmbf-red);
+  border: none;
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#hmbfest-app .hmbfest-btn:hover { background: var(--hmbf-red-dark); }
+
+#hmbfest-app .hmbfest-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--hmbf-line);
+  color: var(--hmbf-muted);
+}
+
+#hmbfest-app .hmbfest-btn-ghost:hover { background: var(--hmbf-line); color: var(--hmbf-text); }
+
+#hmbfest-app .hmbfest-btn-small { padding: 0.45rem 0.9rem; font-size: 0.75rem; }
+
+#hmbfest-app .hmbfest-mini {
+  background: transparent;
+  border: 1px solid var(--hmbf-line);
+  color: var(--hmbf-muted);
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+#hmbfest-app .hmbfest-mini:hover { color: var(--hmbf-text); border-color: var(--hmbf-muted); }
+
+#hmbfest-app .hmbfest-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.6rem;
+}
+
+/* ----- gente ----- */
+
+#hmbfest-app .hmbfest-selector { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+
+#hmbfest-app .hmbfest-chip {
+  background: var(--hmbf-card);
+  border: 1px solid var(--hmbf-line);
+  color: var(--hmbf-muted);
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+#hmbfest-app .hmbfest-chip.is-active { border-color: var(--hmbf-red); color: var(--hmbf-text); }
+
+#hmbfest-app .hmbfest-person-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+#hmbfest-app .hmbfest-pill {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--hmbf-line);
+  color: var(--hmbf-muted);
+  white-space: nowrap;
+}
+
+#hmbfest-app .hmbfest-pill-ligar { border-color: var(--hmbf-red); color: var(--hmbf-red); }
+#hmbfest-app .hmbfest-pill-ambas { border-color: var(--hmbf-muted); color: var(--hmbf-text); }
+
+#hmbfest-app .hmbfest-bio { color: var(--hmbf-text); font-size: 0.9rem; margin: 0.4rem 0; }
+
+/* Medidor de afinidad: el "ampli" — la firma visual del componente */
+
+#hmbfest-app .hmbfest-aff { margin: 0.6rem 0 0.2rem; }
+
+#hmbfest-app .hmbfest-aff-bar {
+  height: 10px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 8px, var(--hmbf-bg) 8px 10px),
+    var(--hmbf-line);
+  position: relative;
+  overflow: hidden;
+}
+
+#hmbfest-app .hmbfest-aff-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--hmbf-red-dark), var(--hmbf-red));
+  transition: width 0.6s ease;
+}
+
+#hmbfest-app .hmbfest-aff-num {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--hmbf-red);
+  margin-top: 0.15rem;
+}
+
+#hmbfest-app .hmbfest-aff-num small { color: var(--hmbf-muted); font-weight: 400; }
+
+#hmbfest-app .hmbfest-aff-common { font-size: 0.75rem; color: var(--hmbf-muted); }
+
+#hmbfest-app .hmbfest-aff-na { color: var(--hmbf-muted); font-size: 0.8rem; }
+
+#hmbfest-app .hmbfest-horned { color: var(--hmbf-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+#hmbfest-app .hmbfest-matched { color: var(--hmbf-red); font-weight: 900; letter-spacing: 0.08em; }
+
+/* ----- matches ----- */
+
+#hmbfest-app .hmbfest-matchrow {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--hmbf-card);
+  border: 1px solid var(--hmbf-line);
+  border-left: 4px solid var(--hmbf-red);
+  color: var(--hmbf-text);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+}
+
+#hmbfest-app .hmbfest-matchrow:hover { background: #1a1a1f; }
+
+#hmbfest-app .hmbfest-matchrow-name { font-weight: 800; display: block; }
+#hmbfest-app .hmbfest-matchrow-fest { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--hmbf-red); display: block; margin: 0.1rem 0; }
+#hmbfest-app .hmbfest-matchrow-last { font-size: 0.85rem; color: var(--hmbf-muted); display: block; }
+
+#hmbfest-app .hmbfest-badge {
+  background: var(--hmbf-red);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
+/* ----- modales ----- */
+
+#hmbfest-app .hmbfest-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+#hmbfest-app .hmbfest-modal[hidden] { display: none; }
+
+#hmbfest-app .hmbfest-modal-box {
+  background: var(--hmbf-card);
+  border: 1px solid var(--hmbf-line);
+  border-top: 4px solid var(--hmbf-red);
+  padding: 1.25rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+#hmbfest-app .hmbfest-modal-box h2 {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: var(--hmbf-text);
+}
+
+#hmbfest-app .hmbfest-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--hmbf-muted);
+  margin: 0.75rem 0 0.3rem;
+}
+
+#hmbfest-app .hmbfest-intents label {
+  display: block;
+  padding: 0.45rem 0;
+  cursor: pointer;
+  color: var(--hmbf-text);
+}
+
+#hmbfest-app .hmbfest-adult {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--hmbf-text);
+}
+
+#hmbfest-app .hmbfest-modal-box input[type="text"] {
+  width: 100%;
+  background: var(--hmbf-bg);
+  border: 1px solid var(--hmbf-line);
+  color: var(--hmbf-text);
+  padding: 0.55rem 0.7rem;
+  box-sizing: border-box;
+}
+
+#hmbfest-app .hmbfest-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* ----- chat ----- */
+
+#hmbfest-app .hmbfest-chat-box { max-width: 520px; display: flex; flex-direction: column; height: min(70vh, 560px); }
+
+#hmbfest-app .hmbfest-chat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--hmbf-line);
+}
+
+#hmbfest-app .hmbfest-chat-head-actions { display: flex; gap: 0.4rem; }
+
+#hmbfest-app .hmbfest-chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+#hmbfest-app .hmbfest-msg {
+  background: var(--hmbf-bg);
+  border: 1px solid var(--hmbf-line);
+  padding: 0.45rem 0.7rem;
+  max-width: 80%;
+  align-self: flex-start;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+#hmbfest-app .hmbfest-msg.is-mine {
+  background: var(--hmbf-red-dark);
+  border-color: var(--hmbf-red);
+  align-self: flex-end;
+}
+
+#hmbfest-app .hmbfest-chat-input { display: flex; gap: 0.5rem; padding-top: 0.6rem; border-top: 1px solid var(--hmbf-line); }
+#hmbfest-app .hmbfest-chat-input input { flex: 1; }
+
+/* ----- toast y match splash ----- */
+
+#hmbfest-app .hmbfest-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--hmbf-card);
+  border: 1px solid var(--hmbf-red);
+  color: var(--hmbf-text);
+  padding: 0.7rem 1.2rem;
+  z-index: 10000;
+  font-size: 0.9rem;
+}
+
+#hmbfest-app .hmbfest-matchsplash {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 11, 13, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  text-align: center;
+}
+
+#hmbfest-app .hmbfest-matchsplash[hidden] { display: none; }
+
+#hmbfest-app .hmbfest-horns {
+  font-size: 4rem;
+  display: inline-block;
+  animation: hmbfest-shake 0.7s ease-in-out 2;
+}
+
+#hmbfest-app .hmbfest-matchsplash-inner h2 {
+  font-size: clamp(2.5rem, 10vw, 4.5rem);
+  color: var(--hmbf-red);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.25rem 0;
+}
+
+#hmbfest-app .hmbfest-matchsplash-inner p { color: var(--hmbf-muted); margin-bottom: 1.25rem; }
+
+@keyframes hmbfest-shake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-15deg) scale(1.15); }
+  75% { transform: rotate(15deg) scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hmbfest-app .hmbfest-horns { animation: none; }
+  #hmbfest-app .hmbfest-aff-bar span { transition: none; }
+}
+
+@media (max-width: 560px) {
+  #hmbfest-app .hmbfest-grid { grid-template-columns: 1fr; }
+}
+
+/* Banner de cuernos recibidos (v0.3.0) */
+
+#hmbfest-app .hmbfest-hornbanner {
+  grid-column: 1 / -1;
+  background: var(--hmbf-card);
+  border: 1px solid var(--hmbf-red);
+  border-left: 4px solid var(--hmbf-red);
+  color: var(--hmbf-text);
+  padding: 0.8rem 1rem;
+  font-weight: 700;
+}

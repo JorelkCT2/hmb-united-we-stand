@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="game" label="COM_HMB_QUIZ_CONFIG_GAME">
+		<field name="content_scope" type="list" default="both"
+			label="COM_HMB_QUIZ_CFG_CONTENT" description="COM_HMB_QUIZ_CFG_CONTENT_DESC">
+			<option value="both">COM_HMB_QUIZ_CFG_CONTENT_BOTH</option>
+			<option value="song">COM_HMB_QUIZ_CFG_CONTENT_SONGS</option>
+			<option value="movie">COM_HMB_QUIZ_CFG_CONTENT_MOVIES</option>
+		</field>
+
+		<field name="clip_seconds" type="number" default="10" min="1" max="30"
+			label="COM_HMB_QUIZ_CFG_CLIP_SECONDS" description="COM_HMB_QUIZ_CFG_CLIP_SECONDS_DESC" />
+
+		<field name="rounds_per_game" type="list" default="10"
+			label="COM_HMB_QUIZ_CFG_ROUNDS" description="COM_HMB_QUIZ_CFG_ROUNDS_DESC">
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
+		</field>
+
+		<field name="player_chooses_rounds" type="radio" layout="joomla.form.field.radio.switcher" default="1"
+			label="COM_HMB_QUIZ_CFG_CHOOSE_ROUNDS" description="COM_HMB_QUIZ_CFG_CHOOSE_ROUNDS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="answer_seconds" type="number" default="20" min="0" max="120"
+			label="COM_HMB_QUIZ_CFG_ANSWER_SECS" description="COM_HMB_QUIZ_CFG_ANSWER_SECS_DESC" />
+
+		<field name="start_min" type="number" default="15" min="0" max="600"
+			label="COM_HMB_QUIZ_CFG_START_MIN" description="COM_HMB_QUIZ_CFG_START_MIN_DESC" />
+
+		<field name="start_max" type="number" default="60" min="0" max="600"
+			label="COM_HMB_QUIZ_CFG_START_MAX" description="COM_HMB_QUIZ_CFG_START_MAX_DESC" />
+
+		<field name="points_correct" type="number" default="10" min="1" max="1000"
+			label="COM_HMB_QUIZ_CFG_POINTS" description="COM_HMB_QUIZ_CFG_POINTS_DESC" />
+
+		<field name="genres_list" type="textarea" rows="8" filter="raw"
+			label="COM_HMB_QUIZ_CFG_GENRES" description="COM_HMB_QUIZ_CFG_GENRES_DESC"
+			default="Heavy Metal&#10;Thrash Metal&#10;Death Metal&#10;Black Metal&#10;Power Metal&#10;Doom Metal&#10;Speed Metal&#10;Hard Rock&#10;Progressive Metal&#10;Folk Metal&#10;Symphonic Metal&#10;Metalcore&#10;Groove Metal&#10;Nu Metal&#10;Glam Metal" />
+
+		<field name="question_mode" type="list" default="mixed"
+			label="COM_HMB_QUIZ_CFG_MODE" description="COM_HMB_QUIZ_CFG_MODE_DESC">
+			<option value="mixed">COM_HMB_QUIZ_CFG_MODE_MIXED</option>
+			<option value="title">COM_HMB_QUIZ_CFG_MODE_TITLE</option>
+			<option value="band">COM_HMB_QUIZ_CFG_MODE_BAND</option>
+			<option value="year">COM_HMB_QUIZ_CFG_MODE_YEAR</option>
+			<option value="genre">COM_HMB_QUIZ_CFG_MODE_GENRE</option>
+			<option value="album">COM_HMB_QUIZ_CFG_MODE_ALBUM</option>
+			<option value="origin">COM_HMB_QUIZ_CFG_MODE_ORIGIN</option>
+			<option value="singer">COM_HMB_QUIZ_CFG_MODE_SINGER</option>
+		</field>
+
+		<field name="question_types" type="checkboxes"
+			label="COM_HMB_QUIZ_CFG_TYPES" description="COM_HMB_QUIZ_CFG_TYPES_DESC"
+			showon="question_mode:mixed"
+			default="title,band,year,genre,album,origin,singer">
+			<option value="title">COM_HMB_QUIZ_TYPE_TITLE</option>
+			<option value="band">COM_HMB_QUIZ_TYPE_BAND</option>
+			<option value="year">COM_HMB_QUIZ_TYPE_YEAR</option>
+			<option value="genre">COM_HMB_QUIZ_TYPE_GENRE</option>
+			<option value="album">COM_HMB_QUIZ_TYPE_ALBUM</option>
+			<option value="origin">COM_HMB_QUIZ_TYPE_ORIGIN</option>
+			<option value="singer">COM_HMB_QUIZ_TYPE_SINGER</option>
+			<option value="movie">COM_HMB_QUIZ_TYPE_MOVIE</option>
+			<option value="movie_year">COM_HMB_QUIZ_TYPE_MOVIE_YEAR</option>
+			<option value="movie_original">COM_HMB_QUIZ_TYPE_MOVIE_ORIGINAL</option>
+			<option value="director">COM_HMB_QUIZ_TYPE_DIRECTOR</option>
+		</field>
+
+		<field name="reveal_video" type="radio" layout="joomla.form.field.radio.switcher" default="1"
+			label="COM_HMB_QUIZ_CFG_REVEAL" description="COM_HMB_QUIZ_CFG_REVEAL_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="cover_pixelate" type="radio" layout="joomla.form.field.radio.switcher" default="1"
+			label="COM_HMB_QUIZ_CFG_COVER_PIX" description="COM_HMB_QUIZ_CFG_COVER_PIX_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="lifelines" type="list" default="0"
+			label="COM_HMB_QUIZ_CFG_LIFELINES" description="COM_HMB_QUIZ_CFG_LIFELINES_DESC">
+			<option value="0">COM_HMB_QUIZ_LIFELINES_OFF</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</field>
+
+		<field name="player_chooses_difficulty" type="radio" layout="joomla.form.field.radio.switcher" default="1"
+			label="COM_HMB_QUIZ_CFG_CHOOSE_DIFF" description="COM_HMB_QUIZ_CFG_CHOOSE_DIFF_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="default_difficulty" type="list" default="0"
+			label="COM_HMB_QUIZ_CFG_DEF_DIFF" description="COM_HMB_QUIZ_CFG_DEF_DIFF_DESC">
+			<option value="0">COM_HMB_QUIZ_LEVEL_MIX</option>
+			<option value="1">COM_HMB_QUIZ_LEVEL_EASY</option>
+			<option value="2">COM_HMB_QUIZ_LEVEL_MEDIUM</option>
+			<option value="3">COM_HMB_QUIZ_LEVEL_HARD</option>
+		</field>
+
+		<field name="player_chooses_language" type="radio" layout="joomla.form.field.radio.switcher" default="0"
+			label="COM_HMB_QUIZ_CFG_CHOOSE_LANG" description="COM_HMB_QUIZ_CFG_CHOOSE_LANG_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="player_chooses_genres" type="radio" layout="joomla.form.field.radio.switcher" default="0"
+			label="COM_HMB_QUIZ_CFG_CHOOSE_GENRES" description="COM_HMB_QUIZ_CFG_CHOOSE_GENRES_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="genre_note" type="note" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRES_NOTE_LABEL" description="COM_HMB_QUIZ_CFG_GENRES_NOTE_DESC" />
+
+		<field name="genre_1" type="genrechoice" multiple="true" size="6" addfieldprefix="Hmb\Component\Quiz\Administrator\Field"
+			showon="player_chooses_genres:1" label="COM_HMB_QUIZ_CFG_GENRE_N1" />
+		<field name="genre_1_name" type="text" filter="string" default="ROCK" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_NAME1" description="COM_HMB_QUIZ_CFG_GENRE_NAME_DESC" />
+		<field name="genre_1_img" type="text" filter="string" default="images/genero-rock.jpg" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_IMG1" description="COM_HMB_QUIZ_CFG_GENRE_IMG_DESC" />
+
+		<field name="genre_2" type="genrechoice" multiple="true" size="6" addfieldprefix="Hmb\Component\Quiz\Administrator\Field"
+			showon="player_chooses_genres:1" label="COM_HMB_QUIZ_CFG_GENRE_N2" />
+		<field name="genre_2_name" type="text" filter="string" default="THRASH" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_NAME2" description="COM_HMB_QUIZ_CFG_GENRE_NAME_DESC" />
+		<field name="genre_2_img" type="text" filter="string" default="images/genero-thrash.jpg" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_IMG2" description="COM_HMB_QUIZ_CFG_GENRE_IMG_DESC" />
+
+		<field name="genre_3" type="genrechoice" multiple="true" size="6" addfieldprefix="Hmb\Component\Quiz\Administrator\Field"
+			showon="player_chooses_genres:1" label="COM_HMB_QUIZ_CFG_GENRE_N3" />
+		<field name="genre_3_name" type="text" filter="string" default="HEAVY" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_NAME3" description="COM_HMB_QUIZ_CFG_GENRE_NAME_DESC" />
+		<field name="genre_3_img" type="text" filter="string" default="images/genero-heavy.jpg" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_IMG3" description="COM_HMB_QUIZ_CFG_GENRE_IMG_DESC" />
+
+		<field name="genre_4" type="genrechoice" multiple="true" size="6" addfieldprefix="Hmb\Component\Quiz\Administrator\Field"
+			showon="player_chooses_genres:1" label="COM_HMB_QUIZ_CFG_GENRE_N4" />
+		<field name="genre_4_name" type="text" filter="string" default="POWER" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_NAME4" description="COM_HMB_QUIZ_CFG_GENRE_NAME_DESC" />
+		<field name="genre_4_img" type="text" filter="string" default="images/genero-power.jpg" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_IMG4" description="COM_HMB_QUIZ_CFG_GENRE_IMG_DESC" />
+
+		<field name="genre_5" type="genrechoice" multiple="true" size="6" addfieldprefix="Hmb\Component\Quiz\Administrator\Field"
+			showon="player_chooses_genres:1" label="COM_HMB_QUIZ_CFG_GENRE_N5" />
+		<field name="genre_5_name" type="text" filter="string" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_NAME5" description="COM_HMB_QUIZ_CFG_GENRE_NAME_DESC" />
+		<field name="genre_5_img" type="text" filter="string" showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_IMG5" description="COM_HMB_QUIZ_CFG_GENRE_IMG_DESC" />
+
+		<field name="genre_score_pct" type="number" default="50" min="0" max="100"
+			showon="player_chooses_genres:1"
+			label="COM_HMB_QUIZ_CFG_GENRE_PCT" description="COM_HMB_QUIZ_CFG_GENRE_PCT_DESC" />
+	</fieldset>
+
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC">
+		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox" validate="rules" filter="rules"
+			component="com_hmb_quiz" section="component" />
+	</fieldset>
+</config>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="Añadir noticia / evento">
+        <message><![CDATA[Muestra el formulario para que los artistas puedan añadir una nueva noticia o evento desde el frontend.]]></message>
+    </layout>
+</metadata>

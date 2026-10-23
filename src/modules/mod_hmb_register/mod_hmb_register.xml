@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>MOD_HMB_REGISTER</name>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+    <version>2.3.1</version>
+    <description>MOD_HMB_REGISTER_DESC</description>
+
+    <files>
+        <filename module="mod_hmb_register">mod_hmb_register.php</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="mod_hmb_register" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/mod_hmb_register.ini</language>
+        <language tag="es-ES">es-ES/mod_hmb_register.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+
+            <!-- ── REGISTRO ── -->
+            <fieldset name="basic" label="MOD_HMB_REGISTER_FIELDSET_BASIC">
+                <field name="show_name" type="radio" label="MOD_HMB_REGISTER_SHOW_NAME"
+                    default="1" layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option><option value="1">JYES</option>
+                </field>
+                <field name="show_username" type="radio" label="MOD_HMB_REGISTER_SHOW_USERNAME"
+                    default="1" layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option><option value="1">JYES</option>
+                </field>
+                <field name="redirect_after_register" type="url"
+                    label="MOD_HMB_REGISTER_REDIRECT_URL"
+                    description="MOD_HMB_REGISTER_REDIRECT_URL_DESC"
+                    default="" filter="url" />
+            </fieldset>
+
+            <!-- ── LOGIN ── -->
+            <fieldset name="login_settings" label="MOD_HMB_REGISTER_FIELDSET_LOGIN">
+                <field name="show_remember" type="radio" label="MOD_HMB_LOGIN_SHOW_REMEMBER"
+                    default="1" layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option><option value="1">JYES</option>
+                </field>
+                <field name="show_forgot_password" type="radio" label="MOD_HMB_LOGIN_SHOW_FORGOT_PW"
+                    default="1" layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option><option value="1">JYES</option>
+                </field>
+                <field name="show_forgot_username" type="radio" label="MOD_HMB_LOGIN_SHOW_FORGOT_USER"
+                    default="1" layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option><option value="1">JYES</option>
+                </field>
+                <field name="redirect_after_login" type="url"
+                    label="MOD_HMB_LOGIN_REDIRECT_URL"
+                    description="MOD_HMB_LOGIN_REDIRECT_URL_DESC"
+                    default="" filter="url" />
+                <field name="redirect_after_logout" type="url"
+                    label="MOD_HMB_LOGIN_REDIRECT_LOGOUT_URL"
+                    description="MOD_HMB_LOGIN_REDIRECT_LOGOUT_URL_DESC"
+                    default="" filter="url" />
+            </fieldset>
+
+            <!-- ── GOOGLE ── -->
+            <fieldset name="google_auth" label="MOD_HMB_REGISTER_FIELDSET_GOOGLE">
+                <field name="enable_google" type="radio" label="MOD_HMB_REGISTER_ENABLE_GOOGLE"
+                    default="0" layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option><option value="1">JYES</option>
+                </field>
+                <field name="google_client_id" type="text"
+                    label="MOD_HMB_REGISTER_GOOGLE_CLIENT_ID"
+                    description="MOD_HMB_REGISTER_GOOGLE_CLIENT_ID_DESC"
+                    default="" showon="enable_google:1" />
+                <field name="google_button_text" type="text"
+                    label="MOD_HMB_REGISTER_GOOGLE_BUTTON_TEXT"
+                    default="Entrar con Google" showon="enable_google:1" />
+            </fieldset>
+
+            <!-- ── CAPTCHA ── -->
+            <fieldset name="captcha" label="MOD_HMB_REGISTER_FIELDSET_CAPTCHA">
+                <field name="enable_recaptcha" type="radio" label="MOD_HMB_REGISTER_ENABLE_RECAPTCHA"
+                    default="0" layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option><option value="1">JYES</option>
+                </field>
+                <field name="recaptcha_site_key" type="text"
+                    label="MOD_HMB_REGISTER_RECAPTCHA_SITE_KEY"
+                    description="MOD_HMB_REGISTER_RECAPTCHA_SITE_KEY_DESC"
+                    default="" showon="enable_recaptcha:1" />
+                <field name="recaptcha_secret_key" type="text"
+                    label="MOD_HMB_REGISTER_RECAPTCHA_SECRET_KEY"
+                    description="MOD_HMB_REGISTER_RECAPTCHA_SECRET_KEY_DESC"
+                    default="" showon="enable_recaptcha:1" />
+            </fieldset>
+
+            <fieldset name="advanced">
+                <field name="moduleclass_sfx" type="textarea"
+                    label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" rows="3" />
+            </fieldset>
+
+            <fieldset name="screens" label="MOD_HMB_REGISTER_FIELDSET_SCREENS">
+
+                <field name="welcome_title" type="text"
+                    label="MOD_HMB_REGISTER_WELCOME_TITLE_LABEL"
+                    default="¡Bienvenido a la Hermandad!" />
+                <field name="welcome_subtitle" type="text"
+                    label="MOD_HMB_REGISTER_WELCOME_SUBTITLE_LABEL"
+                    default="Hermano del Metal" />
+                <field name="welcome_message" type="textarea"
+                    label="MOD_HMB_REGISTER_WELCOME_MESSAGE_LABEL"
+                    rows="3"
+                    default="Tu cuenta ha sido creada. Ya eres parte de la Hermandad del Metal." />
+                <field name="welcome_image" type="media"
+                    label="MOD_HMB_REGISTER_WELCOME_IMAGE_LABEL"
+                    description="MOD_HMB_REGISTER_WELCOME_IMAGE_DESC"
+                    default="" />
+                <field name="welcome_delay" type="number"
+                    label="MOD_HMB_REGISTER_WELCOME_DELAY_LABEL"
+                    description="MOD_HMB_REGISTER_WELCOME_DELAY_DESC"
+                    default="4000" min="1000" max="15000" step="500" />
+
+                <field name="bye_title" type="text"
+                    label="MOD_HMB_REGISTER_BYE_TITLE_LABEL"
+                    default="Hasta Pronto, Hermano" />
+                <field name="bye_subtitle" type="text"
+                    label="MOD_HMB_REGISTER_BYE_SUBTITLE_LABEL"
+                    default="Que el Metal te acompañe" />
+                <field name="bye_message" type="textarea"
+                    label="MOD_HMB_REGISTER_BYE_MESSAGE_LABEL"
+                    rows="3"
+                    default="Has cerrado sesión. La Hermandad te espera cuando quieras volver." />
+                <field name="bye_image" type="media"
+                    label="MOD_HMB_REGISTER_BYE_IMAGE_LABEL"
+                    description="MOD_HMB_REGISTER_BYE_IMAGE_DESC"
+                    default="" />
+                <field name="bye_delay" type="number"
+                    label="MOD_HMB_REGISTER_BYE_DELAY_LABEL"
+                    description="MOD_HMB_REGISTER_BYE_DELAY_DESC"
+                    default="3500" min="1000" max="15000" step="500" />
+
+            </fieldset>
+
+        </fields>
+    </config>
+</extension>

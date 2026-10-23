@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="user" method="upgrade">
+	<name>PLG_USER_HMBQUIZ</name>
+	<author>Heavy Metal Brothers</author>
+	<creationDate>2026-06</creationDate>
+	<version>1.0.0</version>
+	<description>PLG_USER_HMBQUIZ_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Plugin\User\Hmbquiz</namespace>
+	<files>
+		<folder plugin="hmbquiz">services</folder>
+		<folder>src</folder>
+		<folder>forms</folder>
+		<folder>language</folder>
+	</files>
+	<languages>
+		<language tag="es-ES">language/es-ES/plg_user_hmbquiz.ini</language>
+		<language tag="es-ES">language/es-ES/plg_user_hmbquiz.sys.ini</language>
+	</languages>
+</extension>

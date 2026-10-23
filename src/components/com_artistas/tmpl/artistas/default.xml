@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="Lista de Artistas">
+        <message><![CDATA[Muestra el listado completo de artistas con filtros de búsqueda.]]></message>
+    </layout>
+</metadata>

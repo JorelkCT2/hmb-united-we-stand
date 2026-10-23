@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="template" client="site" version="4.0" method="upgrade">
 	<name>hmb</name>
-	<version>7.5.31.0</version>
+	<version>7.5.37.0</version>
 	<creationDate>2026-05-12</creationDate>
 	<author>Heavy Metal Brothers</author>
 	<authorEmail>admin@heavymetalbrothers.com</authorEmail>
@@ -105,31 +105,65 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="destacadosTitle" type="text" default="Explora"
-					label="Título de la sección" filter="string"
-					description="Deja en blanco para no mostrar título." />
+				<field name="showDestacadosTitle" type="radio" default="1"
+					label="Mostrar título de la sección"
+					description="Apágalo para ocultar el título de la franja."
+					layout="joomla.form.field.radio.switcher" filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="destacadosTitle" type="text" default="" label="Título de la sección" filter="string"
+					description="Solo se muestra si el interruptor de arriba está activado." />
 
-				<field name="destacado1_icon" type="text" default="🎟️" label="① Icono (emoji)" filter="raw" />
-				<field name="destacado1_label" type="text" default="Conciertos" label="① Texto" filter="string" />
+				<!-- ① -->
+				<field name="destacado1_type" type="list" default="icon" label="① Tipo de tarjeta">
+					<option value="icon">Icono + texto</option>
+					<option value="image">Imagen sola (400×100)</option>
+					<option value="imagetext">Imagen + texto</option>
+				</field>
+				<field name="destacado1_icon" type="text" default="🎟️" label="① Icono (emoji)" filter="raw" showon="destacado1_type:icon" />
+				<field name="destacado1_label" type="text" default="Conciertos" label="① Texto" filter="string"
+					description="En modo Imagen se usa como texto alternativo (alt)." />
 				<field name="destacado1_url" type="text" default="" label="① Enlace (URL)" filter="string"
 					description="Ej: index.php/conciertos  ·  /agenda  ·  https://..." />
-				<field name="destacado1_img" type="text" default="" label="① Imagen de fondo (URL)" filter="string"
-					description="Opcional. Si la rellenas, la tarjeta usa esta imagen en vez del emoji. Ej: images/destacados/quiz.jpg" />
+				<field name="destacado1_img" type="text" default="" label="① Imagen (URL)" filter="string" showon="destacado1_type:image,imagetext"
+					description="Recomendado 400×100 px (formato banner). Ej: images/destacados/quiz.jpg" />
 
-				<field name="destacado2_icon" type="text" default="📺" label="② Icono (emoji)" filter="raw" />
+				<!-- ② -->
+				<field name="destacado2_type" type="list" default="icon" label="② Tipo de tarjeta">
+					<option value="icon">Icono + texto</option>
+					<option value="image">Imagen sola (400×100)</option>
+					<option value="imagetext">Imagen + texto</option>
+				</field>
+				<field name="destacado2_icon" type="text" default="📺" label="② Icono (emoji)" filter="raw" showon="destacado2_type:icon" />
 				<field name="destacado2_label" type="text" default="Vídeos" label="② Texto" filter="string" />
 				<field name="destacado2_url" type="text" default="" label="② Enlace (URL)" filter="string" />
-				<field name="destacado2_img" type="text" default="" label="② Imagen de fondo (URL)" filter="string" />
+				<field name="destacado2_img" type="text" default="" label="② Imagen (URL)" filter="string" showon="destacado2_type:image,imagetext"
+					description="Recomendado 400×100 px (formato banner)." />
 
-				<field name="destacado3_icon" type="text" default="📷" label="③ Icono (emoji)" filter="raw" />
+				<!-- ③ -->
+				<field name="destacado3_type" type="list" default="icon" label="③ Tipo de tarjeta">
+					<option value="icon">Icono + texto</option>
+					<option value="image">Imagen sola (400×100)</option>
+					<option value="imagetext">Imagen + texto</option>
+				</field>
+				<field name="destacado3_icon" type="text" default="📷" label="③ Icono (emoji)" filter="raw" showon="destacado3_type:icon" />
 				<field name="destacado3_label" type="text" default="Galería" label="③ Texto" filter="string" />
 				<field name="destacado3_url" type="text" default="" label="③ Enlace (URL)" filter="string" />
-				<field name="destacado3_img" type="text" default="" label="③ Imagen de fondo (URL)" filter="string" />
+				<field name="destacado3_img" type="text" default="" label="③ Imagen (URL)" filter="string" showon="destacado3_type:image,imagetext"
+					description="Recomendado 400×100 px (formato banner)." />
 
-				<field name="destacado4_icon" type="text" default="📰" label="④ Icono (emoji)" filter="raw" />
+				<!-- ④ -->
+				<field name="destacado4_type" type="list" default="icon" label="④ Tipo de tarjeta">
+					<option value="icon">Icono + texto</option>
+					<option value="image">Imagen sola (400×100)</option>
+					<option value="imagetext">Imagen + texto</option>
+				</field>
+				<field name="destacado4_icon" type="text" default="📰" label="④ Icono (emoji)" filter="raw" showon="destacado4_type:icon" />
 				<field name="destacado4_label" type="text" default="Noticias" label="④ Texto" filter="string" />
 				<field name="destacado4_url" type="text" default="" label="④ Enlace (URL)" filter="string" />
-				<field name="destacado4_img" type="text" default="" label="④ Imagen de fondo (URL)" filter="string" />
+				<field name="destacado4_img" type="text" default="" label="④ Imagen (URL)" filter="string" showon="destacado4_type:image,imagetext"
+					description="Recomendado 400×100 px (formato banner)." />
 			</fieldset>
 		</fields>
 	</config>

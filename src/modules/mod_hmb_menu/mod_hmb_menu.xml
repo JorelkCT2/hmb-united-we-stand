@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="6.0" type="module" client="site" method="upgrade">
+    <name>mod_hmb_menu</name>
+    <title>HMB Menú</title>
+    <description>Módulo de menú horizontal Heavy Metal Brothers. Desktop: fila con dropdowns. Móvil: scroll horizontal con submenús a pantalla completa. Sin dependencias externas.</description>
+    <version>1.0.0</version>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+    <files>
+        <filename module="mod_hmb_menu">mod_hmb_menu.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="menutype" type="text"
+                    label="Tipo de menú"
+                    description="Nombre del menú en Joomla (normalmente: mainmenu)"
+                    default="mainmenu" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

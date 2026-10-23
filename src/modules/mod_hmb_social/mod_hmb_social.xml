@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="6.0" type="module" client="site" method="upgrade">
+    <name>mod_hmb_social</name>
+    <title>HMB Redes Sociales</title>
+    <description>Módulo de redes sociales Heavy Metal Brothers v2. Iconos metálicos con glow de color de marca. WhatsApp, YouTube, Facebook, Instagram, X, TikTok, Spotify, Twitch, Bandcamp, SoundCloud y YouTube Music. Tamaño configurable por instancia.</description>
+    <version>2.0.0</version>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+
+    <files>
+        <filename module="mod_hmb_social">mod_hmb_social.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="mod_hmb_social" folder="media">
+        <folder>css</folder>
+    </media>
+
+    <config>
+        <fields name="params">
+
+            <fieldset name="display" label="Apariencia">
+
+                <field name="block_title" type="text"
+                    label="Título del bloque (opcional)"
+                    default="" filter="string" />
+
+                <field name="layout_style" type="list"
+                    label="Layout" default="icons">
+                    <option value="icons">Iconos (cuadrícula)</option>
+                    <option value="bar">Barra horizontal compacta</option>
+                    <option value="labels">Lista con nombres</option>
+                </field>
+
+                <field name="icon_size" type="list"
+                    label="Tamaño base" default="md">
+                    <option value="sm">Pequeño (36px)</option>
+                    <option value="md">Mediano (48px)</option>
+                    <option value="lg">Grande (62px)</option>
+                </field>
+
+                <field name="custom_size" type="number"
+                    label="Tamaño personalizado (px)"
+                    description="Sobreescribe el tamaño base. Ideal para hacerlos más grandes en artículos que en el footer. Ej: 80 para artículo, 0 para usar el tamaño base."
+                    default="0" min="0" max="200" step="4" />
+
+                <field name="show_label" type="radio"
+                    label="Mostrar nombre de red" default="0"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field name="animated" type="radio"
+                    label="Animación de entrada" default="1"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="networks" label="URLs (deja vacío para ocultar)">
+
+                <field name="url_youtube"      type="url" filter="url" label="YouTube"        default="" />
+                <field name="url_youtube_music" type="url" filter="url" label="YouTube Music"  default="" />
+                <field name="url_whatsapp"     type="url" filter="url" label="WhatsApp Canal"
+                    description="URL del canal de WhatsApp. Ej: https://whatsapp.com/channel/XXXXX"
+                    default="" />
+                <field name="url_facebook"     type="url" filter="url" label="Facebook"       default="" />
+                <field name="url_instagram"    type="url" filter="url" label="Instagram"      default="" />
+                <field name="url_twitter"      type="url" filter="url" label="X (Twitter)"    default="" />
+                <field name="url_tiktok"       type="url" filter="url" label="TikTok"         default="" />
+                <field name="url_spotify"      type="url" filter="url" label="Spotify"        default="" />
+                <field name="url_twitch"       type="url" filter="url" label="Twitch"         default="" />
+                <field name="url_bandcamp"     type="url" filter="url" label="Bandcamp"       default="" />
+                <field name="url_soundcloud"   type="url" filter="url" label="SoundCloud"     default="" />
+
+            </fieldset>
+
+        </fields>
+    </config>
+
+</extension>

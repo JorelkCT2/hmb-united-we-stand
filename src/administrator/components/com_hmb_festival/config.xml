@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <fieldset name="integracion" label="Integración MetalMap">
+        <field name="fest_table" type="text" default="#__metalmap_festivals"
+            label="Tabla de festivales" description="Tabla de com_metalmap. Usa el prefijo #__" />
+        <field name="fest_col_id" type="text" default="id" label="Columna ID" />
+        <field name="fest_col_name" type="text" default="name" label="Columna nombre" />
+        <field name="fest_col_start" type="text" default="date_start" label="Columna fecha inicio" />
+        <field name="fest_col_end" type="text" default="date_end" label="Columna fecha fin" />
+        <field name="fest_col_city" type="text" default="city" label="Columna ciudad (vacío si no existe)" />
+    </fieldset>
+    <fieldset name="afinidad" label="Afinidad (quiz)">
+        <field name="affinity_sql" type="textarea" rows="6" default=""
+            label="SQL de vector de géneros"
+            description="Consulta que devuelve columnas genre y weight para un usuario. Usa {user} como marcador del ID. Si está vacío, la afinidad se desactiva sin romper nada." />
+    </fieldset>
+    <fieldset name="limpieza" label="Limpieza GDPR">
+        <field name="purge_days" type="number" default="7" min="1"
+            label="Días tras fin de festival"
+            description="Check-ins, matches y mensajes se borran automáticamente N días después de terminar el festival." />
+    </fieldset>
+</config>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <fieldset name="map" label="COM_METALMAP_CONFIG_MAP_LABEL">
+        <field
+            name="default_lat"
+            type="text"
+            label="COM_METALMAP_CONFIG_DEFAULT_LAT"
+            default="50.5"
+            filter="float" />
+
+        <field
+            name="default_lng"
+            type="text"
+            label="COM_METALMAP_CONFIG_DEFAULT_LNG"
+            default="10.0"
+            filter="float" />
+
+        <field
+            name="default_zoom"
+            type="number"
+            label="COM_METALMAP_CONFIG_DEFAULT_ZOOM"
+            default="4"
+            min="2"
+            max="18"
+            filter="integer" />
+
+        <field
+            name="tile_provider"
+            type="list"
+            label="COM_METALMAP_CONFIG_TILE_PROVIDER"
+            default="cartodb_dark">
+            <option value="cartodb_dark">Dark Matter (oscuro, recomendado)</option>
+            <option value="osm">OpenStreetMap (claro)</option>
+            <option value="stadia_dark">Stadia Alidade Smooth Dark</option>
+        </field>
+
+        <field
+            name="show_only_future"
+            type="radio"
+            label="COM_METALMAP_CONFIG_SHOW_ONLY_FUTURE"
+            default="0"
+            layout="joomla.form.field.radio.switcher">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+    </fieldset>
+
+    <fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
+        <field name="rules" type="rules" component="com_metalmap" filter="rules" validate="rules"
+               class="inputbox" label="JCONFIG_PERMISSIONS_LABEL" section="component" />
+    </fieldset>
+</config>

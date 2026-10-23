@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>System - HMB SEO</name>
+    <author>Heavy Metal Brothers</author>
+    <authorUrl>https://www.heavymetalbrothers.com</authorUrl>
+    <version>1.1.0</version>
+    <description>Controla el título y meta tags SEO de Heavy Metal Brothers, sobreescribiendo los valores de la plantilla Gantry 5.</description>
+    <files>
+        <filename plugin="hmb_seo">hmb_seo.php</filename>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Configuración SEO">
+
+                <field
+                    name="site_name"
+                    type="text"
+                    label="Nombre del sitio"
+                    description="Se añade al final del título en páginas internas."
+                    default="Heavy Metal Brothers"
+                    required="true"
+                />
+
+                <field
+                    name="home_title"
+                    type="text"
+                    label="Título de la portada"
+                    description="Título exacto que verá Google en la página de inicio."
+                    default="Heavy Metal Brothers - Rock y Heavy Metal"
+                    required="true"
+                />
+
+                <field
+                    name="home_description"
+                    type="textarea"
+                    label="Meta descripción de la portada"
+                    description="Texto bajo el título en Google. Máximo 160 caracteres recomendado."
+                    default="Los Heavy Metal Brothers somos dos apasionados del Rock y el Heavy Metal. Más de cuatro décadas con el volumen al 11."
+                    rows="3"
+                />
+
+                <field
+                    name="separator"
+                    type="text"
+                    label="Separador (páginas internas)"
+                    description="Texto entre el título de la página y el nombre del sitio. Ej:  | "
+                    default=" | "
+                />
+
+                <field
+                    name="fix_og_tags"
+                    type="radio"
+                    label="Corregir OG tags (redes sociales)"
+                    description="Sobreescribe og:title y og:site_name en todas las páginas."
+                    default="1"
+                    class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

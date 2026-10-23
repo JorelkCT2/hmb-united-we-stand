@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="Noticias de artistas">
+        <message><![CDATA[Muestra las noticias y eventos publicados por los grupos del directorio.]]></message>
+    </layout>
+    <fields name="request">
+        <fieldset name="request" label="Opciones">
+            <field name="artista_id" type="number" label="ID del artista" description="Deja 0 para mostrar noticias de todos los artistas." default="0" />
+        </fieldset>
+    </fields>
+</metadata>

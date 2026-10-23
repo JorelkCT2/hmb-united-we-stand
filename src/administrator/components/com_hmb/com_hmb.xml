@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+    <name>com_hmb</name>
+    <author>Heavy Metal Brothers</author>
+    <version>1.0.10</version>
+    <description>Componente de Registro y Login de Heavy Metal Brothers.</description>
+
+    <scriptfile>script.php</scriptfile>
+
+    <namespace path="src">HeavyMetalBrothers\Component\Hmb</namespace>
+
+    <files folder="site">
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <administration>
+        <files folder="admin">
+            <filename>access.xml</filename>
+            <folder>services</folder>
+        </files>
+    </administration>
+</extension>

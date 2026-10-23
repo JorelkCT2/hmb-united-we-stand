@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>COM_HMBTEMAS</name>
+    <creationDate>2024</creationDate>
+    <author>Heavy Metal Brothers</author>
+    <version>1.3.0</version>
+    <description>COM_HMBTEMAS_TEMAS_VIEW_DEFAULT_DESC</description>
+    <namespace path="src">HeavyMetalBrothers\Component\HmbTemas</namespace>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">administrator/components/com_hmbtemas/sql/install.mysql.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">administrator/components/com_hmbtemas/sql/uninstall.mysql.sql</file>
+        </sql>
+    </uninstall>
+
+    <!-- ── Frontend ── -->
+    <files folder="components/com_hmbtemas">
+        <folder>services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <!-- ── Idioma frontend ── -->
+    <languages folder="language">
+        <language tag="en-GB">en-GB/com_hmbtemas.ini</language>
+        <language tag="en-GB">en-GB/com_hmbtemas.sys.ini</language>
+    </languages>
+
+    <!-- ── Backend ── -->
+    <administration>
+        <menu img="class:music">COM_HMBTEMAS</menu>
+        <submenu>
+            <menu link="option=com_hmbtemas&amp;view=temas">Temas</menu>
+            <menu link="option=com_hmbtemas&amp;task=tema.add" img="class:plus">— Añadir tema</menu>
+            <menu link="option=com_hmbtemas&amp;view=discos">Discos</menu>
+            <menu link="option=com_hmbtemas&amp;task=disco.add" img="class:plus">— Añadir disco</menu>
+        </submenu>
+        <files folder="administrator/components/com_hmbtemas">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>forms</folder>
+            <folder>services</folder>
+            <folder>sql</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+        <languages folder="administrator/language">
+            <language tag="en-GB">en-GB/com_hmbtemas.sys.ini</language>
+        </languages>
+    </administration>
+</extension>

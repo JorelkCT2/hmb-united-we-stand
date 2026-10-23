@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_concerts</name>
+    <author>Tu Empresa</author>
+    <creationDate>2026</creationDate>
+    <version>1.1.1</version>
+    <description>Agenda de próximos conciertos con importación CSV y cartel.</description>
+    <namespace path="src">Joomla\Component\Concerts</namespace>
+
+    <scriptfile>script.php</scriptfile>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <!-- Secciones vacías: script.php copia los ficheros en preflight() -->
+    <files folder="components/com_concerts">
+    </files>
+
+    <administration>
+        <menu link="option=com_concerts">Agenda de Conciertos</menu>
+        <submenu>
+            <menu link="option=com_concerts&amp;view=concerts">Conciertos</menu>
+            <menu link="option=com_concerts&amp;task=concert.add">Nuevo concierto</menu>
+            <menu link="option=com_concerts&amp;view=import">Importar CSV</menu>
+        </submenu>
+        <files folder="administrator/components/com_concerts">
+        </files>
+        <languages folder="administrator/language">
+            <language tag="es-ES">es-ES/com_concerts.ini</language>
+            <language tag="es-ES">es-ES/com_concerts.sys.ini</language>
+        </languages>
+    </administration>
+
+</extension>

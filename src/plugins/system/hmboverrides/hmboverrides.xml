@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>plg_system_hmboverrides</name>
+    <author>Heavy Metal Brothers</author>
+    <version>1.0.0</version>
+    <description>Instala los overrides de plantilla de Heavy Metal Brothers (com_users profile, reset, remind).</description>
+    <namespace path="src">HeavyMetalBrothers\Plugin\System\HmbOverrides</namespace>
+
+    <files>
+        <filename plugin="hmboverrides">hmboverrides.php</filename>
+        <folder>overrides</folder>
+        <filename>script.php</filename>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="auto_reinstall"
+                    type="radio"
+                    label="Reinstalar overrides automáticamente"
+                    description="Vuelve a copiar los overrides al cambiar de plantilla."
+                    default="1"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

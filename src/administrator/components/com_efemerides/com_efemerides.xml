@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_efemerides</name>
+    <author>Tu Nombre</author>
+    <creationDate>2026</creationDate>
+    <version>2.6.0</version>
+    <description>Componente Efemérides Rock &amp; Metal para Joomla 6. PHP 8.1+. Compatible con cualquier plantilla.</description>
+    <namespace path="src">Joomla\Component\Efemerides</namespace>
+    <scriptfile>script.php</scriptfile>
+    <install>
+        <sql><file driver="mysql" charset="utf8mb4">sql/install.mysql.utf8.sql</file></sql>
+    </install>
+    <uninstall>
+        <sql><file driver="mysql" charset="utf8mb4">sql/uninstall.mysql.utf8.sql</file></sql>
+    </uninstall>
+                                                                                                                                                                                                                                                                <files folder="components/com_efemerides">
+            <filename>services/provider.php</filename>
+            <filename>src/Controller/DisplayController.php</filename>
+            <filename>src/Model/EfemeridesModel.php</filename>
+            <filename>src/Model/ListadoModel.php</filename>
+            <filename>src/View/Banda/HtmlView.php</filename>
+            <filename>src/View/Bandas/HtmlView.php</filename>
+            <filename>src/View/Busqueda/HtmlView.php</filename>
+            <filename>src/View/Efemerides/HtmlView.php</filename>
+            <filename>src/View/Fallecidos/HtmlView.php</filename>
+            <filename>src/View/Lista/HtmlView.php</filename>
+            <filename>src/View/Musico/HtmlView.php</filename>
+            <filename>src/View/Musicos/HtmlView.php</filename>
+            <filename>tmpl/banda/default.php</filename>
+            <filename>tmpl/banda/default.xml</filename>
+            <filename>tmpl/bandas/default.php</filename>
+            <filename>tmpl/bandas/default.xml</filename>
+            <filename>tmpl/busqueda/default.php</filename>
+            <filename>tmpl/busqueda/default.xml</filename>
+            <filename>tmpl/efemerides/default.php</filename>
+            <filename>tmpl/efemerides/default.xml</filename>
+            <filename>tmpl/fallecidos/default.php</filename>
+            <filename>tmpl/fallecidos/default.xml</filename>
+            <filename>tmpl/lista/default.php</filename>
+            <filename>tmpl/lista/default.xml</filename>
+            <filename>tmpl/musico/default.php</filename>
+            <filename>tmpl/musico/default.xml</filename>
+            <filename>tmpl/musicos/default.php</filename>
+            <filename>tmpl/musicos/default.xml</filename>
+    </files>
+    <administration>
+        <menu link="option=com_efemerides">Efemérides</menu>
+        <submenu>
+            <menu link="option=com_efemerides&amp;view=cpanel">Panel de Control</menu>
+            <menu link="option=com_efemerides&amp;view=efemerides">Efemérides</menu>
+            <menu link="option=com_efemerides&amp;view=efemerid&amp;layout=edit">Nueva Efeméride</menu>
+            <menu link="option=com_efemerides&amp;view=categorias">Categorías</menu>
+            <menu link="option=com_efemerides&amp;view=fallecidos">Artistas Fallecidos</menu>
+            <menu link="option=com_efemerides&amp;view=import">Importar CSV</menu>
+            <menu link="option=com_efemerides&amp;view=frases">Frases Míticas</menu>
+            <menu link="option=com_efemerides&amp;view=musicos">Músicos</menu>
+            <menu link="option=com_efemerides&amp;view=bandas">Bandas</menu>
+            <menu link="option=com_efemerides&amp;view=busqueda">&#128269; Búsqueda global</menu>
+        </submenu>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <files folder="administrator/components/com_efemerides">
+            <filename>csv/bandas_ejemplo.csv</filename>
+            <filename>csv/musicos_ejemplo.csv</filename>
+            <filename>forms/banda.xml</filename>
+            <filename>forms/categoria.xml</filename>
+            <filename>forms/efemerid.xml</filename>
+            <filename>forms/fallecido.xml</filename>
+            <filename>forms/frase.xml</filename>
+            <filename>forms/musico.xml</filename>
+            <filename>services/provider.php</filename>
+            <filename>src/Controller/BandaController.php</filename>
+            <filename>src/Controller/BandasController.php</filename>
+            <filename>src/Controller/BusquedaController.php</filename>
+            <filename>src/Controller/CategoriaController.php</filename>
+            <filename>src/Controller/CategoriasController.php</filename>
+            <filename>src/Controller/DisplayController.php</filename>
+            <filename>src/Controller/EfemeridController.php</filename>
+            <filename>src/Controller/EfemeridesController.php</filename>
+            <filename>src/Controller/FallecidoController.php</filename>
+            <filename>src/Controller/FallecidosController.php</filename>
+            <filename>src/Controller/FraseController.php</filename>
+            <filename>src/Controller/FrasesController.php</filename>
+            <filename>src/Controller/ImportController.php</filename>
+            <filename>src/Controller/MusicoController.php</filename>
+            <filename>src/Controller/MusicosController.php</filename>
+            <filename>src/Extension/EfemeridesComponent.php</filename>
+            <filename>src/Helper/AutoPoblador.php</filename>
+            <filename>src/Model/BandaModel.php</filename>
+            <filename>src/Model/BandasModel.php</filename>
+            <filename>src/Model/CategoriaModel.php</filename>
+            <filename>src/Model/CategoriasModel.php</filename>
+            <filename>src/Model/EfemeridModel.php</filename>
+            <filename>src/Model/EfemeridesModel.php</filename>
+            <filename>src/Model/FallecidoModel.php</filename>
+            <filename>src/Model/FallecidosModel.php</filename>
+            <filename>src/Model/FraseModel.php</filename>
+            <filename>src/Model/FrasesModel.php</filename>
+            <filename>src/Model/ImportModel.php</filename>
+            <filename>src/Model/MusicoModel.php</filename>
+            <filename>src/Model/MusicosModel.php</filename>
+            <filename>src/Table/BandaTable.php</filename>
+            <filename>src/Table/CategoriaTable.php</filename>
+            <filename>src/Table/EfemeridTable.php</filename>
+            <filename>src/Table/FallecidoTable.php</filename>
+            <filename>src/Table/FraseTable.php</filename>
+            <filename>src/Table/MusicoTable.php</filename>
+            <filename>src/View/Banda/HtmlView.php</filename>
+            <filename>src/View/Bandas/HtmlView.php</filename>
+            <filename>src/View/Busqueda/HtmlView.php</filename>
+            <filename>src/View/Categoria/HtmlView.php</filename>
+            <filename>src/View/Categorias/HtmlView.php</filename>
+            <filename>src/View/Cpanel/HtmlView.php</filename>
+            <filename>src/View/Efemerid/HtmlView.php</filename>
+            <filename>src/View/Efemerides/HtmlView.php</filename>
+            <filename>src/View/Fallecido/HtmlView.php</filename>
+            <filename>src/View/Fallecidos/HtmlView.php</filename>
+            <filename>src/View/Frase/HtmlView.php</filename>
+            <filename>src/View/Frases/HtmlView.php</filename>
+            <filename>src/View/Import/HtmlView.php</filename>
+            <filename>src/View/Musico/HtmlView.php</filename>
+            <filename>src/View/Musicos/HtmlView.php</filename>
+            <filename>tmpl/banda/edit.php</filename>
+            <filename>tmpl/bandas/default.php</filename>
+            <filename>tmpl/busqueda/default.php</filename>
+            <filename>tmpl/categoria/edit.php</filename>
+            <filename>tmpl/categorias/default.php</filename>
+            <filename>tmpl/cpanel/default.php</filename>
+            <filename>tmpl/efemerid/edit.php</filename>
+            <filename>tmpl/efemerides/default.php</filename>
+            <filename>tmpl/fallecido/edit.php</filename>
+            <filename>tmpl/fallecidos/default.php</filename>
+            <filename>tmpl/frase/edit.php</filename>
+            <filename>tmpl/frases/default.php</filename>
+            <filename>tmpl/import/default.php</filename>
+            <filename>tmpl/musico/edit.php</filename>
+            <filename>tmpl/musicos/default.php</filename>
+        </files>
+        <languages folder="administrator/language">
+            <language tag="es-ES">es-ES/com_efemerides.ini</language>
+            <language tag="es-ES">es-ES/com_efemerides.sys.ini</language>
+        </languages>
+    </administration>
+    <languages folder="language">
+        <language tag="es-ES">es-ES/com_efemerides.ini</language>
+    </languages>
+</extension>

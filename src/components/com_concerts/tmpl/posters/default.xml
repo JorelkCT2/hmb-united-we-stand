@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Carteles de Conciertos">
+        <message>
+            <![CDATA[Muestra todos los carteles de conciertos en una galería proporcional.]]>
+        </message>
+    </layout>
+</metadata>

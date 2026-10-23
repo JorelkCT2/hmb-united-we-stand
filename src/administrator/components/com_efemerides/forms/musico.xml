@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field name="id" type="hidden" />
+    <field name="solista" type="hidden" default="0" filter="int" />
+    <field name="banda_id_2"    type="hidden" filter="int"    default="" />
+    <field name="banda_texto_2" type="hidden" filter="string" default="" />
+    <field name="nombre" type="text" label="Nombre del músico" required="true" maxlength="255" class="form-control" />
+    <field name="banda_id" type="sql" label="Banda principal"
+           query="SELECT id AS value, nombre AS text FROM #__efemerides_bandas WHERE state=1 ORDER BY nombre ASC"
+           key_field="value" value_field="text" class="form-select"
+           first_option="-- Sin banda --" first_option_value="" />
+    <field name="banda_texto" type="text" label="Banda (texto libre)" description="Si la banda no está en la base de datos" maxlength="255" class="form-control" />
+    <field name="instrumento" type="text" label="Instrumento(s)" maxlength="255" class="form-control" placeholder="Guitarra eléctrica, Voz" />
+    <field name="pais" type="text" label="País de origen" maxlength="100" class="form-control" placeholder="España, Reino Unido..." />
+    <field name="wikipedia_url" type="text" label="Wikipedia URL" maxlength="500" class="form-control" />
+    <field name="foto" type="text" label="Foto (URL o ruta)" maxlength="500" class="form-control" />
+    <field name="fecha_nacimiento" type="calendar" label="Fecha de nacimiento" format="%Y-%m-%d" filter="date" class="form-control" />
+    <field name="lugar_nacimiento" type="text" label="Lugar de nacimiento" maxlength="255" class="form-control" />
+    <field name="fecha_defuncion" type="calendar" label="Fecha de defunción" format="%Y-%m-%d" filter="date" class="form-control" />
+    <field name="lugar_defuncion" type="text" label="Lugar de defunción" maxlength="255" class="form-control" />
+    <field name="descripcion" type="editor" label="Biografía" filter="safehtml" />
+    <field name="state" type="list" label="Estado" class="form-select">
+        <option value="1">Publicado</option>
+        <option value="0">No publicado</option>
+    </field>
+</form>

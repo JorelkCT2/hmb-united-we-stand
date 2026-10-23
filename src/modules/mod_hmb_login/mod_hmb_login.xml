@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>MOD_HMB_LOGIN</name>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+    <version>1.0.7</version>
+    <description>MOD_HMB_LOGIN_DESC</description>
+
+    <files>
+        <filename module="mod_hmb_login">mod_hmb_login.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="mod_hmb_login" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/mod_hmb_login.ini</language>
+        <language tag="es-ES">es-ES/mod_hmb_login.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="MOD_HMB_LOGIN_FIELDSET_BASIC">
+
+                <field
+                    name="show_remember"
+                    type="radio"
+                    label="MOD_HMB_LOGIN_SHOW_REMEMBER"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field
+                    name="show_forgot_password"
+                    type="radio"
+                    label="MOD_HMB_LOGIN_SHOW_FORGOT_PW"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field
+                    name="show_forgot_username"
+                    type="radio"
+                    label="MOD_HMB_LOGIN_SHOW_FORGOT_USER"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field
+                    name="show_register_link"
+                    type="radio"
+                    label="MOD_HMB_LOGIN_SHOW_REGISTER"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field
+                    name="forgot_password_url"
+                    type="url"
+                    label="MOD_HMB_LOGIN_FORGOT_PW_URL"
+                    description="MOD_HMB_LOGIN_FORGOT_PW_URL_DESC"
+                    default=""
+                    filter="url" />
+
+                <field
+                    name="forgot_username_url"
+                    type="url"
+                    label="MOD_HMB_LOGIN_FORGOT_USER_URL"
+                    description="MOD_HMB_LOGIN_FORGOT_USER_URL_DESC"
+                    default=""
+                    filter="url" />
+
+                <field
+                    name="register_url"
+                    type="url"
+                    label="MOD_HMB_LOGIN_REGISTER_URL"
+                    description="MOD_HMB_LOGIN_REGISTER_URL_DESC"
+                    default=""
+                    filter="url" />
+
+                <field
+                    name="redirect_after_login"
+                    type="url"
+                    label="MOD_HMB_LOGIN_REDIRECT_URL"
+                    description="MOD_HMB_LOGIN_REDIRECT_URL_DESC"
+                    default=""
+                    filter="url" />
+
+                <field
+                    name="redirect_after_logout"
+                    type="url"
+                    label="MOD_HMB_LOGIN_REDIRECT_LOGOUT_URL"
+                    description="MOD_HMB_LOGIN_REDIRECT_LOGOUT_URL_DESC"
+                    default=""
+                    filter="url" />
+
+            </fieldset>
+
+            <fieldset name="advanced">
+                <field
+                    name="moduleclass_sfx"
+                    type="textarea"
+                    label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                    rows="3" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

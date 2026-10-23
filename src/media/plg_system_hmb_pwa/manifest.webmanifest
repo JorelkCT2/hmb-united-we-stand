@@ -1,0 +1,17 @@
+{
+	"name": "Metal Quiz - Heavy Metal Brothers",
+	"short_name": "Metal Quiz",
+	"description": "Adivina la canción de heavy metal escuchando un fragmento. Niveles, rondas, liga y ranking.",
+	"lang": "es",
+	"start_url": "/index.php?option=com_hmb_quiz&view=game",
+	"scope": "/",
+	"display": "standalone",
+	"orientation": "portrait-primary",
+	"background_color": "#0a0a0a",
+	"theme_color": "#c1121f",
+	"icons": [
+		{ "src": "/media/plg_system_hmb_pwa/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+		{ "src": "/media/plg_system_hmb_pwa/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+		{ "src": "/media/plg_system_hmb_pwa/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+	]
+}

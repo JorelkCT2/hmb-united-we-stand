@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_hmbnews</name>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026-05-20</creationDate>
+    <version>1.0.26</version>
+    <description>HMB Importador de Noticias</description>
+    <namespace path="src">Joomla\Component\Hmbnews</namespace>
+    <scriptfile>script.php</scriptfile>
+    <administration>
+        <files folder="admin">
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>css</folder>
+            <folder>js</folder>
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+        </files>
+        <menu>HMB Importador de Noticias</menu>
+    </administration>
+</extension>

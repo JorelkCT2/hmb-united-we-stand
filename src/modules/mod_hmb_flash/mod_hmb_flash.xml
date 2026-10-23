@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="module" method="upgrade">
+    <name>mod_hmb_flash</name>
+    <version>1.1.0</version>
+    <creationDate>2026</creationDate>
+    <author>Heavy Metal Brothers</author>
+    <license>GNU/GPL Version 2 or later</license>
+    <description>Notificación flotante HMB — noticias urgentes con foto, texto y autoclose</description>
+    <files>
+        <filename module="mod_hmb_flash">mod_hmb_flash.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+
+            <fieldset name="contenido" label="Contenido">
+
+                <field name="activo" type="radio" label="Mostrar notificación"
+                    default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field name="tamano" type="radio" label="Tamaño"
+                    default="medium" class="btn-group">
+                    <option value="small">Pequeña  (80 ch)</option>
+                    <option value="medium">Mediana (150 ch)</option>
+                    <option value="large">Grande  (250 ch)</option>
+                </field>
+
+                <field name="titulo" type="text" label="Titular"
+                    description="Título principal de la notificación urgente"
+                    filter="string" size="60" maxlength="60" />
+
+                <field name="texto" type="textarea" label="Texto"
+                    description="Pequeña=80 ch · Mediana=150 ch · Grande=250 ch. El contador en tiempo real aparece al guardar."
+                    rows="5" cols="60" filter="string"
+                    class="hmb-flash-textarea" />
+
+                <!-- Contador visual (se activa con JS en el admin) -->
+                <field name="counter_note" type="note"
+                    description="&lt;style&gt;#hmb-fc{font-size:12px;padding:4px 8px;border-radius:4px;display:inline-block;margin-top:4px;background:#1a1a1a;color:#888;}&lt;/style&gt;&lt;div id='hmb-fc'&gt;Escribe el texto para ver el contador&lt;/div&gt;&lt;script&gt;(function(){function u(){var ta=document.querySelector('.hmb-flash-textarea');var ts=document.querySelector('[name*=tamano]:checked,input[name*=tamano][value=medium]');if(!ta)return;var lim={small:80,medium:150,large:250};var s=(ts&amp;&amp;ts.value)||'medium';var max=lim[s]||150;var n=ta.value.length;var fc=document.getElementById('hmb-fc');if(!fc)return;var pct=n/max;fc.textContent=n+' / '+max+' caracteres';fc.style.color=pct&gt;1?'#CC2200':pct&gt;0.85?'#DAA520':'#00cc66';}document.addEventListener('DOMContentLoaded',function(){var ta=document.querySelector('.hmb-flash-textarea');if(ta){ta.addEventListener('input',u);u();}document.querySelectorAll('[name*=tamano]').forEach(function(r){r.addEventListener('change',u);});});})();&lt;/script&gt;" />
+
+                <field name="foto" type="media" label="Foto (opcional)"
+                    description="Imagen que aparece en la notificación"
+                    preview="true" types="images" />
+
+
+                <field name="link" type="url" label="URL de la imagen (enlace)"
+                    description="Si se rellena, al hacer clic en la imagen se navega a esta URL (misma ventana)"
+                    filter="url" size="80" />
+
+            </fieldset>
+
+            <fieldset name="comportamiento" label="Comportamiento">
+
+                <field name="posicion" type="radio" label="Posición desktop"
+                    default="right" class="btn-group">
+                    <option value="right">Derecha</option>
+                    <option value="left">Izquierda</option>
+                </field>
+
+                <field name="autoclose" type="radio" label="Autoclose"
+                    default="0" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field name="autoclose_seg" type="list" label="Tiempo autoclose" default="8">
+                    <option value="3">3 segundos</option>
+                    <option value="5">5 segundos</option>
+                    <option value="8">8 segundos</option>
+                    <option value="12">12 segundos</option>
+                    <option value="20">20 segundos</option>
+                    <option value="30">30 segundos</option>
+                </field>
+
+                <field name="overlay" type="radio" label="Oscurecer fondo"
+                    default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field name="sesion" type="radio"
+                    label="No volver a mostrar si se cierra (misma sesión)"
+                    default="1" class="btn-group btn-group-yesno">
+                    <option value="1">Sí</option>
+                    <option value="0">No (mostrar siempre)</option>
+                </field>
+
+            </fieldset>
+
+        </fields>
+    </config>
+</extension>

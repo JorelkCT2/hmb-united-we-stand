@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="COM_HMBTEMAS_TEMAS_VIEW_DEFAULT_TITLE">
+        <message><![CDATA[COM_HMBTEMAS_TEMAS_VIEW_DEFAULT_DESC]]></message>
+    </layout>
+
+    <fields name="params">
+        <fieldset name="basic" label="Opciones">
+
+            <field name="titulo" type="text"
+                   label="Título de la sección"
+                   default="Nuestros Temas" />
+
+            <field name="subtitulo" type="text"
+                   label="Subtítulo"
+                   default="" />
+
+            <field name="mostrar_player" type="list"
+                   label="Mostrar reproductor" default="1">
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </field>
+
+            <field name="mostrar_spotify" type="list"
+                   label="Mostrar enlace Spotify" default="1">
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </field>
+
+            <field name="mostrar_youtube" type="list"
+                   label="Mostrar enlace YouTube" default="1">
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </field>
+
+        </fieldset>
+    </fields>
+</metadata>

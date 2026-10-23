@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <layout title="Mi Ficha de Artista">
+        <message><![CDATA[Permite al artista registrado editar o borrar su propia ficha.]]></message>
+    </layout>
+</metadata>

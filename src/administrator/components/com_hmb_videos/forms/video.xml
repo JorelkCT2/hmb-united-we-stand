@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="details">
+        <field name="id" type="hidden" />
+        <field name="title" type="text" label="JGLOBAL_TITLE" required="true" class="form-control" />
+        <field name="alias" type="text" label="JFIELD_ALIAS_LABEL" hint="JFIELD_ALIAS_PLACEHOLDER" class="form-control" />
+        <field name="youtube_id" type="text" label="COM_HMB_VIDEOS_VIDEO_YOUTUBE_ID" required="true"
+            hint="COM_HMB_VIDEOS_VIDEO_YOUTUBE_ID_HINT" class="form-control" />
+        <field name="description" type="editor" label="JGLOBAL_DESCRIPTION" rows="4" />
+        <field name="band" type="text" label="COM_HMB_VIDEOS_VIDEO_BAND" class="form-control" />
+        <field name="year" type="number" label="COM_HMB_VIDEOS_VIDEO_YEAR" class="form-control" min="1950" max="2099" />
+        <field name="tags" type="text" label="COM_HMB_VIDEOS_VIDEO_TAGS" hint="COM_HMB_VIDEOS_VIDEO_TAGS_HINT" class="form-control" />
+        <field name="tags" type="text" label="COM_HMB_VIDEOS_VIDEO_TAGS" hint="COM_HMB_VIDEOS_VIDEO_TAGS_HINT" class="form-control" />
+        <field name="folder_id" type="sql"
+            label="COM_HMB_VIDEOS_VIDEO_FOLDER"
+            query="SELECT id, title FROM #__hmb_folders WHERE state=1 ORDER BY title ASC"
+            key_field="id" value_field="title"
+            first_option="COM_HMB_VIDEOS_FOLDER_NONE"
+            class="form-select" />
+        <field name="state" type="list" label="JSTATUS" default="1" class="form-select">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field>
+        <field name="mobile" type="list" label="COM_HMB_VIDEOS_VIDEO_MOBILE" default="0" class="form-select"
+            description="COM_HMB_VIDEOS_VIDEO_MOBILE_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field name="featured" type="list" label="JFEATURED" default="0" class="form-select">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" class="form-select" />
+        <field name="ordering" type="number" label="JFIELD_ORDERING_LABEL" class="form-control" />
+    </fieldset>
+</form>

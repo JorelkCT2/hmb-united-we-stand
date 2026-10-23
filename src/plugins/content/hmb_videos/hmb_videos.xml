@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="content" method="upgrade">
+    <name>plg_content_hmb_videos</name>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2024</creationDate>
+    <version>1.0.0</version>
+    <description>PLG_CONTENT_HMB_VIDEOS_DESC</description>
+    <files>
+        <filename plugin="hmb_videos">hmb_videos.php</filename>
+    </files>
+    <languages>
+        <language tag="es-ES">language/es-ES/plg_content_hmb_videos.ini</language>
+        <language tag="en-GB">language/en-GB/plg_content_hmb_videos.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="autoplay" type="list" label="PLG_CONTENT_HMB_VIDEOS_AUTOPLAY" default="0" class="form-select">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="width" type="text" label="PLG_CONTENT_HMB_VIDEOS_WIDTH" default="100%" class="form-control" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="basic">
+        <field name="id" type="hidden" />
+        <field name="name" type="text" label="Nombre del género" required="true" size="60"
+               hint="Ej: Folk Metal, Jazz, Flamenco…" />
+        <field name="ordering" type="number" label="Orden" default="0" min="0" />
+        <field name="state" type="list" label="Activo" default="1">
+            <option value="1">Sí (visible en formularios)</option>
+            <option value="0">No (oculto)</option>
+        </field>
+    </fieldset>
+</form>

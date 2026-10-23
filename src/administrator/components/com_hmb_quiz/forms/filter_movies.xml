@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="filter">
+		<field name="search" type="text" inputmode="search"
+			label="COM_HMB_QUIZ_SEARCH_LABEL"
+			description="COM_HMB_QUIZ_SEARCH_DESC"
+			hint="COM_HMB_QUIZ_SEARCH_MOVIE_HINT" />
+
+		<field name="state" type="list" onchange="this.form.submit();"
+			label="JOPTION_SELECT_PUBLISHED" default="">
+			<option value="">JOPTION_SELECT_PUBLISHED</option>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field name="difficulty" type="list" onchange="this.form.submit();"
+			label="COM_HMB_QUIZ_DIFFICULTY" default="">
+			<option value="">COM_HMB_QUIZ_FILTER_DIFFICULTY</option>
+			<option value="1">COM_HMB_QUIZ_LEVEL_EASY</option>
+			<option value="2">COM_HMB_QUIZ_LEVEL_MEDIUM</option>
+			<option value="3">COM_HMB_QUIZ_LEVEL_HARD</option>
+		</field>
+
+		<field name="genre" type="sql" onchange="this.form.submit();"
+			label="COM_HMB_QUIZ_GENRE" default=""
+			key_field="value" value_field="text"
+			header="COM_HMB_QUIZ_FILTER_GENRE"
+			query="SELECT DISTINCT genre AS value, genre AS text FROM #__hmb_quiz_songs WHERE content_type = 'movie' AND genre &lt;&gt; '' ORDER BY genre ASC" />
+
+		<field name="has_cover" type="list" onchange="this.form.submit();"
+			label="COM_HMB_QUIZ_COVER_COL" default="">
+			<option value="">COM_HMB_QUIZ_FILTER_COVER</option>
+			<option value="1">COM_HMB_QUIZ_COVER_YES</option>
+			<option value="0">COM_HMB_QUIZ_COVER_NO</option>
+		</field>
+
+		<field name="director" type="text"
+			label="COM_HMB_QUIZ_DIRECTOR"
+			hint="COM_HMB_QUIZ_FILTER_DIRECTOR_HINT" />
+	</fields>
+
+	<fields name="list">
+		<field name="fullordering" type="list" onchange="this.form.submit();"
+			label="JGLOBAL_SORT_BY" default="a.movie ASC">
+			<option value="">JGLOBAL_SORT_BY</option>
+			<option value="a.movie ASC">COM_HMB_QUIZ_SORT_MOVIE_ASC</option>
+			<option value="a.movie DESC">COM_HMB_QUIZ_SORT_MOVIE_DESC</option>
+			<option value="a.title ASC">COM_HMB_QUIZ_SORT_TITLE_ASC</option>
+			<option value="a.band ASC">COM_HMB_QUIZ_SORT_BAND_ASC</option>
+			<option value="a.movie_year ASC">COM_HMB_QUIZ_SORT_MOVIE_YEAR_ASC</option>
+			<option value="a.movie_year DESC">COM_HMB_QUIZ_SORT_MOVIE_YEAR_DESC</option>
+			<option value="a.difficulty ASC">COM_HMB_QUIZ_SORT_DIFF_ASC</option>
+			<option value="a.id DESC">COM_HMB_QUIZ_SORT_NEWEST</option>
+		</field>
+
+		<field name="limit" type="limitbox" default="20"
+			label="JGLOBAL_LIST_LIMIT" onchange="this.form.submit();" />
+	</fields>
+</form>

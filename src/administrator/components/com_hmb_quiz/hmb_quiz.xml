@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+	<name>com_hmb_quiz</name>
+	<author>Heavy Metal Brothers</author>
+	<creationDate>2026</creationDate>
+	<copyright>(C) Heavy Metal Brothers</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<version>1.50.0</version>
+	<description>COM_HMB_QUIZ_XML_DESCRIPTION</description>
+	<namespace path="src">Hmb\Component\Quiz</namespace>
+
+	<scriptfile>script.php</scriptfile>
+
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8mb4">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8mb4">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<!-- SITE (frontend) -->
+	<files folder="components/com_hmb_quiz">
+		<folder>services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+
+	<media destination="com_hmb_quiz" folder="media/com_hmb_quiz">
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>images</folder>
+	</media>
+
+	<languages folder="language">
+		<language tag="es-ES">es-ES/com_hmb_quiz.ini</language>
+	</languages>
+
+	<administration>
+		<menu link="option=com_hmb_quiz">COM_HMB_QUIZ</menu>
+		<submenu>
+			<menu link="option=com_hmb_quiz&amp;view=songs">COM_HMB_QUIZ_SUBMENU_SONGS</menu>
+			<menu link="option=com_hmb_quiz&amp;view=movies">COM_HMB_QUIZ_SUBMENU_MOVIES</menu>
+			<menu link="option=com_hmb_quiz&amp;view=scores">COM_HMB_QUIZ_SUBMENU_SCORES</menu>
+			<menu link="option=com_hmb_quiz&amp;view=players">COM_HMB_QUIZ_SUBMENU_PLAYERS</menu>
+		</submenu>
+
+		<files folder="administrator/components/com_hmb_quiz">
+			<folder>services</folder>
+			<folder>src</folder>
+			<folder>tmpl</folder>
+			<folder>forms</folder>
+			<file>access.xml</file>
+			<file>config.xml</file>
+		</files>
+
+		<languages folder="administrator/language">
+			<language tag="es-ES">es-ES/com_hmb_quiz.ini</language>
+			<language tag="es-ES">es-ES/com_hmb_quiz.sys.ini</language>
+		</languages>
+	</administration>
+</extension>

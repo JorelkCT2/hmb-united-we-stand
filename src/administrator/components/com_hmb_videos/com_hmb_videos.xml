@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_hmb_videos</name>
+    <author>Heavy Metal Brothers</author>
+    <authorEmail>admin@heavymetalbrothers.com</authorEmail>
+    <authorUrl>https://www.heavymetalbrothers.com</authorUrl>
+    <creationDate>2024</creationDate>
+    <version>1.0.0</version>
+    <description>Heavy Metal Brothers YouTube Video Gallery with folder navigation and hover preview.</description>
+
+    <namespace path="src">Joomla\Component\HmbVideos</namespace>
+    <scriptfile>script.php</scriptfile>
+
+    <files folder="components/com_hmb_videos">
+        <folder>services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="com_hmb_videos" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/com_hmb_videos.ini</language>
+        <language tag="en-GB">en-GB/com_hmb_videos.sys.ini</language>
+    </languages>
+
+    <administration>
+        <menu link="option=com_hmb_videos">HMB Videos</menu>
+        <submenu>
+            <menu link="option=com_hmb_videos&amp;view=folders">Folders</menu>
+            <menu link="option=com_hmb_videos&amp;view=videos">Videos</menu>
+        </submenu>
+        <files folder="administrator/components/com_hmb_videos">
+            <folder>forms</folder>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <file>access.xml</file>
+        </files>
+        <languages folder="administrator/language">
+            <language tag="en-GB">en-GB/com_hmb_videos.ini</language>
+            <language tag="en-GB">en-GB/com_hmb_videos.sys.ini</language>
+        </languages>
+    </administration>
+</extension>

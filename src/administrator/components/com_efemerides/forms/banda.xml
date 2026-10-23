@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field name="id" type="hidden" />
+    <field name="nombre" type="text" label="Nombre de la banda" required="true" maxlength="255" class="form-control" />
+    <field name="wikipedia_url" type="text" label="Wikipedia URL" maxlength="500" class="form-control" placeholder="https://es.wikipedia.org/wiki/..." />
+    <field name="foto" type="text" label="Foto (URL o ruta)" description="URL externa o ruta relativa del Media Manager" maxlength="500" class="form-control" placeholder="https://... o images/bandas/foto.jpg" />
+    <field name="pais" type="text" label="País de origen" maxlength="100" class="form-control" />
+    <field name="genero" type="text" label="Género musical" maxlength="255" class="form-control" placeholder="Heavy Metal, Hard Rock..." />
+    <field name="fecha_formacion" type="calendar" label="Año/fecha de formación" format="%Y-%m-%d" filter="date" class="form-control" />
+    <field name="fecha_disolucion" type="calendar" label="Fecha de disolución" format="%Y-%m-%d" filter="date" class="form-control" />
+    <field name="descripcion" type="editor" label="Descripción / Historia" filter="safehtml" />
+    <field name="state" type="list" label="Estado" class="form-select">
+        <option value="1">Publicado</option>
+        <option value="0">No publicado</option>
+    </field>
+</form>

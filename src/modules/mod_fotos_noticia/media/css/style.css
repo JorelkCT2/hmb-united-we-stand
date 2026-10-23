@@ -1,0 +1,131 @@
+/* Tabla de fotos */
+.tabla-fotos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-fotos td {
+    padding: 0;
+}
+
+.tabla-fotos img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Fondo del lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Imagen ampliada */
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border: 3px solid #666;
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    transition: transform 0.2s ease;
+}
+
+/* Botón cerrar */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 45px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #aaa;
+}
+
+/* Flechas metálicas */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    color: #ccc;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.arrow:hover {
+    color: #fff;
+    transform: translateY(-50%) scale(1.2);
+}
+
+.arrow-left {
+    left: 20px;
+}
+
+.arrow-right {
+    right: 20px;
+}
+
+/* Contador */
+.counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 18px;
+    background: rgba(0,0,0,0.5);
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+/* Botón de descarga */
+.download-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.download-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+/* Transición metálica */
+.metal-transition {
+    animation: metalFade 0.6s ease;
+}
+
+@keyframes metalFade {
+    0% {
+        opacity: 0;
+        filter: brightness(2) contrast(2);
+    }
+    40% {
+        opacity: 1;
+        filter: brightness(1.4) contrast(1.4);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1) contrast(1);
+    }
+}

@@ -43,10 +43,66 @@ class PlgSystemHmb_seo extends CMSPlugin
             }
         }
 
+        // Canonical único: dominio con www, solo la ruta y los parámetros que definen el contenido.
+        $hasCanonical = false;
+
+        foreach (($document->getHeadData()["links"] ?? []) as $href => $attribs) {
+            if (($attribs['relation'] ?? '') === 'canonical') {
+                $hasCanonical = true;
+                break;
+            }
+        }
+
+        if (!$hasCanonical) {
+            $uri   = Uri::getInstance();
+            $keep  = ['view', 'id', 'artista_id', 'catid', 'start', 'layout'];
+            $query = array_intersect_key($uri->getQuery(true), array_flip($keep));
+            $url   = 'https://www.heavymetalbrothers.com' . $uri->getPath();
+
+            if ($query) {
+                $url .= '?' . http_build_query($query);
+            }
+
+            $document->addHeadLink(htmlspecialchars($url), 'canonical');
+        }
+
         // Corregir OG tags si está activado
         if ($fixOgTags) {
             $document->setMetaData('og:site_name', $siteName, 'property');
             $document->setMetaData('og:title', $document->getTitle(), 'property');
         }
+    }
+
+    /**
+     * Un único <h1> por página: si no hay ninguno se añade uno oculto con el
+     * título; los <h1> sobrantes (p. ej. dentro del texto del artículo) pasan a <h2>.
+     */
+    public function onAfterRender()
+    {
+        $app = Factory::getApplication();
+
+        if (!$app->isClient('site') || $app->getDocument()->getType() !== 'html') {
+            return;
+        }
+
+        $body = $app->getBody();
+        $n    = 0;
+
+        $body = preg_replace_callback('#<h1(\s[^>]*)?>(.*?)</h1>#si', function ($m) use (&$n) {
+            $n++;
+
+            return $n === 1 ? $m[0] : '<h2' . ($m[1] ?? '') . '>' . $m[2] . '</h2>';
+        }, $body);
+
+        if ($n === 0) {
+            $title = trim(preg_replace('#\s*[|\-–]\s*Heavy Metal Brothers.*$#iu', '', $app->getDocument()->getTitle()));
+            $h1    = '<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">'
+                . htmlspecialchars($title ?: 'Heavy Metal Brothers', ENT_QUOTES, 'UTF-8') . '</h1>';
+            $body  = preg_replace_callback('#<body[^>]*>#i', static function ($m) use ($h1) {
+                return $m[0] . $h1;
+            }, $body, 1);
+        }
+
+        $app->setBody($body);
     }
 }

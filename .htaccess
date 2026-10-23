@@ -61,6 +61,19 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
+	# ============================================================
+	# Bloqueo de crawlers/bots chinos y rusos agresivos
+	# PRIMERA regla: los bots se rechazan aquí (403) sin llegar
+	# a atravesar exploits, redirecciones ni SEF.
+	# No afecta a Google, Bing ni usuarios reales.
+	# ============================================================
+	RewriteCond %{HTTP_USER_AGENT} (Baiduspider|Sogou|360Spider|HaosouSpider|YoudaoBot|Bytespider|PetalBot|Yisouspider|Mb2345Browser|LieBaoFast|EasouSpider) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (YandexBot|YandexImages|MegaIndex|DotBot) [NC]
+	RewriteRule .* - [F,L]
+	# ============================================================
+	# Fin bloqueo bots
+	# ============================================================
+
 	## Begin - Rewrite rules to block out some common exploits.
 	# If you experience problems on your site then comment out the operations listed
 	# below by adding a # to the beginning of the line.
@@ -85,6 +98,10 @@
 	# www redirect (or vice versa), place that code here. Ensure those
 	# redirects use the correct RewriteRule syntax and the [R=301,L] flags.
 	#
+	# Dominio canonico: heavymetalbrothers.com -> www (301)
+	RewriteCond %{HTTP_HOST} ^heavymetalbrothers\.com$ [NC]
+	RewriteRule ^(.*)$ https://www.heavymetalbrothers.com/$1 [R=301,L]
+	#
 	# Redirección de /siguenos (colocada aquí para que actúe ANTES de la
 	# sección SEF de Joomla; si no, la reescritura a index.php la anularía).
 	RewriteRule ^siguenos/?$ /index.php/portfolio [R=301,L]
@@ -96,7 +113,6 @@
 	# is not directly related to physical file paths.
 	# Update Your Joomla! Directory (just / for root).
 	##
-
 	RewriteBase /
 
 	## Begin - Joomla! core SEF Section.

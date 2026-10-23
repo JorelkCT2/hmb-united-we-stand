@@ -100,7 +100,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NR9JTB73');</script>
 <!-- End Google Tag Manager -->
 <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXP1DXHHLN"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];

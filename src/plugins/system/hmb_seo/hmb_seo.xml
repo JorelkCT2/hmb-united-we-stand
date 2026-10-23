@@ -3,7 +3,7 @@
     <name>System - HMB SEO</name>
     <author>Heavy Metal Brothers</author>
     <authorUrl>https://www.heavymetalbrothers.com</authorUrl>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <description>Controla el título y meta tags SEO de Heavy Metal Brothers, sobreescribiendo los valores de la plantilla Gantry 5.</description>
     <files>
         <filename plugin="hmb_seo">hmb_seo.php</filename>

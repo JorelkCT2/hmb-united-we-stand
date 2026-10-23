@@ -50,6 +50,39 @@ class HmbQuizHelper
 	}
 
 	/**
+	 * Ranking del módulo: mejor partida de cada jugador, de mayor a menor puntuación.
+	 */
+	public function getLeaderboard(int $limit = 10): array
+	{
+		try {
+			$db    = Factory::getContainer()->get('DatabaseDriver');
+			$query = $db->getQuery(true)
+				->select([$db->quoteName('player_name'), $db->quoteName('user_id'), $db->quoteName('score')])
+				->from($db->quoteName('#__hmb_quiz_scores'))
+				->order($db->quoteName('score') . ' DESC')
+				->order($db->quoteName('created') . ' ASC');
+
+			$rows = $db->setQuery($query)->loadAssocList() ?: [];
+		} catch (\Throwable $e) {
+			return [];
+		}
+
+		$byPlayer = [];
+
+		foreach ($rows as $r) {
+			$uid = (int) ($r['user_id'] ?? 0);
+			$key = $uid > 0 ? 'u' . $uid : 'n' . mb_strtolower(trim((string) $r['player_name']));
+
+			// Vienen ordenadas por puntuación: la primera vez que aparece un jugador es su mejor partida.
+			if (!isset($byPlayer[$key])) {
+				$byPlayer[$key] = ['player_name' => (string) $r['player_name'], 'score' => (int) $r['score']];
+			}
+		}
+
+		return array_slice(array_values($byPlayer), 0, max(1, $limit));
+	}
+
+	/**
 	 * The configured player options (each a group of one or more genres).
 	 */
 	public function getGenres(): array

@@ -13,7 +13,7 @@ $app = Factory::getApplication();
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php echo $app->get('sitename'); ?> - Offline</title>
 	<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@400;600&family=Rajdhani:wght@400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/template.css">
+	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/hmb-base.css">
 	<style>
 		.hmb-offline-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; background: radial-gradient(ellipse at center, #1a0000 0%, #050505 100%); }
 		.hmb-offline-title { font-family: 'Metal Mania', cursive; font-size: 52px; color: var(--white); margin-bottom: 0.5rem; }

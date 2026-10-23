@@ -11,7 +11,7 @@ $app = Factory::getApplication();
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php echo $this->error->getCode(); ?> - <?php echo $app->get('sitename'); ?></title>
 	<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@400;600&family=Rajdhani:wght@400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/template.css">
+	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/hmb-base.css">
 	<style>
 		.hmb-error-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
 		.hmb-error-code { font-family: 'Metal Mania', cursive; font-size: 140px; line-height: 1; color: var(--fire); text-shadow: 0 0 60px rgba(204,34,0,0.4); }
@@ -25,7 +25,7 @@ $app = Factory::getApplication();
 <div class="hmb-error-page">
 	<div>
 		<div class="hmb-error-code"><?php echo $this->error->getCode(); ?></div>
-		<div class="hmb-error-title"><?php echo htmlspecialchars($this->error->getMessage(), ENT_QUOTES, 'UTF-8'); ?></div>
+		<div class="hmb-error-title"><?php echo $this->error->getCode() == 404 ? 'Página no encontrada' : 'Error del servidor'; ?></div>
 		<p class="hmb-error-msg">
 			<?php if ($this->error->getCode() == 404): ?>
 				La página que buscas ha sido destruida por el metal. Vuelve al inicio.

@@ -2,7 +2,7 @@
 defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 $wa = $this->getWebAssetManager();
-$wa->registerAndUseStyle('hmb.template', 'templates/hmb/css/template.css');
+$wa->registerAndUseStyle('hmb.template', 'templates/hmb/css/hmb-base.css');
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">

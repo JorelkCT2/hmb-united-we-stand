@@ -21,6 +21,9 @@ class PlgSystemHmbnews extends CMSPlugin
 
         $option = $app->input->getString('option', '');
         if ($option !== 'com_hmb') return;
+        // El panel de com_hmb es el dashboard unificado; el importador antiguo (sustituido por
+        // com_hmbnews) solo se sirve si se pide expresamente con view=importer.
+        if ($app->input->getCmd('view', '') !== 'importer') return;
 
         $fmt  = $app->input->getString('format', 'html');
         $task = $app->input->getString('task', '');

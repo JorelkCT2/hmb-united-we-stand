@@ -151,6 +151,11 @@ def main():
         print('NO CUADRAN tras subir:\n  ' + '\n  '.join(mal))
         sys.exit(1)
 
+    # Joomla cachea el mapa de namespaces: si llega codigo nuevo en src/ hay que regenerarlo,
+    # o el controlador nuevo no se encuentra ("Controlador de clase invalido").
+    if any('/src/' in f for f in nuevos):
+        ssh('cd %s && rm -f administrator/cache/autoload_psr4.php' % c.RAIZ_REMOTA)
+
     ok, motivo = portada_ok()
 
     if not ok:

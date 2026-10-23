@@ -3,7 +3,6 @@
  * Integrates mod_hmb_login and mod_hmb_register using template design tokens
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Raleway:ital,wght@0,300;0,400;0,600;1,300&display=swap');
 
 /* ═══════════════════════════════════════════════════════════
    SHARED MODULE TOKENS — mapped to template variables
@@ -22,9 +21,9 @@
     --c-muted:    #484848;
     --c-text:     var(--text);
     --c-text-hi:  var(--white);
-    --f-display:  'Cinzel Decorative', 'Cinzel', serif;
+    --f-display:  var(--font-accent);
     --f-heading:  'Cinzel', serif;
-    --f-body:     'Raleway', sans-serif;
+    --f-body:     var(--font-body);
     --radius:     3px;
     --ease:       cubic-bezier(0.4, 0, 0.2, 1);
     --speed:      0.22s;

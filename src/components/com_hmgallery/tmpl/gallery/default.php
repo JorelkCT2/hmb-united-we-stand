@@ -62,7 +62,6 @@ foreach ($dbAlbums as $alb) {
 }
 ?>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Cinzel:wght@700&family=Share+Tech+Mono&display=swap');
 .hmg-wrap{background:#000;color:#ccc;font-family:'Share Tech Mono',monospace;min-height:100vh}
 .hmg-hdr{text-align:center;padding:2rem 1rem 1.5rem;background:linear-gradient(180deg,#110000,#000);border-bottom:1px solid #330000}
 .hmg-hdr__skull{font-size:2.5rem;display:block;filter:drop-shadow(0 0 12px #cc0000);animation:sk 3s ease-in-out infinite}

@@ -22,6 +22,7 @@
 		<filename>css/hmb-base.css</filename>
 		<filename>css/hmb-modules.css</filename>
 		<filename>css/hmb-layout.css</filename>
+		<filename>css/hmb-components.css</filename>
 		<filename>js/template.js</filename>
 		<folder>images</folder>
 		<folder>html</folder>

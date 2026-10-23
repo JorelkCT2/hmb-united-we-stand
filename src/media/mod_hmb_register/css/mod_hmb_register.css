@@ -2,7 +2,6 @@
    Heavy Metal Brothers — Register + Login Module  v2.1
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;900&family=Raleway:ital,wght@0,300;0,400;0,600;1,300&display=swap');
 
 /* ─── Tokens ─────────────────────────────────────────────── */
 .hmb-module {
@@ -18,7 +17,7 @@
     --c-text-hi:  #f0ebe0;
     --f-display:  'Cinzel Decorative','Cinzel',serif;
     --f-heading:  'Cinzel',serif;
-    --f-body:     'Raleway',sans-serif;
+    --f-body:     var(--font-body, 'Rajdhani', sans-serif);
     --r:          3px;
     --ease:       cubic-bezier(.4,0,.2,1);
     --speed:      .22s;

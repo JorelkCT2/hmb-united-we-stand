@@ -37,10 +37,9 @@ foreach ($fieldsets as $name => $fieldset) {
 }
 ?>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;900&family=Raleway:wght@300;400;600&display=swap');
 
 /* ── Tokens ── */
-.hmb-edit{--c-s:#0f0f0f;--c-b:#252525;--c-r:#b41414;--c-rh:#e02020;--c-g:#c9a84c;--c-gd:#7a6030;--c-sv:#888;--c-t:#d4d4d4;--c-th:#f0ebe0;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:'Raleway',sans-serif;--r:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--c-t);max-width:680px;margin:2rem auto;padding:0 1rem}
+.hmb-edit{--c-s:#0f0f0f;--c-b:#252525;--c-r:#b41414;--c-rh:#e02020;--c-g:#c9a84c;--c-gd:#7a6030;--c-sv:#888;--c-t:#d4d4d4;--c-th:#f0ebe0;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:var(--font-body, 'Rajdhani', sans-serif);--r:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--c-t);max-width:680px;margin:2rem auto;padding:0 1rem}
 
 /* ── Card ── */
 .hmb-card{position:relative;background:var(--c-s);border:1px solid var(--c-b);border-radius:var(--r);box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 24px 64px rgba(0,0,0,.85),0 0 80px rgba(180,20,20,.06)}

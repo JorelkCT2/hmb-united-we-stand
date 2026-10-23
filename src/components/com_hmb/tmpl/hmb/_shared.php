@@ -68,8 +68,7 @@ $byeDelay    = max(1000, (int) $modCfg->get('bye_delay', 3500));
 $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 ?>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;900&family=Raleway:wght@300;400;500;600&display=swap');
-.hmb-cw{--r:#b41414;--rh:#e02020;--g:#c9a84c;--gd:#7a6030;--sv:#888;--t:#d4d4d4;--b:#252525;--s:#0f0f0f;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:'Raleway',sans-serif;--ra:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--t);width:100%}
+.hmb-cw{--r:#b41414;--rh:#e02020;--g:#c9a84c;--gd:#7a6030;--sv:#888;--t:#d4d4d4;--b:#252525;--s:#0f0f0f;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:var(--font-body, 'Rajdhani', sans-serif);--ra:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--t);width:100%}
 .hmb-ci{position:relative;background:var(--s);border:1px solid var(--b);border-radius:var(--ra);box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 24px 64px rgba(0,0,0,.85),0 0 60px rgba(180,20,20,.06)}
 .hmb-ci::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3a0000,var(--r) 30%,var(--g) 50%,var(--r) 70%,#3a0000);background-size:200% 100%;animation:hmbB 4s ease infinite;z-index:2;border-radius:var(--ra) var(--ra) 0 0}
 @keyframes hmbB{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}

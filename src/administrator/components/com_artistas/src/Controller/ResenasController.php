@@ -32,7 +32,7 @@ class ResenasController extends AdminController
             }
             $app->enqueueMessage(count($ids) . ' reseña(s) eliminada(s).', 'success');
         }
-        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=resenas'));
+        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=resenas', false));
     }
 
     public function aprobar(): void
@@ -54,6 +54,6 @@ class ResenasController extends AdminController
             $db->setQuery('UPDATE #__artistas SET rating=' . round((float)$avg, 2) . ', review_count=' . (int)$cnt . ' WHERE id=' . (int)$aid)->execute();
         }
         $app->enqueueMessage(count($ids) . ' reseña(s) aprobada(s).', 'success');
-        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=resenas'));
+        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=resenas', false));
     }
 }

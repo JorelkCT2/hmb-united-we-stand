@@ -3,7 +3,6 @@
    mod_hmb_login.css  v1.0
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Raleway:ital,wght@0,300;0,400;0,600;1,300&display=swap');
 
 /* ─── Design Tokens (same as register) ──────────────────── */
 .hmb-login-module {
@@ -21,7 +20,7 @@
     --c-text-hi:    #f0ebe0;
     --f-display:    'Cinzel Decorative', 'Cinzel', serif;
     --f-heading:    'Cinzel', serif;
-    --f-body:       'Raleway', sans-serif;
+    --f-body:       var(--font-body, 'Rajdhani', sans-serif);
     --radius:       3px;
     --ease:         cubic-bezier(0.4, 0, 0.2, 1);
     --speed:        0.22s;

@@ -13,9 +13,8 @@ use Joomla\CMS\Uri\Uri;
 HTMLHelper::_('behavior.formvalidator');
 ?>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;900&family=Raleway:wght@300;400;600&display=swap');
 
-.hmb-page{--c-s:#0f0f0f;--c-b:#252525;--c-r:#b41414;--c-rh:#e02020;--c-g:#c9a84c;--c-gd:#7a6030;--c-sv:#888;--c-t:#d4d4d4;--c-th:#f0ebe0;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:'Raleway',sans-serif;--r:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--c-t);max-width:480px;margin:3rem auto;padding:0 1rem}
+.hmb-page{--c-s:#0f0f0f;--c-b:#252525;--c-r:#b41414;--c-rh:#e02020;--c-g:#c9a84c;--c-gd:#7a6030;--c-sv:#888;--c-t:#d4d4d4;--c-th:#f0ebe0;--fd:'Cinzel Decorative','Cinzel',serif;--fh:'Cinzel',serif;--fb:var(--font-body, 'Rajdhani', sans-serif);--r:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.22s;font-family:var(--fb);color:var(--c-t);max-width:480px;margin:3rem auto;padding:0 1rem}
 
 .hmb-card{position:relative;background:var(--c-s);border:1px solid var(--c-b);border-radius:var(--r);box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 24px 64px rgba(0,0,0,.85),0 0 80px rgba(180,20,20,.06)}
 .hmb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3a0000 0%,var(--c-r) 30%,var(--c-g) 50%,var(--c-r) 70%,#3a0000 100%);background-size:200% 100%;animation:hmbBar 4s ease infinite;z-index:2;border-radius:var(--r) var(--r) 0 0}

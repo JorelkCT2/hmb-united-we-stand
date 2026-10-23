@@ -21,7 +21,7 @@ class PresupuestosController extends AdminController
             }
             $app->enqueueMessage(count($ids) . ' solicitud(es) de presupuesto eliminada(s).', 'success');
         }
-        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=presupuestos'));
+        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=presupuestos', false));
     }
 
     public function cambiarEstado(): void
@@ -33,6 +33,6 @@ class PresupuestosController extends AdminController
         $state = $app->getInput()->getInt('state');
         $db->setQuery('UPDATE #__artistas_presupuestos SET state=' . (int)$state . ' WHERE id=' . (int)$id)->execute();
         $app->enqueueMessage('Estado actualizado.', 'success');
-        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=presupuestos'));
+        $app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_artistas&view=presupuestos', false));
     }
 }

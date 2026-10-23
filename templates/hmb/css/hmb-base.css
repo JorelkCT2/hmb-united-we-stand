@@ -21,7 +21,15 @@
   --border: #1a1a1a;
   --radius: 0px;
   --transition: 0.3s ease;
+
+  /* Tipografia: cuatro roles, ninguna familia mas */
+  --font-display: 'Metal Mania', cursive;            /* logotipos y numeros grandes */
+  --font-title:   'Oswald', sans-serif;               /* titulos, menus, etiquetas */
+  --font-body:    'Rajdhani', 'Segoe UI', sans-serif; /* texto corrido y controles */
+  --font-accent:  'Cinzel Decorative', 'Cinzel', serif; /* detalles ceremoniales: formularios, citas */
 }
+
+button, input, select, textarea { font-family: inherit; }
 
 /* ═══════════════════ RESET & BASE ═══════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

@@ -58,8 +58,7 @@ if ($isOwn && $_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['hmb_avata
 }
 ?>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500;600&display=swap');
-.hmb-pf{--r:#b41414;--g:#c9a84c;--gd:#7a6030;--b:#222;--s:#0f0f0f;--t:#d4d4d4;--w:#fff;--sv:#888;--ra:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.2s;font-family:'Raleway',sans-serif;color:var(--t);max-width:600px;margin:2rem auto;padding:0 1rem}
+.hmb-pf{--r:#b41414;--g:#c9a84c;--gd:#7a6030;--b:#222;--s:#0f0f0f;--t:#d4d4d4;--w:#fff;--sv:#888;--ra:3px;--e:cubic-bezier(.4,0,.2,1);--sp:.2s;font-family:var(--font-body, 'Rajdhani', sans-serif);color:var(--t);max-width:600px;margin:2rem auto;padding:0 1rem}
 .hmb-card{position:relative;background:var(--s);border:1px solid var(--b);border-radius:var(--ra);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8),0 0 60px rgba(180,20,20,.06)}
 .hmb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3a0000,var(--r) 30%,var(--g) 50%,var(--r) 70%,#3a0000);background-size:200% 100%;animation:hmbB 4s ease infinite;z-index:2}
 @keyframes hmbB{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}

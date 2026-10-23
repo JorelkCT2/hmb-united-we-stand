@@ -15,21 +15,21 @@ class ImportController extends BaseController
 
         if (empty($file) || $file['error'] !== UPLOAD_ERR_OK) {
             $app->enqueueMessage('Error al subir el archivo CSV.', 'error');
-            $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel'));
+            $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel', false));
             return;
         }
 
         $handle = fopen($file['tmp_name'], 'r');
         if (!$handle) {
             $app->enqueueMessage('No se puede leer el archivo CSV.', 'error');
-            $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel'));
+            $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel', false));
             return;
         }
 
         $headers = fgetcsv($handle, 0, ';');
         if (!$headers) {
             $app->enqueueMessage('El CSV está vacío o tiene formato incorrecto.', 'error');
-            $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel'));
+            $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel', false));
             return;
         }
 
@@ -83,7 +83,7 @@ class ImportController extends BaseController
 
         fclose($handle);
         $app->enqueueMessage("Importación completada: $imported artistas importados, $skipped omitidos.", 'success');
-        $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel'));
+        $app->redirect(Route::_('index.php?option=com_artistas&view=cpanel', false));
     }
 
     public function ejemplo(): void

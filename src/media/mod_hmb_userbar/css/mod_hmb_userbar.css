@@ -1,11 +1,10 @@
 /* HMB Userbar */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Raleway:wght@400;600&display=swap');
 
 .hmb-userbar {
     display: flex;
     align-items: center;
     gap: .75rem;
-    font-family: 'Raleway', sans-serif;
+    font-family: var(--font-body, 'Rajdhani', sans-serif);
 }
 
 /* Avatar + nombre */

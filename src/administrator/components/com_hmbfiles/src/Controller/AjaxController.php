@@ -121,7 +121,7 @@ class AjaxController extends BaseController
         $this->salir([
             'success' => true, 'dir' => $dir, 'padre' => Fs::esRaiz($dir) ? '' : dirname($dir),
             'carpetas' => $carpetas, 'ficheros' => $ficheros,
-            'limite' => min($this->aBytes(ini_get('upload_max_filesize')), $this->aBytes(ini_get('post_max_size'))),
+            'limite' => Fs::MAX_SUBIDA, 'trozo' => min(Fs::TROZO, $this->aBytes(ini_get('upload_max_filesize')), $this->aBytes(ini_get('post_max_size'))),
         ]);
     }
 
@@ -233,6 +233,117 @@ class AjaxController extends BaseController
 
         @chmod($abs . '/' . $nombre, 0644);
         $this->log('subir', $dir . '/' . $nombre . ' (' . (int) $f['size'] . ' B)');
+        $this->salir(['success' => true, 'nombre' => $nombre]);
+    }
+
+    /**
+     * Subida de archivos grandes en trozos de 4 MB (el proxy del hosting rechaza peticiones de ~10 MB o mas).
+     * El navegador envia los trozos en orden; con el ultimo se ensambla, se revisa el contenido y se coloca.
+     */
+    public function subirTrozo(): void
+    {
+        $this->guardia();
+        $in = $this->app()->getInput()->post;
+        $id = (string) $in->getString('id', '');
+        $i  = $in->getInt('i', -1);
+        $n  = $in->getInt('n', 0);
+        $f  = $_FILES['trozo'] ?? null;
+
+        if (!preg_match('/^[a-f0-9]{24}$/', $id) || $n < 2 || $n > 256 || $i < 0 || $i >= $n) {
+            $this->fallo('Datos de subida no validos.');
+        }
+
+        if (!$f || ($f['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK || !is_uploaded_file($f['tmp_name']) || $f['size'] > Fs::TROZO + 1024) {
+            $this->fallo('El trozo ' . ($i + 1) . ' no se recibio correctamente.');
+        }
+
+        $uid  = (int) $this->app()->getIdentity()->id;
+        $base = Fs::dirUploads();
+        $dir  = $base . '/' . $id;
+        $metaF = $dir . '/meta.json';
+
+        if ($i === 0) {
+            $rel    = Fs::limpiar((string) $in->getString('dir', ''));
+            $nombre = Fs::nombreSeguro((string) $in->getString('nombre', ''));
+
+            if ($rel === null || ($d = Fs::resolver($rel)) === null || !is_dir($d)) {
+                $this->fallo('Carpeta de destino no valida.');
+            }
+
+            if (!Fs::permitido($nombre)) {
+                $this->fallo('Tipo de archivo no permitido: .' . strtolower(pathinfo($nombre, PATHINFO_EXTENSION)));
+            }
+
+            if (is_dir($dir) || !@mkdir($dir, 0755)) {
+                $this->fallo('No se pudo iniciar la subida.');
+            }
+
+            file_put_contents($metaF, json_encode(['uid' => $uid, 'dir' => $rel, 'nombre' => $nombre, 'n' => $n]));
+        }
+
+        $meta = is_file($metaF) ? json_decode((string) file_get_contents($metaF), true) : null;
+
+        if (!is_array($meta) || (int) $meta['uid'] !== $uid || (int) $meta['n'] !== $n) {
+            $this->fallo('Subida desconocida o caducada. Vuelve a empezar.');
+        }
+
+        if (!move_uploaded_file($f['tmp_name'], $dir . '/p' . sprintf('%04d', $i))) {
+            $this->fallo('No se pudo guardar el trozo.');
+        }
+
+        $total = 0;
+
+        foreach (glob($dir . '/p*') ?: [] as $p) {
+            $total += filesize($p);
+        }
+
+        if ($total > Fs::MAX_SUBIDA) {
+            Fs::borrarRecursivo($dir);
+            $this->fallo('El archivo supera el maximo de ' . (Fs::MAX_SUBIDA / 1048576) . ' MB.');
+        }
+
+        if ($i < $n - 1) {
+            $this->salir(['success' => true, 'parcial' => true]);
+        }
+
+        // Ultimo trozo: ensamblar
+        $final = $dir . '/final';
+        $out   = fopen($final, 'wb');
+
+        for ($k = 0; $k < $n; $k++) {
+            $p = $dir . '/p' . sprintf('%04d', $k);
+
+            if (!is_file($p)) {
+                fclose($out);
+                Fs::borrarRecursivo($dir);
+                $this->fallo('Falta el trozo ' . ($k + 1) . '. Vuelve a subir el archivo.');
+            }
+
+            $src = fopen($p, 'rb');
+            stream_copy_to_stream($src, $out);
+            fclose($src);
+        }
+
+        fclose($out);
+
+        $err = Fs::revisarContenido($final, $meta['nombre']);
+        $dAbs = Fs::resolver($meta['dir']);
+
+        if ($err !== '' || $dAbs === null || !is_dir($dAbs)) {
+            Fs::borrarRecursivo($dir);
+            $this->fallo($err !== '' ? $err : 'La carpeta de destino ya no existe.');
+        }
+
+        $nombre = Fs::nombreLibre($dAbs, $meta['nombre']);
+
+        if (!@rename($final, $dAbs . '/' . $nombre) && !(@copy($final, $dAbs . '/' . $nombre))) {
+            Fs::borrarRecursivo($dir);
+            $this->fallo('No se pudo guardar el archivo (permisos).');
+        }
+
+        @chmod($dAbs . '/' . $nombre, 0644);
+        Fs::borrarRecursivo($dir);
+        $this->log('subir (trozos)', $meta['dir'] . '/' . $nombre . ' (' . $total . ' B)');
         $this->salir(['success' => true, 'nombre' => $nombre]);
     }
 

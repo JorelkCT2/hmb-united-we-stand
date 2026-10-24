@@ -193,6 +193,35 @@ class FsHelper
         return '';
     }
 
+    /** Tamano maximo de un archivo subido por trozos (el proxy del hosting corta peticiones de mas de ~10 MB). */
+    public const MAX_SUBIDA = 512 * 1048576;
+
+    /** Tamano maximo de cada trozo, y el que usa el navegador (por debajo del limite del proxy). */
+    public const TROZO = 4 * 1048576;
+
+    /** Carpeta temporal de subidas por trozos; borra lo que lleve mas de un dia. */
+    public static function dirUploads(): string
+    {
+        $d = JPATH_ROOT . '/tmp/hmb_uploads';
+
+        if (!is_dir($d)) {
+            @mkdir($d, 0755, true);
+        }
+
+        if (!is_file($d . '/.htaccess')) {
+            @file_put_contents($d . '/.htaccess', "Require all denied\n");
+            @file_put_contents($d . '/index.html', '<!DOCTYPE html><title></title>');
+        }
+
+        foreach (scandir($d) ?: [] as $x) {
+            if ($x[0] !== '.' && $x !== 'index.html' && is_dir($d . '/' . $x) && filemtime($d . '/' . $x) < time() - 86400) {
+                self::borrarRecursivo($d . '/' . $x);
+            }
+        }
+
+        return $d;
+    }
+
     public static function dirTrash(): string
     {
         $d = JPATH_ROOT . '/tmp/hmb_trash';

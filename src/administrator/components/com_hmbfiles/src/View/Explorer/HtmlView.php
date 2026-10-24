@@ -22,7 +22,7 @@ class HtmlView extends BaseHtmlView
         $root = Uri::root(true) . '/administrator/components/com_hmbfiles';
 
         $doc->addStyleSheet($root . '/css/files.css?v=101');
-        $doc->addScript($root . '/js/files.js?v=101', [], ['defer' => true]);
+        $doc->addScript($root . '/js/files.js?v=102', [], ['defer' => true]);
 
         $this->token = Session::getFormToken();
         $this->ajax  = 'index.php?option=com_hmbfiles&format=json&task=ajax.';

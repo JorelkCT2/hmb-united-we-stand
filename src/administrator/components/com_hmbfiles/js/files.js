@@ -70,7 +70,7 @@
         S.sel = {};
         leer('lista', { dir: dir || S.dir }).then(function (d) {
             if (!d.success) { msg(d.message || 'Error', 'err'); return; }
-            S.dir = d.dir; S.carpetas = d.carpetas; S.ficheros = d.ficheros; S.limite = d.limite;
+            S.dir = d.dir; S.carpetas = d.carpetas; S.ficheros = d.ficheros; S.limite = d.limite; S.trozo = d.trozo;
             pintar();
         }).catch(function (e) { msg('Error de red: ' + e.message, 'err'); });
     }
@@ -169,18 +169,48 @@
             }
             var f = files[k], row = $('hf-q' + k), est = row.querySelector('b'), barra = row.querySelector('u'); k++;
             if (f.size > S.limite && S.limite) { est.textContent = 'supera ' + tam(S.limite); row.classList.add('err'); sig(); return; }
-            var fd = new FormData(), x = new XMLHttpRequest();
-            fd.append(C.token, '1'); fd.append('dir', dir); fd.append('archivo', f);
-            x.open('POST', C.ajax + 'subir');
-            x.upload.onprogress = function (e) { if (e.lengthComputable) { barra.style.width = Math.round(e.loaded * 100 / e.total) + '%'; est.textContent = Math.round(e.loaded * 100 / e.total) + '%'; } };
-            x.onload = function () {
-                var d; try { d = JSON.parse(x.responseText); } catch (e) { d = { success: false, message: 'respuesta no válida (¿archivo demasiado grande?)' }; }
+            var TROZO = S.trozo || 4194304;
+
+            function fin(d) {
                 if (d.success) { ok++; est.textContent = 'subido'; row.classList.add('ok'); barra.style.width = '100%'; }
                 else { est.textContent = d.message; row.classList.add('err'); }
                 sig();
-            };
-            x.onerror = function () { est.textContent = 'error de red'; row.classList.add('err'); sig(); };
-            x.send(fd);
+            }
+            // Un envio (archivo entero o un trozo). El proxy del hosting corta peticiones de ~10 MB o mas.
+            function enviarParte(campo, blob, extra, progreso) {
+                return new Promise(function (resolve) {
+                    var fd = new FormData(), x = new XMLHttpRequest();
+                    fd.append(C.token, '1');
+                    Object.keys(extra).forEach(function (k) { fd.append(k, extra[k]); });
+                    fd.append(campo, blob, f.name);
+                    x.open('POST', C.ajax + (campo === 'trozo' ? 'subirTrozo' : 'subir'));
+                    x.upload.onprogress = function (e) { if (e.lengthComputable) progreso(e.loaded); };
+                    x.onload = function () {
+                        var d; try { d = JSON.parse(x.responseText); }
+                        catch (e) { d = { success: false, message: 'respuesta no válida del servidor (HTTP ' + x.status + ')' }; }
+                        resolve(d);
+                    };
+                    x.onerror = function () { resolve({ success: false, message: 'error de red' }); };
+                    x.send(fd);
+                });
+            }
+            function pct(hecho) { var p = Math.min(100, Math.round(hecho * 100 / f.size)); barra.style.width = p + '%'; est.textContent = p + '%'; }
+
+            if (f.size <= TROZO) {
+                enviarParte('archivo', f, { dir: dir }, pct).then(fin);
+            } else {
+                var n = Math.ceil(f.size / TROZO), id = '', a = new Uint8Array(12);
+                (window.crypto || window.msCrypto).getRandomValues(a);
+                a.forEach(function (b) { id += ('0' + b.toString(16)).slice(-2); });
+                (function trozo(t) {
+                    var ini = t * TROZO, parte = f.slice(ini, Math.min(f.size, ini + TROZO));
+                    est.textContent = 'trozo ' + (t + 1) + '/' + n;
+                    enviarParte('trozo', parte, { id: id, i: t, n: n, dir: dir, nombre: f.name }, function (c) { pct(ini + c); }).then(function (d) {
+                        if (!d.success || t === n - 1) { fin(d); return; }
+                        trozo(t + 1);
+                    });
+                }(0));
+            }
         }
         sig();
     }

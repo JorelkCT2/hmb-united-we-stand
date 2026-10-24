@@ -186,7 +186,7 @@ $form = $this->form;
         alt="Avatar" width="72" height="72">
     <div class="hmb-av-info">
         <form method="post" enctype="multipart/form-data"
-            action="<?php echo htmlspecialchars(Uri::current(), ENT_QUOTES); ?>">
+            action="<?php echo htmlspecialchars(Uri::current() . '?layout=edit', ENT_QUOTES); ?>">
             <input type="hidden" name="<?php echo Session::getFormToken(); ?>" value="1">
             <input type="hidden" name="user_id" value="<?php echo (int)$userId; ?>">
             <label class="hmb-av-lbl" for="hmb-av-file-ed">&#128247; Cambiar foto</label>
@@ -212,7 +212,7 @@ $form = $this->form;
 </div>
 <?php endif; ?>
 <div class="hmb-quiz-sec">
-    <form method="post" action="<?php echo htmlspecialchars(Uri::current(), ENT_QUOTES); ?>">
+    <form method="post" action="<?php echo htmlspecialchars(Uri::current() . '?layout=edit', ENT_QUOTES); ?>">
         <input type="hidden" name="<?php echo Session::getFormToken(); ?>" value="1">
         <input type="hidden" name="user_id" value="<?php echo (int)$userId; ?>">
         <input type="hidden" name="hmb_save_quiz" value="1">

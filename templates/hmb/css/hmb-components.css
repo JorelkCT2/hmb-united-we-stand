@@ -82,7 +82,6 @@ ul.tags.list-inline,ul.tags,.tags.list-inline,div.tags,.article-tags,.com-conten
 @media(max-width:1024px){.hmb-row-noticias .hmb-module-content,.hmb-row-videos .hmb-module-content{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:768px){
 	.hmb-header-top{display:none!important;}
-	.hmb-slider__img{max-height:none!important;height:auto!important;width:100%!important;}
 	.hmb-row-ef-frases-inner{grid-template-columns:1fr!important;}
 	.hmb-row-noticias .hmb-module-content,.hmb-row-videos .hmb-module-content{grid-template-columns:1fr!important;}
 	.hmb-art-banner{width:calc(100% + 4rem)!important;margin-left:-2rem!important;max-width:none!important;}

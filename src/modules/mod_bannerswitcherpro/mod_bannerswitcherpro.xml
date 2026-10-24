@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="6.0" type="module" client="site" method="upgrade">
+    <name>mod_bannerswitcherpro</name>
+    <title>HMB Banner Switcher Pro</title>
+    <description>Slider Heavy Metal Brothers — hasta 10 banners, imágenes Desktop y Mobile, apertura en misma/nueva ventana por slide, Ken Burns, autoplay y dots de calavera.</description>
+    <version>3.1.0</version>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026</creationDate>
+
+    <files>
+        <filename module="mod_bannerswitcherpro">mod_bannerswitcherpro.php</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="mod_bannerswitcherpro" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <config>
+        <fields name="params">
+
+            <!-- ══ GENERAL ══════════════════════════════════════════ -->
+            <fieldset name="general" label="Configuración general">
+
+                <field name="autoplay"
+                       type="radio"
+                       label="Autoplay"
+                       default="1"
+                       layout="joomla.form.field.radio.switcher">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="interval"
+                       type="number"
+                       label="Intervalo entre slides (ms)"
+                       description="Ej: 4500 = 4,5 segundos"
+                       default="4500"
+                       min="1000"
+                       max="15000"
+                       step="500" />
+
+                <field name="link_target"
+                       type="list"
+                       label="Apertura de enlace global"
+                       description="Se aplica a todos los slides que no tengan un ajuste propio"
+                       default="_self">
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+
+                <field name="banner_height"
+                       type="list"
+                       label="Alto del banner (desktop)"
+                       default="200">
+                    <option value="80">Pequeño — 80px</option>
+                    <option value="120">Compacto — 120px</option>
+                    <option value="160">Mediano — 160px</option>
+                    <option value="200">Normal — 200px</option>
+                    <option value="260">Grande — 260px</option>
+                    <option value="320">Muy grande — 320px</option>
+                    <option value="400">Gigante — 400px</option>
+                    <option value="0">Sin límite (tamaño natural)</option>
+                </field>
+
+                <field name="banner_height_mobile"
+                       type="list"
+                       label="Alto del banner (móvil)"
+                       default="96">
+                    <option value="60">Pequeño — 60px</option>
+                    <option value="100">Compacto — 100px</option>
+                    <option value="120">Normal — 120px</option>
+                    <option value="160">Grande — 160px</option>
+                    <option value="200">Muy grande — 200px</option>
+                    <option value="0">Sin límite (tamaño natural)</option>
+                </field>
+
+                <field name="object_fit"
+                       type="list"
+                       label="Ajuste de imagen"
+                       description="Cover rellena todo el espacio. Contain muestra la imagen completa."
+                       default="cover">
+                    <option value="cover">Cover (rellena, puede recortar)</option>
+                    <option value="contain">Contain (imagen completa, con espacios)</option>
+                </field>
+
+            </fieldset>
+
+            <!-- ══ SLIDE 1 ══════════════════════════════════════════ -->
+            <fieldset name="slide1" label="Banner 1">
+                <field name="desktop1" type="media" label="Imagen Desktop" />
+                <field name="mobile1"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link1"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target1"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global (usa ajuste general)</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 2 ══════════════════════════════════════════ -->
+            <fieldset name="slide2" label="Banner 2">
+                <field name="desktop2" type="media" label="Imagen Desktop" />
+                <field name="mobile2"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link2"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target2"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 3 ══════════════════════════════════════════ -->
+            <fieldset name="slide3" label="Banner 3">
+                <field name="desktop3" type="media" label="Imagen Desktop" />
+                <field name="mobile3"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link3"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target3"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 4 ══════════════════════════════════════════ -->
+            <fieldset name="slide4" label="Banner 4">
+                <field name="desktop4" type="media" label="Imagen Desktop" />
+                <field name="mobile4"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link4"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target4"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 5 ══════════════════════════════════════════ -->
+            <fieldset name="slide5" label="Banner 5">
+                <field name="desktop5" type="media" label="Imagen Desktop" />
+                <field name="mobile5"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link5"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target5"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 6 ══════════════════════════════════════════ -->
+            <fieldset name="slide6" label="Banner 6">
+                <field name="desktop6" type="media" label="Imagen Desktop" />
+                <field name="mobile6"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link6"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target6"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 7 ══════════════════════════════════════════ -->
+            <fieldset name="slide7" label="Banner 7">
+                <field name="desktop7" type="media" label="Imagen Desktop" />
+                <field name="mobile7"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link7"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target7"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 8 ══════════════════════════════════════════ -->
+            <fieldset name="slide8" label="Banner 8">
+                <field name="desktop8" type="media" label="Imagen Desktop" />
+                <field name="mobile8"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link8"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target8"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 9 ══════════════════════════════════════════ -->
+            <fieldset name="slide9" label="Banner 9">
+                <field name="desktop9" type="media" label="Imagen Desktop" />
+                <field name="mobile9"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link9"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target9"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+            <!-- ══ SLIDE 10 ══════════════════════════════════════════ -->
+            <fieldset name="slide10" label="Banner 10">
+                <field name="desktop10" type="media" label="Imagen Desktop" />
+                <field name="mobile10"  type="media" label="Imagen Mobile (opcional)" />
+                <field name="link10"    type="url"   label="Enlace" default="" filter="url" />
+                <field name="target10"  type="list"  label="Abrir enlace en" default="">
+                    <option value="">— Global</option>
+                    <option value="_self">Misma ventana</option>
+                    <option value="_blank">Nueva ventana / pestaña</option>
+                </field>
+            </fieldset>
+
+        </fields>
+    </config>
+
+</extension>

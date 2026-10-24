@@ -17,8 +17,8 @@ $app = Factory::getApplication();
 		.hmb-error-code { font-family: 'Metal Mania', cursive; font-size: 140px; line-height: 1; color: var(--fire); text-shadow: 0 0 60px rgba(204,34,0,0.4); }
 		.hmb-error-title { font-family: 'Oswald', sans-serif; font-size: 28px; color: var(--white); margin: 1rem 0; }
 		.hmb-error-msg { color: var(--text-dim); font-size: 16px; max-width: 400px; margin: 0 auto 2rem; }
-		.hmb-error-btn { font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #0A0A0A; background: #CC2200; padding: 12px 28px; text-decoration: none; display: inline-block; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
-		.hmb-error-btn:hover { background: #FF4500; }
+		.hmb-error-btn { font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #fff; background: #B01C00; padding: 12px 28px; text-decoration: none; display: inline-block; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
+		.hmb-error-btn:hover { background: #E02A00; }
 	</style>
 </head>
 <body class="hmb-body">

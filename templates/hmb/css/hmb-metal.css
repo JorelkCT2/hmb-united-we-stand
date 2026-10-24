@@ -140,6 +140,7 @@ blockquote {
 .hmbq-board-tab.is-active { background: #c4161f !important; color: #fff !important; }
 .hmb-ct-btn { color: #fff !important; }
 .cc2-prov { color: var(--tx-dim) !important; }
+.hmb-card-band { color: var(--fire-text) !important; }
 .cc2-eyebrow, .cc2 .cc2-month__h { color: var(--fire-text) !important; }
 
 /* Movimiento reducido */

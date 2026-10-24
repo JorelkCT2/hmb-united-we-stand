@@ -147,8 +147,8 @@ blockquote {
 
 /* Textura sutil de metal cepillado sobre toda la página (sin imagen: gradientes) */
 body.hmb-body::before {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: .55;
-  background: url('../images/metal/placas.webp') repeat 0 0 / 384px 384px;
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: .16;
+  background: url('../images/metal/acero.webp') center top / cover no-repeat;
 }
 
 /* Menú principal: raya de fuego bajo el enlace activo y brillo al pasar */
@@ -208,7 +208,7 @@ body.hmb-body::after {
 /* Barra de menú: placa de acero con filo de fuego */
 .hmb-header-nav {
   background-image: linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.86)), url('../images/metal/acero.webp');
-  background-size: auto, 256px; background-color: #0d0d0d;
+  background-size: auto, cover; background-position: center, center 30%; background-repeat: no-repeat; background-color: #0d0d0d;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 6px 26px rgba(0,0,0,.75), 0 2px 0 #5c0000, 0 3px 16px rgba(204,34,0,.35);
 }
 
@@ -217,8 +217,7 @@ body.hmb-body::after {
 
 /* Tarjetas: placa de acero oscuro bajo el contenido */
 .hmb-card, .hmb-module, .hmb-component-inner {
-  background-image: linear-gradient(180deg, rgba(20,20,20,.88), rgba(8,8,8,.94)), url('../images/metal/placas.webp');
-  background-size: auto, 300px;
+  background-image: linear-gradient(180deg, rgba(22,22,22,.9), rgba(8,8,8,.95));
 }
 
 /* Botones principales: acero con filo rojo y brillo al pasar */
@@ -232,19 +231,25 @@ body.hmb-body::after {
 .hmb-footer {
   background-color: #070707;
   background-image: linear-gradient(180deg, rgba(0,0,0,.55), rgba(8,0,0,.9) 55%, rgba(5,0,0,.96)), url('../images/metal/acero.webp');
-  background-size: auto, 300px; margin-top: 170px; isolation: isolate;
+  background-size: auto, cover; background-position: center, center bottom; background-repeat: no-repeat;
+  margin-top: 220px; isolation: isolate;
 }
 .hmb-footer::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 180px; z-index: -1; pointer-events: none;
-  background: url('../images/metal/fuego.webp') center bottom / 1000px auto repeat-x;
-  -webkit-mask-image: linear-gradient(0deg, #000 35%, transparent 100%); mask-image: linear-gradient(0deg, #000 35%, transparent 100%);
-  filter: saturate(1.1) brightness(.9);
-  animation: hmb-llama 5.5s ease-in-out infinite alternate;
+  content: ''; position: absolute; left: 0; right: 0; bottom: calc(100% - 110px); height: 440px; z-index: -1; pointer-events: none;
+  background:
+    url('../images/metal/fuego2.webp') 0 100% / 1100px auto repeat-x,
+    url('../images/metal/fuego.webp') 0 100% / 1300px auto repeat-x;
+  -webkit-mask-image: linear-gradient(0deg, transparent 0, #000 26%, #000 48%, transparent 100%); mask-image: linear-gradient(0deg, transparent 0, #000 26%, #000 48%, transparent 100%);
+  transform-origin: 50% 100%;
+  animation: hmb-llama-x 50s linear infinite, hmb-llama-y 3.4s ease-in-out infinite alternate, hmb-llama-luz 2.1s ease-in-out infinite alternate;
 }
-@keyframes hmb-llama { from { transform: translateY(0) scaleY(1); } to { transform: translateY(2px) scaleY(1.05); } }
+/* Las capas se desplazan una anchura exacta de tesela: el bucle no tiene salto */
+@keyframes hmb-llama-x { from { background-position: 0 100%, 0 100%; } to { background-position: 1100px 100%, -1300px 100%; } }
+@keyframes hmb-llama-y { from { transform: scaleY(1); } to { transform: scaleY(1.12); } }
+@keyframes hmb-llama-luz { from { filter: brightness(.85) saturate(1.05); } to { filter: brightness(1.25) saturate(1.2); } }
 
 /* Brasas: puntos de luz que suben desde el pie */
-.hmb-footer::before { z-index: 1; }
+.hmb-footer::before { display: none; } /* la linea roja cruzaba las llamas */
 .hmb-footer .hmb-container::before, .hmb-footer .container::before {
   content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 260px; pointer-events: none; z-index: -1;
   background:

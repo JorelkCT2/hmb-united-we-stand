@@ -156,9 +156,9 @@ if ($isOwn && $esPost && !empty($_FILES['hmb_avatar']['name'])) {
                     <label class="hmb-file-lbl" for="hmb_av_inp">&#128247; Elegir imagen</label>
                     <input type="file" id="hmb_av_inp" name="hmb_avatar"
                         style="display:none" accept="image/jpeg,image/png,image/gif,image/webp"
-                        onchange="document.getElementById('hmb-fn').textContent=this.files[0]?.name||''">
+                        onchange="document.getElementById('hmb-fn').textContent=this.files[0]?.name||'';if(this.files[0]){this.form.submit();}">
                     <div id="hmb-fn" class="hmb-fn"></div>
-                    <button type="submit" class="hmb-upload-btn">&#8593; Subir foto</button>
+                    <button type="submit" class="hmb-upload-btn" onclick="var i=document.getElementById('hmb_av_inp');if(!i.files.length){i.click();return false;}">&#8593; Subir foto</button>
                 </form>
             </div>
             <?php endif; ?>

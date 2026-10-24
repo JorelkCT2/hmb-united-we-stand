@@ -198,9 +198,10 @@ $form = $this->form;
                         var r=new FileReader();
                         r.onload=function(e){document.getElementById('hmb-ed-av').src=e.target.result};
                         r.readAsDataURL(this.files[0]);
+                        this.form.submit();
                     }">
             <div id="hmb-av-fn-ed" class="hmb-av-fname"></div>
-            <button type="submit" class="hmb-av-upbtn">&#8593; Subir</button>
+            <button type="submit" class="hmb-av-upbtn" onclick="var i=document.getElementById('hmb-av-file-ed');if(!i.files.length){i.click();return false;}">&#8593; Subir</button>
         </form>
     </div>
 </div>

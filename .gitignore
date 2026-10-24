@@ -36,3 +36,7 @@ dist/
 __pycache__/
 
 herramientas/salida/
+
+# assets propios del template (el resto de images/ es contenido del sitio)
+!templates/hmb/images/
+!templates/hmb/images/**

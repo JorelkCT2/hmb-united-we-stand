@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_hmbfiles</name>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026-10</creationDate>
+    <version>1.0.0</version>
+    <description>Gestor de archivos multimedia (images/ y media/) para super administradores.</description>
+    <namespace path="src">HeavyMetalBrothers\Component\Hmbfiles</namespace>
+    <administration>
+        <files folder="admin">
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>js</folder>
+            <folder>css</folder>
+            <filename>access.xml</filename>
+        </files>
+        <menu>HMB Archivos</menu>
+    </administration>
+</extension>

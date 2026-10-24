@@ -52,6 +52,7 @@ class AreasHelper
                 'items'  => [
                     ['Fotos', 'Álbumes de fotos.', 'option=com_hmgallery', '#__hmgallery_albums'],
                     ['Vídeos', 'Vídeos y carpetas.', 'option=com_hmb_videos&view=videos', '#__hmb_videos'],
+                    ['Archivos', 'Gestor de archivos de images/ y media/ (solo super administradores).', 'option=com_hmbfiles', ''],
                 ],
             ],
             'comunidad' => [

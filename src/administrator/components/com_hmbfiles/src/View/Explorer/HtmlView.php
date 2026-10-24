@@ -21,7 +21,7 @@ class HtmlView extends BaseHtmlView
         $doc  = Factory::getApplication()->getDocument();
         $root = Uri::root(true) . '/administrator/components/com_hmbfiles';
 
-        $doc->addStyleSheet($root . '/css/files.css?v=100');
+        $doc->addStyleSheet($root . '/css/files.css?v=101');
         $doc->addScript($root . '/js/files.js?v=100', [], ['defer' => true]);
 
         $this->token = Session::getFormToken();

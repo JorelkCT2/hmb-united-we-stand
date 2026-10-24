@@ -93,3 +93,10 @@
 .cand-pts{color:#b58900;font-weight:700}
 .cand-res{font-size:12px;color:#666;line-height:1.4}
 #hmb-cand-card .hmb-import-btn{margin-top:14px}
+
+/* Tema oscuro del administrador: tarjetas claras con colores explícitos */
+#hmb-wrap .hmb-card,#hmb-wrap .hmb-modal{color:#1a1a2e;color-scheme:light}
+#hmb-wrap .hmb-table td,#hmb-wrap .cand,#hmb-wrap .cand-txt,#hmb-wrap .hmb-row,#hmb-wrap .hmb-body{color:#1a1a2e}
+#hmb-wrap .hmb-btn,#hmb-wrap .hmb-chk{color:#333}
+#hmb-wrap .hmb-add,#hmb-wrap .hmb-save{color:#fff}
+#hmb-wrap .hmb-head,#hmb-wrap .hmb-head h2,#hmb-wrap .hmb-head h3{color:#fff}

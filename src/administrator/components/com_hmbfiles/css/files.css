@@ -42,3 +42,16 @@
 .hf-arbol label{display:block;padding:3px 4px;cursor:pointer;font-size:13px}.hf-arbol label:hover{background:#f5f5f5}
 
 .hf-app [hidden]{display:none !important}
+
+/* Tema oscuro del administrador: el gestor es una tarjeta clara con todos los colores explícitos */
+.hf-app{background:#fff;color:#1a1a2e;color-scheme:light;padding:16px 18px;border-radius:8px}
+.hf-app button,.hf-app input,.hf-app select{font-family:inherit}
+.hf-tab{color:#333}.hf-tab.on{color:#fff}
+.hf-tab:hover:not(.on){background:#eaeaea}
+.hf-t td{color:#1a1a2e}
+.hf-sel-acts,.hf-sel-acts span{color:#333}
+.hf-i{color:#333}
+.hf-modal,.hf-modal h3,.hf-modal p,.hf-modal label{color:#1a1a2e}
+.hf-modal-bg .hf-btn{color:#333}.hf-modal-bg .hf-pri{color:#fff}
+.hf-q span{color:#333}
+.hf-crumbs b,.hf-crumbs small{color:#1a1a2e}

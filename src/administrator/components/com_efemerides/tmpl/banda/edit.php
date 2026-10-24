@@ -72,6 +72,11 @@ $siteRoot      = rtrim(Uri::root(), '/');
             <?php echo $this->form->renderField('descripcion'); ?>
           </div>
 
+          <div class="mb-3">
+            <label class="form-label text-light">Discografía destacada (lista con un álbum por línea: «Título (año)»)</label>
+            <?php echo $this->form->renderField('discografia'); ?>
+          </div>
+
         </div>
       </div>
     </div>

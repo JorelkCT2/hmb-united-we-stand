@@ -1008,7 +1008,7 @@
     height: 100%;
     border: 0;
     display: block;
-    background: #fff;
+    background: var(--dark, #0a0a0a);
     transition: opacity .2s ease;
 }
 .mm-modal__loader {

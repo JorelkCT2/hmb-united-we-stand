@@ -10,6 +10,10 @@ class HtmlView extends BaseHtmlView
     public ?object $banda    = null;
     public array   $miembros = [];
     public array   $efems    = [];
+    public array   $proximos = [];
+    public array   $pasados  = [];
+    public bool    $modal    = false;
+    public string  $urlMapa  = '';
     public string  $componentBase = '';
 
     public function display($tpl = null): void
@@ -68,6 +72,22 @@ class HtmlView extends BaseHtmlView
              ORDER BY e.fecha_evento DESC LIMIT 20'
         );
         $this->efems = $db->loadObjectList() ?: [];
+
+        // Festivales y conciertos del mapa donde figura la banda
+        try {
+            $like = $db->quote('%' . $db->escape($this->banda->nombre, true) . '%', false);
+            $cols = 'id, name, event_type, start_date, end_date, city, country_code, website';
+            $db->setQuery('SELECT ' . $cols . ' FROM #__metalmap_events WHERE state = 1 AND bands LIKE ' . $like
+                . ' AND COALESCE(end_date, start_date) >= CURDATE() ORDER BY start_date ASC LIMIT 6');
+            $this->proximos = $db->loadObjectList() ?: [];
+            $db->setQuery('SELECT ' . $cols . ' FROM #__metalmap_events WHERE state = 1 AND bands LIKE ' . $like
+                . ' AND COALESCE(end_date, start_date) < CURDATE() ORDER BY start_date DESC LIMIT 3');
+            $this->pasados = $db->loadObjectList() ?: [];
+            $this->urlMapa = \Joomla\CMS\Router\Route::_('index.php?option=com_metalmap&view=map');
+        } catch (\Throwable $e) {
+        }
+
+        $this->modal = Factory::getApplication()->getInput()->getInt('hmbmodal', 0) === 1;
 
         // URL base del componente
         try {

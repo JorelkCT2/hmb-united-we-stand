@@ -9,6 +9,7 @@
     <field name="fecha_formacion" type="calendar" label="Año/fecha de formación" format="%Y-%m-%d" filter="date" class="form-control" />
     <field name="fecha_disolucion" type="calendar" label="Fecha de disolución" format="%Y-%m-%d" filter="date" class="form-control" />
     <field name="descripcion" type="editor" label="Descripción / Historia" filter="safehtml" />
+    <field name="discografia" type="editor" label="Discografía destacada" description="Lista (&lt;ul&gt;&lt;li&gt;Álbum (año)&lt;/li&gt;...)" filter="safehtml" />
     <field name="state" type="list" label="Estado" class="form-select">
         <option value="1">Publicado</option>
         <option value="0">No publicado</option>

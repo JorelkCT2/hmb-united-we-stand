@@ -526,7 +526,8 @@
             modalLoader.hidden = false;
             modalFrame.style.opacity = '0';
             // URL TAL CUAL la generó el servidor (sin tmpl=component)
-            modalFrame.src = item.url;
+            // La ficha se pide en modo modal (hmbmodal=1): la plantilla solo devuelve el contenido, con su estilo oscuro
+            modalFrame.src = item.url + (item.url.indexOf('?') >= 0 ? '&' : '?') + 'hmbmodal=1';
 
             modalPrev.disabled = (mmIndex === 0);
             modalNext.disabled = (mmIndex === mmList.length - 1);
@@ -536,6 +537,8 @@
             if (!modal || !Array.isArray(list) || !list.length) return;
             mmList  = list;
             mmIndex = startIdx || 0;
+            // El modal cuelga de <body>: así queda por encima de la cabecera fija de la plantilla
+            if (modal.parentNode !== document.body) document.body.appendChild(modal);
             modal.hidden = false;
             modal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
@@ -557,7 +560,6 @@
         //  2. inyectar CSS para ocultar el chrome del sitio (header/footer/nav)
         if (modalFrame) {
             modalFrame.addEventListener('load', () => {
-                injectStripChromeInIframe();
                 modalLoader.hidden = true;
                 modalFrame.style.opacity = '1';
             });

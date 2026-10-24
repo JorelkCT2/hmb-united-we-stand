@@ -88,6 +88,27 @@ elseif ($hasSidebarLeft)  $mainClass = 'hmb-main-left';
 elseif ($hasSidebarRight) $mainClass = 'hmb-main-right';
 
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
+
+// Ficha dentro de un iframe (modal del mapa): solo el contenido del componente, con el mismo estilo oscuro
+if ($app->input->getInt('hmbmodal', 0) === 1) {
+	$this->setMetaData('robots', 'noindex, nofollow');
+	?><!DOCTYPE html>
+<html lang="<?php echo $lang; ?>" dir="<?php echo $dir; ?>">
+<head>
+	<meta charset="utf-8">
+	<jdoc:include type="metas" />
+	<jdoc:include type="styles" />
+	<jdoc:include type="scripts" />
+	<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<style>:root { <?php echo $cssVars; ?> } html,body{background:var(--dark,#0a0a0a)!important;margin:0}</style>
+	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/hmb-components.css?v=<?php echo (int) @filemtime(__DIR__ . '/css/hmb-components.css'); ?>">
+</head>
+<body class="hmb-body hmb-modal-body <?php echo $colorScheme; ?>-scheme">
+	<jdoc:include type="component" />
+</body>
+</html><?php
+	return;
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang; ?>" dir="<?php echo $dir; ?>">

@@ -23,7 +23,10 @@ $redirectRegister = (string) $params->get('redirect_after_register', '') ?: Uri:
 $showRemember     = (bool) $params->get('show_remember', true);
 $showForgotPw     = (bool) $params->get('show_forgot_password', true);
 $showForgotUser   = (bool) $params->get('show_forgot_username', true);
-$redirectLogin    = (string) $params->get('redirect_after_login', '')  ?: Uri::root();
+if (!class_exists('ModHmbRegisterHelper')) {
+    require_once JPATH_ROOT . '/modules/mod_hmb_register/helper.php';
+}
+$redirectLogin    = ModHmbRegisterHelper::destinoLogin();
 $redirectLogout   = (string) $params->get('redirect_after_logout', '') ?: Uri::root() . 'index.php/registro?hmbbye=1';
 
 // ── Google ─────────────────────────────────────────────────

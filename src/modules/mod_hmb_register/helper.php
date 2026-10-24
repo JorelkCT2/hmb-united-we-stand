@@ -320,6 +320,24 @@ class ModHmbRegisterHelper
     }
 
     /** Solo se permite volver a una URL del propio sitio; cualquier otra cosa cae a la portada. */
+    /**
+     * Destino tras iniciar sesion: la misma pagina en la que esta la persona.
+     * Si esta en las paginas de registro/acceso (o vuelve de cerrar sesion) va a la portada.
+     * Se usa el HOST ACTUAL para no perder la sesion al saltar entre www y sin www.
+     */
+    public static function destinoLogin(): string
+    {
+        $uri  = Uri::getInstance();
+        $raiz = rtrim($uri->toString(['scheme', 'host', 'port']), '/') . '/';
+
+        if (preg_match('#/(registro|component/users|login|logout)(/|$)#i', (string) $uri->getPath())
+            || $uri->getVar('hmbbye') !== null || $uri->getVar('rdr') !== null) {
+            return $raiz;
+        }
+
+        return $uri->toString(['scheme', 'host', 'port', 'path', 'query']);
+    }
+
     public static function redirectSeguro(string $url): string
     {
         $raiz = Uri::root();

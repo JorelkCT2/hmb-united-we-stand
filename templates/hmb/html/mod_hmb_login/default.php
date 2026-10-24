@@ -11,7 +11,8 @@ use Joomla\CMS\Session\Session;
 
 // HMB — Retornos forzados a las rutas personalizadas (evita component/users/*)
 $hmbRoot      = rtrim(Uri::root(), '/');
-$hmbReturnIn  = base64_encode($hmbRoot . '/index.php/registro/perfil-usuario');
+// Tras conectar: la misma pagina (o portada si esta en registro/acceso). Lo calcula el modulo.
+$hmbReturnIn  = base64_encode(!empty($redirectLogin) ? $redirectLogin : $hmbRoot . '/');
 $hmbReturnOut = base64_encode($hmbRoot . '/index.php/registro?hmbbye=1');
 $hmbToken     = Session::getFormToken();
 $return       = $hmbReturnIn;

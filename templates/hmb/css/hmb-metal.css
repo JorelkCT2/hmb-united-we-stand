@@ -191,6 +191,9 @@ body.hmb-body::before {
 .hmb-colab-item:hover { box-shadow: 0 0 18px rgba(204, 34, 0, .45); }
 .hmb-colab-nombre { color: var(--tx-dim) !important; }
 
+/* El perfil de usuario usa la clase .hmb-hero, que hmb-base.css define como portada de 60vh: dejaba la ficha medio vacia */
+.hmb-pf .hmb-hero { min-height: 0 !important; overflow: visible !important; background-color: transparent; }
+
 /* Movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

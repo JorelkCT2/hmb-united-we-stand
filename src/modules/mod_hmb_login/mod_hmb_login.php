@@ -44,7 +44,12 @@ $registerUrl       = $isJoomlaDefault
 $redirectLogin     = (string) $params->get('redirect_after_login', '');
 $redirectLogout    = (string) $params->get('redirect_after_logout', '');
 
-if (empty($redirectLogin))  $redirectLogin  = Uri::root();
+if (!class_exists('ModHmbRegisterHelper')) {
+    require_once JPATH_ROOT . '/modules/mod_hmb_register/helper.php';
+}
+
+// Tras conectar se queda en la pagina actual (o portada si esta en registro/acceso); ignora el parametro fijo.
+$redirectLogin = ModHmbRegisterHelper::destinoLogin();
 if (empty($redirectLogout)) $redirectLogout = Uri::root() . '?hmbbye=1';
 
 $justLoggedOut = (int) $app->getInput()->getInt('hmbbye', 0) === 1;

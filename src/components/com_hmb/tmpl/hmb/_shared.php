@@ -43,7 +43,8 @@ if ($rdrParam !== '') {
 }
 
 // El login (com_users) vuelve al mismo destino que el registro si llega ?rdr.
-$returnLogin = base64_encode($registerDest);
+// Conectar desde /registro lleva a la portada (o al ?rdr pedido); el registro nuevo sigue yendo al perfil.
+$returnLogin = base64_encode($rdrParam !== '' ? $registerDest : $reqRoot);
 
 // ── Leer params del módulo mod_hmb_register desde BD ──────
 $q = $db->getQuery(true)->select('params')->from('#__modules')

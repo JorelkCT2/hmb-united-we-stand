@@ -193,6 +193,10 @@ body.hmb-body::before {
 
 /* El perfil de usuario usa la clase .hmb-hero, que hmb-base.css define como portada de 60vh: dejaba la ficha medio vacia */
 .hmb-pf .hmb-hero { min-height: 0 !important; overflow: visible !important; background-color: transparent; }
+/* El desplegable de la foto sale del encabezado: tiene que dibujarse por encima de las filas de datos y de las acciones */
+.hmb-pf .hmb-hero { z-index: 20 !important; }
+.hmb-pf .hmb-av-drop { z-index: 30; }
+.hmb-pf .hmb-av-drop { left: 0 !important; transform: none !important; max-width: min(260px, calc(100vw - 80px)); }
 
 /* ==========================================================================
    6 · METAL v3 — acero remachado, fuego y emblema (assets en ../images/metal/)

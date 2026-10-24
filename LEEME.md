@@ -11,3 +11,5 @@
 - El panel flotante **ACCESO** (`#hmb-float-tab`) se maneja SOLO en `templates/hmb/js/template.js`. Nunca añadir otro `onclick`/`addEventListener` sobre él (en `index.php`, módulos o componentes): abre y cierra a la vez y el botón deja de funcionar.
 - `hmb-metal.css` es la última hoja de estilos del template; los retoques visuales van ahí, no en los bloques `<style>` de cada extensión.
 - Los formularios de `com_users/profile/edit.php` deben enviarse a `…?layout=edit`, si no la subida de foto cae en la vista de perfil y se ignora.
+- La ficha de perfil (`.hmb-pf`) usa la clase `.hmb-hero`, que también existe como portada en `hmb-base.css`. Cualquier cambio de alto o `z-index` en `.hmb-hero` debe probarse con el desplegable de la foto (lápiz): sale del encabezado y debe quedar POR ENCIMA de las filas de datos (`.hmb-pf .hmb-hero { z-index: 20 }` en `hmb-metal.css`).
+- Para probar subidas de foto: clic real de ratón en "Subir foto" (no `form.submit()`), y comprobar con `document.elementFromPoint` que el botón es lo que recibe el clic.

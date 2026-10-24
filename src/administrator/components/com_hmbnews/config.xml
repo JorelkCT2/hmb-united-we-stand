@@ -3,13 +3,19 @@
     <fields name="params">
         <fieldset name="basic">
             <field name="api_key" type="text" label="API Key Anthropic" size="80" maxlength="200" filter="raw"/>
+            <field name="modelo" type="text" label="Modelo de IA (solo redacta)" default="claude-haiku-4-5" description="Haiku es el mas barato; la IA ya no busca en la web, solo redacta las noticias que elijas."/>
             <field name="default_category" type="number" label="Categoria destino" default="21"/>
-            <field name="articles_per_run" type="number" label="Articulos por importacion" default="2" min="1" max="15"/>
             <field name="article_state" type="list" label="Estado de publicacion" default="0">
-                <option value="0">Despublicado</option>
+                <option value="0">Despublicado (borrador para revisar)</option>
                 <option value="1">Publicado</option>
             </field>
             <field name="article_language" type="text" label="Idioma" default="es-ES"/>
+        </fieldset>
+        <fieldset name="filtros" label="Filtros de relevancia">
+            <field name="dias_max" type="number" label="Antiguedad maxima (dias)" default="7" min="1" max="60"/>
+            <field name="prioritarias" type="textarea" rows="3" cols="60" label="Temas / bandas prioritarias" description="Separadas por comas. Suben la puntuacion (las bandas de la casa ya cuentan solas)." default=""/>
+            <field name="excluir" type="textarea" rows="4" cols="60" label="Palabras que descartan una noticia" description="Separadas por comas. Si queda vacio se usa la lista por defecto (ofertas, sorteos, famosos...)." default=""/>
+            <field name="generalistas" type="textarea" rows="2" cols="60" label="Fuentes generalistas" description="Dominios cuyas noticias deben mencionar metal/rock duro para entrar (separados por comas). Si queda vacio: loudwire, guitarworld, kerrang, rockandblog, loudersound, metalhammer." default=""/>
         </fieldset>
     </fields>
 </config>

@@ -78,3 +78,18 @@
 .hmb-err{color:#c62828;font-size:13px;padding:12px}
 .hmb-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center}
 .hmb-modal{background:#fff;border-radius:8px;width:400px;max-width:95vw;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.25)}
+
+/* v2: candidatas */
+.hmb-chk{display:flex;align-items:center;gap:8px;font-size:13px;color:#333;cursor:pointer}
+.cand{display:flex;gap:12px;padding:10px 4px;border-bottom:1px solid #eee;cursor:pointer;align-items:flex-start}
+.cand:hover{background:#fafafa}
+.cand-chk{margin-top:6px;flex-shrink:0}
+.cand-img{width:96px;height:64px;object-fit:cover;border-radius:4px;flex-shrink:0;background:#eee}
+.cand-noimg{display:block}
+.cand-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.cand-txt b{font-size:13px;line-height:1.35;color:#1a1a2e}
+.cand-meta{font-size:11px;color:#888}
+.cand-meta a{color:#c62828}
+.cand-pts{color:#b58900;font-weight:700}
+.cand-res{font-size:12px;color:#666;line-height:1.4}
+#hmb-cand-card .hmb-import-btn{margin-top:14px}

@@ -23,8 +23,8 @@ class HtmlView extends BaseHtmlView
         $doc  = $app->getDocument();
         $root = Uri::root(true);
 
-        $doc->addStyleSheet($root . '/administrator/components/com_hmbnews/css/admin.css?v=126');
-        $doc->addScript($root . '/administrator/components/com_hmbnews/js/admin.js?v=126');
+        $doc->addStyleSheet($root . '/administrator/components/com_hmbnews/css/admin.css?v=200');
+        $doc->addScript($root . '/administrator/components/com_hmbnews/js/admin.js?v=201');
 
         // Leer params DIRECTAMENTE de BD (saltarse el cache de ComponentHelper)
         $db = Factory::getDbo();
@@ -38,7 +38,6 @@ class HtmlView extends BaseHtmlView
         $this->apiKey   = (string)($p['api_key'] ?? '');
         $this->catId    = (int)($p['default_category'] ?? 21);
         $this->num      = (int)($p['articles_per_run'] ?? 2);
-        if ($this->num > 2) $this->num = 2; // default operativo: 2
         $this->ajaxBase = 'index.php?option=com_hmbnews&format=json&' . $this->token . '=1&task=ajax.';
 
         ToolbarHelper::title('HMB Importador de Noticias', 'newspaper');

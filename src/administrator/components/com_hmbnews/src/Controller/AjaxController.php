@@ -7,6 +7,7 @@ use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Session\Session;
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\Component\Hmbnews\Administrator\Helper\FeedHelper;
 
 class AjaxController extends BaseController
 {
@@ -43,6 +44,12 @@ class AjaxController extends BaseController
                     $db->setQuery('ALTER TABLE `#__hmb_imported` ADD COLUMN `news_date` date NULL DEFAULT NULL AFTER `imported_at`')->execute();
                 }
             } catch (\Throwable $e) {}
+            try {
+                $scols = $db->setQuery('SHOW COLUMNS FROM `#__hmb_sources`')->loadColumn();
+                if (!in_array('feed_url', $scols, true)) {
+                    $db->setQuery('ALTER TABLE `#__hmb_sources` ADD COLUMN `feed_url` varchar(500) NOT NULL DEFAULT \'\' AFTER `url`')->execute();
+                }
+            } catch (\Throwable $e) {}
             $n = (int)$db->setQuery('SELECT COUNT(*) FROM `#__hmb_sources`')->loadResult();
             if ($n === 0) {
                 $db->setQuery("INSERT IGNORE INTO `#__hmb_sources`(`name`,`url`,`active`,`ordering`)VALUES('Loudwire','loudwire.com',1,1),('Metal Injection','metalinjection.net',1,2),('Blabbermouth','blabbermouth.net',0,3),('Kerrang','kerrang.com',0,4),('Revolver','revolvermag.com',0,5),('Metal Hammer','metalhammer.com',0,6),('Guitar World','guitarworld.com',0,7)")->execute();
@@ -74,7 +81,7 @@ class AjaxController extends BaseController
             $sortBy = Factory::getApplication()->input->getString('sort', 'imported');
             $orderCol = ($sortBy === 'news') ? 'i.news_date DESC, i.imported_at DESC' : 'i.imported_at DESC';
             $q  = $db->getQuery(true)
-                ->select(['i.id AS import_id', 'i.article_id', 'i.source_site', 'i.source_url', 'i.imported_at', 'i.news_date', 'c.title', 'c.alias', 'c.state', 'c.images'])
+                ->select(['i.id AS import_id', 'i.article_id', 'i.source_site', 'i.source_url', 'i.imported_at', 'i.news_date', 'c.title', 'c.alias', 'c.state', 'c.images', 'c.metakey'])
                 ->from('#__hmb_imported AS i')
                 ->leftJoin('#__content AS c ON c.id = i.article_id')
                 ->order($orderCol);
@@ -82,7 +89,8 @@ class AjaxController extends BaseController
             foreach ($rows as &$r) {
                 $imgs = json_decode($r['images'] ?? '{}', true);
                 $r['thumb'] = $imgs['image_intro'] ?? '';
-                unset($r['images']);
+                $r['hashtags'] = FeedHelper::hashtags((string) ($r['metakey'] ?? ''));
+                unset($r['images'], $r['metakey']);
             }
             $this->jsonOut(['success' => true, 'articles' => $rows]);
         } catch (\Throwable $e) {
@@ -153,7 +161,7 @@ class AjaxController extends BaseController
             $url  = trim($inp->post->getString('url', ''));
             if (!$id || !$name || !$url) { $this->jsonOut(['success' => false, 'message' => 'Datos incompletos']); return; }
             $db = $this->db();
-            $db->setQuery($db->getQuery(true)->update('#__hmb_sources')->set('name = ' . $db->quote($name))->set('url = ' . $db->quote($url))->where('id = ' . $id))->execute();
+            $db->setQuery($db->getQuery(true)->update('#__hmb_sources')->set('name = ' . $db->quote($name))->set('url = ' . $db->quote($url))->set('feed_url = ' . $db->quote(''))->where('id = ' . $id))->execute();
             $this->jsonOut(['success' => true]);
         } catch (\Throwable $e) {
             $this->jsonOut(['success' => false, 'message' => 'updateSource: ' . $e->getMessage()]);
@@ -205,434 +213,346 @@ class AjaxController extends BaseController
         }
     }
 
-    public function importArticles(): void
+    // ── Ajustes ──────────────────────────────────────────────────────────
+
+    private function ajustes(): array
+    {
+        // Se leen directamente de BD para saltarse la cache de ComponentHelper
+        $raw = $this->db()->setQuery("SELECT params FROM `#__extensions` WHERE element='com_hmbnews' AND type='component'")->loadResult();
+        $p   = json_decode($raw ?? '{}', true);
+
+        if (!is_array($p)) {
+            $p = [];
+        }
+
+        return (isset($p['params']) && is_array($p['params'])) ? $p['params'] : $p;
+    }
+
+    // ── 1) BUSCAR (gratis: solo RSS, sin IA) ─────────────────────────────
+
+    public function buscar(): void
     {
         try {
             if (!$this->csrf()) { $this->jsonOut(['success' => false, 'message' => 'Token invalido']); return; }
-            @set_time_limit(180);
-
-            $app    = $this->app();
-            $inp    = $app->input;
-
-            // Leer params DIRECTAMENTE de BD (evitar cache de ComponentHelper)
-            $db0 = $this->db();
-            $rawParams = $db0->setQuery("SELECT params FROM `#__extensions` WHERE element='com_hmbnews' AND type='component'")->loadResult();
-            $p = json_decode($rawParams ?? '{}', true);
-            if (!is_array($p)) $p = [];
-            if (isset($p['params']) && is_array($p['params'])) $p = $p['params'];
-
-            $apiKey = trim((string)($p['api_key'] ?? ''));
-            $catId  = (int)($inp->post->getInt('catid', 0) ?: ($p['default_category'] ?? 21));
-            $num    = min(15, max(1, (int)($inp->post->getInt('num', 0) ?: ($p['articles_per_run'] ?? 2))));
-            $type   = $inp->post->getString('content_type', 'news');
-            $region = $inp->post->getString('region', 'all');
-            $state  = (int)($p['article_state'] ?? 0);
-            $lang   = (string)($p['article_language'] ?? 'es-ES') ?: 'es-ES';
-
-            if (!$apiKey) {
-                $this->jsonOut(['success' => false, 'message' => 'Configura la API Key en Ajustes del componente.']);
-                return;
-            }
-
-            $db = $this->db();
+            @set_time_limit(120);
             $this->ensureTables();
-            $srcs = $db->setQuery($db->getQuery(true)->select(['name', 'url'])->from('#__hmb_sources')->where('active = 1')->order('ordering ASC'))->loadAssocList() ?? [];
-            if (empty($srcs)) {
+
+            $p    = $this->ajustes();
+            $inp  = $this->app()->input->post;
+            $dias = max(1, min(60, $inp->getInt('dias', 0) ?: (int) ($p['dias_max'] ?? 7)));
+            $solo = $inp->getInt('solo_prioritarias', 0) === 1;
+            $q    = FeedHelper::normalizar(trim($inp->getString('q', '')));
+
+            $excluir  = FeedHelper::lista((string) (($p['excluir'] ?? '') !== '' ? $p['excluir'] : FeedHelper::basuraPorDefecto()));
+            $priori   = FeedHelper::lista((string) ($p['prioritarias'] ?? ''));
+            $generalistas = FeedHelper::lista((string) (($p['generalistas'] ?? '') !== '' ? $p['generalistas'] : 'loudwire.com, guitarworld.com, kerrang.com, rockandblog.net, loudersound.com, metalhammer.com'));
+
+            $db     = $this->db();
+            $bandas = array_map([FeedHelper::class, 'normalizar'], $db->setQuery('SELECT name FROM `#__artistas` WHERE state = 1')->loadColumn() ?: []);
+            $srcs   = $db->setQuery('SELECT id, name, url, feed_url FROM `#__hmb_sources` WHERE active = 1 ORDER BY ordering ASC')->loadAssocList() ?: [];
+
+            if (!$srcs) {
                 $this->jsonOut(['success' => false, 'message' => 'No hay fuentes activas. Activa al menos una.']);
                 return;
             }
-            // Aleatorizar el orden de fuentes en cada ejecucion para forzar variedad
-            shuffle($srcs);
-            $sourceLines = [];
+
+            // URLs ya importadas y titulos recientes (para no repetir)
+            $hechas = [];
+            foreach ($db->setQuery('SELECT source_url FROM `#__hmb_imported`')->loadColumn() ?: [] as $u) {
+                $hechas[preg_replace('#[?\#].*$#', '', rtrim((string) $u, '/'))] = true;
+            }
+
+            $limite = time() - $dias * 86400;
+            $todas  = [];
+            $informe = [];
+
             foreach ($srcs as $s) {
-                $sourceLines[] = '- ' . $s['name'] . ' (' . $s['url'] . ')';
-            }
-            $sitesFormal = implode("\n", $sourceLines);
-            $sites = implode(', ', array_column($srcs, 'url'));
+                $feed = trim((string) $s['feed_url']);
+                $xml  = '';
 
-            // Variacion temporal en la query para evitar siempre los mismos resultados
-            $today    = date('Y-m-d');
-
-            // Region seleccionada
-            $regionMap = [
-                'europe'  => 'EUROPA: prioriza noticias sobre bandas europeas, festivales europeos (Wacken, Hellfest, Download, Resurrection Fest, Graspop), giras por Europa y lanzamientos de bandas de Europa',
-                'northam' => 'NORTEAMERICA: prioriza noticias sobre bandas de EEUU y Canada, festivales norteamericanos, giras por Norteamerica',
-                'southam' => 'SUDAMERICA Y LATINOAMERICA: prioriza noticias sobre bandas latinoamericanas, festivales en Sudamerica (Rock al Parque, Knotfest Chile/Brasil), giras por Latinoamerica, y bandas internacionales visitando la region',
-                'all'     => 'INTERNACIONAL: cualquier region del mundo',
-            ];
-            $regionText = $regionMap[$region] ?? $regionMap['all'];
-            $thisWeek = date('W \d\e\l Y');
-
-            // Recuperar titulos y URLs ya importados (ultimas 150) para que Claude los evite
-            $alreadyImported = $db->setQuery(
-                $db->getQuery(true)
-                    ->select(['c.title', 'i.source_url', 'i.source_site'])
-                    ->from('#__hmb_imported AS i')
-                    ->leftJoin('#__content AS c ON c.id = i.article_id')
-                    ->order('i.imported_at DESC')
-                    ->setLimit(150)
-            )->loadAssocList() ?? [];
-            $skipTitles = [];
-            $skipUrls = [];
-            foreach ($alreadyImported as $imp) {
-                if (!empty($imp['title'])) $skipTitles[] = '- ' . $imp['title'];
-                if (!empty($imp['source_url'])) $skipUrls[] = $imp['source_url'];
-            }
-            $skipTitlesStr = !empty($skipTitles) ? implode("\n", array_slice($skipTitles, 0, 80)) : '(ninguno aun)';
-            $skipUrlsStr = !empty($skipUrls) ? implode("\n", array_slice($skipUrls, 0, 80)) : '(ninguno aun)';
-            $map   = [
-                'news'       => 'latest heavy metal news',
-                'reviews'    => 'heavy metal album reviews',
-                'lists'      => 'best heavy metal lists rankings',
-                'videos'     => 'heavy metal music videos',
-                'interviews' => 'heavy metal band interviews',
-            ];
-            $topic = $map[$type] ?? $map['news'];
-
-            $prompt = <<<PROMPT
-Eres un redactor de noticias de metal en español para heavymetalbrothers.com.
-
-FECHA ACTUAL: {$today}
-
-ENFOQUE REGIONAL: {$regionText}
-
-FUENTES PERMITIDAS (UNICAS QUE PUEDES USAR):
-{$sitesFormal}
-
-REGLAS ESTRICTAS:
-1. SOLO busca en las fuentes listadas. NO uses otras (NO Ticketmaster, NO Wikipedia, NO fuentes generalistas).
-2. Los {$num} articulos deben ser de fuentes DIFERENTES entre si.
-3. Noticias de los ULTIMOS 7 DIAS y que encajen con el enfoque regional indicado.
-
-EVITAR DUPLICADOS - estos ya estan importados, NO repitas ni traigas variantes del mismo evento:
-
-TITULOS YA IMPORTADOS:
-{$skipTitlesStr}
-
-URLS YA IMPORTADAS:
-{$skipUrlsStr}
-
-REDACCION - MUY IMPORTANTE:
-1. Lee la noticia original y comprende los HECHOS.
-2. CIERRA mentalmente la fuente y escribe TU PROPIO articulo desde cero en español.
-3. PROHIBIDO: traducir frase a frase, copiar la estructura de parrafos del original, usar las mismas metaforas o expresiones.
-4. OBLIGATORIO: estructura propia diferente al original, tus propias transiciones, tu propio enfoque periodistico. Puedes reordenar la informacion, empezar por un angulo distinto, añadir contexto de la banda que tu conozcas.
-5. VERIFICA antes de incluir cada articulo: si pusieras tu texto y el original lado a lado traducido, NO deberian parecerse en estructura ni redaccion. Solo comparten los hechos noticiosos.
-6. Las citas textuales de musicos SI pueden mantenerse como citas (traducidas), marcadas con comillas y maximo 2 por articulo.
-
-PROCESO:
-1. Para cada fuente, busca noticias recientes que encajen con la region.
-2. Extrae la URL de la imagen principal (og:image).
-3. Redacta tu articulo original en español, minimo 200 palabras.
-
-FORMATO JSON (sin markdown, empieza con [ termina con ]):
-[
-  {
-    "titulo": "Titulo original en español (no traduccion literal del original)",
-    "fuente": "Nombre de la fuente",
-    "url_original": "URL del articulo",
-    "imagen_url": "URL completa imagen (https://...)",
-    "fecha": "YYYY-MM-DD",
-    "intro": "Resumen 2-3 frases",
-    "contenido": "Articulo redactado desde cero, minimo 200 palabras",
-    "etiquetas": "palabras, clave",
-    "metadesc": "Meta SEO menos 155 caracteres"
-  }
-]
-
-Devuelve {$num} objetos de fuentes DIFERENTES, region correcta, redaccion 100% propia.
-PROMPT;
-
-            if (!function_exists('curl_init')) {
-                $this->jsonOut(['success' => false, 'message' => 'cURL no disponible en el servidor.']);
-                return;
-            }
-
-            // Reintentos con backoff exponencial para errores 429/529 (rate limit / overloaded)
-            $body = ''; $code = 0; $err = ''; $attempt = 0; $maxAttempts = 4;
-            while ($attempt < $maxAttempts) {
-                $attempt++;
-                $ch = curl_init('https://api.anthropic.com/v1/messages');
-                curl_setopt_array($ch, [
-                    CURLOPT_POST            => true,
-                    CURLOPT_RETURNTRANSFER  => true,
-                    CURLOPT_TIMEOUT         => 150,
-                    CURLOPT_CONNECTTIMEOUT  => 30,
-                    CURLOPT_HTTPHEADER      => [
-                        'Content-Type: application/json',
-                        'x-api-key: ' . $apiKey,
-                        'anthropic-version: 2023-06-01',
-                    ],
-                    CURLOPT_POSTFIELDS => json_encode([
-                        'model'      => 'claude-haiku-4-5',
-                        'max_tokens' => 4000,
-                        'tools'      => [['type' => 'web_search_20250305', 'name' => 'web_search']],
-                        'messages'   => [['role' => 'user', 'content' => $prompt]],
-                    ], JSON_UNESCAPED_UNICODE),
-                ]);
-                $body = curl_exec($ch);
-                $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                $err  = curl_error($ch);
-                curl_close($ch);
-
-                // Si OK o error no reintentable, salir
-                if ($code === 200 || ($code !== 429 && $code !== 529 && $code !== 503 && $code !== 0)) {
-                    break;
+                if ($feed !== '') {
+                    $r = FeedHelper::http($feed, 20, '', 2500000);
+                    $xml = $r['code'] === 200 ? $r['body'] : '';
                 }
-                if ($attempt < $maxAttempts) {
-                    sleep((int) pow(2, $attempt)); // 2s, 4s, 8s
-                }
-            }
 
-            if ($err) { $this->jsonOut(['success' => false, 'message' => 'Error cURL: ' . $err]); return; }
-            $data = json_decode($body, true);
-            if ($code !== 200) {
-                $msg = $data['error']['message'] ?? ('HTTP ' . $code);
-                $type = $data['error']['type'] ?? '';
-                $debug = 'Status: ' . $code . ' | Type: ' . $type . ' | Body preview: ' . substr($body, 0, 500);
-                $this->jsonOut(['success' => false, 'message' => 'API error: ' . $msg, 'debug' => $debug]);
-                return;
-            }
+                if ($xml === '') {
+                    $feed = FeedHelper::descubrirFeed($s['url']);
 
-            $text = '';
-            foreach ((array)($data['content'] ?? []) as $b) {
-                if (($b['type'] ?? '') === 'text') $text .= $b['text'];
-            }
-            if (!$text) {
-                $this->jsonOut(['success' => false, 'message' => 'API sin texto en respuesta', 'debug' => substr(json_encode($data), 0, 800)]);
-                return;
-            }
-            // Limpiar markdown si Claude devolvio ```json ... ```
-            $cleaned = preg_replace('/^```(?:json)?\s*/i', '', trim($text));
-            $cleaned = preg_replace('/\s*```$/', '', $cleaned);
-            $cleaned = trim($cleaned);
-            $arts = json_decode($cleaned, true);
-            if (!is_array($arts)) {
-                // Intentar extraer JSON array entre corchetes
-                if (preg_match('/(\[[\s\S]*\])/u', $cleaned, $m)) {
-                    $arts = json_decode($m[1], true);
-                }
-            }
-            if (!is_array($arts)) {
-                $this->jsonOut(['success' => false, 'message' => 'JSON invalido. Texto: ' . substr($text, 0, 600)]);
-                return;
-            }
-
-            // Si Claude devolvio array vacio, diagnosticar
-            if (count($arts) === 0) {
-                $blockTypes = [];
-                $hasWebSearch = false;
-                foreach ((array)($data['content'] ?? []) as $b) {
-                    $t = ($b['type'] ?? '?');
-                    $blockTypes[] = $t;
-                    if ($t === 'server_tool_use' || $t === 'tool_use' || $t === 'web_search_tool_result') {
-                        $hasWebSearch = true;
+                    if ($feed !== '') {
+                        $db->setQuery('UPDATE `#__hmb_sources` SET feed_url = ' . $db->quote($feed) . ' WHERE id = ' . (int) $s['id'])->execute();
+                        $r   = FeedHelper::http($feed, 20, '', 2500000);
+                        $xml = $r['code'] === 200 ? $r['body'] : '';
                     }
                 }
-                $stopReason = $data['stop_reason'] ?? 'unknown';
-                $usage = $data['usage'] ?? [];
-                $tokens = 'in=' . ($usage['input_tokens'] ?? '?') . ' out=' . ($usage['output_tokens'] ?? '?');
-                $msg = 'Array vacio. Web search usado: ' . ($hasWebSearch ? 'SI' : 'NO') . ' | Stop: ' . $stopReason . ' | Bloques: ' . implode(',', $blockTypes) . ' | Tokens: ' . $tokens . ' | Texto: ' . substr($text, 0, 400);
-                $this->jsonOut(['success' => false, 'message' => $msg]);
-                return;
-            }
 
-            $userId = (int)($app->getIdentity()?->id ?? 0);
-            $now    = Factory::getDate()->toSql();
-            $created = [];
-            $skipped = [];
+                $items = FeedHelper::leerFeed($xml);
 
-            foreach ($arts as $idx => $art) {
-                // Aceptar tanto nombres en español como en inglés
-                $title = trim((string)($art['titulo'] ?? $art['title'] ?? $art['titulo_es'] ?? ''));
-                if (!$title) {
-                    $skipped[] = 'art[' . $idx . '] sin titulo. Campos: ' . implode(',', array_keys((array)$art));
+                if (!$items) {
+                    $informe[] = ['fuente' => $s['name'], 'estado' => $feed === '' ? 'sin RSS accesible' : 'RSS vacio', 'total' => 0, 'validas' => 0];
                     continue;
                 }
 
-                // Verificacion de redaccion: contenido en español y longitud minima
-                $contentText = trim((string)($art['contenido'] ?? $art['content'] ?? $art['body'] ?? ''));
-                $wordCount = str_word_count(strip_tags($contentText));
-                if ($wordCount < 120) {
-                    $skipped[] = 'art[' . $idx . '] contenido muy corto (' . $wordCount . ' palabras): ' . substr($title, 0, 60);
-                    continue;
-                }
-                // Heuristica español: contar palabras funcionales españolas vs inglesas
-                $esWords = preg_match_all('/\b(el|la|los|las|de|del|que|con|para|una|uno|su|por|como|mas|pero|este|esta)\b/iu', $contentText);
-                $enWords = preg_match_all('/\b(the|and|with|for|that|this|from|has|have|will|their|about)\b/i', $contentText);
-                if ($enWords > $esWords) {
-                    $skipped[] = 'art[' . $idx . '] contenido parece estar en ingles (no redactado): ' . substr($title, 0, 60);
-                    continue;
-                }
+                $gen    = in_array(FeedHelper::hostDe($s['url']), $generalistas, true) || in_array(FeedHelper::hostDe($feed), $generalistas, true);
+                $validas = 0;
 
-                // ── ANTI-DUPLICADOS ─────────────────────────────────────────
-                $sourceUrl = trim((string)($art['url_original'] ?? $art['url'] ?? $art['source_url'] ?? ''));
-                $sourceName = trim((string)($art['fuente'] ?? $art['source'] ?? ''));
-
-                // 0. Validar que la fuente sea una de las activas (URL + nombre)
-                $allowedDomains = array_column($srcs, 'url');
-                $allowedNames = array_map('mb_strtolower', array_column($srcs, 'name'));
-                $isAllowed = false;
-                if ($sourceUrl) {
-                    foreach ($allowedDomains as $dom) {
-                        $domClean = preg_replace('#^https?://(www\.)?#i', '', $dom);
-                        $domClean = rtrim($domClean, '/');
-                        if (stripos($sourceUrl, $domClean) !== false) { $isAllowed = true; break; }
-                    }
-                }
-                // Si la URL no encaja, probar con el nombre de fuente
-                if (!$isAllowed && $sourceName) {
-                    $srcNameLow = mb_strtolower($sourceName);
-                    foreach ($allowedNames as $allowedName) {
-                        if (stripos($srcNameLow, $allowedName) !== false || stripos($allowedName, $srcNameLow) !== false) {
-                            $isAllowed = true; break;
-                        }
-                    }
-                }
-                if (!$isAllowed) {
-                    $skipped[] = 'art[' . $idx . '] fuente NO permitida: ' . substr($sourceName . ' / ' . $sourceUrl, 0, 100);
-                    continue;
-                }
-
-                // 1. Si la URL original ya fue importada, saltar (normalizar antes)
-                $normUrl = preg_replace('#[?#].*$#', '', rtrim($sourceUrl, '/'));
-                if ($normUrl) {
-                    $exists = (int)$db->setQuery(
-                        $db->getQuery(true)
-                            ->select('COUNT(*)')
-                            ->from('#__hmb_imported')
-                            ->where('source_url LIKE ' . $db->quote($normUrl . '%'))
-                    )->loadResult();
-                    if ($exists > 0) {
-                        $skipped[] = 'art[' . $idx . '] URL ya importada: ' . substr($sourceUrl, 0, 80);
+                foreach ($items as $it) {
+                    if ($it['titulo'] === '' || $it['url'] === '') {
                         continue;
                     }
-                }
 
-                // 2. Anti-duplicado por similitud de titulo (no solo exacto)
-                $normTitle = mb_strtolower($title, 'UTF-8');
-                $normTitle = preg_replace('/[^a-z0-9 ]/u', '', $normTitle);
-                $titleWords = array_filter(explode(' ', $normTitle), fn($w) => mb_strlen($w) > 3);
-
-                $existingTitles = $db->setQuery(
-                    $db->getQuery(true)
-                        ->select('title')
-                        ->from('#__content')
-                        ->where('catid = ' . (int)$catId)
-                        ->order('created DESC')
-                        ->setLimit(200)
-                )->loadColumn() ?? [];
-
-                $isDup = false;
-                foreach ($existingTitles as $existing) {
-                    $normExisting = preg_replace('/[^a-z0-9 ]/u', '', mb_strtolower($existing, 'UTF-8'));
-                    $existingWords = array_filter(explode(' ', $normExisting), fn($w) => mb_strlen($w) > 3);
-                    if (empty($titleWords) || empty($existingWords)) continue;
-                    $common = array_intersect($titleWords, $existingWords);
-                    $similarity = count($common) / max(count($titleWords), count($existingWords));
-                    if ($similarity >= 0.6) { // 60% palabras clave coinciden
-                        $isDup = true;
-                        $skipped[] = 'art[' . $idx . '] similar a existente (' . round($similarity * 100) . '%): ' . substr($title, 0, 60);
-                        break;
+                    if ($it['fecha'] && $it['fecha'] < $limite) {
+                        continue;
                     }
-                }
-                if ($isDup) continue;
 
-                $sl   = strtr(mb_strtolower($title, 'UTF-8'), ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ñ'=>'n']);
-                $sl   = preg_replace('/[^a-z0-9\s\-]/', '', $sl);
-                $sl   = trim(preg_replace('/[\s\-]+/', '-', $sl), '-');
-                $slug = substr($sl, 0, 100);
+                    if (isset($hechas[preg_replace('#[?\#].*$#', '', rtrim($it['url'], '/'))])) {
+                        continue;
+                    }
 
-                $existing = $db->setQuery($db->getQuery(true)->select('alias')->from('#__content')->where('alias LIKE ' . $db->quote($slug . '%')))->loadColumn();
-                $alias    = in_array($slug, $existing, true) ? $slug . '-' . substr(md5(microtime(true)), 0, 6) : $slug;
+                    if ($q !== '' && strpos(FeedHelper::normalizar($it['titulo'] . ' ' . $it['texto']), $q) === false) {
+                        continue;
+                    }
 
-                try {
-                    $artDate = Factory::getDate(trim((string)($art['fecha'] ?? $art['date'] ?? '')))->toSql();
-                } catch (\Exception $e) {
-                    $artDate = $now;
-                }
+                    $sc = FeedHelper::puntuar($it, $gen, $excluir, $priori, $bandas);
 
-                $imgUrl = trim((string)($art['imagen_url'] ?? $art['image_url'] ?? $art['image'] ?? $art['imagen'] ?? ''));
-                // Validar que la URL parece valida
-                if ($imgUrl && !preg_match('#^https?://#i', $imgUrl)) $imgUrl = '';
-                $imgs = json_encode([
-                    'image_intro'         => $imgUrl,
-                    'float_intro'         => '',
-                    'image_intro_alt'     => $title,
-                    'image_intro_caption' => '',
-                    'image_fulltext'      => $imgUrl,
-                    'float_fulltext'      => '',
-                    'image_fulltext_alt'  => $title,
-                    'image_fulltext_caption' => '',
-                ]);
+                    if ($sc['descartar']) {
+                        continue;
+                    }
 
-                try {
-                    // Usar el modelo nativo de com_content para que cree el asset, workflow, etc
-                    $mvcFactory = Factory::getApplication()->bootComponent('com_content')->getMVCFactory();
-                    $articleModel = $mvcFactory->createModel('Article', 'Administrator', ['ignore_request' => true]);
+                    if ($solo && strpos($sc['motivo'], 'banda de la casa') === false && strpos($sc['motivo'], 'tema prioritario') === false) {
+                        continue;
+                    }
 
-                    $articleData = [
-                        'id'           => 0,
-                        'title'        => $title,
-                        'alias'        => $alias,
-                        'introtext'    => trim((string)($art['intro'] ?? $art['introduccion'] ?? $art['summary'] ?? '')),
-                        'fulltext'     => trim((string)($art['contenido'] ?? $art['content'] ?? $art['body'] ?? '')),
-                        'state'        => $state,
-                        'catid'        => $catId,
-                        'created'      => $artDate,
-                        'created_by'   => $userId,
-                        'language'     => $lang,
-                        'access'       => 1,
-                        'images'       => $imgs,
-                        'urls'         => '{}',
-                        'attribs'      => '{}',
-                        'metadata'     => '{}',
-                        'metadesc'     => trim((string)($art['metadesc'] ?? $art['meta'] ?? $art['description'] ?? '')),
-                        'metakey'      => trim((string)($art['etiquetas'] ?? $art['tags'] ?? $art['keywords'] ?? '')),
-                        'featured'     => 0,
-                        'publish_up'   => $artDate,
-                        'publish_down' => null,
-                        'rules'        => [],
-                        'associations' => [],
-                        'tags'         => [],
+                    $validas++;
+                    $todas[] = [
+                        'fuente'  => $s['name'],
+                        'titulo'  => $it['titulo'],
+                        'url'     => $it['url'],
+                        'fecha'   => $it['fecha'] ? date('Y-m-d', $it['fecha']) : '',
+                        'ts'      => $it['fecha'],
+                        'resumen' => mb_substr($it['texto'], 0, 260),
+                        'texto'   => mb_substr($it['texto'], 0, 6000),
+                        'imagen'  => $it['imagen'],
+                        'puntos'  => $sc['puntos'],
+                        'motivo'  => $sc['motivo'],
+                        'palabras' => FeedHelper::palabrasTitulo($it['titulo']),
                     ];
-
-                    if (!$articleModel->save($articleData)) {
-                        throw new \Exception($articleModel->getError() ?: 'Error al guardar articulo');
-                    }
-                    $aid = (int)$articleModel->getState($articleModel->getName() . '.id');
-
-                    if ($aid > 0) {
-                        $importObj = new \stdClass();
-                        $importObj->article_id  = $aid;
-                        $importObj->source_site = trim((string)($art['fuente'] ?? $art['source'] ?? ''));
-                        $importObj->source_url  = trim((string)($art['url_original'] ?? $art['url'] ?? $art['source_url'] ?? ''));
-                        $importObj->imported_at = $now;
-                        $importObj->news_date   = substr($artDate, 0, 10);
-                        $db->insertObject('#__hmb_imported', $importObj);
-                        $created[] = ['article_id' => $aid, 'title' => $title, 'state' => $state, 'imported_at' => $now];
-                    } else {
-                        throw new \Exception('No se obtuvo ID del articulo creado');
-                    }
-                } catch (\Throwable $e) {
-                    $skipped[] = 'art[' . $idx . '] DB error: ' . $e->getMessage();
-                    continue;
                 }
+
+                $informe[] = ['fuente' => $s['name'], 'estado' => 'ok', 'total' => count($items), 'validas' => $validas];
             }
 
-            $n = count($created);
-            $totalArts = count($arts);
-            if ($n === 0 && $totalArts > 0) {
-                // Devolvió items pero todos saltados: enseñar por qué
-                $this->jsonOut([
-                    'success' => false,
-                    'message' => 'Recibidos ' . $totalArts . ' items pero ninguno valido. Razones: ' . implode(' | ', $skipped)
-                ]);
+            // Misma noticia en varias fuentes: se queda la mejor puntuada
+            usort($todas, static fn($a, $b) => [$b['puntos'], $b['ts']] <=> [$a['puntos'], $a['ts']]);
+            $finales = [];
+
+            foreach ($todas as $c) {
+                foreach ($finales as $f) {
+                    if (FeedHelper::parecidas($c['palabras'], $f['palabras']) >= 0.5 && count($c['palabras']) >= 2) {
+                        continue 2;
+                    }
+                }
+
+                $finales[] = $c;
+            }
+
+            $finales = array_slice($finales, 0, 60);
+
+            foreach ($finales as &$f) {
+                unset($f['palabras'], $f['ts']);
+            }
+
+            $this->jsonOut(['success' => true, 'candidatas' => $finales, 'informe' => $informe]);
+        } catch (\Throwable $e) {
+            $this->jsonOut(['success' => false, 'message' => 'buscar: ' . $e->getMessage()]);
+        }
+    }
+
+    // ── 2) IMPORTAR UNA (usa la IA solo para redactar) ───────────────────
+
+    public function importarUna(): void
+    {
+        try {
+            if (!$this->csrf()) { $this->jsonOut(['success' => false, 'message' => 'Token invalido']); return; }
+            @set_time_limit(150);
+            $this->ensureTables();
+
+            $p      = $this->ajustes();
+            $inp    = $this->app()->input->post;
+            $apiKey = trim((string) ($p['api_key'] ?? ''));
+            $modelo = trim((string) ($p['modelo'] ?? '')) ?: 'claude-haiku-4-5';
+            $catId  = $inp->getInt('catid', 0) ?: (int) ($p['default_category'] ?? 21);
+            $state  = $inp->getInt('publicar', 0) === 1 ? 1 : (int) ($p['article_state'] ?? 0);
+            $lang   = (string) ($p['article_language'] ?? 'es-ES') ?: 'es-ES';
+
+            $url    = trim($inp->getString('url', ''));
+            $titulo = trim($inp->getString('titulo', ''));
+            $fuente = trim($inp->getString('fuente', ''));
+            $fecha  = trim($inp->getString('fecha', ''));
+            $imgFeed = trim($inp->getString('imagen', ''));
+
+            if (!$apiKey) { $this->jsonOut(['success' => false, 'message' => 'Configura la API Key en Ajustes del componente.']); return; }
+            if (!preg_match('#^https?://#i', $url)) { $this->jsonOut(['success' => false, 'message' => 'URL de la noticia no valida.']); return; }
+
+            $db   = $this->db();
+            $norm = preg_replace('#[?\#].*$#', '', rtrim($url, '/'));
+
+            if ((int) $db->setQuery('SELECT COUNT(*) FROM `#__hmb_imported` WHERE source_url LIKE ' . $db->quote($norm . '%'))->loadResult() > 0) {
+                $this->jsonOut(['success' => false, 'message' => 'Ya estaba importada.']);
                 return;
             }
-            $this->jsonOut(['success' => true, 'created' => $n, 'articles' => $created, 'message' => $n . ' articulo' . ($n === 1 ? '' : 's') . ' importado' . ($n === 1 ? '' : 's') . '.']);
+
+            // Pagina real: texto + imagen verdadera (og:image). Si la web bloquea al servidor (403),
+            // se usa el texto completo que ya trajo el RSS.
+            $pag      = FeedHelper::leerPagina($url);
+            $feedText = trim($inp->getString('texto', '')) ?: trim($inp->getString('resumen', ''));
+            $texto    = mb_strlen($pag['texto']) >= 400 ? $pag['texto'] : (mb_strlen($feedText) > mb_strlen($pag['texto']) ? $feedText : $pag['texto']);
+
+            if (mb_strlen($texto) < 250) {
+                $this->jsonOut(['success' => false, 'message' => 'No hay texto aprovechable de la noticia original (HTTP ' . $pag['code'] . '). No se ha gastado IA.']);
+                return;
+            }
+
+            $ia = FeedHelper::redactar($apiKey, $modelo, ['fuente' => $fuente, 'fecha' => $fecha, 'titulo' => $titulo ?: $pag['titulo'], 'texto' => $texto]);
+
+            if (!$ia['ok']) {
+                $this->jsonOut(['success' => false, 'message' => $ia['error']]);
+                return;
+            }
+
+            $d = $ia['data'];
+
+            if (isset($d['relevante']) && $d['relevante'] === false) {
+                $this->jsonOut(['success' => false, 'message' => 'La IA la descarta: ' . ($d['motivo'] ?? 'no es de metal') . ' (coste ~' . number_format($ia['coste'], 4) . ' $)', 'coste' => $ia['coste']]);
+                return;
+            }
+
+            $tit   = trim((string) ($d['titulo'] ?? ''));
+            $cuerpo = trim((string) ($d['contenido'] ?? ''));
+
+            if ($tit === '' || str_word_count(strip_tags($cuerpo)) < 80) {
+                $this->jsonOut(['success' => false, 'message' => 'La IA devolvio un texto demasiado corto.', 'coste' => $ia['coste']]);
+                return;
+            }
+
+            // Imagen real descargada a nuestro servidor (la de la pagina primero, luego la del feed)
+            $slug   = FeedHelper::slug($tit);
+            $imagen = FeedHelper::guardarImagen($pag['imagen'], $url, $slug) ?: FeedHelper::guardarImagen($imgFeed, $url, $slug);
+
+            $alias  = $this->aliasUnico($slug);
+            $now    = Factory::getDate()->toSql();
+
+            try {
+                $artDate = $fecha !== '' ? Factory::getDate($fecha)->toSql() : $now;
+            } catch (\Throwable $e) {
+                $artDate = $now;
+            }
+
+            $fuenteHtml = '<p class="hmb-fuente">Fuente: <a href="' . htmlspecialchars($url, ENT_QUOTES) . '" target="_blank" rel="nofollow noopener">' . htmlspecialchars($fuente ?: FeedHelper::hostDe($url)) . '</a></p>';
+
+            $imgs = json_encode([
+                'image_intro' => $imagen, 'float_intro' => '', 'image_intro_alt' => $tit, 'image_intro_caption' => '',
+                'image_fulltext' => $imagen, 'float_fulltext' => '', 'image_fulltext_alt' => $tit, 'image_fulltext_caption' => '',
+            ]);
+
+            $mvc   = $this->app()->bootComponent('com_content')->getMVCFactory();
+            $model = $mvc->createModel('Article', 'Administrator', ['ignore_request' => true]);
+
+            $ok = $model->save([
+                'id' => 0, 'title' => $tit, 'alias' => $alias,
+                'introtext' => trim((string) ($d['intro'] ?? '')), 'fulltext' => $cuerpo . $fuenteHtml,
+                'state' => $state, 'catid' => $catId, 'created' => $artDate, 'created_by' => (int) ($this->app()->getIdentity()->id ?? 0),
+                'language' => $lang, 'access' => 1, 'images' => $imgs, 'urls' => '{}', 'attribs' => '{}', 'metadata' => '{}',
+                'metadesc' => mb_substr(trim((string) ($d['metadesc'] ?? '')), 0, 155), 'metakey' => trim((string) ($d['etiquetas'] ?? '')),
+                'featured' => 0, 'publish_up' => $artDate, 'publish_down' => null, 'rules' => [], 'associations' => [], 'tags' => [],
+            ]);
+
+            if (!$ok) {
+                $this->jsonOut(['success' => false, 'message' => 'No se pudo guardar: ' . ($model->getError() ?: 'error desconocido'), 'coste' => $ia['coste']]);
+                return;
+            }
+
+            $aid = (int) $model->getState($model->getName() . '.id');
+
+            $reg = new \stdClass();
+            $reg->article_id  = $aid;
+            $reg->source_site = $fuente;
+            $reg->source_url  = $url;
+            $reg->imported_at = $now;
+            $reg->news_date   = substr($artDate, 0, 10);
+            $db->insertObject('#__hmb_imported', $reg);
+
+            $this->jsonOut([
+                'success' => true, 'article_id' => $aid, 'title' => $tit, 'state' => $state,
+                'imagen' => $imagen !== '', 'coste' => $ia['coste'], 'tokens' => $ia['tokens'],
+                'hashtags' => FeedHelper::hashtags((string) ($d['etiquetas'] ?? '')),
+            ]);
         } catch (\Throwable $e) {
-            $this->jsonOut(['success' => false, 'message' => 'importArticles: ' . $e->getMessage()]);
+            $this->jsonOut(['success' => false, 'message' => 'importarUna: ' . $e->getMessage()]);
+        }
+    }
+
+    private function aliasUnico(string $slug): string
+    {
+        $db  = $this->db();
+        $ex  = $db->setQuery($db->getQuery(true)->select('alias')->from('#__content')->where('alias LIKE ' . $db->quote($slug . '%')))->loadColumn();
+
+        return in_array($slug, $ex, true) ? $slug . '-' . substr(md5(microtime(true)), 0, 6) : $slug;
+    }
+
+    // ── 3) REPARAR IMAGENES de lo ya importado (gratis, sin IA) ──────────
+
+    public function repararImagenes(): void
+    {
+        try {
+            if (!$this->csrf()) { $this->jsonOut(['success' => false, 'message' => 'Token invalido']); return; }
+            @set_time_limit(150);
+
+            $db   = $this->db();
+            $rows = $db->setQuery(
+                "SELECT c.id, c.title, c.images, i.source_url FROM `#__hmb_imported` i JOIN `#__content` c ON c.id = i.article_id
+                 WHERE c.images LIKE '%\"image_intro\":\"http%' ORDER BY c.id DESC LIMIT 6"
+            )->loadAssocList() ?: [];
+
+            $arreglados = 0;
+            $sinImagen  = 0;
+            $rotos      = [];
+
+            foreach ($rows as $r) {
+                $imgs   = json_decode($r['images'], true) ?: [];
+                $nuevo  = '';
+                $estado = 0;
+
+                if (preg_match('#^https?://#i', (string) $r['source_url'])) {
+                    $pag    = FeedHelper::leerPagina($r['source_url']);
+                    $estado = $pag['code'];
+
+                    if ($pag['code'] === 200) {
+                        $nuevo = FeedHelper::guardarImagen($pag['imagen'], $r['source_url'], FeedHelper::slug($r['title']));
+                    }
+                }
+
+                $imgs['image_intro'] = $imgs['image_fulltext'] = $nuevo;
+                $db->setQuery('UPDATE `#__content` SET images = ' . $db->quote(json_encode($imgs)) . ' WHERE id = ' . (int) $r['id'])->execute();
+
+                if ($nuevo !== '') {
+                    $arreglados++;
+                } else {
+                    $sinImagen++;
+
+                    if ($estado === 404 || $estado === 410 || $estado === 0) {
+                        $rotos[] = (int) $r['id'];
+                    }
+                }
+            }
+
+            $quedan = (int) $db->setQuery(
+                "SELECT COUNT(*) FROM `#__hmb_imported` i JOIN `#__content` c ON c.id = i.article_id
+                 WHERE c.images LIKE '%\"image_intro\":\"http%'"
+            )->loadResult();
+
+            $this->jsonOut(['success' => true, 'arreglados' => $arreglados, 'sin_imagen' => $sinImagen, 'enlace_roto' => $rotos, 'quedan' => $quedan]);
+        } catch (\Throwable $e) {
+            $this->jsonOut(['success' => false, 'message' => 'repararImagenes: ' . $e->getMessage()]);
         }
     }
 }

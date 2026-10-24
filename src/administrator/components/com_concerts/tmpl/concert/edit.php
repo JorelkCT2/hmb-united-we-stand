@@ -75,7 +75,9 @@ $currentCountry  = $item->country_code ?? 'ES';
                    value="<?= htmlspecialchars($item->headliners ?? '[]') ?>" />
         </div>
         <div class="row g-3">
+            <div class="col-md-4"><?= $f->renderField('event_type') ?></div>
             <div class="col-12"><?= $f->renderField('support_bands') ?></div>
+            <div class="col-12"><?= $f->renderField('lineup') ?></div>
             <div class="col-12"><?= $f->renderField('genre_ids') ?><small class="text-muted">Ctrl+clic para varios</small></div>
         </div>
     </div>
@@ -119,6 +121,9 @@ $currentCountry  = $item->country_code ?? 'ES';
                 <input type="hidden" name="jform[province]" id="jform_province" value="<?= htmlspecialchars($currentProvince) ?>" />
             </div>
             <div class="col-12"><?= $f->renderField('address') ?></div>
+            <div class="col-md-6"><?= $f->renderField('latitude') ?></div>
+            <div class="col-md-6"><?= $f->renderField('longitude') ?></div>
+            <div class="col-12 small text-muted">Si dejas latitud y longitud vacías, la ciudad se sitúa sola en el mapa (OpenStreetMap) al importar o desde «Importar y actualizar».</div>
         </div>
     </div>
 </div>

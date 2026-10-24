@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const lista = document.getElementById('cc2-list');
     if (!lista) return;
-    const q = document.getElementById('cc2-q'), prov = document.getElementById('cc2-prov');
+    const q = document.getElementById('cc2-q'), prov = document.getElementById('cc2-prov'), tipoSel = document.getElementById('cc2-tipo');
     const meses = document.getElementById('cc2-months'), cuenta = document.getElementById('cc2-count');
     const ninguno = document.getElementById('cc2-none');
     const evs = [...lista.querySelectorAll('.cc2-ev')];
@@ -83,10 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
     function aplicar() {
-        const t = norm(q.value.trim()), p = prov.value;
+        const t = norm(q.value.trim()), p = prov.value, tp = tipoSel ? tipoSel.value : '';
         let n = 0;
         evs.forEach(e => {
-            const ok = (!mes || e.dataset.mes === mes) && (!p || e.dataset.prov === p) && (!t || norm(e.dataset.q).includes(t));
+            const ok = (!mes || e.dataset.mes === mes) && (!p || e.dataset.prov === p) && (!tp || e.dataset.tipo === tp) && (!t || norm(e.dataset.q).includes(t));
             e.hidden = !ok;
             if (ok) n++;
         });
@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     q.addEventListener('input', aplicar);
     prov.addEventListener('change', aplicar);
+    if (tipoSel) tipoSel.addEventListener('change', aplicar);
     meses.addEventListener('click', e => {
         const b = e.target.closest('button[data-mes]');
         if (!b) return;
@@ -105,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const reset = document.getElementById('cc2-reset');
     if (reset) reset.addEventListener('click', e => {
-        e.preventDefault(); q.value = ''; prov.value = ''; mes = '';
+        e.preventDefault(); q.value = ''; prov.value = ''; if (tipoSel) tipoSel.value = ''; mes = '';
         meses.querySelectorAll('button').forEach((x, i) => x.classList.toggle('on', i === 0));
         aplicar();
     });

@@ -7,6 +7,7 @@ use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Router\Route;
+use Joomla\Component\Concerts\Administrator\Helper\SyncHelper;
 
 class ImportController extends BaseController
 {
@@ -72,146 +73,43 @@ class ImportController extends BaseController
         Factory::getApplication()->close();
     }
 
-    /** Procesar CSV subido */
+    /** Procesar CSV subido (mismo motor que las fuentes: detecta duplicados y rellena huecos) */
     public function upload(): void
     {
         $this->checkToken();
         $app  = Factory::getApplication();
-        $db   = Factory::getContainer()->get('DatabaseDriver');
         $file = $this->input->files->get('csv_file', [], 'array');
+        $volver = Route::_('index.php?option=com_concerts&view=import', false);
 
         if (empty($file['tmp_name']) || $file['error'] !== UPLOAD_ERR_OK) {
             $app->enqueueMessage('No se recibió ningún CSV válido.', 'error');
-            $this->setRedirect(Route::_('index.php?option=com_concerts&view=import', false));
+            $this->setRedirect($volver);
+
             return;
         }
 
-        // Detect delimiter
-        $delim = $this->input->getString('delimiter', 'auto');
-        if ($delim === 'auto') {
-            $s = file_get_contents($file['tmp_name'], false, null, 0, 2048);
-            $c = [';'=>substr_count($s,';'),','=>substr_count($s,','),"\t"=>substr_count($s,"\t")];
-            arsort($c); $delim = array_key_first($c);
-        }
+        $eventos = SyncHelper::leerCsv((string) file_get_contents($file['tmp_name']), $this->input->getString('delimiter', 'auto'));
 
-        $h = fopen($file['tmp_name'], 'r');
-        if (fread($h, 3) !== "\xEF\xBB\xBF") fseek($h, 0);
+        if (!$eventos) {
+            $app->enqueueMessage('El CSV está vacío o no tiene filas válidas (hacen falta título y fecha de inicio).', 'error');
+            $this->setRedirect($volver);
 
-        $header = fgetcsv($h, 4000, $delim);
-        if (!$header) {
-            $app->enqueueMessage('CSV vacío o mal formado.', 'error');
-            $this->setRedirect(Route::_('index.php?option=com_concerts&view=import', false));
             return;
         }
-        $header = array_map(fn($x) => strtolower(trim($x)), $header);
 
-        $cn = ['ES'=>'España','DE'=>'Alemania','AT'=>'Austria','BE'=>'Bélgica','FR'=>'Francia',
-               'IT'=>'Italia','PT'=>'Portugal','GB'=>'Reino Unido','NL'=>'Países Bajos',
-               'PL'=>'Polonia','SE'=>'Suecia','NO'=>'Noruega','CH'=>'Suiza','HR'=>'Croacia',
-               'GR'=>'Grecia','HU'=>'Hungría','CZ'=>'República Checa','RO'=>'Rumanía',
-               'SK'=>'Eslovaquia','SI'=>'Eslovenia','IE'=>'Irlanda','IS'=>'Islandia',
-               'DK'=>'Dinamarca','FI'=>'Finlandia','EE'=>'Estonia','LV'=>'Letonia',
-               'LT'=>'Lituania','LU'=>'Luxemburgo','MT'=>'Malta','CY'=>'Chipre','BG'=>'Bulgaria'];
+        $publicar = $this->input->getInt('publicar', 1) === 1;
+        $c = ['nuevo' => 0, 'actualizado' => 0, 'igual' => 0];
+        $err = 0;
 
-        $ins = $skip = 0;
-        $now = (new \DateTime())->format('Y-m-d H:i:s');
-        $uid = $app->getIdentity()->id;
-
-        while (($row = fgetcsv($h, 4000, $delim)) !== false) {
-            if (empty(array_filter($row))) continue;
-            if (count($row) < count($header)) $row = array_pad($row, count($header), '');
-            $d = array_combine($header, array_slice($row, 0, count($header)));
-
-            // title OR headliners required
-            $title = trim($d['title'] ?? '');
-            $hlRaw = trim($d['headliners'] ?? '');
-            if (empty($title) && empty($hlRaw)) { $skip++; continue; }
-
-            // date_start required
-            if (empty(trim($d['date_start'] ?? ''))) { $skip++; continue; }
-            try { $ds = (new \DateTime(trim($d['date_start'])))->format('Y-m-d'); }
-            catch (\Exception) { $skip++; continue; }
-
-            $de = '';
-            if (!empty($d['date_end'])) {
-                try { $de=(new \DateTime(trim($d['date_end'])))->format('Y-m-d'); } catch(\Exception){}
-            }
-
-            // Headliners: pipe-separated → JSON array
-            $hls = [];
-            if ($hlRaw) {
-                $hls = array_values(array_filter(array_map('trim', explode('|', $hlRaw))));
-            }
-            $hlJson = json_encode($hls, JSON_UNESCAPED_UNICODE);
-
-            // band = first headliner or title
-            $band = !empty($hls) ? $hls[0] : $title;
-
-            // genre_ids: already comma-separated IDs
-            $genreIds = trim($d['genre_ids'] ?? '');
-
-            // prices: "Abono:235€|Día1:99€" → JSON array
-            $pricesJson = '';
-            $pricesRaw = trim($d['prices'] ?? '');
-            if ($pricesRaw) {
-                $pricesArr = [];
-                foreach (explode('|', $pricesRaw) as $pr) {
-                    $parts = explode(':', $pr, 2);
-                    if (count($parts) === 2) {
-                        $pricesArr[] = ['label'=>trim($parts[0]),'amount'=>trim($parts[1]),'sold_out'=>0];
-                    } elseif (count($parts) === 1 && !empty(trim($parts[0]))) {
-                        $pricesArr[] = ['label'=>trim($parts[0]),'amount'=>'','sold_out'=>0];
-                    }
-                }
-                $pricesJson = json_encode($pricesArr, JSON_UNESCAPED_UNICODE);
-            }
-
-            $city  = trim($d['city'] ?? '');
-            $code  = strtoupper(trim($d['country_code'] ?? 'ES'));
-            $alias = ApplicationHelper::stringURLSafe(($title?:$band).'-'.$city.'-'.$ds);
-
-            if (empty($title)) $title = $band.($city?' — '.$city:'');
-
-            $rec = [
-                'title'        => $title,
-                'alias'        => $alias,
-                'band'         => $band,
-                'headliners'   => $hlJson,
-                'support_bands'=> trim($d['support_bands'] ?? ''),
-                'genre_ids'    => $genreIds,
-                'date_start'   => $ds,
-                'date_end'     => $de,
-                'concert_time' => trim($d['concert_time'] ?? ''),
-                'doors_time'   => trim($d['doors_time'] ?? ''),
-                'venue'        => trim($d['venue'] ?? ''),
-                'city'         => $city,
-                'province'     => trim($d['province'] ?? ''),
-                'country_code' => $code,
-                'country_name' => $cn[$code] ?? $code,
-                'address'      => trim($d['address'] ?? ''),
-                'prices'       => $pricesJson,
-                'ticket_url'   => trim($d['ticket_url'] ?? ''),
-                'website_url'  => trim($d['website_url'] ?? ''),
-                'poster_url'   => trim($d['poster_url'] ?? ''),
-                'description'  => trim($d['description'] ?? ''),
-                'state'        => 1,
-                'ordering'     => 0,
-                'created'      => $now,
-                'modified'     => $now,
-                'created_by'   => $uid,
-            ];
-
+        foreach ($eventos as $e) {
             try {
-                $db->setQuery($db->getQuery(true)
-                    ->insert($db->qn('#__concerts'))
-                    ->columns(array_map([$db,'qn'], array_keys($rec)))
-                    ->values(implode(',', array_map([$db,'q'], $rec)))
-                )->execute();
-                $ins++;
-            } catch(\Exception $e) { $skip++; }
+                $c[SyncHelper::guardar($e, 'csv', $publicar)]++;
+            } catch (\Throwable $ex) {
+                $err++;
+            }
         }
-        fclose($h);
-        $app->enqueueMessage("✅ $ins importados, $skip omitidos.", 'success');
-        $this->setRedirect(Route::_('index.php?option=com_concerts&view=concerts', false));
+
+        $app->enqueueMessage($c['nuevo'] . ' eventos nuevos, ' . $c['actualizado'] . ' actualizados, ' . $c['igual'] . ' ya existían' . ($err ? ', ' . $err . ' con error' : '') . '.', $err ? 'warning' : 'message');
+        $this->setRedirect($volver);
     }
 }

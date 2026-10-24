@@ -9,6 +9,11 @@
             <option value="0">Sin publicar</option>
             <option value="-1">Cancelado</option>
         </field>
+        <field name="event_type" type="list" label="Tipo de evento" default="concert" class="form-select">
+            <option value="concert">Concierto / gira</option>
+            <option value="festival">Festival</option>
+        </field>
+        <field name="lineup" type="textarea" label="Cartel completo (bandas separadas por coma; sale en el mapa)" rows="3" class="form-control" />
         <field name="headliners" type="hidden" />
         <field name="support_bands" type="text" label="Teloneras (separadas por coma)" size="400" class="form-control" />
         <field name="genre_ids" type="sql"
@@ -45,6 +50,8 @@
             <option value="SE">Suecia</option><option value="CH">Suiza</option>
         </field>
         <field name="address" type="text" label="Direccion completa" size="400" class="form-control" />
+        <field name="latitude" type="text" label="Latitud (mapa)" class="form-control" hint="Se rellena sola al situar la ciudad" />
+        <field name="longitude" type="text" label="Longitud (mapa)" class="form-control" />
     </fieldset>
     <fieldset name="tickets" label="Entradas y Web">
         <field name="prices" type="hidden" />

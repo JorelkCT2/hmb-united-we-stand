@@ -7,8 +7,8 @@ $app    = Factory::getApplication();
 $doc    = $app->getDocument();
 $base   = Uri::base(true);
 $itemId = $app->input->getInt('Itemid', 0);
-$doc->addStyleSheet($base . '/components/com_concerts/assets/css/concerts.css?v=301');
-$doc->addScript($base . '/components/com_concerts/assets/js/concerts.js?v=301', [], ['defer' => true]);
+$doc->addStyleSheet($base . '/components/com_concerts/assets/css/concerts.css?v=302');
+$doc->addScript($base . '/components/com_concerts/assets/js/concerts.js?v=302', [], ['defer' => true]);
 
 $esc = static fn($s): string => htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 
@@ -75,6 +75,11 @@ $prox  = $stats['proximo'] ? new DateTime($stats['proximo']) : null;
     <label class="cc2-search"><span aria-hidden="true">🔍</span>
         <input type="search" id="cc2-q" placeholder="Banda, ciudad o sala" autocomplete="off">
     </label>
+    <select id="cc2-tipo" aria-label="Tipo de evento">
+        <option value="">Conciertos y festivales</option>
+        <option value="concert">Solo conciertos</option>
+        <option value="festival">Solo festivales</option>
+    </select>
     <select id="cc2-prov" aria-label="Provincia">
         <option value="">Todas las provincias</option>
         <?php foreach ($this->provinces as $p => $n): ?><option value="<?= $esc($p) ?>"><?= $esc($p) ?> (<?= (int) $n ?>)</option><?php endforeach; ?>
@@ -102,6 +107,7 @@ $prox  = $stats['proximo'] ? new DateTime($stats['proximo']) : null;
         $mul    = !empty($c->date_end) && $c->date_end !== $c->date_start;
         $can    = (int) $c->state === -1;
         $ps     = trim((string) ($c->poster_url ?? ''));
+        if ($ps !== '' && !preg_match('#^https?://#i', $ps)) $ps = Uri::root() . ltrim($ps, '/');   // los carteles propios pueden guardarse como ruta relativa
         $det    = 'index.php?option=com_concerts&view=concert&id=' . (int) $c->id . $iid;
         $ics    = 'index.php?option=com_concerts&task=display.ics&id=' . (int) $c->id;
         $buscar = mb_strtolower($titulo . ' ' . ($c->support_bands ?? '') . ' ' . $c->city . ' ' . ($c->venue ?? '') . ' ' . ($c->province ?? ''), 'UTF-8');
@@ -125,7 +131,7 @@ $prox  = $stats['proximo'] ? new DateTime($stats['proximo']) : null;
             elseif ($diff > 1 && $diff <= 14) $cuando = 'En ' . $diff . ' días';
         }
     ?>
-    <article class="cc2-ev<?= $can ? ' is-cancelled' : '' ?>" data-mes="<?= $esc($mes) ?>" data-prov="<?= $esc($c->province ?? '') ?>" data-q="<?= $esc($buscar) ?>">
+    <article class="cc2-ev<?= $can ? ' is-cancelled' : '' ?>" data-tipo="<?= $esc($c->event_type ?? 'concert') ?>" data-mes="<?= $esc($mes) ?>" data-prov="<?= $esc($c->province ?? '') ?>" data-q="<?= $esc($buscar) ?>">
         <div class="cc2-date" aria-label="<?= $esc($dias[(int) $d->format('w')] . ' ' . $d->format('j') . ' de ' . $meses[(int) $d->format('n')]) ?>">
             <span class="cc2-date__dow"><?= $dias[(int) $d->format('w')] ?></span>
             <b><?= $d->format('j') ?></b>
@@ -140,13 +146,15 @@ $prox  = $stats['proximo'] ? new DateTime($stats['proximo']) : null;
 
         <div class="cc2-main">
             <a class="cc2-name" href="<?= $esc($det) ?>"><?= $esc($titulo) ?></a>
-            <?php if (!empty($c->support_bands)): ?><div class="cc2-sup">+ <?= $esc($c->support_bands) ?></div><?php endif; ?>
+            <?php if (!empty($c->support_bands)): ?><div class="cc2-sup">+ <?= $esc($c->support_bands) ?></div>
+            <?php elseif (!empty($c->lineup)): $lu = array_slice(array_map('trim', explode(',', $c->lineup)), 0, 8); ?><div class="cc2-sup"><?= $esc(implode(' · ', $lu)) ?><?= substr_count($c->lineup, ',') >= 8 ? ' …' : '' ?></div><?php endif; ?>
             <div class="cc2-where">
                 <?php $fl = $flag((string) $c->country_code); if ($fl && $c->country_code !== 'ES') echo $fl . ' '; ?>
                 <b><?= $esc($c->city) ?></b><?php if (!empty($c->province) && $c->province !== $c->city): ?><span class="cc2-prov"> · <?= $esc($c->province) ?></span><?php endif; ?>
                 <?php if (!empty($c->venue)): ?><span class="cc2-venue"> — <?= $esc($c->venue) ?></span><?php endif; ?>
             </div>
             <div class="cc2-badges">
+                <?php if (($c->event_type ?? '') === 'festival'): ?><span class="cc2-badge cc2-badge--fest">Festival</span><?php endif; ?>
                 <?php if ($cuando): ?><span class="cc2-badge cc2-badge--soon"><?= $esc($cuando) ?></span><?php endif; ?>
                 <?php if ($can): ?><span class="cc2-badge cc2-badge--bad">Cancelado</span><?php endif; ?>
                 <?php if (!empty($c->doors_time)): ?><span class="cc2-badge">Puertas <?= substr($c->doors_time, 0, 5) ?></span><?php endif; ?>

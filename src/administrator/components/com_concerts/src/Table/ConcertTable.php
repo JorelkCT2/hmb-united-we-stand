@@ -70,6 +70,20 @@ class ConcertTable extends Table
             $this->prices = json_encode($prices, JSON_UNESCAPED_UNICODE);
         }
 
+        // Coordenadas: vacio = sin situar (se geolocaliza solo); con valor = manual
+        foreach (['latitude', 'longitude'] as $c) {
+            $v = trim((string) ($this->$c ?? ''));
+            $this->$c = ($v === '' || (float) str_replace(',', '.', $v) == 0.0) ? null : (float) str_replace(',', '.', $v);
+        }
+        if ($this->latitude !== null && $this->longitude !== null) {
+            $this->geo_status = 'ok';
+        } elseif ($this->geo_status === 'ok') {
+            $this->geo_status = null;
+        }
+        if (empty($this->event_type)) $this->event_type = 'concert';
+        if (empty($this->source)) $this->source = 'manual';
+        $this->dedupe_key = substr(preg_replace('/[^a-z0-9]+/', '-', strtolower(@iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', (string) ($this->title ?: $this->band)) ?: (string) $this->title)) . '|' . $this->date_start . '|' . preg_replace('/[^a-z0-9]+/', '-', strtolower(@iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', (string) $this->city) ?: (string) $this->city)), 0, 190);
+
         $now = (new \DateTime())->format('Y-m-d H:i:s');
         if (empty($this->id)) $this->created = $now;
         $this->modified = $now;

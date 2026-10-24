@@ -8,30 +8,47 @@ HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
 <form action="<?= Route::_('index.php?option=com_concerts') ?>"
       method="post" name="adminForm" id="adminForm">
 
-    <!-- Search bar -->
+    <!-- Filtros -->
     <div class="row mb-3 g-2 align-items-center">
-        <div class="col-md-4">
+        <div class="col-lg-3 col-md-6">
             <div class="input-group">
                 <input type="text" name="filter_search" id="filter_search"
                        value="<?= htmlspecialchars($this->state->get('filter.search', '')) ?>"
-                       placeholder="Buscar evento, artista, ciudad, sala…" class="form-control" />
-                <button type="submit" class="btn btn-primary">
-                    <span class="icon-search" aria-hidden="true"></span>
-                </button>
-                <a href="<?= Route::_('index.php?option=com_concerts') ?>"
-                   class="btn btn-secondary" title="Limpiar filtro">
-                    <span class="icon-times" aria-hidden="true"></span>
-                </a>
+                       placeholder="Buscar evento, banda, ciudad, sala…" class="form-control" />
+                <button type="submit" class="btn btn-primary"><span class="icon-search" aria-hidden="true"></span></button>
+                <a href="<?= Route::_('index.php?option=com_concerts&filter_search=&filter_state=&filter_tipo=&filter_fecha=proximos&filter_cartel=&filter_geo=&filter_origen=') ?>" class="btn btn-secondary" title="Limpiar filtros"><span class="icon-times" aria-hidden="true"></span></a>
             </div>
         </div>
-        <div class="col-md-2">
-            <select name="filter_state" class="form-select" onchange="this.form.submit()">
-                <option value="">— Estado —</option>
-                <option value="1"  <?= $this->state->get('filter.state') === '1'  ? 'selected' : '' ?>>Publicado</option>
-                <option value="0"  <?= $this->state->get('filter.state') === '0'  ? 'selected' : '' ?>>Sin publicar</option>
-                <option value="-1" <?= $this->state->get('filter.state') === '-1' ? 'selected' : '' ?>>Cancelado</option>
-            </select>
-        </div>
+        <?php
+        $sel = fn(string $k, string $v): string => (string) $this->state->get('filter.' . $k) === $v ? 'selected' : '';
+        ?>
+        <div class="col-auto"><select name="filter_fecha" class="form-select" onchange="this.form.submit()">
+            <option value="proximos" <?= $sel('fecha', 'proximos') ?>>Próximos</option>
+            <option value="pasados" <?= $sel('fecha', 'pasados') ?>>Ya celebrados</option>
+            <option value="" <?= $sel('fecha', '') ?>>Todas las fechas</option>
+        </select></div>
+        <div class="col-auto"><select name="filter_state" class="form-select" onchange="this.form.submit()">
+            <option value="">— Estado —</option>
+            <option value="pend" <?= $sel('state', 'pend') ?>>⚠ Pendientes de revisar</option>
+            <option value="1" <?= $sel('state', '1') ?>>Publicado</option>
+            <option value="0" <?= $sel('state', '0') ?>>Sin publicar</option>
+            <option value="-1" <?= $sel('state', '-1') ?>>Cancelado</option>
+        </select></div>
+        <div class="col-auto"><select name="filter_tipo" class="form-select" onchange="this.form.submit()">
+            <option value="">— Tipo —</option>
+            <option value="concert" <?= $sel('tipo', 'concert') ?>>Conciertos</option>
+            <option value="festival" <?= $sel('tipo', 'festival') ?>>Festivales</option>
+        </select></div>
+        <div class="col-auto"><select name="filter_origen" class="form-select" onchange="this.form.submit()">
+            <option value="">— Origen —</option>
+            <?php foreach ($this->origenes as $o) : ?><option value="<?= htmlspecialchars($o) ?>" <?= $sel('origen', $o) ?>><?= htmlspecialchars($o) ?></option><?php endforeach; ?>
+        </select></div>
+        <div class="col-auto"><select name="filter_cartel" class="form-select" onchange="this.form.submit()">
+            <option value="">Cartel: todos</option><option value="0" <?= $sel('cartel', '0') ?>>Sin cartel</option>
+        </select></div>
+        <div class="col-auto"><select name="filter_geo" class="form-select" onchange="this.form.submit()">
+            <option value="">Mapa: todos</option><option value="0" <?= $sel('geo', '0') ?>>Sin situar en el mapa</option>
+        </select></div>
     </div>
 
     <table class="table table-striped table-hover" id="concertList">
@@ -45,6 +62,7 @@ HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
                 <th>Recinto</th>
                 <th>Ciudad</th>
                 <th>País</th>
+                <th>Mapa</th>
                 <th>Cartel</th>
                 <th>Entradas</th>
                 <th>Estado</th>
@@ -54,11 +72,11 @@ HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
         <tbody>
         <?php if (empty($this->items)) : ?>
             <tr>
-                <td colspan="10" class="text-center py-4 text-muted">
-                    No hay conciertos.
+                <td colspan="11" class="text-center py-4 text-muted">
+                    No hay eventos con estos filtros.
                     <a href="<?= Route::_('index.php?option=com_concerts&task=concert.add') ?>">Crear uno</a>
                     o
-                    <a href="<?= Route::_('index.php?option=com_concerts&view=import') ?>">importar CSV</a>.
+                    <a href="<?= Route::_('index.php?option=com_concerts&view=import') ?>">importar o actualizar desde fuentes</a>.
                 </td>
             </tr>
         <?php else : ?>
@@ -76,6 +94,8 @@ HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
                        class="fw-bold">
                         <?= htmlspecialchars($item->title ?: $item->band) ?>
                     </a>
+                    <?php if (($item->event_type ?? '') === 'festival') : ?><span class="badge bg-info">Festival</span><?php endif; ?>
+                    <?php if (!empty($item->source) && $item->source !== 'manual') : ?><span class="badge bg-secondary" title="Origen del dato"><?= htmlspecialchars($item->source) ?></span><?php endif; ?>
                     <?php if (!empty($item->genre)) : ?>
                         <br><small class="text-muted"><?= htmlspecialchars($item->genre) ?></small>
                     <?php endif; ?>
@@ -96,6 +116,7 @@ HTMLHelper::_('bootstrap.tooltip', '.hasTooltip');
                     <?php endif; ?>
                 </td>
                 <td><?= htmlspecialchars($item->country_name) ?></td>
+                <td class="text-center"><?= ((float) ($item->latitude ?? 0) != 0.0) ? '<span title="Situado en el mapa">📍</span>' : '<span class="text-muted" title="Sin coordenadas">—</span>' ?></td>
                 <td>
                     <?php if (!empty($item->poster_url)) : ?>
                         <a href="<?= htmlspecialchars($item->poster_url) ?>" target="_blank"

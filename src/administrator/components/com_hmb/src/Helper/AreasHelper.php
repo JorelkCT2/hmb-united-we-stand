@@ -41,8 +41,8 @@ class AreasHelper
                 'titulo' => 'Agenda',
                 'icono'  => 'icon-calendar',
                 'items'  => [
-                    ['Conciertos', 'Agenda de conciertos.', 'option=com_concerts&view=concerts', '#__concerts'],
-                    ['Mapa Metal', 'Festivales y conciertos en el mapa.', 'option=com_metalmap&view=festivals', '#__metalmap_events'],
+                    ['Agenda y mapa', 'Conciertos y festivales: alimentan la agenda y el mapa de conciertos.', 'option=com_concerts&view=concerts', '#__concerts'],
+                    ['Importar y actualizar', 'Fuentes automáticas, CSV, direcciones web, duplicados y mapa.', 'option=com_concerts&view=import', ''],
                     ['Festival', 'Gestión del festival.', 'option=com_hmb_festival', ''],
                 ],
             ],

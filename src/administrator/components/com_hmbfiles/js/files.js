@@ -3,6 +3,11 @@
     'use strict';
 
     var C = window.HMBFILES;
+    // Cualquier fallo de JavaScript se muestra en pantalla (sin esto, un error silencioso parece que "no hace nada")
+    window.addEventListener('error', function (e) {
+        var m = document.getElementById('hf-msg');
+        if (m) { m.textContent = 'Error en la página: ' + e.message + ' (' + String(e.filename || '').split('/').pop() + ':' + e.lineno + ')'; m.className = 'hf-msg hf-msg-err'; m.hidden = false; }
+    });
     var S = { dir: 'images', carpetas: [], ficheros: [], sel: {}, filtro: '', papelera: false, limite: 0, cola: [] };
     var $ = function (id) { return document.getElementById(id); };
 
@@ -148,6 +153,8 @@
     // ── Subida (cola, de uno en uno) ─────────────────────────────────────
     function subir(files) {
         files = [].slice.call(files);
+        if (!files.length) { msg('El navegador no ha entregado ningún archivo.', 'err'); return; }
+        if (S.papelera) { msg('Sal de la papelera para subir archivos.', 'err'); return; }
         if (!files.length || S.papelera) return;
         var dir = S.dir, cola = $('hf-cola'), ok = 0, k = 0;
         cola.hidden = false;

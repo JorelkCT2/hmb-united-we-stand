@@ -960,7 +960,9 @@ final class SyncHelper
             }
 
             // fuentes generalistas: solo lo que parece metal / rock duro (Ticketmaster y CSV ya vienen filtrados)
-            if (!in_array($src->type, ['ticketmaster', 'csvurl'], true) && ($p['filtro_metal'] ?? 1) && !self::esMetal($e, (string) ($p['palabras'] ?? ''))) {
+            $filtrar = $src->type === 'ticketmaster' ? !empty($p['filtro_metal']) : ($src->type !== 'csvurl' && ($p['filtro_metal'] ?? 1));
+
+            if ($filtrar && !self::esMetal($e, (string) ($p['palabras'] ?? ''))) {
                 $res['descartados'] = ($res['descartados'] ?? 0) + 1;
                 continue;
             }

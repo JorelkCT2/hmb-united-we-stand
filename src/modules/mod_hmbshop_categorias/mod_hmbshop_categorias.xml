@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>HMB Tienda - Categorías</name>
+    <author>Heavy Metal Brothers</author>
+    <version>1.0.0</version>
+    <description>Lista lateral de categorías de la tienda con su miniatura (sustituye al módulo de categorías de Phoca).</description>
+    <files>
+        <filename module="mod_hmbshop_categorias">mod_hmbshop_categorias.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <media destination="mod_hmbshop_categorias" folder="media">
+        <folder>css</folder>
+    </media>
+</extension>

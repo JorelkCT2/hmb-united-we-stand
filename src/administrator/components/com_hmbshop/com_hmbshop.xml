@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+    <name>com_hmbshop</name>
+    <author>Heavy Metal Brothers</author>
+    <creationDate>2026-10</creationDate>
+    <version>0.1.0</version>
+    <description>Tienda de Heavy Metal Brothers: productos con tallas y colores, carrito y pedidos. Pago en tienda al recoger; el resto de pagos se activan en Ajustes.</description>
+
+    <scriptfile>script.php</scriptfile>
+
+    <namespace path="src">HeavyMetalBrothers\Component\Hmbshop</namespace>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <files folder="site">
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <media destination="com_hmbshop" folder="media">
+        <folder>css</folder>
+    </media>
+
+    <administration>
+        <menu link="option=com_hmbshop">Tienda</menu>
+        <submenu>
+            <menu link="option=com_hmbshop&amp;view=productos">Productos</menu>
+            <menu link="option=com_hmbshop&amp;view=categorias">Categorías</menu>
+            <menu link="option=com_hmbshop&amp;view=pedidos">Pedidos</menu>
+            <menu link="option=com_hmbshop&amp;view=envios">Formas de envío</menu>
+        </submenu>
+        <files folder="admin">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>services</folder>
+            <folder>sql</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+    </administration>
+</extension>

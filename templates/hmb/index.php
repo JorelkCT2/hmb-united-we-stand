@@ -68,7 +68,7 @@ $wa->registerAndUseStyle('hmb.layout', 'templates/hmb/css/hmb-layout.css', ['ver
 $wa->registerAndUseScript('hmb.template', 'templates/hmb/js/template.js', ['version' => '3.0.0'], ['defer' => true]);
 
 // Phoca Cart — cargar CSS solo en páginas de la tienda
-if ($app->input->get('option', '') === 'com_phocacart') {
+if (in_array($app->input->get('option', ''), ['com_phocacart', 'com_hmbshop'], true)) {
     $wa->registerAndUseStyle('hmb.phocacart', 'templates/hmb/css/hmb-phocacart.css', ['version' => (string) (@filemtime(__DIR__ . '/css/hmb-phocacart.css') ?: 1)]);
 }
 

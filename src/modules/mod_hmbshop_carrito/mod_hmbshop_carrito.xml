@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>HMB Tienda - Carrito</name>
+    <author>Heavy Metal Brothers</author>
+    <version>1.0.0</version>
+    <description>Caja lateral del carrito de la tienda (sustituye al módulo de carrito de Phoca).</description>
+    <files>
+        <filename module="mod_hmbshop_carrito">mod_hmbshop_carrito.php</filename>
+        <folder>tmpl</folder>
+    </files>
+</extension>

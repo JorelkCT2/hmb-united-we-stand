@@ -62,6 +62,17 @@ class AreasHelper
                     ['Usuarios', 'Usuarios registrados en la web.', 'option=com_users&view=users', '#__users'],
                 ],
             ],
+            'tienda' => [
+                'titulo' => 'Tienda',
+                'icono'  => 'icon-cart',
+                'items'  => [
+                    ['Productos', 'Catálogo con tallas, colores y fotos.', 'option=com_hmbshop&view=productos', '#__hmbshop_productos'],
+                    ['Pedidos', 'Pedidos recibidos y su estado.', 'option=com_hmbshop&view=pedidos', '#__hmbshop_pedidos'],
+                    ['Categorías', 'Categorías de la tienda.', 'option=com_hmbshop&view=categorias', '#__hmbshop_categorias'],
+                    ['Formas de envío', 'Recogida y envíos.', 'option=com_hmbshop&view=envios', '#__hmbshop_envios'],
+                    ['Ajustes de la tienda', 'Formas de pago, IVA y stock.', 'option=com_config&view=component&component=com_hmbshop', ''],
+                ],
+            ],
             'sitio' => [
                 'titulo' => 'Sitio',
                 'icono'  => 'icon-cog',

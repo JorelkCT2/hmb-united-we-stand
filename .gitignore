@@ -34,3 +34,5 @@ logs/
 images/
 dist/
 __pycache__/
+
+herramientas/salida/

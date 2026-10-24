@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <fieldset name="general" label="General">
+        <field name="iva_defecto" type="number" label="IVA por defecto (%)" default="21" min="0" max="30" step="1" />
+        <field name="controlar_stock" type="radio" label="Controlar stock" default="0" layout="joomla.form.field.radio.switcher">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </field>
+        <field name="email_pedidos" type="text" label="Aviso de pedidos nuevos a (correo)" default="" />
+        <field name="moneda" type="text" label="Símbolo de moneda" default="€" size="3" />
+    </fieldset>
+
+    <fieldset name="pagos" label="Formas de pago">
+        <field name="pago_recogida" type="radio" label="Pago en tienda (al recoger)" default="1" layout="joomla.form.field.radio.switcher">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </field>
+        <field name="texto_recogida" type="textarea" label="Texto de recogida" rows="3" default="Pagas al recoger tu pedido. Te avisaremos cuando esté listo." />
+
+        <field name="pago_transferencia" type="radio" label="Transferencia bancaria" default="0" layout="joomla.form.field.radio.switcher">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </field>
+        <field name="iban" type="text" label="IBAN para transferencias" default="" showon="pago_transferencia:1" />
+
+        <field name="pago_contrareembolso" type="radio" label="Contrareembolso" default="0" layout="joomla.form.field.radio.switcher">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </field>
+        <field name="recargo_contrareembolso" type="number" label="Recargo contrareembolso (€)" default="0" step="0.5" showon="pago_contrareembolso:1" />
+
+        <field name="pago_stripe" type="radio" label="Tarjeta (Stripe)" default="0" layout="joomla.form.field.radio.switcher">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </field>
+        <field name="stripe_pk" type="text" label="Stripe clave pública" default="" showon="pago_stripe:1" />
+        <field name="stripe_sk" type="password" label="Stripe clave secreta" default="" showon="pago_stripe:1" />
+
+        <field name="pago_paypal" type="radio" label="PayPal" default="0" layout="joomla.form.field.radio.switcher">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </field>
+        <field name="paypal_client_id" type="text" label="PayPal Client ID" default="" showon="pago_paypal:1" />
+        <field name="paypal_secret" type="password" label="PayPal Secret" default="" showon="pago_paypal:1" />
+    </fieldset>
+
+    <fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
+        <field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" filter="rules" validate="rules" component="com_hmbshop" section="component" />
+    </fieldset>
+</config>

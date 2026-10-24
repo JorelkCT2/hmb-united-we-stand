@@ -38,6 +38,7 @@ class AjaxController extends BaseController
 
     private function fallo(string $m, int $codigo = 200): void
     {
+        $this->log('rechazo', $m . (isset($_FILES['archivo']['name']) ? ' [' . $_FILES['archivo']['name'] . ', ' . (int) ($_FILES['archivo']['size'] ?? 0) . ' B, error ' . ($_FILES['archivo']['error'] ?? '-') . ']' : ''));
         if ($codigo !== 200 && !headers_sent()) {
             http_response_code($codigo);
         }

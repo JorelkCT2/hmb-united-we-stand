@@ -50,6 +50,9 @@ $q = $db->getQuery(true)->select('params')->from('#__modules')
     ->where('module = ' . $db->q('mod_hmb_register'))->where('published = 1');
 $modCfg = new \Joomla\Registry\Registry($db->setQuery($q)->loadResult() ?: '{}');
 
+$captchaKey = ((bool) $modCfg->get('enable_recaptcha', false) && trim((string) $modCfg->get('recaptcha_secret_key', '')) !== '')
+    ? trim((string) $modCfg->get('recaptcha_site_key', '')) : '';
+
 $welcomeTitle    = (string) $modCfg->get('welcome_title',    '¡Bienvenido a la Hermandad!');
 $welcomeSubtitle = (string) $modCfg->get('welcome_subtitle', 'Hermano del Metal');
 $welcomeMessage  = (string) $modCfg->get('welcome_message',  'Tu cuenta ha sido creada. Ya eres parte de la Hermandad del Metal.');
@@ -346,6 +349,9 @@ $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 </div>
 </div>
 
+<?php if ($captchaKey !== '') : ?>
+<script src="https://www.google.com/recaptcha/api.js?render=<?php echo htmlspecialchars($captchaKey, ENT_QUOTES); ?>" async></script>
+<?php endif; ?>
 <script>
 (function(){
     var SITE = '<?php echo addslashes($siteRoot); ?>';
@@ -400,9 +406,19 @@ $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 
         rb.disabled=true; rb.classList.add('ld');
 
-        fetch('<?php echo addslashes($ajaxUrl); ?>',{
-            method:'POST', body:new FormData(rf),
-            headers:{'X-Requested-With':'XMLHttpRequest'}
+        var CK = <?php echo json_encode($captchaKey); ?>;
+        var tokenCaptcha = (!CK) ? Promise.resolve('') : new Promise(function(ok, ko){
+            if(!window.grecaptcha){ ko(); return; }
+            grecaptcha.ready(function(){ grecaptcha.execute(CK, {action:'register'}).then(ok, ko); });
+        });
+
+        tokenCaptcha.then(function(t){
+            var fd = new FormData(rf);
+            if(CK) fd.set('g-recaptcha-response', t);
+            return fetch('<?php echo addslashes($ajaxUrl); ?>',{
+                method:'POST', body:fd,
+                headers:{'X-Requested-With':'XMLHttpRequest'}
+            });
         })
         .then(function(r){return r.json();})
         .then(function(j){

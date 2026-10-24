@@ -52,7 +52,10 @@ class ModHmbRegisterHelper
         $captchaEnabled  = (bool) $moduleParams->get('enable_recaptcha', false);
         $recaptchaSecret = trim((string) $moduleParams->get('recaptcha_secret_key', ''));
 
-        if ($captchaEnabled && !empty($recaptchaSecret) && !empty($recaptchaToken)) {
+        if ($captchaEnabled && !empty($recaptchaSecret)) {
+            if ($recaptchaToken === '') {
+                return ['success' => false, 'message' => 'No se pudo verificar que eres una persona. Recarga la página e inténtalo de nuevo.'];
+            }
             $ctx = stream_context_create(['http' => [
                 'method'  => 'POST',
                 'header'  => 'Content-Type: application/x-www-form-urlencoded',
@@ -66,7 +69,7 @@ class ModHmbRegisterHelper
             $result      = @file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $ctx);
             $captchaResp = $result ? json_decode($result, true) : [];
             $score       = (float) ($captchaResp['score'] ?? 0);
-            if (!empty($captchaResp['success']) && $score < 0.3) {
+            if (empty($captchaResp['success']) || $score < 0.3) {
                 return ['success' => false, 'message' => 'Actividad sospechosa detectada. Inténtalo de nuevo.'];
             }
         }
@@ -96,7 +99,7 @@ class ModHmbRegisterHelper
             $q = $db->getQuery(true)->select('COUNT(*)')->from('#__users')
                 ->where('email = ' . $db->q($email));
             if ((int) $db->setQuery($q)->loadResult() > 0) {
-                return ['success' => false, 'message' => 'Este correo ya está registrado.'];
+                return ['success' => false, 'message' => 'No se pudo completar el registro con esos datos. Si ya tienes cuenta, inicia sesión o recupera tu contraseña.'];
             }
 
             if (empty($username)) {
@@ -105,7 +108,7 @@ class ModHmbRegisterHelper
                 $q = $db->getQuery(true)->select('COUNT(*)')->from('#__users')
                     ->where('username = ' . $db->q($username));
                 if ((int) $db->setQuery($q)->loadResult() > 0) {
-                    return ['success' => false, 'message' => 'Este nombre de usuario ya está en uso.'];
+                    return ['success' => false, 'message' => 'No se pudo completar el registro con esos datos. Si ya tienes cuenta, inicia sesión o recupera tu contraseña.'];
                 }
             }
 
@@ -148,24 +151,17 @@ class ModHmbRegisterHelper
             $db->insertObject('#__user_usergroup_map', $groupMap);
 
             // ── Avatar opcional ────────────────────────────────────────────
-            if (!empty($_FILES['avatar']['name']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
-                $file    = $_FILES['avatar'];
-                $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-                if (in_array($file['type'], $allowed) && $file['size'] <= 2 * 1024 * 1024) {
-                    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-                    $dir = JPATH_ROOT . '/images/hmb_avatars/';
-                    if (!is_dir($dir)) @mkdir($dir, 0755, true);
-                    $fname = 'user_' . $userId . '.' . $ext;
-                    if (move_uploaded_file($file['tmp_name'], $dir . $fname)) {
-                        $ap = new \Joomla\Registry\Registry(json_decode($userParams, true));
-                        $ap->set('avatar', 'images/hmb_avatars/' . $fname);
-                        $db->setQuery(
-                            $db->getQuery(true)
-                                ->update($db->qn('#__users'))
-                                ->set($db->qn('params') . ' = ' . $db->q((string) $ap))
-                                ->where($db->qn('id') . ' = ' . (int) $userId)
-                        )->execute();
-                    }
+            if (!empty($_FILES['avatar']['name'])) {
+                $rel = self::guardarAvatar($_FILES['avatar'], $userId);
+                if ($rel !== null) {
+                    $ap = new \Joomla\Registry\Registry(json_decode($userParams, true));
+                    $ap->set('avatar', $rel);
+                    $db->setQuery(
+                        $db->getQuery(true)
+                            ->update($db->qn('#__users'))
+                            ->set($db->qn('params') . ' = ' . $db->q((string) $ap))
+                            ->where($db->qn('id') . ' = ' . (int) $userId)
+                    )->execute();
                 }
             }
 
@@ -176,7 +172,7 @@ class ModHmbRegisterHelper
             return [
                 'success'  => true,
                 'message'  => '¡Bienvenido a la Hermandad, ' . htmlspecialchars($fullName) . '!',
-                'redirect' => $input->getString('redirect', Uri::root()),
+                'redirect' => self::redirectSeguro($input->getString('redirect', '')),
             ];
 
         } catch (\Exception $e) {
@@ -235,7 +231,7 @@ class ModHmbRegisterHelper
                 return [
                     'success'  => true,
                     'message'  => '¡Bienvenido de nuevo, ' . htmlspecialchars($name) . '!',
-                    'redirect' => $input->getString('redirect', Uri::root()),
+                    'redirect' => self::redirectSeguro($input->getString('redirect', '')),
                     'action'   => 'login',
                 ];
             }
@@ -271,7 +267,7 @@ class ModHmbRegisterHelper
             return [
                 'success'  => true,
                 'message'  => '¡Bienvenido a la Hermandad, ' . htmlspecialchars($name) . '!',
-                'redirect' => $input->getString('redirect', Uri::root()),
+                'redirect' => self::redirectSeguro($input->getString('redirect', '')),
                 'action'   => 'register',
             ];
 
@@ -283,6 +279,68 @@ class ModHmbRegisterHelper
     // ────────────────────────────────────────────────────────────────────────
     //  HELPERS
     // ────────────────────────────────────────────────────────────────────────
+    /**
+     * Guarda un avatar subido. Valida el contenido real (no el tipo/extension que manda el cliente),
+     * fija la extension segun el formato detectado y devuelve la ruta relativa, o null si no vale.
+     */
+    public static function guardarAvatar(array $file, int $userId): ?string
+    {
+        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK
+            || ($file['size'] ?? 0) > 2 * 1024 * 1024
+            || !is_uploaded_file($file['tmp_name'] ?? '')) {
+            return null;
+        }
+
+        $info = @getimagesize($file['tmp_name']);
+        $exts = [IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png', IMAGETYPE_GIF => 'gif', IMAGETYPE_WEBP => 'webp'];
+
+        if (!$info || !isset($exts[$info[2]])) {
+            return null;
+        }
+
+        $dir = JPATH_ROOT . '/images/hmb_avatars/';
+
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0755, true);
+        }
+
+        foreach (glob($dir . 'user_' . $userId . '.*') ?: [] as $viejo) {
+            @unlink($viejo);
+        }
+
+        $nombre = 'user_' . $userId . '.' . $exts[$info[2]];
+
+        if (!move_uploaded_file($file['tmp_name'], $dir . $nombre)) {
+            return null;
+        }
+
+        @chmod($dir . $nombre, 0644);
+
+        return 'images/hmb_avatars/' . $nombre;
+    }
+
+    /** Solo se permite volver a una URL del propio sitio; cualquier otra cosa cae a la portada. */
+    public static function redirectSeguro(string $url): string
+    {
+        $raiz = Uri::root();
+        $url  = trim($url);
+
+        if ($url === '') {
+            return $raiz;
+        }
+
+        $host = parse_url($raiz, PHP_URL_HOST);
+        $dest = parse_url($url, PHP_URL_HOST);
+        $base = preg_replace('/^www\./i', '', (string) $host);
+
+        if ($dest === null) {
+            // ruta relativa: valida salvo "//host" o esquemas raros
+            return (strpos($url, '//') === 0 || preg_match('#^[a-z][a-z0-9+.-]*:#i', $url)) ? $raiz : $raiz . ltrim($url, '/');
+        }
+
+        return (preg_replace('/^www\./i', '', (string) $dest) === $base && preg_match('#^https?://#i', $url)) ? $url : $raiz;
+    }
+
     private static function generateUsername(string $email, $db): string
     {
         $base     = preg_replace('/[^a-zA-Z0-9_]/', '', explode('@', $email)[0]);

@@ -41,37 +41,28 @@ if (!empty($user->registerDate) && $user->registerDate !== '0000-00-00 00:00:00'
 
 // Procesar subida de avatar
 $uploadMsg = null;
-if ($isOwn && $_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['hmb_avatar']['name'])) {
-    $file    = $_FILES['hmb_avatar'];
-    $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+if (!class_exists('ModHmbRegisterHelper')) {
+    require_once JPATH_ROOT . '/modules/mod_hmb_register/helper.php';
+}
 
-    if (!in_array($file['type'], $allowed)) {
-        $uploadMsg = ['ok' => false, 'msg' => 'Solo se permiten imagenes JPG, PNG, GIF o WEBP.'];
-    } elseif ($file['size'] > 2 * 1024 * 1024) {
-        $uploadMsg = ['ok' => false, 'msg' => 'La imagen no puede superar 2 MB.'];
-    } elseif ($file['error'] !== UPLOAD_ERR_OK) {
-        $uploadMsg = ['ok' => false, 'msg' => 'Error al recibir el archivo (codigo ' . $file['error'] . ').'];
+$esPost = $_SERVER['REQUEST_METHOD'] === 'POST';
+if ($isOwn && $esPost && !empty($_FILES['hmb_avatar']['name'])) {
+    if (!Session::checkToken('post')) {
+        $uploadMsg = ['ok' => false, 'msg' => 'La sesión ha caducado. Recarga la página e inténtalo de nuevo.'];
     } else {
-        $ext  = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $dir  = JPATH_ROOT . '/images/hmb_avatars/';
-        $name = 'user_' . $user->id . '.' . $ext;
-
-        if (!is_dir($dir)) { @mkdir($dir, 0755, true); }
-
-        if (move_uploaded_file($file['tmp_name'], $dir . $name)) {
-            $relPath = 'images/hmb_avatars/' . $name;
-            $userParams->set('avatar', $relPath);
+        $rel = ModHmbRegisterHelper::guardarAvatar($_FILES['hmb_avatar'], (int) $user->id);
+        if ($rel !== null) {
+            $userParams->set('avatar', $rel);
             $db = Factory::getDbo();
-            $db->setQuery(
-                $db->getQuery(true)
-                    ->update($db->qn('#__users'))
-                    ->set($db->qn('params') . ' = ' . $db->q((string) $userParams))
-                    ->where($db->qn('id') . ' = ' . (int) $user->id)
+            $db->setQuery($db->getQuery(true)
+                ->update($db->qn('#__users'))
+                ->set($db->qn('params') . ' = ' . $db->q((string) $userParams))
+                ->where($db->qn('id') . ' = ' . (int) $user->id)
             )->execute();
-            $avatarUrl = Uri::root() . $relPath . '?t=' . time();
-            $uploadMsg = ['ok' => true, 'msg' => 'Foto actualizada correctamente.'];
+            $avatarUrl = Uri::root() . $rel . '?t=' . time();
+            $uploadMsg = ['ok' => true, 'msg' => 'Foto actualizada.'];
         } else {
-            $uploadMsg = ['ok' => false, 'msg' => 'No se pudo guardar la imagen. Verifica permisos en /images/hmb_avatars/'];
+            $uploadMsg = ['ok' => false, 'msg' => 'Imagen no válida (máx. 2 MB; JPG, PNG, GIF o WEBP).'];
         }
     }
 }

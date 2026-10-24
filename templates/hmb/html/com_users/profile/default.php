@@ -38,23 +38,30 @@ if (!empty($user->registerDate) && $user->registerDate !== '0000-00-00 00:00:00'
 
 // Procesar subida avatar
 $msg = null;
-if ($isOwn && $_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['hmb_avatar']['name'])) {
-    $f = $_FILES['hmb_avatar'];
-    if ($f['error'] === UPLOAD_ERR_OK && in_array($f['type'], ['image/jpeg','image/png','image/gif','image/webp']) && $f['size'] <= 2097152) {
-        $ext  = strtolower(pathinfo($f['name'], PATHINFO_EXTENSION));
-        $dir  = JPATH_ROOT . '/images/hmb_avatars/';
-        $name = 'user_' . $user->id . '.' . $ext;
-        if (!is_dir($dir)) @mkdir($dir, 0755, true);
-        if (move_uploaded_file($f['tmp_name'], $dir . $name)) {
-            $userParams->set('avatar', 'images/hmb_avatars/' . $name);
+if (!class_exists('ModHmbRegisterHelper')) {
+    require_once JPATH_ROOT . '/modules/mod_hmb_register/helper.php';
+}
+
+$esPost = $_SERVER['REQUEST_METHOD'] === 'POST';
+if ($isOwn && $esPost && !empty($_FILES['hmb_avatar']['name'])) {
+    if (!Session::checkToken('post')) {
+        $msg = ['ok' => false, 'txt' => 'La sesión ha caducado. Recarga la página e inténtalo de nuevo.'];
+    } else {
+        $rel = ModHmbRegisterHelper::guardarAvatar($_FILES['hmb_avatar'], (int) $user->id);
+        if ($rel !== null) {
+            $userParams->set('avatar', $rel);
             $db = Factory::getDbo();
-            $db->setQuery($db->getQuery(true)->update($db->qn('#__users'))
-                ->set($db->qn('params') . ' = ' . $db->q((string)$userParams))
-                ->where($db->qn('id') . ' = ' . (int)$user->id))->execute();
-            $avatarUrl = Uri::root() . 'images/hmb_avatars/' . $name . '?t=' . time();
+            $db->setQuery($db->getQuery(true)
+                ->update($db->qn('#__users'))
+                ->set($db->qn('params') . ' = ' . $db->q((string) $userParams))
+                ->where($db->qn('id') . ' = ' . (int) $user->id)
+            )->execute();
+            $avatarUrl = Uri::root() . $rel . '?t=' . time();
             $msg = ['ok' => true, 'txt' => 'Foto actualizada.'];
-        } else { $msg = ['ok' => false, 'txt' => 'Error al guardar la imagen.']; }
-    } else { $msg = ['ok' => false, 'txt' => 'Imagen no válida (máx. 2MB, JPG/PNG/GIF/WEBP).']; }
+        } else {
+            $msg = ['ok' => false, 'txt' => 'Imagen no válida (máx. 2 MB; JPG, PNG, GIF o WEBP).'];
+        }
+    }
 }
 ?>
 <style>

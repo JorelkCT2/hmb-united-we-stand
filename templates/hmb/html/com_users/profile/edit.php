@@ -15,8 +15,15 @@ HTMLHelper::_('behavior.formvalidator');
 
 $app         = Factory::getApplication();
 $currentUser = $app->getIdentity();
-$userId      = $app->getInput()->getInt('user_id', $currentUser->id);
-$user        = \Joomla\CMS\User\User::getInstance($userId);
+
+if (!$currentUser->id) {
+    $app->redirect(Route::_('index.php?option=com_hmb&view=hmb&layout=login', false));
+    return;
+}
+
+// Solo se edita el perfil propio; el user_id de la peticion se ignora.
+$userId = (int) $currentUser->id;
+$user   = \Joomla\CMS\User\User::getInstance($userId);
 
 // Avatar actual
 $userParams = new \Joomla\Registry\Registry($user->params);
@@ -27,40 +34,47 @@ $avatarUrl  = !empty($avatarPath)
 
 // Subida de avatar desde esta misma página
 $avatarMsg = null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['hmb_avatar_edit']['name'])) {
-    $f = $_FILES['hmb_avatar_edit'];
-    if ($f['error'] === UPLOAD_ERR_OK && in_array($f['type'], ['image/jpeg','image/png','image/gif','image/webp']) && $f['size'] <= 2097152) {
-        $ext  = strtolower(pathinfo($f['name'], PATHINFO_EXTENSION));
-        $dir  = JPATH_ROOT . '/images/hmb_avatars/';
-        $name = 'user_' . $user->id . '.' . $ext;
-        if (!is_dir($dir)) @mkdir($dir, 0755, true);
-        if (move_uploaded_file($f['tmp_name'], $dir . $name)) {
-            $userParams->set('avatar', 'images/hmb_avatars/' . $name);
+if (!class_exists('ModHmbRegisterHelper')) {
+    require_once JPATH_ROOT . '/modules/mod_hmb_register/helper.php';
+}
+
+$esPost = $_SERVER['REQUEST_METHOD'] === 'POST';
+if ($esPost && !empty($_FILES['hmb_avatar_edit']['name'])) {
+    if (!Session::checkToken('post')) {
+        $avatarMsg = ['ok' => false, 'txt' => 'La sesión ha caducado. Recarga la página e inténtalo de nuevo.'];
+    } else {
+        $rel = ModHmbRegisterHelper::guardarAvatar($_FILES['hmb_avatar_edit'], (int) $user->id);
+        if ($rel !== null) {
+            $userParams->set('avatar', $rel);
             $db = Factory::getDbo();
             $db->setQuery($db->getQuery(true)
                 ->update($db->qn('#__users'))
-                ->set($db->qn('params') . ' = ' . $db->q((string)$userParams))
-                ->where($db->qn('id') . ' = ' . (int)$user->id)
+                ->set($db->qn('params') . ' = ' . $db->q((string) $userParams))
+                ->where($db->qn('id') . ' = ' . (int) $user->id)
             )->execute();
-            $avatarUrl = Uri::root() . 'images/hmb_avatars/' . $name . '?t=' . time();
+            $avatarUrl = Uri::root() . $rel . '?t=' . time();
             $avatarMsg = ['ok' => true, 'txt' => 'Foto actualizada.'];
+        } else {
+            $avatarMsg = ['ok' => false, 'txt' => 'Imagen no válida (máx. 2 MB; JPG, PNG, GIF o WEBP).'];
         }
-    } else {
-        $avatarMsg = ['ok' => false, 'txt' => 'Imagen no válida (máx 2MB, JPG/PNG/GIF/WEBP).'];
     }
 }
 
 // Guardar preferencia de Metal Quiz
 $quizMsg = null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hmb_save_quiz'])) {
-    $userParams->set('metal_quiz_invitations', !empty($_POST['metal_quiz_invitations']) ? 1 : 0);
-    $db = Factory::getDbo();
-    $db->setQuery($db->getQuery(true)
-        ->update($db->qn('#__users'))
-        ->set($db->qn('params') . ' = ' . $db->q((string)$userParams))
-        ->where($db->qn('id') . ' = ' . (int)$user->id)
-    )->execute();
-    $quizMsg = ['ok' => true, 'txt' => 'Preferencia de Metal Quiz actualizada.'];
+if ($esPost && isset($_POST['hmb_save_quiz'])) {
+    if (!Session::checkToken('post')) {
+        $quizMsg = ['ok' => false, 'txt' => 'La sesión ha caducado. Recarga la página e inténtalo de nuevo.'];
+    } else {
+        $userParams->set('metal_quiz_invitations', !empty($_POST['metal_quiz_invitations']) ? 1 : 0);
+        $db = Factory::getDbo();
+        $db->setQuery($db->getQuery(true)
+            ->update($db->qn('#__users'))
+            ->set($db->qn('params') . ' = ' . $db->q((string) $userParams))
+            ->where($db->qn('id') . ' = ' . (int) $user->id)
+        )->execute();
+        $quizMsg = ['ok' => true, 'txt' => 'Preferencia de Metal Quiz actualizada.'];
+    }
 }
 
 $quizEnabled = (bool) $userParams->get('metal_quiz_invitations', 1);

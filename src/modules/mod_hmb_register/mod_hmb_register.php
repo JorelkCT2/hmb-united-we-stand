@@ -91,7 +91,6 @@ $doc->addScriptOptions('mod_hmb_register', [
     'enableGoogle'   => $enableGoogle,
     'clientId'       => $googleClientId,
     'enableCaptcha'  => ($enableCaptcha && !empty($recaptchaSiteKey)),
-    'captchaSecret'  => $recaptchaSecret,
     'captchaSiteKey' => $recaptchaSiteKey,
     'loginAction'    => Route::_('index.php?option=com_users&task=user.login'),
     'logoutAction'   => Route::_('index.php?option=com_users&task=user.logout'),

@@ -1042,3 +1042,7 @@
     .mm-modal__nav { width: 32px; height: 32px; font-size: 1.1rem; }
     .mm-modal__close { width: 32px; height: 32px; font-size: 1.1rem; }
 }
+
+/* Mapa oscuro a partir de teselas OSM (sin clave de API) */
+.leaflet-tile-pane .mm-tiles-dark{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.95) saturate(.55)}
+.leaflet-container{background:#1b1b1b}

@@ -45,8 +45,8 @@ $wa->registerAndUseStyle(
 );
 
 // CSS y JS propios
-$wa->registerAndUseStyle('com_metalmap.style', 'media/com_metalmap/css/metalmap.css', ['version' => '2.4.5']);
-$wa->registerAndUseScript('com_metalmap.script', 'media/com_metalmap/js/metalmap.js', ['version' => '2.4.5'], ['defer' => true], ['leaflet', 'leaflet.markercluster']);
+$wa->registerAndUseStyle('com_metalmap.style', 'media/com_metalmap/css/metalmap.css', ['version' => '2.4.6']);
+$wa->registerAndUseScript('com_metalmap.script', 'media/com_metalmap/js/metalmap.js', ['version' => '2.4.6'], ['defer' => true], ['leaflet', 'leaflet.markercluster']);
 
 // Fuentes Google
 $this->document->addStyleSheet('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Cinzel:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap');

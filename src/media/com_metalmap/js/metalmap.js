@@ -72,11 +72,12 @@
         });
 
         const tileProviders = {
+            // CARTO y Stadia piden ahora clave de API (sin ella pintan una marca de agua "API KEY REQUIRED").
+            // Para no depender de ninguna clave, el modo oscuro usa teselas de OpenStreetMap oscurecidas por CSS.
             cartodb_dark: {
-                // dark_all muestra los nombres en idioma local de cada país
-                url: 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png',
-                attr: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> · © <a href="https://carto.com/attributions">CARTO</a>',
-                sub: 'abcd', max: 19
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                sub: 'abc', max: 19, cls: 'mm-tiles-dark'
             },
             osm: {
                 // OSM tiles muestran nombres en idioma local
@@ -85,16 +86,17 @@
                 sub: 'abc', max: 19
             },
             stadia_dark: {
-                url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?lang=es',
-                attr: '© <a href="https://stadiamaps.com/">Stadia</a> · © <a href="https://www.openstreetmap.org/copyright">OSM</a>',
-                sub: '', max: 20
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                sub: 'abc', max: 19, cls: 'mm-tiles-dark'
             }
         };
         const provider = tileProviders[cfg.tile_provider] || tileProviders.cartodb_dark;
         L.tileLayer(provider.url, {
             attribution: provider.attr,
             subdomains: provider.sub,
-            maxZoom: provider.max
+            maxZoom: provider.max,
+            className: provider.cls || ''
         }).addTo(map);
 
         /* ── CLUSTER CON COLORES INTELIGENTES ───────────────────── */

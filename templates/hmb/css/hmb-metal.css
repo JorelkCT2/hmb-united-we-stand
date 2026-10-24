@@ -184,6 +184,13 @@ body.hmb-body::before {
 .hmb-float-tab { animation: hmb-brasa 3.2s ease-in-out infinite; }
 @keyframes hmb-brasa { 0%, 100% { box-shadow: 0 0 8px rgba(204, 34, 0, .4); } 50% { box-shadow: 0 0 22px rgba(255, 77, 46, .75); } }
 
+/* Colaboradores del pie: el efecto gris + 55% de opacidad los hacía casi invisibles sobre negro */
+.hmb-colab-item { background: radial-gradient(circle at 50% 40%, #2a2a2a, #121212) !important; border-color: #5c0000 !important; }
+.hmb-colab-gris img { filter: brightness(1.15) !important; opacity: 1 !important; }
+.hmb-colab-gris .hmb-colab-item:hover img { filter: none !important; opacity: 1 !important; }
+.hmb-colab-item:hover { box-shadow: 0 0 18px rgba(204, 34, 0, .45); }
+.hmb-colab-nombre { color: var(--tx-dim) !important; }
+
 /* Movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

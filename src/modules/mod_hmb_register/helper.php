@@ -279,15 +279,41 @@ class ModHmbRegisterHelper
     // ────────────────────────────────────────────────────────────────────────
     //  HELPERS
     // ────────────────────────────────────────────────────────────────────────
+    /** Motivo del ultimo fallo de guardarAvatar(), en espanol y listo para mostrar. */
+    public static $errorAvatar = '';
+
     /**
      * Guarda un avatar subido. Valida el contenido real (no el tipo/extension que manda el cliente),
-     * fija la extension segun el formato detectado y devuelve la ruta relativa, o null si no vale.
+     * acepta fotos grandes (hasta 12 MB) y las reduce a 512 px, corrigiendo la orientacion EXIF del movil.
+     * Devuelve la ruta relativa, o null (con el motivo en self::$errorAvatar).
      */
     public static function guardarAvatar(array $file, int $userId): ?string
     {
-        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK
-            || ($file['size'] ?? 0) > 2 * 1024 * 1024
-            || !is_uploaded_file($file['tmp_name'] ?? '')) {
+        self::$errorAvatar = '';
+        $max   = 12 * 1024 * 1024;
+        $error = $file['error'] ?? UPLOAD_ERR_NO_FILE;
+
+        if ($error !== UPLOAD_ERR_OK) {
+            if ($error === UPLOAD_ERR_NO_FILE) {
+                self::$errorAvatar = 'No has elegido ninguna imagen.';
+            } elseif ($error === UPLOAD_ERR_INI_SIZE || $error === UPLOAD_ERR_FORM_SIZE) {
+                self::$errorAvatar = 'La foto pesa demasiado (máx. 12 MB).';
+            } else {
+                self::$errorAvatar = 'La subida falló (código ' . (int) $error . '). Inténtalo de nuevo.';
+            }
+
+            return null;
+        }
+
+        if (($file['size'] ?? 0) > $max) {
+            self::$errorAvatar = 'La foto pesa demasiado (máx. 12 MB).';
+
+            return null;
+        }
+
+        if (!is_uploaded_file($file['tmp_name'] ?? '')) {
+            self::$errorAvatar = 'Archivo no válido.';
+
             return null;
         }
 
@@ -295,26 +321,89 @@ class ModHmbRegisterHelper
         $exts = [IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png', IMAGETYPE_GIF => 'gif', IMAGETYPE_WEBP => 'webp'];
 
         if (!$info || !isset($exts[$info[2]])) {
+            self::$errorAvatar = 'Formato no admitido. Usa JPG, PNG, GIF o WEBP (las fotos HEIC del iPhone hay que convertirlas o hacerlas en formato "más compatible").';
+
             return null;
         }
 
-        $dir = JPATH_ROOT . '/images/hmb_avatars/';
+        $tipo = $info[2];
+        $dir  = JPATH_ROOT . '/images/hmb_avatars/';
 
         if (!is_dir($dir)) {
             @mkdir($dir, 0755, true);
         }
 
-        foreach (glob($dir . 'user_' . $userId . '.*') ?: [] as $viejo) {
-            @unlink($viejo);
+        $nombre  = 'user_' . $userId . '.' . $exts[$tipo];
+        $destino = $dir . $nombre;
+        $guardado = false;
+
+        // Reduccion con GD (no se toca el GIF para no romper animaciones pequenas).
+        if ($tipo !== IMAGETYPE_GIF && function_exists('imagecreatefromstring')
+            && (max($info[0], $info[1]) > 512 || ($file['size'] ?? 0) > 400 * 1024)) {
+            $src = @imagecreatefromstring((string) file_get_contents($file['tmp_name']));
+
+            if ($src) {
+                if ($tipo === IMAGETYPE_JPEG && function_exists('exif_read_data')) {
+                    $exif = @exif_read_data($file['tmp_name']);
+                    $giro = [3 => 180, 6 => -90, 8 => 90][(int) ($exif['Orientation'] ?? 1)] ?? 0;
+
+                    if ($giro) {
+                        $rot = @imagerotate($src, $giro, 0);
+
+                        if ($rot) {
+                            $src = $rot;
+                        }
+                    }
+                }
+
+                $w   = imagesx($src);
+                $h   = imagesy($src);
+                $esc = min(1, 512 / max($w, $h));
+                $nw  = max(1, (int) round($w * $esc));
+                $nh  = max(1, (int) round($h * $esc));
+                $dst = imagecreatetruecolor($nw, $nh);
+
+                if ($tipo === IMAGETYPE_PNG || $tipo === IMAGETYPE_WEBP) {
+                    imagealphablending($dst, false);
+                    imagesavealpha($dst, true);
+                    imagefill($dst, 0, 0, imagecolorallocatealpha($dst, 0, 0, 0, 127));
+                }
+
+                imagecopyresampled($dst, $src, 0, 0, 0, 0, $nw, $nh, $w, $h);
+
+                foreach (glob($dir . 'user_' . $userId . '.*') ?: [] as $viejo) {
+                    @unlink($viejo);
+                }
+
+                if ($tipo === IMAGETYPE_JPEG) {
+                    $guardado = @imagejpeg($dst, $destino, 88);
+                } elseif ($tipo === IMAGETYPE_PNG) {
+                    $guardado = @imagepng($dst, $destino, 6);
+                } else {
+                    $guardado = function_exists('imagewebp') && @imagewebp($dst, $destino, 88);
+                }
+            }
         }
 
-        $nombre = 'user_' . $userId . '.' . $exts[$info[2]];
+        if (!$guardado) {
+            if (($file['size'] ?? 0) > 2 * 1024 * 1024) {
+                self::$errorAvatar = 'No se pudo reducir la foto (pesa más de 2 MB). Prueba con una más pequeña.';
 
-        if (!move_uploaded_file($file['tmp_name'], $dir . $nombre)) {
-            return null;
+                return null;
+            }
+
+            foreach (glob($dir . 'user_' . $userId . '.*') ?: [] as $viejo) {
+                @unlink($viejo);
+            }
+
+            if (!move_uploaded_file($file['tmp_name'], $destino)) {
+                self::$errorAvatar = 'No se pudo guardar la imagen en el servidor.';
+
+                return null;
+            }
         }
 
-        @chmod($dir . $nombre, 0644);
+        @chmod($destino, 0644);
 
         return 'images/hmb_avatars/' . $nombre;
     }

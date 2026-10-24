@@ -59,7 +59,7 @@ if ($isOwn && $esPost && !empty($_FILES['hmb_avatar']['name'])) {
             $avatarUrl = Uri::root() . $rel . '?t=' . time();
             $msg = ['ok' => true, 'txt' => 'Foto actualizada.'];
         } else {
-            $msg = ['ok' => false, 'txt' => 'Imagen no válida (máx. 2 MB; JPG, PNG, GIF o WEBP).'];
+            $msg = ['ok' => false, 'txt' => (ModHmbRegisterHelper::$errorAvatar ?: 'Imagen no válida (JPG, PNG, GIF o WEBP).')];
         }
     }
 }

@@ -182,7 +182,11 @@ class FsHelper
 
         $cabeza = (string) @file_get_contents($tmp, false, null, 0, 16384);
 
-        if (preg_match('/<\?(php|=)|<script\b|<%|#!\s*\/(usr|bin)/i', $cabeza)) {
+        // Solo marcas que no aparecen por azar en un fichero binario (audio, video, zip...);
+        // en texto plano se exige ademas que no haya etiquetas cortas de codigo.
+        $patron = in_array($ext, ['txt', 'csv'], true) ? '/<\?(php|=)|<script\b|<%|#!\s*\/(usr|bin)/i' : '/<\?php|<script\b/i';
+
+        if (preg_match($patron, $cabeza)) {
             return 'El fichero contiene codigo ejecutable.';
         }
 

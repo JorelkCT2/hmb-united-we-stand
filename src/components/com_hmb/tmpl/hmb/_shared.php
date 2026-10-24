@@ -101,12 +101,12 @@ $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 .hmb-rq{color:var(--rh)}
 .hmb-iw,.hmb-pw{position:relative}
 .hmb-in{width:100%;box-sizing:border-box;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:var(--ra);color:#fff !important;font-family:var(--fb);font-size:.9rem;font-weight:500 !important;padding:.62rem 2.3rem .62rem .88rem;transition:border-color var(--sp) var(--e),background var(--sp) var(--e),box-shadow var(--sp) var(--e);-webkit-appearance:none;appearance:none}
-.hmb-in::placeholder{color:rgba(136,136,136,.28);font-style:italic;font-weight:300}
+.hmb-in::placeholder{color:var(--tx-dim,#a3a3a3);font-style:italic;font-weight:300}
 .hmb-in:focus{outline:none;border-color:var(--r);background:rgba(180,20,20,.05);box-shadow:0 0 0 3px rgba(180,20,20,.12)}
 .hmb-in:-webkit-autofill,.hmb-in:-webkit-autofill:focus{-webkit-text-fill-color:#fff !important;-webkit-box-shadow:0 0 0 1000px var(--wine-black, #0A0000) inset}
-.hmb-ic{position:absolute;right:.72rem;top:50%;transform:translateY(-50%);color:#484848;pointer-events:none;display:flex;align-items:center}
+.hmb-ic{position:absolute;right:.72rem;top:50%;transform:translateY(-50%);color:var(--tx-faint,#8f8f8f);pointer-events:none;display:flex;align-items:center}
 .hmb-ic svg{width:.95rem;height:.95rem}
-.hmb-ey{position:absolute;right:.65rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#484848;padding:.2rem;display:flex;align-items:center;transition:color var(--sp) var(--e)}
+.hmb-ey{position:absolute;right:.65rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--tx-faint,#8f8f8f);padding:.2rem;display:flex;align-items:center;transition:color var(--sp) var(--e)}
 .hmb-ey:hover{color:var(--rh)}
 .hmb-ey svg{width:.9rem;height:.9rem}
 /* Checkbox */
@@ -132,7 +132,7 @@ $showBye = !$isLoggedIn && (int) $app->getInput()->getInt('hmbbye', 0) === 1;
 .hmb-lk li a:hover{color:#fff}
 .hmb-bl{font-size:.45rem;color:var(--r);flex-shrink:0}
 /* Footer */
-.hmb-ft{padding:.95rem 3rem 1.35rem;border-top:1px solid var(--b);text-align:center;font-size:.78rem;color:#484848;background:rgba(0,0,0,.2);position:relative;z-index:1}
+.hmb-ft{padding:.95rem 3rem 1.35rem;border-top:1px solid var(--b);text-align:center;font-size:.78rem;color:var(--tx-faint,#8f8f8f);background:rgba(0,0,0,.2);position:relative;z-index:1}
 .hmb-sw{background:none;border:none;cursor:pointer;padding:0;margin-left:.3rem;color:var(--rh);font-family:var(--fb);font-size:.78rem;font-weight:600;text-decoration:underline;transition:color var(--sp) var(--e)}
 .hmb-sw:hover{color:var(--g)}
 /* Pantallas de bienvenida / despedida */

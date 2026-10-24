@@ -80,7 +80,7 @@ $pagination = $this->pagination ?? null;
     text-shadow:0 0 30px rgba(204,34,0,.5);
 }
 .hmb-art-header p{
-    font-size:14px;color:var(--grey-5, #555555);letter-spacing:1px;margin:0;
+    font-size:14px;color:var(--tx-faint,#8f8f8f);letter-spacing:1px;margin:0;
 }
 
 /* Grid */
@@ -191,7 +191,7 @@ $pagination = $this->pagination ?? null;
 }
 .hmb-art-date{
     font-size:10px;letter-spacing:1px;
-    color:rgba(180,180,180,.6);
+    color:var(--tx-dim,#a3a3a3);
 }
 
 /* Título */
@@ -215,7 +215,7 @@ $pagination = $this->pagination ?? null;
 
 /* Intro texto */
 .hmb-art-intro{
-    font-size:12px;color:rgba(180,180,180,.7);
+    font-size:12px;color:var(--tx-dim,#a3a3a3);
     line-height:1.6;letter-spacing:.3px;
     display:-webkit-box;
     -webkit-line-clamp:2;
@@ -228,7 +228,7 @@ $pagination = $this->pagination ?? null;
 .hmb-art-cta{
     display:inline-flex;align-items:center;gap:6px;
     font-size:10px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--fire, #CC2200);
+    color:var(--fire-text,#ff4d2e);
     border:1px solid rgba(139,0,0,.5);
     padding:5px 14px;
     transition:all .25s;

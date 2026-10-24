@@ -37,7 +37,7 @@
 .hmb-ct-email-a{display:flex;align-items:center;gap:8px;color:var(--grey-8, #888888);font-size:12px;text-decoration:none;padding:6px 0;transition:color .2s;word-break:break-all;}
 .hmb-ct-email-a:hover{color:var(--cr);}
 .hmb-ct-redes{display:flex;flex-direction:column;gap:4px;}
-.hmb-ct-red{display:flex;align-items:center;gap:8px;color:var(--text-dim, #777777);font-size:12px;letter-spacing:1px;text-decoration:none;padding:7px 8px;border:1px solid #180000;border-radius:2px;transition:all .2s;}
+.hmb-ct-red{display:flex;align-items:center;gap:8px;color:var(--tx-dim,#a3a3a3);font-size:12px;letter-spacing:1px;text-decoration:none;padding:7px 8px;border:1px solid #180000;border-radius:2px;transition:all .2s;}
 .hmb-ct-red:hover{color:#fff;border-color:var(--cr2);background:rgba(139,0,0,.1);}
 .hmb-ct-photos{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
 .hmb-ct-photo{aspect-ratio:1;overflow:hidden;cursor:pointer;border:1px solid #180000;}

@@ -181,7 +181,7 @@
 .hmb-col-ef .hmb-module-content p::before,
 .hmb-col-ef .hmb-module-content li::before {
   content: '▸';
-  color: var(--fire);
+  color: var(--fire-text,#ff4d2e);
   font-size: 11px;
   margin-top: 4px;
   flex-shrink: 0;
@@ -287,7 +287,7 @@
   left: 10px;
   background: none;
   border: none;
-  color: var(--text-dim);
+  color: var(--tx-dim,#a3a3a3);
   font-size: 14px;
   cursor: pointer;
   z-index: 10;
@@ -353,7 +353,7 @@
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--tx-dim,#a3a3a3);
   text-decoration: none;
   text-align: center;
   display: block;
@@ -529,7 +529,7 @@
   font-weight: 600 !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  color: var(--text-dim) !important;
+  color: var(--tx-dim,#a3a3a3) !important;
   text-decoration: none !important;
   padding: 14px 18px !important;
   white-space: nowrap !important;
@@ -592,7 +592,7 @@
   padding: 9px 20px !important;
   font-size: 12px !important;
   letter-spacing: 1px !important;
-  color: var(--text-dim) !important;
+  color: var(--tx-dim,#a3a3a3) !important;
   background: none !important;
   border-bottom: 1px solid var(--steel, #1A1A1A) !important;
 }
@@ -658,7 +658,7 @@
   font-weight: 600 !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  color: var(--text-dim) !important;
+  color: var(--tx-dim,#a3a3a3) !important;
   text-decoration: none !important;
   padding: 0 18px !important;
   height: 100% !important;
@@ -729,7 +729,7 @@
   font-weight: 400 !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
-  color: var(--text-dim) !important;
+  color: var(--tx-dim,#a3a3a3) !important;
   text-decoration: none !important;
   padding: 9px 20px !important;
   border-bottom: 1px solid var(--steel, #1A1A1A) !important;
@@ -1254,10 +1254,10 @@ body.home .hmb-main-home > .hmb-container-fluid {
 .hmb-art-texto h2 { font-family: 'Metal Mania', cursive; font-size: clamp(24px, 3.5vw, 42px); color: var(--white); margin: 0 0 1.5rem; text-align: center; text-shadow: 0 0 30px rgba(204,34,0,.4); letter-spacing: 2px; line-height: 1.1; }
 .hmb-art-texto h2::after { content: ''; display: block; width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--fire), transparent); margin: .75rem auto 0; }
 .hmb-art-texto p { font-size: 15.5px; line-height: 1.85; color: #B8B8B8; margin-bottom: 1.4rem; text-align: justify; }
-.hmb-art-texto p:first-of-type::first-letter { font-family: 'Metal Mania', cursive; font-size: 60px; float: left; line-height: .75; margin: .05em .12em 0 0; color: var(--fire); text-shadow: 0 0 20px rgba(204,34,0,.5); }
+.hmb-art-texto p:first-of-type::first-letter { font-family: 'Metal Mania', cursive; font-size: 60px; float: left; line-height: .75; margin: .05em .12em 0 0; color: var(--fire-text,#ff4d2e); text-shadow: 0 0 20px rgba(204,34,0,.5); }
 
 /* Separador decorativo */
-.hmb-art-separador { text-align: center; margin: 2rem 0; color: var(--blood); font-size: 18px; letter-spacing: 8px; }
+.hmb-art-separador { text-align: center; margin: 2rem 0; color: var(--fire-text,#ff4d2e); font-size: 18px; letter-spacing: 8px; }
 
 /* Cita destacada */
 .hmb-art-cita { border-left: 3px solid var(--fire); padding: 1rem 1.5rem; margin: 2rem 0; background: rgba(139,0,0,.08); }

@@ -28,7 +28,7 @@
 
 .hmb-ub-welcome {
     font-size: .72rem;
-    color: rgba(212, 212, 212, .6);
+    color: var(--tx-dim,#a3a3a3);
     letter-spacing: .04em;
 }
 

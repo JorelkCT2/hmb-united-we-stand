@@ -60,7 +60,7 @@ try {
 .mp-card { background:rgba(10,8,6,.82); border:1px solid rgba(180,140,80,.3); border-radius:10px; margin-bottom:1.5rem; overflow:hidden; }
 .mp-card-h { background:rgba(100,70,20,.5); padding:.7rem 1.2rem; font-weight:700; font-size:.85rem; color:var(--gold-pale, #D4BB8A); text-transform:uppercase; letter-spacing:.4px; display:flex; justify-content:space-between; align-items:center; }
 .mp-card-b { padding:1.2rem 1.4rem; }
-.mp-label { display:block; color:var(--gold-dim, #7A6030); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
+.mp-label { display:block; color:var(--gold-text,#c9a45c); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
 .mp-ctrl { width:100%; background:rgba(255,255,255,.06)!important; border:1px solid rgba(180,140,60,.3)!important; color:var(--cream, #E8E0D5)!important; border-radius:6px; padding:.45rem .7rem; font-size:.9rem; margin-bottom:0; }
 .mp-ctrl:focus { border-color:rgba(200,160,60,.8)!important; outline:none!important; color:#fff!important; }
 .mp-ctrl option { background:var(--steel, #1A1A1A); color:var(--cream, #E8E0D5); }
@@ -305,13 +305,13 @@ try {
                 <div class="mp-card-b">
                     <div class="row g-2">
                         <div class="col-12">
-                            <label class="mp-label">Meta descripción <small style="color:#6a5f4a;font-weight:normal">(máx. 160 caracteres — aparece en Google bajo el título)</small></label>
+                            <label class="mp-label">Meta descripción <small style="color:var(--gold-text,#c9a45c);font-weight:normal">(máx. 160 caracteres — aparece en Google bajo el título)</small></label>
                             <textarea name="metadesc" class="mp-ctrl" rows="2" maxlength="160"
                                 oninput="document.getElementById('metadesc_count').textContent=(160-this.value.length)"><?= htmlspecialchars($item->metadesc ?? '') ?></textarea>
-                            <small style="color:#6a5f4a">Te quedan <span id="metadesc_count"><?= 160 - mb_strlen($item->metadesc ?? '') ?></span> caracteres</small>
+                            <small style="color:var(--gold-text,#c9a45c)">Te quedan <span id="metadesc_count"><?= 160 - mb_strlen($item->metadesc ?? '') ?></span> caracteres</small>
                         </div>
                         <div class="col-12">
-                            <label class="mp-label">Palabras clave <small style="color:#6a5f4a;font-weight:normal">(separadas por comas)</small></label>
+                            <label class="mp-label">Palabras clave <small style="color:var(--gold-text,#c9a45c);font-weight:normal">(separadas por comas)</small></label>
                             <input type="text" name="metakey" class="mp-ctrl"
                                 value="<?= htmlspecialchars($item->metakey ?? '') ?>"
                                 placeholder="Ej: folk metal, banda Murcia, música celta, contratar grupo">
@@ -416,7 +416,7 @@ $__provincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila','
         <!-- Búsquedas activas -->
         <?php if (!empty($__busquedas)): ?>
         <div>
-            <p style="color:#6a5f4a;font-size:.8rem;margin-bottom:.5rem">Búsquedas activas:</p>
+            <p style="color:var(--gold-text,#c9a45c);font-size:.8rem;margin-bottom:.5rem">Búsquedas activas:</p>
             <?php foreach ($__busquedas as $__b):
                 $__bestilo = json_decode($__b->estilos ?? '[]', true) ?: [];
                 // Count matches
@@ -440,7 +440,7 @@ $__provincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila','
             <?php endforeach; ?>
         </div>
         <?php else: ?>
-        <p style="color:#6a5f4a;font-size:.85rem">No tienes búsquedas activas. Publica una para que te notifiquemos cuando haya músicos disponibles.</p>
+        <p style="color:var(--gold-text,#c9a45c);font-size:.85rem">No tienes búsquedas activas. Publica una para que te notifiquemos cuando haya músicos disponibles.</p>
         <?php endif; ?>
 
         <!-- Link al directorio de músicos -->
@@ -485,7 +485,7 @@ $__provincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila','
                             <option value="concierto">🎤 Concierto</option>
                             <option value="album">💿 Nuevo álbum / single</option>
                         </select>
-                        <p style="color:#6a5f4a;font-size:.75rem;margin-top:3px">El título se genera automáticamente.</p>
+                        <p style="color:var(--gold-text,#c9a45c);font-size:.75rem;margin-top:3px">El título se genera automáticamente.</p>
                     </div>
                     <div class="col-md-4" id="campo_fecha">
                         <label class="mp-label">Fecha del evento / lanzamiento</label>
@@ -549,7 +549,7 @@ $__provincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila','
 
         <!-- Listado noticias -->
         <?php if (!empty($__noticias)): ?>
-        <p style="color:#6a5f4a;font-size:.8rem;margin-bottom:.5rem">Noticias publicadas:</p>
+        <p style="color:var(--gold-text,#c9a45c);font-size:.8rem;margin-bottom:.5rem">Noticias publicadas:</p>
         <table class="table table-sm" style="color:#e8e0d5">
             <thead><tr>
                 <th>Noticia</th><th>Tipo</th><th>Fecha</th><th class="text-center">Acciones</th>

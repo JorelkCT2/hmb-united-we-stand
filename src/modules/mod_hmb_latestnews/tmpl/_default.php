@@ -98,12 +98,12 @@ $effectCSS = match($imageEffect) {
 .hmb-latestnews .hmb-meta{display:flex;flex-wrap:wrap;gap:.75rem;font-size:.75rem;color:var(--hmb-text-muted);}
 .hmb-latestnews .hmb-date{display:flex;align-items:center;gap:.6rem;margin:.1rem 0 .2rem;}
 .hmb-latestnews .hmb-date__line{display:inline-block;width:22px;height:2px;background:var(--hmb-accent);flex-shrink:0;}
-.hmb-latestnews .hmb-date__text{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--hmb-accent);}
+.hmb-latestnews .hmb-date__text{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fire-text,#ff4d2e);}
 .hmb-latestnews .hmb-card__title{font-size:1rem;font-weight:700;line-height:1.35;margin:0;}
 .hmb-latestnews .hmb-card__title a{color:var(--hmb-white);text-decoration:none;transition:color .2s;}
-.hmb-latestnews .hmb-card__title a:hover{color:var(--hmb-accent);}
+.hmb-latestnews .hmb-card__title a:hover{color:var(--fire-text,#ff4d2e);}
 .hmb-latestnews .hmb-card__intro{font-size:.85rem;color:var(--hmb-text-muted);line-height:1.55;flex:1;}
-.hmb-latestnews .hmb-readmore{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;font-weight:600;text-transform:uppercase;color:var(--hmb-accent);text-decoration:none;}
+.hmb-latestnews .hmb-readmore{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;font-weight:600;text-transform:uppercase;color:var(--fire-text,#ff4d2e);text-decoration:none;}
 .hmb-latestnews .hmb-readmore:hover{color:var(--hmb-white);}
 .hmb-latestnews .hmb-readmore::after{content:' →';}
 
@@ -123,8 +123,8 @@ $effectCSS = match($imageEffect) {
 .hmb-latestnews .hmb-ticker__inner{display:flex;gap:2.5rem;white-space:nowrap;animation:hmb-scroll 40s linear infinite;padding:.6rem 1rem;}
 .hmb-latestnews .hmb-ticker:hover .hmb-ticker__inner{animation-play-state:paused;}
 .hmb-latestnews .hmb-ticker__item a{color:var(--hmb-text);text-decoration:none;font-size:.85rem;}
-.hmb-latestnews .hmb-ticker__item a:hover{color:var(--hmb-accent);}
-.hmb-latestnews .hmb-ticker__sep{color:var(--hmb-accent);}
+.hmb-latestnews .hmb-ticker__item a:hover{color:var(--fire-text,#ff4d2e);}
+.hmb-latestnews .hmb-ticker__sep{color:var(--fire-text,#ff4d2e);}
 @keyframes hmb-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ── Share ── */

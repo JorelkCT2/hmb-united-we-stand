@@ -96,7 +96,7 @@ final class HmbCarrusel extends CMSPlugin
         $h .= '.'.$id.'-btn:hover{background:var(--cr2);color:#fff;}';
         $h .= '.'.$id.'-prev{left:8px;}.'.$id.'-next{right:8px;}';
         $h .= '.'.$id.'-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--cr);z-index:6;width:0;}';
-        $h .= '.'.$id.'-wm{position:absolute;bottom:10px;right:10px;z-index:7;background:rgba(0,0,0,.55);color:rgba(255,255,255,.65);font-family:\'Oswald\',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px 3px 8px;border-radius:20px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);pointer-events:none;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .4s .2s;}';
+        $h .= '.'.$id.'-wm{position:absolute;bottom:10px;right:10px;z-index:7;background:rgba(0,0,0,.55);color:var(--tx-dim,#a3a3a3);font-family:\'Oswald\',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px 3px 8px;border-radius:20px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);pointer-events:none;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .4s .2s;}';
         $h .= '.'.$id.'-sl.on .'.$id.'-wm{opacity:1;}';
         $h .= '.'.$id.'-dots{display:flex;justify-content:center;gap:6px;padding:7px 0 5px;background:var(--cdk2);}';
         $h .= '.'.$id.'-dot{width:8px;height:8px;border-radius:50%;background:var(--grey-3, #333333);border:1px solid var(--wine, #3A0000);cursor:pointer;transition:background .2s,transform .2s;}';
@@ -118,7 +118,7 @@ final class HmbCarrusel extends CMSPlugin
         $h .= '.'.$id.'-lbp{left:8px;}.'.$id.'-lbn{right:8px;}';
         $h .= '.'.$id.'-lbf{text-align:center;margin-top:10px;}';
         $h .= '.'.$id.'-lbf p{font-family:\'Metal Mania\',cursive;color:var(--grey-b, #BBBBBB);font-size:14px;letter-spacing:2px;margin:0 0 3px;}';
-        $h .= '.'.$id.'-lbf small{font-family:\'Oswald\',sans-serif;color:var(--grey-4, #444444);font-size:11px;letter-spacing:2px;}';
+        $h .= '.'.$id.'-lbf small{font-family:\'Oswald\',sans-serif;color:var(--tx-faint,#8f8f8f);font-size:11px;letter-spacing:2px;}';
         $h .= '</style>';
 
         $h .= '<div id="'.$id.'"><div class="'.$id.'-wrap"><div class="'.$id.'-track" id="'.$id.'-track">';

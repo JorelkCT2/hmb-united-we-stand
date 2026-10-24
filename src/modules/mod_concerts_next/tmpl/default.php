@@ -45,24 +45,24 @@ $title = htmlspecialchars($c->title ?: (!empty($c->headlinersList) ? $c->headlin
 @keyframes ncPan<?= $uid ?>{0%{transform:translateY(0)}100%{transform:translateY(calc(-100% + 220px))}}
 #<?= $uid ?> .nc-pw:hover .nc-pi{animation-play-state:paused}
 #<?= $uid ?> .nc-nfo{flex:1;min-width:0}
-#<?= $uid ?> .nc-lbl{font-size:.68rem;font-weight:700;letter-spacing:2.5px;color:var(--fire, #CC2200);
+#<?= $uid ?> .nc-lbl{font-size:.68rem;font-weight:700;letter-spacing:2.5px;color:var(--fire-text,#ff4d2e);
   text-transform:uppercase;margin-bottom:.5rem}
 #<?= $uid ?> .nc-ttl{font-size:clamp(1.3rem,3.5vw,2rem);font-weight:800;margin:0 0 .3rem;
   color:#fff;line-height:1.15}
 #<?= $uid ?> .nc-hl{color:#ff9500;font-weight:600;font-size:.9rem;margin-bottom:.2rem}
 #<?= $uid ?> .nc-sup{color:var(--grey-9, #999999);font-size:.8rem;margin-bottom:.4rem}
-#<?= $uid ?> .nc-dt{font-size:1rem;font-weight:800;color:var(--fire, #CC2200);margin:.5rem 0 .2rem;
+#<?= $uid ?> .nc-dt{font-size:1rem;font-weight:800;color:var(--fire-text,#ff4d2e);margin:.5rem 0 .2rem;
   letter-spacing:.5px}
 #<?= $uid ?> .nc-ven{font-size:.85rem;color:var(--grey-c, #CCCCCC);margin-bottom:.15rem}
 #<?= $uid ?> .nc-pv{color:var(--grey-8, #888888)}
 #<?= $uid ?> .nc-hr{font-size:.78rem;color:var(--grey-a, #AAAAAA);margin-bottom:.55rem}
 #<?= $uid ?> .nc-prs{display:flex;flex-wrap:wrap;gap:.3rem;margin:.4rem 0 .2rem}
 #<?= $uid ?> .nc-pr{background:rgba(230,51,41,.15);border:1px solid rgba(230,51,41,.4);
-  color:var(--fire, #CC2200);border-radius:20px;padding:.18rem .6rem;font-size:.74rem;font-weight:600}
+  color:var(--fire-text,#ff4d2e);border-radius:20px;padding:.18rem .6rem;font-size:.74rem;font-weight:600}
 #<?= $uid ?> .nc-pr.sold{background:rgba(255,80,80,.1);border-color:rgba(255,80,80,.3);color:#f88}
 #<?= $uid ?> .nc-stag{background:#7a2020;color:#fff;border-radius:8px;padding:1px 5px;
   font-size:.64rem;margin-left:3px}
-#<?= $uid ?> .nc-dis{font-size:.64rem;color:var(--grey-5, #555555);font-style:italic;margin-bottom:.5rem}
+#<?= $uid ?> .nc-dis{font-size:.64rem;color:var(--tx-faint,#8f8f8f);font-style:italic;margin-bottom:.5rem}
 #<?= $uid ?> .nc-act{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.65rem;align-items:center}
 #<?= $uid ?> .nc-btn{display:inline-flex;align-items:center;gap:.25rem;font-size:.78rem;
   font-weight:700;padding:.32rem .85rem;border-radius:6px;cursor:pointer;
@@ -71,7 +71,7 @@ $title = htmlspecialchars($c->title ?: (!empty($c->headlinersList) ? $c->headlin
 #<?= $uid ?> .btix{background:var(--fire, #CC2200);color:#fff}
 #<?= $uid ?> .bweb{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)!important}
 #<?= $uid ?> .bcal{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)!important}
-#<?= $uid ?> .bmore{background:transparent;color:var(--fire, #CC2200);border:1px solid var(--fire, #CC2200)!important}
+#<?= $uid ?> .bmore{background:transparent;color:var(--fire-text,#ff4d2e);border:1px solid var(--fire, #CC2200)!important}
 #<?= $uid ?> .nc-cw{position:relative}
 #<?= $uid ?> .nc-cm{display:none;position:absolute;bottom:110%;left:0;background:var(--steel, #1A1A1A);
   border:1px solid var(--grey-4, #444444);border-radius:8px;min-width:190px;z-index:999;overflow:hidden;

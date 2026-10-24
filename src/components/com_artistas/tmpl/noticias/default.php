@@ -27,7 +27,7 @@ if (!$currentUser->guest) {
 .an-badge-a { background:#ffc107; color:#000; font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:4px; }
 .an-title { color:var(--cream, #E8E0D5); font-size:1.05rem; font-weight:700; margin:.4rem 0 .3rem; }
 .an-intro { color:#9a8a6a; font-size:.88rem; }
-.an-artista { color:var(--gold-dim, #7A6030); font-size:.8rem; }
+.an-artista { color:var(--gold-text,#c9a45c); font-size:.8rem; }
 @media(max-width:600px){ .an-img { display:none; } }
 </style>
 
@@ -39,7 +39,7 @@ if (!$currentUser->guest) {
     </div>
 
     <?php if (empty($noticias)): ?>
-    <div style="text-align:center;padding:3rem;color:#6a5f4a">
+    <div style="text-align:center;padding:3rem;color:var(--gold-text,#c9a45c)">
         <div style="font-size:3rem;margin-bottom:1rem">📰</div>
         <p>Aún no hay noticias publicadas.</p>
     </div>

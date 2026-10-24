@@ -120,7 +120,7 @@ $GLOBALS['_mu_banda']  = $this->bandaFiltro ?: '';
 .hmb-list-wrap{max-width:1100px;margin:0 auto;font-family:inherit}
 .hmb-list-hero{background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);border-top:4px solid var(--gold-light, #DAA520);padding:18px 22px;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:0}
 .hmb-list-h1{font-size:1.4rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin:0}
-.hmb-list-total{font-size:.7rem;color:var(--grey-5, #555555);letter-spacing:.1em}
+.hmb-list-total{font-size:.7rem;color:var(--tx-faint,#8f8f8f);letter-spacing:.1em}
 .hmb-list-form{background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);border-top:none;padding:10px 14px;margin-bottom:16px}
 .hmb-list-form-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
 .hmb-list-search-g{flex:1;min-width:200px;display:flex;background:var(--mid, #111111);border:1px solid var(--steel2, #222222)}
@@ -143,16 +143,16 @@ $GLOBALS['_mu_banda']  = $this->bandaFiltro ?: '';
 .hmb-musico-sol-txt{color:var(--gold-light, #DAA520) !important;font-style:italic}
 .hmb-musico-nombre{font-size:.82rem;font-weight:700;color:var(--grey-e, #E0E0E0);text-align:center;display:block;margin-bottom:4px;line-height:1.3}
 .hmb-musico-banda{font-size:.7rem;color:var(--gold-light, #DAA520);text-align:center;display:block}
-.hmb-musico-anios{font-size:.65rem;color:var(--grey-5, #555555);text-align:center;display:block;margin-top:3px}
+.hmb-musico-anios{font-size:.65rem;color:var(--tx-faint,#8f8f8f);text-align:center;display:block;margin-top:3px}
 .hmb-list-pag{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 0;border-top:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
-.hmb-list-pag-info{font-size:.75rem;color:var(--grey-5, #555555)}
+.hmb-list-pag-info{font-size:.75rem;color:var(--tx-faint,#8f8f8f)}
 .hmb-list-pag-nav{display:flex;gap:3px}
-.hmb-pb{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 6px;background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A);color:var(--text-dim, #777777);text-decoration:none;font-size:.75rem;font-weight:700;transition:all .2s}
+.hmb-pb{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 6px;background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A);color:var(--tx-dim,#a3a3a3);text-decoration:none;font-size:.75rem;font-weight:700;transition:all .2s}
 .hmb-pb:hover{border-color:var(--gold-light, #DAA520);color:var(--gold-light, #DAA520)}
 .hmb-pb-on{background:var(--gold-light, #DAA520) !important;border-color:var(--gold-light, #DAA520) !important;color:#000 !important}
-.hmb-list-empty{padding:40px;text-align:center;color:var(--grey-6, #666666);background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
+.hmb-list-empty{padding:40px;text-align:center;color:var(--tx-dim,#a3a3a3);background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
 .hmb-ficha-footer{text-align:center;padding:12px;border-top:1px solid var(--steel, #1A1A1A);font-size:.76rem}
-.hmb-lnk{color:var(--fire, #CC2200);text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.72rem}
+.hmb-lnk{color:var(--fire-text,#ff4d2e);text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.72rem}
 .hmb-lnk:hover{color:#ff2222}
 @media(max-width:500px){.hmb-musicos-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
 </style>

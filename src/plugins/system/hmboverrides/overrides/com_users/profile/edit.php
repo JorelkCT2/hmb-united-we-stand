@@ -77,7 +77,7 @@ foreach ($fieldsets as $name => $fieldset) {
 .hmb-edit .controls select:focus{outline:none;border-color:var(--c-r);background:rgba(180,20,20,.05);box-shadow:0 0 0 3px rgba(180,20,20,.12)}
 .hmb-edit .controls input:-webkit-autofill,
 .hmb-edit .controls input:-webkit-autofill:focus{-webkit-text-fill-color:var(--c-th);-webkit-box-shadow:0 0 0 1000px var(--wine-black, #0A0000) inset}
-.hmb-edit .controls input::placeholder{color:rgba(136,136,136,.28);font-style:italic}
+.hmb-edit .controls input::placeholder{color:var(--tx-dim,#a3a3a3);font-style:italic}
 
 /* Ocultar description/hint innecesarios de Joomla */
 .hmb-edit .controls .form-text,

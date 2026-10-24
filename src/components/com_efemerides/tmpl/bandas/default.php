@@ -9,7 +9,7 @@ $base = $cur.'?view=bandas'.($this->search?'&search='.urlencode($this->search):'
 ?>
 <div class="hmb-list-wrap">
   <div class="hmb-list-hero" style="border-top-color:#cc0000">
-    <h1 class="hmb-list-h1">Bandas<span style="color:#cc0000"> Rock &amp; Metal</span></h1>
+    <h1 class="hmb-list-h1">Bandas<span style="color:var(--fire-text,#ff4d2e)"> Rock &amp; Metal</span></h1>
     <span class="hmb-list-total"><?php echo $this->total; ?> bandas</span>
   </div>
 
@@ -70,7 +70,7 @@ $base = $cur.'?view=bandas'.($this->search?'&search='.urlencode($this->search):'
   </div>
 
   <div class="hmb-list-pag">
-    <span class="hmb-list-pag-info"><?php echo $this->start+1; ?>–<?php echo min($this->start+$this->limit,$this->total); ?> de <strong style="color:#cc0000"><?php echo $this->total; ?></strong></span>
+    <span class="hmb-list-pag-info"><?php echo $this->start+1; ?>–<?php echo min($this->start+$this->limit,$this->total); ?> de <strong style="color:var(--fire-text,#ff4d2e)"><?php echo $this->total; ?></strong></span>
     <div class="hmb-list-pag-nav">
       <?php if($pagActual>1): ?>
       <a href="<?php echo htmlspecialchars($base.'&limitstart=0'); ?>" class="hmb-pb">&laquo;</a>
@@ -99,7 +99,7 @@ $base = $cur.'?view=bandas'.($this->search?'&search='.urlencode($this->search):'
 .hmb-list-wrap{max-width:1100px;margin:0 auto;font-family:inherit}
 .hmb-list-hero{background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);border-top:4px solid var(--fire, #CC2200);padding:18px 22px;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:0}
 .hmb-list-h1{font-size:1.4rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin:0;color:#fff}
-.hmb-list-total{font-size:.7rem;color:var(--grey-5, #555555);letter-spacing:.1em}
+.hmb-list-total{font-size:.7rem;color:var(--tx-faint,#8f8f8f);letter-spacing:.1em}
 .hmb-list-form{background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);border-top:none;padding:10px 14px;margin-bottom:16px}
 .hmb-list-form-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
 .hmb-list-search-g{flex:1;min-width:200px;display:flex;background:var(--mid, #111111);border:1px solid var(--steel2, #222222)}
@@ -107,7 +107,7 @@ $base = $cur.'?view=bandas'.($this->search?'&search='.urlencode($this->search):'
 .hmb-list-input{flex:1;background:transparent;border:none;color:var(--grey-d, #DDDDDD);padding:8px 11px;font-size:.8rem;outline:none}
 .hmb-list-sel{background:var(--mid, #111111);border:1px solid var(--steel2, #222222);color:var(--grey-a, #AAAAAA);padding:8px 10px;font-size:.78rem;cursor:pointer;outline:none}
 .hmb-list-clr{padding:6px 12px;background:var(--steel, #1A1A1A);border:1px solid var(--grey-3, #333333);color:var(--grey-8, #888888);text-decoration:none;font-size:.72rem;font-weight:700}
-.hmb-list-clr:hover{border-color:var(--fire, #CC2200);color:var(--fire, #CC2200)}
+.hmb-list-clr:hover{border-color:var(--fire, #CC2200);color:var(--fire-text,#ff4d2e)}
 .hmb-bandas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:16px}
 .hmb-banda-card{display:flex;flex-direction:column;background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A);text-decoration:none;transition:all .2s;overflow:hidden}
 .hmb-banda-card:hover{border-color:var(--fire, #CC2200)}
@@ -118,16 +118,16 @@ $base = $cur.'?view=bandas'.($this->search?'&search='.urlencode($this->search):'
 .hmb-banda-card-data{padding:10px 12px}
 .hmb-banda-card-nombre{display:block;font-size:.9rem;font-weight:800;color:var(--grey-e, #E0E0E0);margin-bottom:4px}
 .hmb-banda-card-genero{display:block;font-size:.68rem;color:var(--gold-light, #DAA520);margin-bottom:6px;font-weight:600}
-.hmb-banda-card-meta{display:flex;gap:10px;font-size:.68rem;color:var(--grey-5, #555555);flex-wrap:wrap}
+.hmb-banda-card-meta{display:flex;gap:10px;font-size:.68rem;color:var(--tx-faint,#8f8f8f);flex-wrap:wrap}
 .hmb-list-pag{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 0;border-top:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
-.hmb-list-pag-info{font-size:.75rem;color:var(--grey-5, #555555)}
+.hmb-list-pag-info{font-size:.75rem;color:var(--tx-faint,#8f8f8f)}
 .hmb-list-pag-nav{display:flex;gap:3px}
-.hmb-pb{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 6px;background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A);color:var(--text-dim, #777777);text-decoration:none;font-size:.75rem;font-weight:700;transition:all .2s}
-.hmb-pb:hover{border-color:var(--fire, #CC2200);color:var(--fire, #CC2200)}
+.hmb-pb{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 6px;background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A);color:var(--tx-dim,#a3a3a3);text-decoration:none;font-size:.75rem;font-weight:700;transition:all .2s}
+.hmb-pb:hover{border-color:var(--fire, #CC2200);color:var(--fire-text,#ff4d2e)}
 .hmb-pb-on{background:var(--fire, #CC2200) !important;border-color:var(--fire, #CC2200) !important;color:#fff !important}
-.hmb-list-empty{padding:40px;text-align:center;color:var(--grey-6, #666666);background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
+.hmb-list-empty{padding:40px;text-align:center;color:var(--tx-dim,#a3a3a3);background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);margin-bottom:14px}
 .hmb-ficha-footer{text-align:center;padding:12px;border-top:1px solid var(--steel, #1A1A1A);font-size:.76rem}
-.hmb-lnk{color:var(--fire, #CC2200);text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.72rem}
+.hmb-lnk{color:var(--fire-text,#ff4d2e);text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.72rem}
 .hmb-lnk:hover{color:#ff2222}
 @media(max-width:500px){.hmb-bandas-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 </style>

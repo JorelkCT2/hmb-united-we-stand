@@ -54,10 +54,10 @@ $sTit = urlencode($titulo . ' | Heavy Metal Brothers');
         </a>
         <?php endif; ?>
         <?php if ($fecha): ?>
-        <span style="color:#6a5f4a;font-size:.85rem">📅 <?= $fecha ?></span>
+        <span style="color:var(--gold-text,#c9a45c);font-size:.85rem">📅 <?= $fecha ?></span>
         <?php endif; ?>
         <?php if (!empty($n->ciudad)): ?>
-        <span style="color:#6a5f4a;font-size:.85rem">📍 <?= htmlspecialchars($n->ciudad) ?></span>
+        <span style="color:var(--gold-text,#c9a45c);font-size:.85rem">📍 <?= htmlspecialchars($n->ciudad) ?></span>
         <?php endif; ?>
     </div>
 

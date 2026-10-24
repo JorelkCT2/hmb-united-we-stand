@@ -153,7 +153,7 @@ if (empty($topItems)) return;
       if(hasSub2){
         var arr = document.createElement('span');
         arr.textContent = '\u203a';
-        arr.style.cssText = 'position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#CC2200;pointer-events:none;';
+        arr.style.cssText = 'position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--fire-text,#ff4d2e);pointer-events:none;';
         item.appendChild(arr);
 
         item.addEventListener('mouseenter', function(){

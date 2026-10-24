@@ -47,23 +47,23 @@ s.textContent=[
 ".thumbnail.ph-thumbnail:hover{border-color:#8B0000!important;transform:translateY(-4px)!important;box-shadow:0 8px 24px rgba(0,0,0,.6)!important;}",
 ".ph-product-header{font-family:Oswald,sans-serif!important;font-size:1.1rem!important;font-weight:600!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#EFEFEF!important;margin:.75rem 0 .4rem!important;}",
 ".thumbnail.ph-thumbnail:hover .ph-product-header{color:#FF4500!important;}",
-".ph-price-original{color:#444!important;text-decoration:line-through!important;font-size:.9rem!important;}",
-".ph-price-brutto{font-family:\"Metal Mania\",cursive!important;font-size:1.5rem!important;color:#CC2200!important;}",
-".ph-price-txt{font-family:Oswald,sans-serif!important;font-size:.72rem!important;text-transform:uppercase!important;color:#555!important;letter-spacing:1px!important;}",
+".ph-price-original{color:var(--tx-faint,#8f8f8f)!important;text-decoration:line-through!important;font-size:.9rem!important;}",
+".ph-price-brutto{font-family:\"Metal Mania\",cursive!important;font-size:1.5rem!important;color:var(--fire-text,#ff4d2e)!important;}",
+".ph-price-txt{font-family:Oswald,sans-serif!important;font-size:.72rem!important;text-transform:uppercase!important;color:var(--tx-faint,#8f8f8f)!important;letter-spacing:1px!important;}",
 ".ph-button-add-to-cart-box .ph-btn,.ph-button-add-to-cart-box button.btn{background:#8B0000!important;border:1px solid #8B0000!important;color:#fff!important;border-radius:0!important;font-size:.78rem!important;letter-spacing:2px!important;}",
 ".ph-button-add-to-cart-box .ph-btn:hover,.ph-button-add-to-cart-box button.btn:hover{background:#CC2200!important;border-color:#CC2200!important;}",
-".ph-button-view-product-box .ph-btn,.ph-button-view-product-box a.btn{background:transparent!important;border:1px solid #333!important;color:#777!important;border-radius:0!important;font-size:.78rem!important;}",
+".ph-button-view-product-box .ph-btn,.ph-button-view-product-box a.btn{background:transparent!important;border:1px solid #333!important;color:var(--tx-dim,#a3a3a3)!important;border-radius:0!important;font-size:.78rem!important;}",
 ".ph-button-view-product-box .ph-btn:hover,.ph-button-view-product-box a.btn:hover{border-color:#8B0000!important;color:#fff!important;}",
 
 // Producto individual
 ".ph-header{font-family:\"Metal Mania\",cursive!important;font-size:2.2rem!important;color:#EFEFEF!important;letter-spacing:2px!important;border-bottom:2px solid #8B0000!important;padding-bottom:.75rem!important;margin:0 0 1rem!important;}",
 ".ph-desc p,.ph-item-desc p{font-family:Rajdhani,sans-serif!important;color:#aaa!important;font-size:1.05rem!important;line-height:1.7!important;}",
-".ph-top .btn-secondary{background:transparent!important;border:1px solid #333!important;color:#777!important;border-radius:0!important;font-family:Oswald,sans-serif!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
+".ph-top .btn-secondary{background:transparent!important;border:1px solid #333!important;color:var(--tx-dim,#a3a3a3)!important;border-radius:0!important;font-family:Oswald,sans-serif!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".ph-input-quantity{background:#111!important;border:1px solid #333!important;color:#fff!important;border-radius:0!important;width:65px!important;text-align:center!important;font-size:1rem!important;}",
 ".ph-form-button button.btn{background:#8B0000!important;border:1px solid #8B0000!important;color:#fff!important;border-radius:0!important;font-family:Oswald,sans-serif!important;letter-spacing:3px!important;text-transform:uppercase!important;padding:.7rem 1.8rem!important;font-size:.85rem!important;}",
 ".ph-form-button button.btn:hover{background:#CC2200!important;}",
 ".nav-tabs{border-bottom:2px solid #8B0000!important;}",
-".nav-tabs .nav-link{color:#555!important;border:none!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.8rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
+".nav-tabs .nav-link{color:var(--tx-faint,#8f8f8f)!important;border:none!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.8rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".nav-tabs .nav-link.active{color:#fff!important;background:#8B0000!important;}",
 ".pc-si{width:16px!important;height:16px!important;fill:currentColor!important;}",
 "@media(max-width:768px){.ph-item-view-data-box{padding-left:0!important;margin-top:1.5rem!important;}}",
@@ -71,9 +71,9 @@ s.textContent=[
 // Módulo carrito
 ".ph-cart-small-title a{color:#EFEFEF!important;text-decoration:none!important;font-family:Oswald,sans-serif!important;text-transform:uppercase!important;font-size:.95rem!important;letter-spacing:1px!important;}",
 ".ph-cart-module-image img{width:64px!important;height:64px!important;object-fit:cover!important;display:block!important;}",
-".ph-cart-small-quantity{font-family:Oswald,sans-serif!important;font-size:.85rem!important;color:#555!important;}",
+".ph-cart-small-quantity{font-family:Oswald,sans-serif!important;font-size:.85rem!important;color:var(--tx-faint,#8f8f8f)!important;}",
 ".ph-cart-small-price{font-size:1rem!important;}",
-".ph-cart-small-price,.ph-cart-total,.ph-b{font-family:\"Metal Mania\",cursive!important;color:#CC2200!important;}",
+".ph-cart-small-price,.ph-cart-total,.ph-b{font-family:\"Metal Mania\",cursive!important;color:var(--fire-text,#ff4d2e)!important;}",
 ".ph-cart-total,.ph-b{color:#fff!important;font-size:1.3rem!important;font-weight:normal!important;}",
 ".ph-cart-link-checkout a{background:#8B0000!important;color:#fff!important;display:block!important;padding:.7rem!important;text-align:center!important;text-decoration:none!important;font-family:Oswald,sans-serif!important;letter-spacing:2px!important;text-transform:uppercase!important;font-size:.82rem!important;}",
 ".ph-cart-link-checkout a:hover{background:#CC2200!important;}",
@@ -83,7 +83,7 @@ s.textContent=[
 ".phProductScrollerModuleBox .ph-item-box:hover{border-color:#8B0000;}",
 ".phProductScrollerModuleBox img{width:100%!important;height:auto!important;display:block!important;}",
 ".phProductScrollerModuleBox .ph-product-header,.phProductScrollerModuleBox h3{font-family:Oswald,sans-serif!important;font-size:.88rem!important;font-weight:600!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#EFEFEF!important;}",
-".phProductScrollerModuleBox .ph-price-brutto{font-family:\"Metal Mania\",cursive!important;color:#CC2200!important;font-size:1.1rem!important;}",
+".phProductScrollerModuleBox .ph-price-brutto{font-family:\"Metal Mania\",cursive!important;color:var(--fire-text,#ff4d2e)!important;font-size:1.1rem!important;}",
 
 // Checkout login y dirección
 ".ph-checkout-box-login,.ph-checkout-box-action,.ph-checkout-box-row,.ph-checkout-box-header,.ph-box-header,.ph-right-border,.ph-left-border,.ph-checkout-box-address,.ph-checkout-box-header-pas,.ph-checkout-box-status-pending{background:#111!important;color:#EFEFEF!important;}",
@@ -93,44 +93,44 @@ s.textContent=[
 ".ph-checkout-box-login input:focus,.ph-checkout-box-address input:focus{border-color:#8B0000!important;outline:none!important;box-shadow:none!important;}",
 ".ph-checkout-box-login .btn-primary,.ph-checkout-box-address .btn-primary,.ph-checkout-box-address .btn-success{background:#8B0000!important;border-color:#8B0000!important;color:#fff!important;border-radius:0!important;font-family:Oswald,sans-serif!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".ph-checkout-box-login .btn-primary:hover,.ph-checkout-box-address .btn-primary:hover{background:#CC2200!important;}",
-".ph-checkout-box-login a{color:#CC2200!important;}",
-".ph-checkout-box-address label,.ph-checkout-box-login label{color:#777!important;font-family:Oswald,sans-serif!important;font-size:.78rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;}",
+".ph-checkout-box-login a{color:var(--fire-text,#ff4d2e)!important;}",
+".ph-checkout-box-address label,.ph-checkout-box-login label{color:var(--tx-dim,#a3a3a3)!important;font-family:Oswald,sans-serif!important;font-size:.78rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;}",
 ".ph-checkout-icon-spec-pending{background:#8B0000!important;color:#fff!important;font-family:\"Metal Mania\",cursive!important;font-size:1.1rem!important;}",
 ".ph-checkout-box-shipping,.ph-checkout-box-payment{background:#111!important;border:1px solid #1a1a1a!important;border-left:3px solid #8B0000!important;margin-bottom:1rem!important;}",
 ".ph-checkout-box-shipping *,.ph-checkout-box-payment *{color:#EFEFEF!important;background:transparent!important;}",
 ".ph-checkout-box-shipping h3,.ph-checkout-box-payment h3{font-family:Oswald,sans-serif!important;font-size:1rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".ph-checkout-box-status-finished{border-left-color:#2a5!important;}",
 ".ph-checkout-icon-spec-finished{background:#2a5!important;color:#fff!important;font-family:Metal Mania,cursive!important;font-size:1.1rem!important;}",
-".ph-checkout-shipping-row .ph-box-header{font-family:Oswald,sans-serif!important;font-size:.85rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:#555!important;margin-bottom:.75rem!important;}",
+".ph-checkout-shipping-row .ph-box-header{font-family:Oswald,sans-serif!important;font-size:.85rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:var(--tx-faint,#8f8f8f)!important;margin-bottom:.75rem!important;}",
 ".ph-checkout-shipping-item{background:#1a1a1a!important;border:1px solid #222!important;margin-bottom:.5rem!important;padding:.75rem!important;}",
 ".ph-checkout-shipping-item:hover{border-color:#8B0000!important;}",
 ".ph-checkout-shipping-item input[type=radio]{accent-color:#CC2200!important;width:18px!important;height:18px!important;margin-right:.5rem!important;}",
 ".ph-shipping-title{font-family:Oswald,sans-serif!important;font-size:.9rem!important;letter-spacing:1px!important;text-transform:uppercase!important;color:#EFEFEF!important;}",
 ".ph-shipping-image img{width:40px!important;height:40px!important;object-fit:cover!important;border-radius:0!important;border:1px solid #333!important;margin-right:.5rem!important;vertical-align:middle!important;}",
-".ph-checkout-shipping-brutto-txt{font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#555!important;}",
-".ph-checkout-shipping-brutto{font-family:Metal Mania,cursive!important;color:#CC2200!important;font-size:1rem!important;}",
+".ph-checkout-shipping-brutto-txt{font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:var(--tx-faint,#8f8f8f)!important;}",
+".ph-checkout-shipping-brutto{font-family:Metal Mania,cursive!important;color:var(--fire-text,#ff4d2e)!important;font-size:1rem!important;}",
 ".ph-checkout-shipping-save .btn-primary,.ph-checkout-shipping-save .ph-btn{background:#8B0000!important;border-color:#8B0000!important;color:#fff!important;border-radius:0!important;font-family:Oswald,sans-serif!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".ph-checkout-shipping-save .btn-primary:hover,.ph-checkout-payment-save .btn-primary:hover{background:#CC2200!important;}",
 ".ph-checkout-shipping-row-item{display:flex!important;align-items:center!important;gap:1rem!important;background:#1a1a1a!important;border:2px solid #CC2200!important;padding:1rem!important;}",
 ".ph-checkout-shipping-row-item .ph-shipping-image img{width:72px!important;height:72px!important;object-fit:cover!important;display:block!important;border:1px solid #333!important;}",
 ".ph-checkout-shipping-row-item .ph-shipping-title{font-family:Oswald,sans-serif!important;font-size:1rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:#EFEFEF!important;}",
-".ph-checkout-shipping-edit .btn-success{background:transparent!important;border:1px solid #333!important;color:#777!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
+".ph-checkout-shipping-edit .btn-success{background:transparent!important;border:1px solid #333!important;color:var(--tx-dim,#a3a3a3)!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".ph-checkout-shipping-edit .btn-success:hover{border-color:#8B0000!important;color:#fff!important;}",
 ".ph-checkout-payment-row-item{display:flex!important;align-items:center!important;gap:1rem!important;background:#1a1a1a!important;border:2px solid #CC2200!important;padding:1rem!important;}",
 ".ph-checkout-payment-row-item .ph-payment-image img{width:72px!important;height:72px!important;object-fit:cover!important;display:block!important;border:1px solid #333!important;}",
 ".ph-checkout-payment-row-item .ph-payment-title{font-family:Oswald,sans-serif!important;font-size:1rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:#EFEFEF!important;}",
-".ph-checkout-payment-edit .btn-success{background:transparent!important;border:1px solid #333!important;color:#777!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
+".ph-checkout-payment-edit .btn-success{background:transparent!important;border:1px solid #333!important;color:var(--tx-dim,#a3a3a3)!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".ph-checkout-payment-edit .btn-success:hover{border-color:#8B0000!important;color:#fff!important;}",
 ".ph-input-apply-coupon{background:#0a0a0a!important;border:1px solid #333!important;color:#EFEFEF!important;border-radius:0!important;margin-top:.3rem!important;}",
 ".ph-checkout-payment-save .btn-primary{background:#8B0000!important;border-color:#8B0000!important;color:#fff!important;border-radius:0!important;font-family:Oswald,sans-serif!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
-".ph-checkout-address-edit .btn-success{background:transparent!important;border:1px solid #333!important;color:#777!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
+".ph-checkout-address-edit .btn-success{background:transparent!important;border:1px solid #333!important;color:var(--tx-dim,#a3a3a3)!important;border-radius:0!important;font-family:Oswald,sans-serif!important;font-size:.72rem!important;letter-spacing:2px!important;text-transform:uppercase!important;}",
 ".ph-checkout-address-edit .btn-success:hover{border-color:#8B0000!important;color:#fff!important;}",
 ".ph-category-module-box{background:#111!important;border:1px solid #1a1a1a!important;border-top:2px solid #8B0000!important;padding:.5rem!important;}",
 ".ph-category-box-link{display:flex!important;align-items:center!important;gap:.75rem!important;padding:.5rem!important;text-decoration:none!important;border-bottom:1px solid #1a1a1a!important;transition:background .2s!important;}",
 ".ph-category-box-link:hover{background:rgba(139,0,0,.15)!important;}",
 ".ph-category-box-image img{width:48px!important;height:48px!important;object-fit:cover!important;border:1px solid #222!important;flex-shrink:0!important;}",
 ".ph-category-box-title{font-family:Oswald,sans-serif!important;font-size:.85rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#EFEFEF!important;}",
-".ph-category-box-link:hover .ph-category-box-title{color:#CC2200!important;}",
+".ph-category-box-link:hover .ph-category-box-title{color:var(--fire-text,#ff4d2e)!important;}",
 
 // Checkout tabla
 ".ph-checkout-cart-box{overflow-x:auto!important;}",
@@ -139,17 +139,17 @@ s.textContent=[
 ".ph-checkout-cart-box .ph-checkout-cart-image{flex:0 0 72px!important;max-width:72px!important;min-width:72px!important;padding:.2rem .3rem!important;}",
 ".ph-checkout-cart-box .ph-checkout-cart-product,.ph-checkout-cart-box .ph-checkout-cart-title{flex:1!important;padding:.2rem .4rem!important;}",
 ".ph-checkout-cart-box .ph-checkout-cart-quantity{flex:0 0 140px!important;max-width:140px!important;min-width:140px!important;padding:.2rem .3rem!important;}",
-".ph-checkout-cart-box .ph-checkout-cart-brutto{flex:0 0 120px!important;max-width:120px!important;padding:.2rem .4rem!important;font-family:\"Metal Mania\",cursive!important;color:#CC2200!important;font-size:1.1rem!important;text-align:right!important;}",
-".ph-checkout-cart-row-header{font-family:Oswald,sans-serif!important;font-size:.68rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#555!important;}",
-".ph-checkout-cart-row-attributes .ph-cart-small-attribute{font-family:Oswald,sans-serif!important;font-size:.78rem!important;color:#777!important;letter-spacing:1px!important;}",
+".ph-checkout-cart-box .ph-checkout-cart-brutto{flex:0 0 120px!important;max-width:120px!important;padding:.2rem .4rem!important;font-family:\"Metal Mania\",cursive!important;color:var(--fire-text,#ff4d2e)!important;font-size:1.1rem!important;text-align:right!important;}",
+".ph-checkout-cart-row-header{font-family:Oswald,sans-serif!important;font-size:.68rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:var(--tx-faint,#8f8f8f)!important;}",
+".ph-checkout-cart-row-attributes .ph-cart-small-attribute{font-family:Oswald,sans-serif!important;font-size:.78rem!important;color:var(--tx-dim,#a3a3a3)!important;letter-spacing:1px!important;}",
 ".ph-img-cart-checkout{width:58px!important;height:58px!important;object-fit:cover!important;border:1px solid #222!important;display:block!important;}",
 ".ph-checkout-cart-title a{color:#EFEFEF!important;text-decoration:none!important;font-family:Oswald,sans-serif!important;font-size:.85rem!important;text-transform:uppercase!important;}",
 ".ph-checkout-cart-quantity .input-group{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:.25rem!important;}",
 ".ph-checkout-cart-quantity input[name=quantity]{width:36px!important;min-width:36px!important;text-align:center!important;background:#111!important;border:1px solid #333!important;color:#fff!important;border-radius:0!important;padding:.2rem .1rem!important;font-size:.9rem!important;}",
 ".hmb-qty-btn{background:transparent!important;border:1px solid #444!important;color:#EFEFEF!important;width:24px!important;min-width:24px!important;height:24px!important;padding:0!important;cursor:pointer!important;font-size:1.1rem!important;line-height:1!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border-radius:0!important;transition:border-color .15s,color .15s!important;}",
-".hmb-qty-btn:hover{border-color:#CC2200!important;color:#CC2200!important;}",
-".ph-cart-subtotal-netto-txt,.ph-cart-tax-txt,.ph-cart-total-txt{font-family:Oswald,sans-serif!important;font-size:.78rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:#555!important;}",
-".ph-cart-total{font-family:\"Metal Mania\",cursive!important;font-size:1.4rem!important;color:#CC2200!important;}",
+".hmb-qty-btn:hover{border-color:#CC2200!important;color:var(--fire-text,#ff4d2e)!important;}",
+".ph-cart-subtotal-netto-txt,.ph-cart-tax-txt,.ph-cart-total-txt{font-family:Oswald,sans-serif!important;font-size:.78rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:var(--tx-faint,#8f8f8f)!important;}",
+".ph-cart-total{font-family:\"Metal Mania\",cursive!important;font-size:1.4rem!important;color:var(--fire-text,#ff4d2e)!important;}",
 ".ph-checkout-total-amount{color:#EFEFEF!important;font-size:.95rem!important;}",
 ".ph-hr{border:none!important;border-top:1px solid #1a1a1a!important;}",
 
@@ -174,10 +174,10 @@ s.textContent=[
 "a[href*=phoca\\.cz]{display:none!important;}",
 
 // Subcategorías
-".ph-subcategories{font-family:Oswald,sans-serif!important;font-size:.78rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:#555!important;margin-bottom:.5rem!important;}",
+".ph-subcategories{font-family:Oswald,sans-serif!important;font-size:.78rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:var(--tx-faint,#8f8f8f)!important;margin-bottom:.5rem!important;}",
 "#ph-pc-category-box>ul{list-style:none!important;padding:0!important;margin:1rem 0!important;display:flex!important;flex-wrap:wrap!important;gap:.75rem!important;}",
 "#ph-pc-category-box>ul li a{display:block!important;padding:.7rem 1.4rem!important;background:#1a1a1a!important;border:1px solid #222!important;border-left:3px solid #8B0000!important;font-family:Oswald,sans-serif!important;font-size:.85rem!important;letter-spacing:2px!important;text-transform:uppercase!important;color:#EFEFEF!important;text-decoration:none!important;}",
-"#ph-pc-category-box>ul li a:hover{border-left-color:#CC2200!important;color:#CC2200!important;}",
+"#ph-pc-category-box>ul li a:hover{border-left-color:#CC2200!important;color:var(--fire-text,#ff4d2e)!important;}",
 ".ph-thumbnail.list{overflow:hidden!important;}"
 
 ].join("");
@@ -323,10 +323,10 @@ new MutationObserver(function(mm){
     var pr = document.createElement("div");
     pr.style.cssText = "display:flex;align-items:baseline;gap:.4rem;";
     var pt = document.createElement("span");
-    pt.style.cssText = "font-family:Oswald,sans-serif;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:#555;";
+    pt.style.cssText = "font-family:Oswald,sans-serif;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx-faint,#8f8f8f);";
     pt.textContent = priceTxtText + ":";
     var pv = document.createElement("span");
-    pv.style.cssText = "font-family:Metal Mania,cursive;font-size:1.2rem;color:#CC2200;";
+    pv.style.cssText = "font-family:Metal Mania,cursive;font-size:1.2rem;color:var(--fire-text,#ff4d2e);";
     pv.textContent = priceText;
     pr.appendChild(pt); pr.appendChild(pv);
     info.appendChild(pr);
@@ -415,10 +415,10 @@ new MutationObserver(function(mm){
       var pr = document.createElement("div");
       pr.style.cssText = "display:flex;align-items:baseline;gap:.4rem;";
       var pt = document.createElement("span");
-      pt.style.cssText = "font-family:Oswald,sans-serif;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:#555;";
+      pt.style.cssText = "font-family:Oswald,sans-serif;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx-faint,#8f8f8f);";
       pt.textContent = priceTxtText + ":";
       var pv = document.createElement("span");
-      pv.style.cssText = "font-family:Metal Mania,cursive;font-size:1.2rem;color:#CC2200;";
+      pv.style.cssText = "font-family:Metal Mania,cursive;font-size:1.2rem;color:var(--fire-text,#ff4d2e);";
       pv.textContent = priceText;
       pr.appendChild(pt); pr.appendChild(pv);
       info.appendChild(pr);
@@ -501,10 +501,10 @@ document.querySelectorAll(".jf_ph_cat_list.list").forEach(function(row){
 
   if(price){
     var pt = document.createElement("div");
-    pt.style.cssText = "font-family:Oswald,sans-serif;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:#555;";
+    pt.style.cssText = "font-family:Oswald,sans-serif;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx-faint,#8f8f8f);";
     pt.textContent = priceTxt;
     var pv = document.createElement("div");
-    pv.style.cssText = "font-family:Metal Mania,cursive;font-size:1.4rem;color:#CC2200;";
+    pv.style.cssText = "font-family:Metal Mania,cursive;font-size:1.4rem;color:var(--fire-text,#ff4d2e);";
     pv.textContent = price;
     body.appendChild(pt);
     body.appendChild(pv);

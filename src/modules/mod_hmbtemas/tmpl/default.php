@@ -12,30 +12,30 @@ $total          = count($temas);
 .hmbw-head span{font-family:'Cinzel',Georgia,serif;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream, #E8E0D5)}
 .hmbw-fila{display:grid;grid-template-columns:1.6rem 1fr auto auto;align-items:center;gap:.4rem;padding:.5rem .65rem;border-bottom:1px solid var(--steel, #1A1A1A);cursor:pointer;transition:background .15s}
 .hmbw-fila:hover{background:#161616}
-.hmbw-fila.act .hmbw-t{color:var(--fire, #CC2200)}
+.hmbw-fila.act .hmbw-t{color:var(--fire-text,#ff4d2e)}
 .hmbw-fila.act .hmbw-n{opacity:0}
-.hmbw-n{font-size:.65rem;color:var(--grey-4, #444444);text-align:right}
+.hmbw-n{font-size:.65rem;color:var(--tx-faint,#8f8f8f);text-align:right}
 .hmbw-info{min-width:0}
 .hmbw-t{font-family:'Cinzel',Georgia,serif;font-size:.78rem;color:var(--cream, #E8E0D5);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}
-.hmbw-a{font-size:.62rem;color:var(--grey-5, #555555);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hmbw-a{font-size:.62rem;color:var(--tx-faint,#8f8f8f);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hmbw-btns{display:flex;gap:.3rem;align-items:center}
-.hmbw-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--grey-2, #2A2A2A);text-decoration:none;color:var(--grey-5, #555555);transition:all .15s;flex-shrink:0}
-.hmbw-ico:hover{border-color:var(--fire, #CC2200);color:var(--fire, #CC2200)}
+.hmbw-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--grey-2, #2A2A2A);text-decoration:none;color:var(--tx-faint,#8f8f8f);transition:all .15s;flex-shrink:0}
+.hmbw-ico:hover{border-color:var(--fire, #CC2200);color:var(--fire-text,#ff4d2e)}
 .hmbw-dl:hover{border-color:var(--gold-light, #DAA520) !important;color:var(--gold-light, #DAA520) !important}
 .hmbw-sp:hover{border-color:#1DB954 !important;color:#1DB954 !important}
-.hmbw-dur{font-family:monospace;font-size:.65rem;color:var(--grey-5, #555555);min-width:2.4rem;text-align:right;white-space:nowrap}
-.hmbw-sound{display:inline-flex;align-items:center;color:var(--fire, #CC2200);opacity:0;width:.8rem}
+.hmbw-dur{font-family:monospace;font-size:.65rem;color:var(--tx-faint,#8f8f8f);min-width:2.4rem;text-align:right;white-space:nowrap}
+.hmbw-sound{display:inline-flex;align-items:center;color:var(--fire-text,#ff4d2e);opacity:0;width:.8rem}
 .hmbw-fila.act .hmbw-sound{opacity:1}
 .hmbw-pulse{animation:hmb-p 1.2s ease-in-out infinite}
 @keyframes hmb-p{0%,100%{opacity:.3}50%{opacity:1}}
 /* Extra oculto por defecto — display:none es más fiable que max-height */
 #hmbw-extra{display:none}
 .hmbw-btn{width:100%;background:var(--mid, #111111);border:none;border-top:1px solid var(--grey-2, #2A2A2A);
-  color:var(--grey-6, #666666);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx-dim,#a3a3a3);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
   padding:.45rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.35rem;
   transition:color .2s}
-.hmbw-btn:hover{color:var(--fire, #CC2200)}
-.hmbw-btn.open{color:var(--fire, #CC2200);border-top-color:var(--fire, #CC2200);background:#120000}
+.hmbw-btn:hover{color:var(--fire-text,#ff4d2e)}
+.hmbw-btn.open{color:var(--fire-text,#ff4d2e);border-top-color:var(--fire, #CC2200);background:#120000}
 </style>
 
 <div class="hmbw">
@@ -55,7 +55,7 @@ $total          = count($temas);
     <div id="hmbw-extra" hidden>
       <button onclick="hmbwToggle()"
               style="width:100%;background:#120000;border:none;border-bottom:2px solid #cc0000;
-                     color:#cc0000;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+                     color:var(--fire-text,#ff4d2e);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
                      padding:.45rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.35rem">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg>
         Cerrar lista
@@ -74,7 +74,7 @@ $total          = count($temas);
     <?php endif; ?>
 
   <?php else: ?>
-    <p style="text-align:center;color:#555;font-size:.75rem;padding:1rem 0">Sin temas publicados.</p>
+    <p style="text-align:center;color:var(--tx-faint,#8f8f8f);font-size:.75rem;padding:1rem 0">Sin temas publicados.</p>
   <?php endif; ?>
 
 </div>

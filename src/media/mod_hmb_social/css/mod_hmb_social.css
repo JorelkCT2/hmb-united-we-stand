@@ -50,7 +50,7 @@
   width:  var(--icon-size);
   height: var(--icon-size);
   text-decoration: none;
-  color: var(--text-dim, #777777);
+  color: var(--tx-dim,#a3a3a3);
   /* Fondo metálico oscuro */
   background: linear-gradient(145deg, var(--steel, #1A1A1A) 0%, var(--dark, #0A0A0A) 50%, var(--mid, #111111) 100%);
   /* Borde estilo forja */

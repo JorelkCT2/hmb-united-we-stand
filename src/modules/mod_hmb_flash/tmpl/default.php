@@ -109,7 +109,7 @@ $imgHeight = $imgH[$tamano] ?? '220px';
     top:10px;right:10px;
     background:var(--wine-dark, #1A0000);
     border:1px solid var(--blood, #8B0000);
-    color:var(--fire, #CC2200);
+    color:var(--fire-text,#ff4d2e);
     width:32px;height:32px;
     border-radius:3px;
     font-size:18px;line-height:1;
@@ -172,7 +172,7 @@ $imgHeight = $imgH[$tamano] ?? '220px';
 }
 .<?php echo $mid; ?>-bar-txt{
     font-family:'Oswald',sans-serif;
-    font-size:10px;letter-spacing:1px;color:var(--grey-4, #444444);
+    font-size:10px;letter-spacing:1px;color:var(--tx-faint,#8f8f8f);
     white-space:nowrap;flex-shrink:0;
 }
 

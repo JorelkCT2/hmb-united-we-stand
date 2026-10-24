@@ -1,0 +1,148 @@
+/* ==========================================================================
+   HMB · METAL  (v1)
+   Capa final del template: se carga la ULTIMA, despues de todo el resto.
+   1) Legibilidad: tokens de texto con contraste >= 4.5 sobre negro.
+   2) Formularios y registro.
+   3) Estetica metalera: sangre, fuego, acero.
+   ========================================================================== */
+
+:root {
+  /* Texto legible sobre fondos oscuros (relacion de contraste sobre #0a0a0a) */
+  --tx-faint:  #8f8f8f;   /* 6,1:1  etiquetas y notas */
+  --tx-dim:    #a3a3a3;   /* 7,8:1  texto secundario */
+  --gold-text: #c9a45c;   /* 8,4:1  dorado apagado */
+  --fire-text: #ff4d2e;   /* 6,0:1  rojo para TEXTO (el --fire de siempre queda para fondos y bordes) */
+
+  --metal-edge: linear-gradient(90deg, transparent, #5c0000 12%, #cc2200 50%, #5c0000 88%, transparent);
+  --blood-glow: 0 0 22px rgba(204, 34, 0, .45);
+  --steel-grad: linear-gradient(180deg, #1c1c1c, #0d0d0d);
+}
+
+/* ---------- 1 · Base: selección, foco, barra de desplazamiento ---------- */
+html { scrollbar-color: #8b0000 #0a0a0a; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: #0a0a0a; border-left: 1px solid #1a1a1a; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #cc2200, #5c0000); border: 2px solid #0a0a0a; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #ff4d2e, #8b0000); }
+::selection { background: #cc2200; color: #fff; text-shadow: none; }
+:focus-visible { outline: 2px solid #daa520; outline-offset: 2px; }
+
+body.hmb-body {
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -8%, rgba(139, 0, 0, .30), transparent 70%),
+    radial-gradient(ellipse 70% 35% at 50% 112%, rgba(139, 0, 0, .22), transparent 70%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ---------- 2 · Formularios (también el registro y el login) ---------- */
+input::placeholder, textarea::placeholder, select::placeholder {
+  color: var(--tx-faint) !important; opacity: 1 !important; font-style: normal !important;
+}
+.hmb-component input:not([type=checkbox]):not([type=radio]):not([type=range]),
+.hmb-component select, .hmb-component textarea {
+  background-color: #0e0e0e; color: #efefef; border: 1px solid #333; border-radius: 0;
+  transition: border-color .2s, box-shadow .2s;
+}
+.hmb-component input:focus, .hmb-component select:focus, .hmb-component textarea:focus {
+  border-color: #cc2200 !important; box-shadow: 0 0 0 3px rgba(204, 34, 0, .22), var(--blood-glow); outline: none;
+}
+.hmb-component label, .hmb-component legend { color: var(--tx-dim); }
+input[type=checkbox], input[type=radio] { accent-color: #cc2200; }
+
+/* Registro / login (com_hmb y módulos): todo lo que era gris oscuro pasa a legible */
+.hmb-cw .hmb-lb, .hmb-cw .hmb-ft, .hmb-cw .hmb-ctx, .hmb-cw .hmb-hint, .hmb-cw .hmb-bl,
+.hmb-header-user-hello, .hmb-colab-title, .hmb-login-footer { color: var(--tx-dim) !important; }
+.hmb-cw .hmb-sw, .hmb-cw .hmb-lk a, .hmb-login-footer a { color: var(--fire-text) !important; }
+.hmb-cw .hmb-sw:hover, .hmb-cw .hmb-lk a:hover, .hmb-login-footer a:hover { color: #daa520 !important; }
+.hmb-cw .hmb-tt, .hmb-cw .hmb-sb { opacity: 1 !important; }
+.hmb-cw .hmb-tt { color: #fff !important; text-shadow: 0 0 22px rgba(204, 34, 0, .55); }
+.hmb-cw .hmb-sb { color: var(--gold-text) !important; }
+.hmb-cw .hmb-in { color: #efefef !important; background: #0e0e0e !important; border-color: #333 !important; }
+.hmb-cw .hmb-in:focus { border-color: #cc2200 !important; box-shadow: 0 0 0 3px rgba(204, 34, 0, .22); }
+/* texto oscuro sobre rojo = ilegible: botones principales siempre en blanco */
+.hmb-cw .hmb-bt, .hmb-cw .hmb-bt .hmb-bts, .hmb-btn-submit, .hmb-btn-submit .hmb-btn-text,
+.hmb-btn-primary, .btn-primary, input[type=submit] { color: #fff !important; }
+
+/* ---------- 3 · Estética metalera ---------- */
+
+/* Panel de contenido: acero oscuro con filo rojo */
+.hmb-component-inner {
+  position: relative;
+  border: 1px solid #1d1d1d;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, .65), 0 0 0 1px rgba(139, 0, 0, .18), 0 18px 50px rgba(0, 0, 0, .7);
+}
+.hmb-component-inner::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--metal-edge);
+  box-shadow: 0 0 12px rgba(204, 34, 0, .55); pointer-events: none;
+}
+
+/* Titulares: fuego debajo */
+.hmb-component-inner h1 {
+  font-family: var(--font-display, 'Metal Mania', cursive); font-weight: 400; letter-spacing: .05em;
+  color: #fff; text-shadow: 0 2px 18px rgba(204, 34, 0, .5);
+}
+.hmb-component-inner h1::after {
+  content: ''; display: block; height: 3px; margin: .55rem 0 1rem; background: var(--metal-edge); box-shadow: 0 0 14px rgba(204, 34, 0, .6);
+}
+.hmb-component-inner h2 { font-family: var(--font-title, Oswald, sans-serif); letter-spacing: .08em; text-transform: uppercase; }
+.hmb-component-inner h2::before { content: '\25C6'; color: #cc2200; font-size: .6em; margin-right: .55rem; vertical-align: middle; }
+.hmb-cw h1::after, .hmb-cw h2::before, .cc2 h1::after, .cc2 h2::before, .hb h1::after, .hb h2::before { content: none !important; display: none !important; }
+
+/* Enlaces del texto: brasa */
+.hmb-component-inner a:not([class]) { color: var(--fire-text); border-bottom: 1px solid rgba(255, 77, 46, .35); transition: color .2s, border-color .2s, text-shadow .2s; }
+.hmb-component-inner a:not([class]):hover { color: #daa520; border-color: #daa520; text-shadow: 0 0 10px rgba(218, 165, 32, .5); }
+
+/* Citas, listas, separadores, tablas */
+blockquote {
+  border-left: 4px solid #cc2200; background: linear-gradient(90deg, rgba(139, 0, 0, .22), transparent 80%);
+  padding: 1rem 1.4rem; margin: 1.4rem 0; color: #e2d6c4; font-family: var(--font-accent, 'Cinzel', serif);
+}
+.hmb-component-inner ul:not([class]) { list-style: none; padding-left: 1.2rem; }
+.hmb-component-inner ul:not([class]) > li { position: relative; padding-left: .3rem; }
+.hmb-component-inner ul:not([class]) > li::before { content: '\25B8'; position: absolute; left: -1rem; color: #cc2200; }
+.hmb-component-inner hr { border: 0; height: 2px; margin: 1.8rem 0; background: var(--metal-edge); }
+.hmb-component-inner table { border-collapse: collapse; width: 100%; }
+.hmb-component-inner th { background: #1a0000; color: var(--gold-text); text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-title, Oswald, sans-serif); }
+.hmb-component-inner th, .hmb-component-inner td { border: 1px solid #262626; padding: .5rem .7rem; }
+.hmb-component-inner tbody tr:nth-child(even) { background: rgba(255, 255, 255, .02); }
+.hmb-component-inner tbody tr:hover { background: rgba(204, 34, 0, .08); }
+
+/* Módulos (cajas laterales y de portada): filo de acero y brillo al pasar */
+.hmb-module { border-top: 2px solid #5c0000; transition: border-color .25s, box-shadow .25s; }
+.hmb-module:hover { border-top-color: #cc2200; box-shadow: 0 -2px 18px rgba(204, 34, 0, .25); }
+.hmb-module-title { text-shadow: 0 0 12px rgba(204, 34, 0, .35); }
+
+/* Pie de página: llamas */
+.hmb-footer { position: relative; border-top: 0; box-shadow: 0 -14px 46px rgba(139, 0, 0, .3); }
+.hmb-footer::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--metal-edge); box-shadow: 0 0 16px rgba(204, 34, 0, .7); }
+
+/* Botones de Joomla (btn-primary) en estilo cuchilla */
+.btn-primary, input[type=submit], button[type=submit].btn {
+  background: linear-gradient(160deg, #cc2200, #8b0000) !important; border: 1px solid rgba(204, 34, 0, .6) !important; border-radius: 0 !important;
+  letter-spacing: .1em; text-transform: uppercase; font-family: var(--font-title, Oswald, sans-serif); transition: filter .2s, box-shadow .2s, transform .2s;
+}
+.btn-primary:hover, input[type=submit]:hover, button[type=submit].btn:hover { filter: brightness(1.15); box-shadow: var(--blood-glow); transform: translateY(-1px); }
+
+/* Mensajes del sistema (errores, avisos) legibles y en tono */
+#system-message-container .alert, .alert {
+  background: #170000; color: #f3d3cb; border: 1px solid #5c0000; border-left: 4px solid #cc2200; border-radius: 0;
+}
+#system-message-container .alert-success, .alert-success { background: #04150a; color: #cdeed8; border-color: #124d28; border-left-color: #2e9d57; }
+#system-message-container .alert-warning, .alert-warning { background: #1a1200; color: #f2e2b8; border-color: #5c4500; border-left-color: #daa520; }
+#system-message-container .alert a, .alert a { color: #ff7a5f; }
+
+/* ---------- 4 · Ajustes de contraste en extensiones con variables propias ---------- */
+.metalmap-wrapper { --mm-text-muted: #a3a3a3 !important; }
+.mm-btn-filter { background: #c4161f !important; color: #fff !important; }
+.hmbq-rank { color: var(--fire-text) !important; }
+.hmbq-ps { background: #b3121d !important; color: #fff !important; }
+.hmbq-board-tab.is-active { background: #c4161f !important; color: #fff !important; }
+.hmb-ct-btn { color: #fff !important; }
+.cc2-prov { color: var(--tx-dim) !important; }
+.cc2-eyebrow, .cc2 .cc2-month__h { color: var(--fire-text) !important; }
+
+/* Movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

@@ -100,7 +100,7 @@ $interval    = $cfg['interval'];
     z-index:10;
     background:rgba(5,0,0,.7);
     border:1px solid var(--cr2);
-    color:var(--fire, #CC2200);
+    color:var(--fire-text,#ff4d2e);
     font-size:22px;
     line-height:1;
     width:44px;height:44px;
@@ -124,7 +124,7 @@ $interval    = $cfg['interval'];
     z-index:10;
     background:rgba(5,0,0,.7);
     border:1px solid var(--cr2);
-    color:var(--fire, #CC2200);
+    color:var(--fire-text,#ff4d2e);
     font-size:16px;
     width:36px;height:36px;
     display:flex;align-items:center;justify-content:center;
@@ -279,7 +279,7 @@ $interval    = $cfg['interval'];
 }
 .<?php echo $id; ?>-lb-counter{
     font-family:'Oswald',sans-serif;
-    color:var(--grey-5, #555555);
+    color:var(--tx-faint,#8f8f8f);
     font-size:11px;
     letter-spacing:2px;
     margin-top:4px;

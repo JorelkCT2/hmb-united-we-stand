@@ -10,10 +10,10 @@ $q    = htmlspecialchars($this->query);
 .bq-input:focus{border-color:var(--fire, #CC2200)}
 .bq-btn{background:var(--fire, #CC2200);color:#fff;border:none;padding:12px 22px;cursor:pointer;font-size:.95rem;font-weight:700;letter-spacing:.04em;border-radius:0 3px 3px 0}
 .bq-btn:hover{background:#aa0000}
-.bq-summary{color:var(--grey-6, #666666);font-size:.82rem;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--steel, #1A1A1A)}
-.bq-summary strong{color:var(--fire, #CC2200)}
+.bq-summary{color:var(--tx-dim,#a3a3a3);font-size:.82rem;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--steel, #1A1A1A)}
+.bq-summary strong{color:var(--fire-text,#ff4d2e)}
 .bq-section{margin-bottom:32px}
-.bq-sh{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-5, #555555);border-left:3px solid;padding-left:10px;margin-bottom:12px;font-weight:700}
+.bq-sh{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-faint,#8f8f8f);border-left:3px solid;padding-left:10px;margin-bottom:12px;font-weight:700}
 .bq-sh-ef{border-color:var(--fire, #CC2200)}
 .bq-sh-fa{border-color:#5555cc}
 .bq-sh-mu{border-color:#cc6600}
@@ -25,11 +25,11 @@ $q    = htmlspecialchars($this->query);
 .bq-body{flex:1;min-width:0}
 .bq-title{font-size:.92rem;font-weight:600;margin-bottom:2px}
 .bq-title a{color:var(--grey-d, #DDDDDD);text-decoration:none}
-.bq-title a:hover{color:var(--fire, #CC2200)}
-.bq-meta{color:var(--grey-5, #555555);font-size:.75rem;margin-bottom:3px}
-.bq-desc{color:var(--text-dim, #777777);font-size:.78rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bq-title a:hover{color:var(--fire-text,#ff4d2e)}
+.bq-meta{color:var(--tx-faint,#8f8f8f);font-size:.75rem;margin-bottom:3px}
+.bq-desc{color:var(--tx-dim,#a3a3a3);font-size:.78rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .bq-frase{color:var(--grey-9, #999999);font-size:.85rem;font-style:italic;line-height:1.5}
-.bq-nada{color:var(--grey-4, #444444);text-align:center;padding:40px;font-size:.9rem}
+.bq-nada{color:var(--tx-faint,#8f8f8f);text-align:center;padding:40px;font-size:.9rem}
 </style>
 
 <div class="bq">
@@ -75,7 +75,7 @@ $q    = htmlspecialchars($this->query);
               <?php echo htmlspecialchars($m->nombre); ?>
             </a>
             <?php if (!$vivo): ?>
-            <span style="color:#555;font-size:.7rem;font-weight:400"> ✝ <?php echo date('Y', strtotime($m->fecha_defuncion)); ?></span>
+            <span style="color:var(--tx-faint,#8f8f8f);font-size:.7rem;font-weight:400"> ✝ <?php echo date('Y', strtotime($m->fecha_defuncion)); ?></span>
             <?php endif; ?>
           </div>
           <div class="bq-meta">
@@ -99,7 +99,7 @@ $q    = htmlspecialchars($this->query);
           <div class="bq-meta">
             <?php echo $e->fecha_evento ? date('d/m/Y', strtotime($e->fecha_evento)) : ''; ?>
             <?php if (!empty($e->artista)): ?> · <?php echo htmlspecialchars($e->artista); ?><?php endif; ?>
-            <?php if (!empty($e->categoria)): ?> · <span style="color:#cc4444"><?php echo htmlspecialchars($e->categoria); ?></span><?php endif; ?>
+            <?php if (!empty($e->categoria)): ?> · <span style="color:var(--fire-text,#ff4d2e)"><?php echo htmlspecialchars($e->categoria); ?></span><?php endif; ?>
           </div>
           <?php if (!empty($e->descripcion)): ?>
           <div class="bq-desc"><?php echo htmlspecialchars($e->descripcion); ?></div>

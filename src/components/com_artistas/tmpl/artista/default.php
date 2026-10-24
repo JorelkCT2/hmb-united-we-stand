@@ -118,7 +118,7 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
 .af-social { display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); transition:all .2s; text-decoration:none; }
 .af-social:hover { background:rgba(255,255,255,.18); transform:scale(1.1); }
 .af-form-ctrl { background:rgba(255,255,255,.07)!important; border:1px solid rgba(180,140,60,.4)!important; color:var(--cream, #E8E0D5)!important; border-radius:6px; width:100%; padding:.4rem .6rem; margin-bottom:.5rem; font-size:.85rem; }
-.af-form-ctrl::placeholder { color:var(--gold-dim, #7A6030)!important; }
+.af-form-ctrl::placeholder { color:var(--gold-text,#c9a45c)!important; }
 .af-btn-submit { background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; width:100%; padding:.7rem; border-radius:6px; cursor:pointer; }
 .af-resena-stars { display:flex; flex-direction:row-reverse; justify-content:flex-end; }
 .af-resena-stars input { display:none; }
@@ -291,7 +291,7 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
                             <?php endif; ?>
                             <div style="color:#f0e0c0;font-weight:700;font-size:.9rem"><?= htmlspecialchars($disco['titulo']) ?></div>
                             <?php if (!empty($disco['anio'])): ?><div style="color:#8a7a60;font-size:.8rem"><?= htmlspecialchars($disco['anio']) ?></div><?php endif; ?>
-                            <?php if (!empty($disco['productora'])): ?><div style="color:#6a5f4a;font-size:.75rem"><?= htmlspecialchars($disco['productora']) ?></div><?php endif; ?>
+                            <?php if (!empty($disco['productora'])): ?><div style="color:var(--gold-text,#c9a45c);font-size:.75rem"><?= htmlspecialchars($disco['productora']) ?></div><?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                     </div>
@@ -317,7 +317,7 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
                                     <?= $__n->tipo==='concierto'?'🎤 Concierto':'💿 Álbum/Single' ?>
                                 </span>
                                 <h4 style="color:#f0e0c0;font-size:1rem;margin:0 0 .3rem"><?= htmlspecialchars($__n->title) ?></h4>
-                                <small style="color:#6a5f4a"><?= date('d/m/Y', strtotime($__n->created)) ?></small>
+                                <small style="color:var(--gold-text,#c9a45c)"><?= date('d/m/Y', strtotime($__n->created)) ?></small>
                             </div>
                         </div>
                         <?php if (!empty($__n->introtext)): ?>
@@ -357,11 +357,11 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
                             </div>
                             <?php if (!empty($r->event_type)): ?><small style="color:#8a7a60">Evento: <?= htmlspecialchars($r->event_type) ?></small><br><?php endif; ?>
                             <p class="mt-1 mb-0" style="color:#c9b890"><?= nl2br(htmlspecialchars($r->review)) ?></p>
-                            <small style="color:#6a5f4a"><?= date('d/m/Y', strtotime($r->created)) ?></small>
+                            <small style="color:var(--gold-text,#c9a45c)"><?= date('d/m/Y', strtotime($r->created)) ?></small>
                         </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <p style="color:#6a5f4a">Aún no hay reseñas. ¡Sé el primero!</p>
+                        <p style="color:var(--gold-text,#c9a45c)">Aún no hay reseñas. ¡Sé el primero!</p>
                     <?php endif; ?>
 
                     <div class="mt-4 pt-3" style="border-top:1px solid rgba(180,140,60,.2)">
@@ -426,7 +426,7 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
                     <?php if (!empty($item->phone)): ?>
                     <div style="margin-bottom:.8rem">
                         <button type="button" onclick="toggleWA(this)"
-                            style="width:100%;background:transparent;border:1px dashed rgba(180,140,60,.3);color:#6a5f4a;padding:.5rem;border-radius:6px;cursor:pointer;font-size:.82rem;transition:all .2s">
+                            style="width:100%;background:transparent;border:1px dashed rgba(180,140,60,.3);color:var(--gold-text,#c9a45c);padding:.5rem;border-radius:6px;cursor:pointer;font-size:.82rem;transition:all .2s">
                             ¿Prefieres WhatsApp? <span style="font-size:.75rem">▼</span>
                         </button>
                         <div id="wa-btn" style="display:none;margin-top:.4rem">
@@ -476,7 +476,7 @@ if (!empty($item->social_tiktok))    $socials[] = ['url'=>$item->social_tiktok, 
                     <div style="padding:.6rem .8rem">
                         <div style="color:#f0e0c0;font-weight:700;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= htmlspecialchars($rel->name) ?></div>
                         <?php if (!empty($rel->location)): ?>
-                        <div style="color:#6a5f4a;font-size:.75rem">📍 <?= htmlspecialchars($rel->location) ?></div>
+                        <div style="color:var(--gold-text,#c9a45c);font-size:.75rem">📍 <?= htmlspecialchars($rel->location) ?></div>
                         <?php endif; ?>
                         <div style="color:#b87d1e;font-size:.75rem;margin-top:4px">Ver ficha →</div>
                     </div>

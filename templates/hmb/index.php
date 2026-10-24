@@ -102,6 +102,7 @@ if ($app->input->getInt('hmbmodal', 0) === 1) {
 	<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<style>:root { <?php echo $cssVars; ?> } html,body{background:var(--dark,#0a0a0a)!important;margin:0}</style>
 	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/hmb-components.css?v=<?php echo (int) @filemtime(__DIR__ . '/css/hmb-components.css'); ?>">
+	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/hmb-metal.css?v=<?php echo (int) @filemtime(__DIR__ . '/css/hmb-metal.css'); ?>">
 </head>
 <body class="hmb-body hmb-modal-body <?php echo $colorScheme; ?>-scheme">
 	<jdoc:include type="component" />
@@ -136,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Oswald:wght@300;400;600;700&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 	<style>:root { <?php echo $cssVars; ?> }</style>
 	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/hmb-components.css?v=<?php echo (int) @filemtime(__DIR__ . '/css/hmb-components.css'); ?>">
+	<link rel="stylesheet" href="<?php echo Uri::root(true); ?>/templates/hmb/css/hmb-metal.css?v=<?php echo (int) @filemtime(__DIR__ . '/css/hmb-metal.css'); ?>">
 </head><?php
 $menu   = $app->getMenu();
 $isHome = ($menu->getActive() == $menu->getDefault());

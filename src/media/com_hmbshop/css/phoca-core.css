@@ -289,7 +289,7 @@
 
 .ph-reviews-review {
     font-style: italic;
-    color: #555;
+    color: var(--tx-faint,#8f8f8f);
     padding-top: 1em;
 }
 
@@ -1120,7 +1120,7 @@ table.ph-comparison-table tr td.ph-middle {
 
 .ph-search-radio {
     font-size: small;
-    color: #555;
+    color: var(--tx-faint,#8f8f8f);
 }
 */
 /* video */
@@ -2799,31 +2799,31 @@ ul.ph-filter-module-category-tree {
 
 .ph-status-label-status-on-hold {
   background-color: #ffedd5;
-  color: #9a3412;
+  color: var(--fire-text,#ff4d2e);
   border: 1px solid #fed7aa;
 }
 
 .ph-status-label-status-pending {
   background-color: #fef9c3;
-  color: #854d0e;
+  color: var(--gold-text,#c9a45c);
   border: 1px solid #fef08a;
 }
 
 .ph-status-label-status-failed {
   background-color: #fee2e2;
-  color: #991b1b;
+  color: var(--fire-text,#ff4d2e);
   border: 1px solid #fecaca;
 }
 
 .ph-status-label-status-in-trial {
   background-color: #f3e8ff;
-  color: #6b21a8;
+  color: var(--fire-text,#ff4d2e);
   border: 1px solid #e9d5ff;
 }
 
 .ph-status-label-status-card-expired {
   background-color: #fff1f2;
-  color: #be123c;
+  color: var(--fire-text,#ff4d2e);
   border: 1px solid #fda4af;
 }
 

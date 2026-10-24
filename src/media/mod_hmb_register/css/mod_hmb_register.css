@@ -154,7 +154,7 @@
     transition:border-color var(--speed) var(--ease), background var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
     -webkit-appearance:none; appearance:none;
 }
-.hmb-input::placeholder { color:rgba(136,136,136,.28); font-style:italic; font-weight:300; }
+.hmb-input::placeholder { color:var(--tx-dim,#a3a3a3); font-style:italic; font-weight:300; }
 .hmb-input:hover:not(:focus) { border-color:#363636; }
 .hmb-input:focus {
     outline:none; border-color:var(--c-red);

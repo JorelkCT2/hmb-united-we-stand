@@ -9,7 +9,7 @@ if (!$this->banda): ?>
   <h2>Banda no encontrada</h2>
   <a href="<?php echo $esc(Uri::current()); ?>?view=bandas<?php echo $modalQ; ?>">&larr; Volver al listado</a>
 </div>
-<style>.hb-vacio{padding:48px 20px;text-align:center;color:var(--grey-8,#888);background:var(--dark,#0a0a0a);border:1px solid var(--steel2,#222)}.hb-vacio h2{font-family:var(--font-title,Oswald,sans-serif);color:var(--fire,#cc2200);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}.hb-vacio a{color:var(--gold-light,#daa520)}</style>
+<style>.hb-vacio{padding:48px 20px;text-align:center;color:var(--grey-8,#888);background:var(--dark,#0a0a0a);border:1px solid var(--steel2,#222)}.hb-vacio h2{font-family:var(--font-title,Oswald,sans-serif);color:var(--fire-text,#ff4d2e);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}.hb-vacio a{color:var(--gold-light,#daa520)}</style>
 <?php return; endif;
 
 $b        = $this->banda;
@@ -34,7 +34,7 @@ $catColor = static function (string $n): string {
     $n = mb_strtolower(trim($n));
     if (strpos($n, 'conci') !== false) return '#d4641a';
     if (strpos($n, 'naci') !== false) return '#4caf50';
-    if (strpos($n, 'defun') !== false || strpos($n, 'fallec') !== false) return '#cc4444';
+    if (strpos($n, 'defun') !== false || strpos($n, 'fallec') !== false) return '#ff7468';
     if (strpos($n, 'lanz') !== false || strpos($n, 'disco') !== false) return '#5ba3d9';
     return '#888';
 };

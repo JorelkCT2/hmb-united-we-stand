@@ -60,7 +60,7 @@ try {
     color: var(--cream, #E8E0D5) !important;
     border-radius: 6px;
 }
-.al-filtros .form-control::placeholder { color: var(--gold-dim, #7A6030) !important; }
+.al-filtros .form-control::placeholder { color: var(--gold-text,#c9a45c) !important; }
 .al-filtros .form-control:focus,
 .al-filtros .form-select:focus {
     background: rgba(255,255,255,.12) !important;
@@ -109,7 +109,7 @@ try {
     gap: 6px;
     flex-wrap: wrap;
 }
-.al-sort-bar span { color:var(--gold-dim, #7A6030); font-size:.82rem; margin-right:4px; }
+.al-sort-bar span { color:var(--gold-text,#c9a45c); font-size:.82rem; margin-right:4px; }
 .al-sort-btn {
     background: rgba(255,255,255,.05);
     border: 1px solid rgba(180,140,60,.25);
@@ -128,7 +128,7 @@ try {
 .al-sort-btn.active { background:rgba(180,130,20,.25); border-color:rgba(200,160,60,.6); color:var(--gold-light, #DAA520); }
 
 /* Contador */
-.al-count { color:var(--gold-dim, #7A6030); font-size:.85rem; margin-left:auto; }
+.al-count { color:var(--gold-text,#c9a45c); font-size:.85rem; margin-left:auto; }
 
 /* Grid de artistas */
 .al-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
@@ -183,7 +183,7 @@ try {
 }
 .al-card__name a { color: inherit; text-decoration: none; }
 .al-card__name a:hover { color: var(--gold-light, #DAA520); }
-.al-card__desc { color: var(--gold-dim, #7A6030); font-size: .85rem; margin: 6px 0 0; line-height: 1.4; }
+.al-card__desc { color: var(--gold-text,#c9a45c); font-size: .85rem; margin: 6px 0 0; line-height: 1.4; }
 
 .al-card__footer {
     padding: 10px 16px 14px;
@@ -200,8 +200,8 @@ try {
 }
 .al-stars { color: var(--gold-light, #DAA520); letter-spacing: -1px; }
 .al-stars-empty { color: #3a3020; }
-.al-rating-val { color: var(--gold-dim, #7A6030); font-size: .78rem; margin-left: 4px; }
-.al-location { color: var(--gold-dim, #7A6030); font-size: .8rem; }
+.al-rating-val { color: var(--gold-text,#c9a45c); font-size: .78rem; margin-left: 4px; }
+.al-location { color: var(--gold-text,#c9a45c); font-size: .8rem; }
 .al-formats { display:flex; flex-wrap:wrap; gap:4px; }
 .al-fmt-badge {
     background: rgba(255,255,255,.06);
@@ -235,7 +235,7 @@ try {
     border-radius: 10px;
     padding: 40px;
     text-align: center;
-    color: var(--gold-dim, #7A6030);
+    color: var(--gold-text,#c9a45c);
     grid-column: 1/-1;
 }
 .al-empty a { color: var(--gold-pale, #D4BB8A); }

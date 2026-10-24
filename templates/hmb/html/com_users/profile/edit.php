@@ -135,7 +135,7 @@ $form = $this->form;
 .hmb-ed .controls textarea{width:100%;box-sizing:border-box;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:var(--ra);color:var(--w) !important;font-family:var(--font-body, 'Rajdhani', sans-serif);font-size:.88rem;font-weight:500 !important;padding:.6rem .85rem;transition:border-color var(--sp) var(--e),box-shadow var(--sp) var(--e);-webkit-appearance:none}
 .hmb-ed .controls input:focus{outline:none;border-color:var(--r);box-shadow:0 0 0 3px rgba(180,20,20,.12)}
 .hmb-ed .controls input:-webkit-autofill,.hmb-ed .controls input:-webkit-autofill:focus{-webkit-text-fill-color:var(--w) !important;-webkit-box-shadow:0 0 0 1000px var(--wine-black, #0A0000) inset}
-.hmb-ed .controls input::placeholder{color:rgba(136,136,136,.28);font-style:italic}
+.hmb-ed .controls input::placeholder{color:var(--tx-dim,#a3a3a3);font-style:italic}
 .hmb-ed .controls .form-text,.hmb-ed .controls small,.hmb-ed .controls .help-block{display:none}
 .hmb-ed #password-strength-text{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sv);margin-top:.25rem}
 /* Actions */

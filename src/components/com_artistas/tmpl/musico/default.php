@@ -36,7 +36,7 @@ while (count($instSelects) < 4) $instSelects[] = '';
 .mu-card { background:rgba(10,8,6,.82); border:1px solid rgba(180,140,80,.3); border-radius:10px; margin-bottom:1.5rem; overflow:hidden; }
 .mu-card-h { background:rgba(100,70,20,.5); padding:.7rem 1.2rem; font-weight:700; color:var(--gold-pale, #D4BB8A); text-transform:uppercase; font-size:.85rem; letter-spacing:.4px; }
 .mu-card-b { padding:1.2rem 1.4rem; }
-.mu-label { display:block; color:var(--gold-dim, #7A6030); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
+.mu-label { display:block; color:var(--gold-text,#c9a45c); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px; }
 .mu-ctrl { width:100%; background:rgba(255,255,255,.06)!important; border:1px solid rgba(180,140,60,.3)!important; color:var(--cream, #E8E0D5)!important; border-radius:6px; padding:.45rem .7rem; font-size:.9rem; }
 .mu-ctrl:focus { border-color:rgba(200,160,60,.8)!important; outline:none!important; color:#fff!important; }
 .mu-ctrl option { background:var(--steel, #1A1A1A); color:var(--cream, #E8E0D5); }
@@ -162,7 +162,7 @@ while (count($instSelects) < 4) $instSelects[] = '';
                                 💬 WhatsApp
                             </label>
                         </div>
-                        <p style="color:#6a5f4a;font-size:.78rem;margin-top:4px">Te avisamos cuando una banda busque músico con tu perfil.</p>
+                        <p style="color:var(--gold-text,#c9a45c);font-size:.78rem;margin-top:4px">Te avisamos cuando una banda busque músico con tu perfil.</p>
                     </div>
                 </div>
             </div>

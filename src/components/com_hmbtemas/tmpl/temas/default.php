@@ -54,7 +54,7 @@ $primero        = $temas[0] ?? null;
            src="<?= htmlspecialchars($primero->cover_url) ?>"
            alt="Portada" width="110" height="110">
       <?php else: ?>
-      <span id="hmb-player-cover" style="font-size:2.5rem;color:#444">💿</span>
+      <span id="hmb-player-cover" style="font-size:2.5rem;color:var(--tx-faint,#8f8f8f)">💿</span>
       <?php endif; ?>
     </div>
     <div class="hmb-player__info">
@@ -168,14 +168,14 @@ $primero        = $temas[0] ?? null;
 .hmb-player__cover-wrap{width:110px;height:110px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--hmb-s2);border-radius:2px}
 .hmb-player__cover{width:110px;height:110px;object-fit:cover;display:block;border-radius:2px;filter:brightness(.85)}
 .hmb-player__info{display:flex;flex-direction:column;gap:.35rem;min-width:0}
-.hmb-player__label{font-size:.63rem;letter-spacing:.25em;color:var(--hmb-red);text-transform:uppercase}
+.hmb-player__label{font-size:.63rem;letter-spacing:.25em;color:var(--fire-text,#ff4d2e);text-transform:uppercase}
 .hmb-player__nombre{font-family:var(--hmb-ft);font-size:1.05rem;color:var(--hmb-cr);letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hmb-player__tiempo{font-family:'Courier New',monospace;font-size:.7rem;color:var(--hmb-mu)}
 .hmb-player__barra-wrap{height:3px;background:var(--hmb-bd);border-radius:2px;cursor:pointer;margin-top:.3rem}
 .hmb-player__barra-prog{height:100%;background:var(--hmb-red);border-radius:2px;width:0%;transition:width .4s linear}
 .hmb-player__controls{display:flex;align-items:center;gap:.6rem}
 .hmb-player__btn{background:transparent;border:1px solid var(--hmb-bd);color:var(--hmb-mu);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0}
-.hmb-player__btn:hover{border-color:var(--hmb-red);color:var(--hmb-red)}
+.hmb-player__btn:hover{border-color:var(--hmb-red);color:var(--fire-text,#ff4d2e)}
 .hmb-player__btn--main{background:var(--hmb-red);border-color:var(--hmb-red);color:#fff;width:48px;height:48px}
 .hmb-player__btn--main:hover{background:var(--hmb-rh);border-color:var(--hmb-rh)}
 .hmb-album{margin-bottom:1.5rem}
@@ -186,7 +186,7 @@ $primero        = $temas[0] ?? null;
 .hmb-tema:last-child{border-bottom:none}
 .hmb-tema:hover{background:var(--hmb-s2)}
 .hmb-tema--activo{background:#150000}
-.hmb-tema--activo .hmb-tema__titulo{color:var(--hmb-red)}
+.hmb-tema--activo .hmb-tema__titulo{color:var(--fire-text,#ff4d2e)}
 .hmb-tema--activo .hmb-tema__num{opacity:0}
 .hmb-tema__num{font-size:.72rem;color:var(--hmb-mu2);text-align:right}
 .hmb-tema__info{min-width:0}
@@ -197,9 +197,9 @@ $primero        = $temas[0] ?? null;
 .hmb-link-social--spotify:hover{border-color:#1DB954;color:#1DB954}
 .hmb-link-descarga{border-color:var(--grey-5, #555555)}
 .hmb-link-descarga:hover{border-color:var(--gold-light, #DAA520);color:var(--gold-light, #DAA520)}
-.hmb-link-social--youtube:hover{border-color:var(--hmb-red);color:var(--hmb-red)}
+.hmb-link-social--youtube:hover{border-color:var(--hmb-red);color:var(--fire-text,#ff4d2e)}
 .hmb-tema__dur{font-family:'Courier New',monospace;font-size:.72rem;color:var(--hmb-mu);min-width:2.8rem;text-align:right}
-.hmb-tema__playing-ic{display:flex;align-items:center;justify-content:center;color:var(--hmb-red);opacity:0;transition:opacity .2s;width:1.2rem}
+.hmb-tema__playing-ic{display:flex;align-items:center;justify-content:center;color:var(--fire-text,#ff4d2e);opacity:0;transition:opacity .2s;width:1.2rem}
 .hmb-tema--activo .hmb-tema__playing-ic{opacity:1}
 .hmb-ic-sound{animation:hmb-pulse 1.2s ease-in-out infinite}
 @keyframes hmb-pulse{0%,100%{opacity:.4}50%{opacity:1}}

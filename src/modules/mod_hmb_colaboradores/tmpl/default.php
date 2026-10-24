@@ -1,7 +1,7 @@
 <?php defined('_JEXEC') or die; ?>
 <style>
 .hmb-colab{font-family:'Oswald',sans-serif;padding:2rem 0 1rem;}
-.hmb-colab-title{text-align:center;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--grey-5, #555555);margin:0 0 1.5rem;position:relative;}
+.hmb-colab-title{text-align:center;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--tx-faint,#8f8f8f);margin:0 0 1.5rem;position:relative;}
 .hmb-colab-title::before,.hmb-colab-title::after{content:'';display:inline-block;width:40px;height:1px;background:var(--wine, #3A0000);vertical-align:middle;margin:0 12px;}
 .hmb-colab-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1.2rem;max-width:1100px;margin:0 auto;padding:0 1rem;}
 .hmb-colab-item{display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--wine-dark, #1A0000);border-radius:6px;padding:.8rem;transition:all .3s ease;text-decoration:none;position:relative;}

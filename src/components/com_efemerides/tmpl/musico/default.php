@@ -4,8 +4,8 @@ use Joomla\CMS\Router\Route;
 
 if (!$this->musico):?>
 <div style="padding:40px;text-align:center;color:#888;background:#0d0d0d;border:1px solid #1e1e1e">
-  <h2 style="color:#cc0000">Músico no encontrado</h2>
-  <a href="<?php echo Uri::current(); ?>?view=musicos" style="color:#cc0000">← Volver</a>
+  <h2 style="color:var(--fire-text,#ff4d2e)">Músico no encontrado</h2>
+  <a href="<?php echo Uri::current(); ?>?view=musicos" style="color:var(--fire-text,#ff4d2e)">← Volver</a>
 </div>
 <?php return; endif;
 
@@ -36,7 +36,7 @@ $catColor = static function(string $n): string {
     $n=mb_strtolower(trim($n));
     if(strpos($n,'conci')!==false) return '#d4641a';
     if(strpos($n,'naci')!==false)  return '#4caf50';
-    if(strpos($n,'defun')!==false||strpos($n,'fallec')!==false) return '#cc4444';
+    if(strpos($n,'defun')!==false||strpos($n,'fallec')!==false) return '#ff7468';
     if(strpos($n,'lanz')!==false||strpos($n,'disco')!==false) return '#5ba3d9';
     return '#888';
 };
@@ -250,7 +250,7 @@ $banda2Nombre = $banda2 ? $banda2->nombre : ($m->banda_texto_2 ?? '');
 /* Topbar */
 .mf-topbar{background:var(--dark, #0A0A0A);border:1px solid var(--steel, #1A1A1A);border-top:4px solid var(--fire, #CC2200);
   padding:10px 18px;display:flex;align-items:center;gap:10px}
-.mf-tipo{font-size:.6rem;color:var(--fire, #CC2200);letter-spacing:.2em;font-weight:700;text-transform:uppercase;flex:1}
+.mf-tipo{font-size:.6rem;color:var(--fire-text,#ff4d2e);letter-spacing:.2em;font-weight:700;text-transform:uppercase;flex:1}
 .mf-flag{font-size:1.3rem;line-height:1}
 .mf-pais{font-size:.78rem;color:var(--grey-8, #888888);font-weight:600}
 
@@ -275,7 +275,7 @@ $banda2Nombre = $banda2 ? $banda2->nombre : ($m->banda_texto_2 ?? '');
 .mf-banda-lnk{color:var(--gold-light, #DAA520);font-weight:700;text-decoration:none;font-size:.88rem}
 .mf-banda-lnk:hover{color:#fff}
 .mf-banda2-row{margin-top:4px}.mf-banda2-lnk{font-size:.75rem;color:var(--grey-a, #AAAAAA);opacity:.8}
-.mf-solista-badge{font-size:.72rem;background:var(--mid, #111111);border:1px solid var(--grey-2, #2A2A2A);color:var(--text-dim, #777777);padding:3px 10px;letter-spacing:.06em;font-weight:600;display:inline-block}
+.mf-solista-badge{font-size:.72rem;background:var(--mid, #111111);border:1px solid var(--grey-2, #2A2A2A);color:var(--tx-dim,#a3a3a3);padding:3px 10px;letter-spacing:.06em;font-weight:600;display:inline-block}
 .mf-banda-txt{color:var(--gold-light, #DAA520);font-size:.88rem}
 .mf-banda2-row{margin-top:4px}.mf-banda2-lnk{font-size:.75rem;color:var(--grey-a, #AAAAAA);opacity:.8}
 .mf-solista-badge{font-size:.72rem;background:var(--mid, #111111);border:1px solid var(--grey-2, #2A2A2A);color:var(--grey-8, #888888);padding:3px 10px;letter-spacing:.06em;font-weight:600}
@@ -284,10 +284,10 @@ $banda2Nombre = $banda2 ? $banda2->nombre : ($m->banda_texto_2 ?? '');
 .mf-tl-row{display:flex;align-items:flex-start;gap:8px}
 .mf-tl-dot{font-size:.85rem;margin-top:2px;flex-shrink:0}
 .mf-nac .mf-tl-dot{color:var(--ok, #4CAF50)}
-.mf-def .mf-tl-dot{color:#cc4444}
+.mf-def .mf-tl-dot{color:var(--fire-text,#ff4d2e)}
 .mf-tl-f{font-size:.82rem;color:var(--grey-c, #CCCCCC);font-weight:600;display:block}
-.mf-tl-l{font-size:.73rem;color:var(--text-dim, #777777);display:block;line-height:1.4}
-.mf-tl-edad{font-size:.68rem;color:var(--grey-5, #555555);display:block;font-style:italic}
+.mf-tl-l{font-size:.73rem;color:var(--tx-dim,#a3a3a3);display:block;line-height:1.4}
+.mf-tl-edad{font-size:.68rem;color:var(--tx-faint,#8f8f8f);display:block;font-style:italic}
 .mf-tl-line{width:1px;height:10px;background:var(--grey-3, #333333);margin-left:7px}
 .mf-vive{font-size:.62rem;background:#0a1f0a;color:var(--ok, #4CAF50);padding:3px 9px;
   border-radius:2px;font-weight:700;letter-spacing:.1em;display:inline-block;margin-top:6px}
@@ -297,7 +297,7 @@ $banda2Nombre = $banda2 ? $banda2->nombre : ($m->banda_texto_2 ?? '');
 .mf-mt{margin-top:14px}
 /* Cards */
 .mf-card{background:var(--mid, #111111);border:1px solid var(--steel, #1A1A1A)}
-.mf-card-h{font-size:.72rem;font-weight:700;color:var(--fire, #CC2200);text-transform:uppercase;
+.mf-card-h{font-size:.72rem;font-weight:700;color:var(--fire-text,#ff4d2e);text-transform:uppercase;
   letter-spacing:.1em;margin:0;padding:9px 14px;border-bottom:1px solid var(--steel, #1A1A1A);background:var(--dark, #0A0A0A)}
 .mf-bio{padding:14px;font-size:.84rem;color:var(--grey-a, #AAAAAA);line-height:1.8}
 .mf-efems{padding:8px 12px;display:flex;flex-direction:column;gap:4px}
@@ -305,7 +305,7 @@ $banda2Nombre = $banda2 ? $banda2->nombre : ($m->banda_texto_2 ?? '');
   border-bottom:1px solid var(--dark, #0A0A0A);border-left:3px solid;padding-left:9px}
 .mf-efem:last-child{border-bottom:none}
 .mf-efem-anio{font-size:.95rem;font-weight:900;min-width:38px}
-.mf-efem-fecha{font-size:.68rem;color:var(--grey-5, #555555);min-width:32px}
+.mf-efem-fecha{font-size:.68rem;color:var(--tx-faint,#8f8f8f);min-width:32px}
 .mf-efem-tit{font-size:.8rem;color:var(--grey-d, #DDDDDD);font-weight:600}
 .mf-efem-badge{font-size:.58rem;padding:1px 5px;border-radius:2px;margin-left:5px}
 .mf-frase{border-left:3px solid var(--fire, #CC2200);padding:10px 14px;margin:0 0 6px;background:var(--dark, #0A0A0A)}
@@ -327,11 +327,11 @@ $banda2Nombre = $banda2 ? $banda2->nombre : ($m->banda_texto_2 ?? '');
 .mf-banda-logo{max-height:48px;max-width:90px;object-fit:contain}
 .mf-banda-cn{display:block;font-size:.85rem;color:#fff;font-weight:700}
 .mf-banda-cg{display:block;font-size:.7rem;color:var(--grey-8, #888888);margin-top:2px}
-.mf-banda-cp{display:block;font-size:.68rem;color:var(--grey-5, #555555);margin-top:2px}
+.mf-banda-cp{display:block;font-size:.68rem;color:var(--tx-faint,#8f8f8f);margin-top:2px}
 
 /* Footer */
 .mf-footer{text-align:center;padding:12px;border-top:1px solid var(--steel, #1A1A1A);font-size:.76rem}
-.mf-lnk{color:var(--fire, #CC2200);text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.7rem}
+.mf-lnk{color:var(--fire-text,#ff4d2e);text-decoration:none;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.7rem}
 .mf-lnk:hover{color:#ff2222}
 
 /* Responsive */

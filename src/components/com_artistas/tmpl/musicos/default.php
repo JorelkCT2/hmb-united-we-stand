@@ -19,7 +19,7 @@ $provincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila','Ba
 .mu-avatar-ph { width:70px; min-width:70px; height:70px; border-radius:50%; background:rgba(180,140,60,.15); display:flex; align-items:center; justify-content:center; font-size:2rem; }
 .mu-nombre { color:var(--cream, #E8E0D5); font-weight:700; font-size:1rem; margin-bottom:2px; }
 .mu-inst { color:var(--gold-pale, #D4BB8A); font-size:.88rem; }
-.mu-meta { color:var(--gold-dim, #7A6030); font-size:.78rem; margin-top:4px; }
+.mu-meta { color:var(--gold-text,#c9a45c); font-size:.78rem; margin-top:4px; }
 .mu-badge { display:inline-block; background:rgba(180,120,20,.25); border:1px solid rgba(180,140,60,.3); color:var(--gold-pale, #D4BB8A); border-radius:4px; padding:1px 8px; font-size:.75rem; margin:2px; }
 </style>
 
@@ -64,7 +64,7 @@ $provincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila','Ba
     <?php endif; ?>
 
     <?php if (empty($items)): ?>
-    <div style="text-align:center;padding:3rem;color:#6a5f4a">
+    <div style="text-align:center;padding:3rem;color:var(--gold-text,#c9a45c)">
         <div style="font-size:3rem">🎸</div>
         <p>No hay músicos registrados con esos criterios.</p>
     </div>

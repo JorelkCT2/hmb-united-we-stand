@@ -343,7 +343,7 @@ foreach ($items as $item) {
     font-weight:700;
     letter-spacing:3px;
     text-transform:uppercase;
-    color:var(--fire, #CC2200);
+    color:var(--fire-text,#ff4d2e);
     text-decoration:none;
     border:1px solid var(--blood, #8B0000);
     padding:7px 18px;

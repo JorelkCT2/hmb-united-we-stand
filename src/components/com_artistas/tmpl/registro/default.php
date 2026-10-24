@@ -25,7 +25,7 @@ $allProvincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila',
 .reg-bloque-body { padding:1.4rem; }
 
 .reg label { display:block; color:var(--gold-pale, #D4BB8A); font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px; }
-.reg .ayuda { color:var(--gold-dim, #7A6030); font-size:.8rem; margin-top:3px; margin-bottom:.8rem; }
+.reg .ayuda { color:var(--gold-text,#c9a45c); font-size:.8rem; margin-top:3px; margin-bottom:.8rem; }
 .reg .obligatorio { color:#f07070; }
 
 .reg input[type=text],
@@ -61,7 +61,7 @@ $allProvincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila',
 
 .reg-btn-enviar { width:100%; background:linear-gradient(135deg,var(--gold, #B8860B),var(--gold, #B8860B)); border:1px solid rgba(200,150,60,.5); color:#fff; font-weight:700; font-size:1.1rem; padding:.9rem; border-radius:8px; cursor:pointer; letter-spacing:.5px; transition:all .2s; }
 .reg-btn-enviar:hover { background:linear-gradient(135deg,#d4941e,#a06a15); transform:translateY(-1px); }
-.reg-nota { color:var(--gold-dim, #7A6030); font-size:.8rem; text-align:center; margin-top:.8rem; }
+.reg-nota { color:var(--gold-text,#c9a45c); font-size:.8rem; text-align:center; margin-top:.8rem; }
 </style>
 
 <div class="reg">
@@ -77,7 +77,7 @@ $allProvincias = ['Álava','Albacete','Alicante','Almería','Asturias','Ávila',
         <h3 style="color:#d4bb8a;margin-bottom:.5rem">Primero inicia sesión</h3>
         <p style="color:#8a7a60;margin-bottom:1rem">Necesitas una cuenta para registrar tu banda y poder editar tu ficha más adelante.</p>
         <a href="https://heavymetalbrothers.com/index.php/registro" class="reg-login-btn">🔑 Iniciar sesión</a>
-        <p style="color:#6a5f4a;font-size:.82rem;margin-top:.8rem">
+        <p style="color:var(--gold-text,#c9a45c);font-size:.82rem;margin-top:.8rem">
             ¿No tienes cuenta? <a href="index.php?option=com_users&view=registration" style="color:#d4bb8a">Créala aquí gratis</a>
         </p>
     </div>

@@ -40,7 +40,7 @@ HTMLHelper::_('behavior.formvalidator');
 .hmb-field{display:flex;flex-direction:column;gap:.32rem;margin-bottom:1rem}
 .hmb-label{font-family:var(--fh);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-sv)}
 .hmb-input{width:100%;box-sizing:border-box;background:rgba(255,255,255,.03);border:1px solid var(--c-b);border-radius:var(--r);color:var(--c-th);font-family:var(--fb);font-size:.9rem;font-weight:300;padding:.65rem .9rem;transition:border-color var(--sp) var(--e),background var(--sp) var(--e),box-shadow var(--sp) var(--e);-webkit-appearance:none;appearance:none}
-.hmb-input::placeholder{color:rgba(136,136,136,.28);font-style:italic}
+.hmb-input::placeholder{color:var(--tx-dim,#a3a3a3);font-style:italic}
 .hmb-input:focus{outline:none;border-color:var(--c-r);background:rgba(180,20,20,.05);box-shadow:0 0 0 3px rgba(180,20,20,.12)}
 .hmb-input:-webkit-autofill,.hmb-input:-webkit-autofill:focus{-webkit-text-fill-color:var(--c-th);-webkit-box-shadow:0 0 0 1000px var(--wine-black, #0A0000) inset}
 
@@ -98,7 +98,7 @@ HTMLHelper::_('behavior.formvalidator');
 
             <div class="hmb-field">
                 <label class="hmb-label" for="jform_email">
-                    Correo electrónico <span style="color:#e02020">*</span>
+                    Correo electrónico <span style="color:var(--fire-text,#ff4d2e)">*</span>
                 </label>
                 <input type="email" id="jform_email" name="jform[email]"
                     class="hmb-input validate-email required"

@@ -22,7 +22,7 @@ $iconos = ['🤘', '💿', '🎸', '👕', '🔥', '⚡', '💀', '🎵'];
 
 <?php if (empty($this->categorias)) : ?>
 <div class="hmb-container">
-  <p style="color:#777;font-family:'Oswald',sans-serif;letter-spacing:2px;text-transform:uppercase;padding:3rem 0;">Sin categorías disponibles</p>
+  <p style="color:var(--tx-dim,#a3a3a3);font-family:'Oswald',sans-serif;letter-spacing:2px;text-transform:uppercase;padding:3rem 0;">Sin categorías disponibles</p>
 </div>
 <?php else : ?>
 <div class="hmb-cats-premium-wrap">

@@ -4,7 +4,8 @@
 
     python desplegar.py --solo-mirar     compara con el servidor, no toca nada
     python desplegar.py                  sube solo los ficheros distintos
-    python desplegar.py --solo ruta/    limita a ficheros que empiecen por ruta/
+    python desplegar.py --solo ruta/    limita a ficheros que empiecen por ruta/ (varias, separadas por comas)
+    python desplegar.py --lista f.txt   solo las rutas exactas del fichero (para no pisar trabajo de otras ramas)
 
 Como funciona (mismo espiritu que SociWeb/desplegar.py):
   1. Calcula sha256 local de src/ y templates/hmb y pide al servidor el de
@@ -86,10 +87,14 @@ def portada_ok():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--solo-mirar', action='store_true')
-    ap.add_argument('--solo', default='', help='prefijo de ruta a limitar')
+    ap.add_argument('--solo', default='', help='prefijos de ruta a limitar (separados por comas)')
+    ap.add_argument('--lista', default='', help='fichero de texto con las rutas exactas a desplegar (una por linea)')
     a = ap.parse_args()
 
-    locales = {r: p for r, p in c.ficheros_locales().items() if r.startswith(a.solo)}
+    prefijos = tuple(x.strip() for x in a.solo.split(',') if x.strip())
+    exactas = set(l.strip().replace(chr(92), '/') for l in open(a.lista, encoding='utf-8') if l.strip()) if a.lista else None
+    locales = {r: p for r, p in c.ficheros_locales().items()
+               if (not prefijos or r.startswith(prefijos)) and (exactas is None or r in exactas)}
     print('Locales: %d ficheros. Comparando con el servidor...' % len(locales))
     nuevos, distintos = comparar(locales)
 

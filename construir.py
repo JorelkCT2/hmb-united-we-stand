@@ -17,6 +17,7 @@ desplegar.py, que copia ficheros a las mismas rutas.
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import zipfile
@@ -46,6 +47,46 @@ def validar():
                         ET.parse(ruta)
                     except ET.ParseError as e:
                         errores.append('%s: %s' % (ruta, e))
+
+    errores += guardas_template()
+
+    return errores
+
+
+def guardas_template():
+    """Reglas que ya nos han roto la web: se comprueban en cada validacion."""
+    errores = []
+
+    # El panel flotante ACCESO lo gobierna solo templates/hmb/js/template.js.
+    # Un segundo manejador (onclick=, addEventListener...) abre y cierra a la vez y el boton "muere".
+    ligas = ('hmb-float-tab', 'hmb-float-panel')
+    donde = []
+
+    for base, _p in c.ORIGENES:
+        for dirpath, _d, nombres in os.walk(base):
+            for n in nombres:
+                if not n.endswith(('.php', '.js')):
+                    continue
+
+                ruta = os.path.join(dirpath, n)
+                txt = open(ruta, encoding='utf-8', errors='ignore').read()
+
+                if re.search(r"(getElementById|querySelector)\(\s*['\"]#?hmb-float-(tab|panel)", txt):
+                    donde.append(ruta.replace(chr(92), '/'))
+
+    permitidos = [d for d in donde if d.endswith('templates/hmb/js/template.js')]
+    sobran = [d for d in donde if d not in permitidos]
+
+    if len(permitidos) != 1 or sobran:
+        errores.append('Panel flotante ACCESO: debe manejarse SOLO en templates/hmb/js/template.js; tambien aparece en: '
+                       + ', '.join(sobran or ['(falta template.js)']))
+
+    # hmb-metal.css debe cargarse el ultimo en el template.
+    idx = open(os.path.join(c.RAIZ, 'templates', 'hmb', 'index.php'), encoding='utf-8', errors='ignore').read()
+    css = [x for x in ('hmb-base.css', 'hmb-layout.css', 'hmb-modules.css', 'hmb-components.css', 'hmb-metal.css') if x in idx]
+
+    if css and css[-1] != 'hmb-metal.css':
+        errores.append('hmb-metal.css debe ser la ultima hoja de estilos cargada en index.php')
 
     return errores
 

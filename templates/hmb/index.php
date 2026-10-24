@@ -400,17 +400,7 @@ if ($isHome) $bodyClasses .= ' home';
 </script>
 <script>
 (function(){
-  var ftab=document.getElementById('hmb-float-tab');
-  var fpan=document.getElementById('hmb-float-panel');
-  if(ftab&&fpan){
-    ftab.onclick=function(){fpan.classList.toggle('is-open');};
-    var fc=document.getElementById('hmb-float-close');
-    if(fc)fc.onclick=function(){fpan.classList.remove('is-open');};
-    document.addEventListener('click',function(e){
-      var w=document.getElementById('hmb-float-login');
-      if(w&&!w.contains(e.target))fpan.classList.remove('is-open');
-    });
-  }
+  /* El panel flotante de acceso lo gobierna SOLO js/template.js (un unico manejador: dos manejadores lo abrian y cerraban a la vez). */
   (function(){
     var articles=document.querySelectorAll('.com-content-article,.com-content-article__body,.article-body,.item-page');
     articles.forEach(function(art){

@@ -12,7 +12,21 @@ class HtmlView extends BaseHtmlView
 
     public function display($tpl = null): void
     {
-        $this->items = $this->getModel()->getItems();
+        // Un mismo cartel sirve para toda una gira: se muestra una sola vez, con el numero de fechas
+        $unicos = [];
+
+        foreach ((array) $this->getModel()->getItems() as $it) {
+            $k = (string) $it->poster_url;
+
+            if (!isset($unicos[$k])) {
+                $it->n_fechas = 1;
+                $unicos[$k]   = $it;
+            } else {
+                $unicos[$k]->n_fechas++;
+            }
+        }
+
+        $this->items = array_values($unicos);
         Factory::getApplication()->getDocument()->setTitle('Carteles de Conciertos');
         parent::display($tpl);
     }

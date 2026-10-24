@@ -11,4 +11,12 @@
         <field name="default_country" type="text" label="País por defecto (código ISO 2 letras)"
                default="ES" size="5" class="form-control" />
     </fieldset>
+    <fieldset name="fuentes" label="Actualización automática">
+        <field name="ticketmaster_key" type="text" label="Clave de la API de Ticketmaster" size="60" class="form-control"
+               description="Gratuita: developer.ticketmaster.com → Get your API key. Sirve para la fuente «Ticketmaster»." filter="raw" />
+        <field name="cron_key" type="text" label="Clave de la tarea programada" size="40" class="form-control"
+               description="Cualquier texto largo y secreto. Con él se arma la dirección que el hosting abre cada día para actualizar la agenda." filter="raw" />
+        <field name="contacto" type="text" label="Email de contacto (se envía a OpenStreetMap al situar ciudades)"
+               default="info@heavymetalbrothers.com" size="40" class="form-control" />
+    </fieldset>
 </config>

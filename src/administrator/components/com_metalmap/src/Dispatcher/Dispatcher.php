@@ -19,4 +19,15 @@ final class Dispatcher extends ComponentDispatcher
             throw new \Joomla\CMS\Access\Exception\NotAllowed(\Joomla\CMS\Language\Text::_('JERROR_ALERTNOAUTHOR'), 403);
         }
     }
+
+    /**
+     * El mapa se alimenta ahora de la agenda unificada (#__concerts): la edicion de festivales y
+     * conciertos se hace alli. Cualquier pantalla de este componente redirige a la nueva.
+     */
+    public function dispatch()
+    {
+        $this->checkAccess();
+        $this->app->enqueueMessage('El mapa de conciertos se alimenta ahora de la Agenda: aquí editas, importas y actualizas conciertos y festivales en un solo sitio.', 'info');
+        $this->app->redirect(\Joomla\CMS\Router\Route::_('index.php?option=com_concerts&view=concerts', false));
+    }
 }

@@ -21,42 +21,44 @@ final class MapModel extends ListModel
         parent::__construct($config);
     }
 
+    /**
+     * La fuente unica de eventos es #__concerts (agenda): conciertos y festivales con coordenadas.
+     * #__metalmap_events queda solo como copia historica (se migro entera a #__concerts).
+     */
     protected function getListQuery()
     {
         $db    = $this->getDatabase();
         $query = $db->getQuery(true)
             ->select([
                 $db->quoteName('a.id'),
-                $db->quoteName('a.name'),
+                $db->quoteName('a.title', 'name'),
                 $db->quoteName('a.alias'),
                 $db->quoteName('a.event_type'),
                 $db->quoteName('a.description'),
-                $db->quoteName('a.start_date'),
-                $db->quoteName('a.end_date'),
+                $db->quoteName('a.date_start', 'start_date'),
+                $db->quoteName('a.date_end', 'end_date'),
                 $db->quoteName('a.city'),
-                $db->quoteName('a.country'),
+                $db->quoteName('a.country_name', 'country'),
                 $db->quoteName('a.country_code'),
                 $db->quoteName('a.latitude'),
                 $db->quoteName('a.longitude'),
-                $db->quoteName('a.website'),
-                $db->quoteName('a.image'),
-                $db->quoteName('a.bands'),
+                'COALESCE(NULLIF(a.website_url, ' . $db->quote('') . '), a.ticket_url) AS ' . $db->quoteName('website'),
+                $db->quoteName('a.poster_url', 'image'),
+                'COALESCE(NULLIF(a.lineup, ' . $db->quote('') . '), CONCAT_WS(' . $db->quote(', ') . ', NULLIF(a.band, ' . $db->quote('') . '), NULLIF(a.support_bands, ' . $db->quote('') . '))) AS ' . $db->quoteName('bands'),
             ])
-            ->from($db->quoteName('#__metalmap_events', 'a'))
+            ->from($db->quoteName('#__concerts', 'a'))
             ->where($db->quoteName('a.state') . ' = 1')
+            ->where($db->quoteName('a.latitude') . ' IS NOT NULL')
             ->where($db->quoteName('a.latitude') . ' <> 0')
             ->where($db->quoteName('a.longitude') . ' <> 0');
 
         // Solo eventos futuros si está activado en la config
         $params = \Joomla\CMS\Component\ComponentHelper::getParams('com_metalmap');
         if ((int) $params->get('show_only_future', 0) === 1) {
-            $today = (new \DateTime('today'))->format('Y-m-d');
-            $query->where('(' . $db->quoteName('a.end_date') . ' IS NULL OR ' . $db->quoteName('a.end_date') . ' >= :today OR ' . $db->quoteName('a.start_date') . ' >= :today2)')
-                  ->bind(':today', $today)
-                  ->bind(':today2', $today);
+            $query->where('COALESCE(a.date_end, a.date_start) >= CURDATE()');
         }
 
-        $query->order($db->quoteName('a.start_date') . ' ASC');
+        $query->order($db->quoteName('a.date_start') . ' ASC');
 
         return $query;
     }

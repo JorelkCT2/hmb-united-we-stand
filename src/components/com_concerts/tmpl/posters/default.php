@@ -33,7 +33,9 @@ function pflag(string $c): string {
 <?php else: ?>
 <div class="cc-grid">
 <?php foreach ($this->items as $c):
-    $ps  = htmlspecialchars($c->poster_url ?? '');
+    $psr = trim((string) ($c->poster_url ?? ''));
+    if ($psr !== '' && !preg_match('#^https?://#i', $psr)) $psr = Uri::root() . ltrim($psr, '/');
+    $ps  = htmlspecialchars($psr);
     $det = 'index.php?option=com_concerts&view=concert&id='.$c->id.($itemId?'&Itemid='.$itemId:'');
     $fl  = pflag($c->country_code);
     $ts  = strtotime($c->date_start);
@@ -55,7 +57,7 @@ function pflag(string $c): string {
     <div class="cc-poster-overlay">
         <span class="cc-poster-band"><?= $fl ?> <?= htmlspecialchars($c->title ?: $c->band) ?></span>
         <span class="cc-poster-date"><?= $dlbl ?></span>
-        <span class="cc-poster-city"><?= htmlspecialchars($c->city) ?></span>
+        <span class="cc-poster-city"><?= htmlspecialchars($c->city) ?><?= ($c->n_fechas ?? 1) > 1 ? ' · ' . (int) $c->n_fechas . ' fechas' : '' ?></span>
     </div>
 </a>
 <?php endforeach; ?>

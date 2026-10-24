@@ -267,3 +267,5 @@
 .cc2 .cc2-month__h small{color:var(--grey-8,#888)!important}
 .cc2 .cc2-title{color:var(--white,#efefef)!important;text-shadow:0 0 30px rgba(204,34,0,.45)!important}
 .cc2 .cc2-empty h2{color:#fff!important}
+#cc2-tipo{background:var(--dark,#0a0a0a);color:var(--cc-text,#e8e8e8);border:1px solid var(--grey-3,#333);padding:.5rem .6rem;font:inherit;font-size:.9rem}
+.cc2-badge--fest{color:#fff;background:rgba(218,165,32,.22);border-color:var(--gold-light,#daa520)}

@@ -278,6 +278,29 @@ body.hmb-body::after {
   .hmb-footer::after, .hmb-footer .hmb-container::before, .hmb-footer .container::before { animation: none !important; }
 }
 
+/* ==========================================================================
+   7 · ACCESO en móvil: botón redondo abajo a la izquierda + panel tipo hoja inferior
+   (en escritorio se mantiene la pestaña lateral). El JS sigue siendo SOLO template.js.
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hmb-float-login { top: auto !important; right: auto !important; left: 14px; bottom: 18px; transform: none !important; z-index: 8600; }
+  .hmb-float-tab {
+    width: 52px; height: 52px; min-height: 0 !important; padding: 0 !important; border-radius: 50% !important;
+    flex-direction: row; justify-content: center; align-items: center;
+    border: 2px solid rgba(255, 255, 255, .18) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .7), 0 0 18px rgba(204, 34, 0, .55) !important;
+  }
+  .hmb-float-icon { font-size: 24px; }
+  .hmb-float-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .hmb-float-panel {
+    position: fixed !important; left: 10px !important; right: 10px !important; bottom: 82px !important; top: auto !important;
+    width: auto !important; max-width: none !important; max-height: calc(100vh - 110px); overflow-y: auto !important;
+    border: 1px solid #5c0000 !important; border-radius: 10px !important;
+    transform: translateY(18px) !important; box-shadow: 0 -10px 40px rgba(0, 0, 0, .85), 0 0 24px rgba(204, 34, 0, .3) !important;
+  }
+  .hmb-float-panel.is-open { transform: none !important; }
+}
+
 /* Movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

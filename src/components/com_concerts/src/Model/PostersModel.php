@@ -17,7 +17,8 @@ class PostersModel extends ConcertsModel
     protected function getListQuery()
     {
         $db = $this->getDatabase();
-        $q  = $db->getQuery(true)->select('a.*')->from('#__concerts a')->where('a.state = 1');
+        $q  = $db->getQuery(true)->select('a.*')->from('#__concerts a')->where('a.state = 1')
+            ->where("a.poster_url IS NOT NULL AND a.poster_url <> ''");
 
         $country = $this->getState('filter.country_code');
         if (!empty($country)) $q->where('a.country_code = ' . $db->q($country));

@@ -70,3 +70,44 @@ document.addEventListener('DOMContentLoaded', () => {
         s.addEventListener('change', () => s.closest('form').submit());
     });
 });
+
+/* ── Agenda v3: filtros en pantalla (búsqueda, provincia, mes) ── */
+document.addEventListener('DOMContentLoaded', () => {
+    const lista = document.getElementById('cc2-list');
+    if (!lista) return;
+    const q = document.getElementById('cc2-q'), prov = document.getElementById('cc2-prov');
+    const meses = document.getElementById('cc2-months'), cuenta = document.getElementById('cc2-count');
+    const ninguno = document.getElementById('cc2-none');
+    const evs = [...lista.querySelectorAll('.cc2-ev')];
+    let mes = '';
+    const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+    function aplicar() {
+        const t = norm(q.value.trim()), p = prov.value;
+        let n = 0;
+        evs.forEach(e => {
+            const ok = (!mes || e.dataset.mes === mes) && (!p || e.dataset.prov === p) && (!t || norm(e.dataset.q).includes(t));
+            e.hidden = !ok;
+            if (ok) n++;
+        });
+        lista.querySelectorAll('.cc2-month').forEach(s => { s.hidden = !s.querySelector('.cc2-ev:not([hidden])'); });
+        cuenta.textContent = n + ' concierto' + (n === 1 ? '' : 's');
+        if (ninguno) ninguno.hidden = n > 0;
+    }
+    q.addEventListener('input', aplicar);
+    prov.addEventListener('change', aplicar);
+    meses.addEventListener('click', e => {
+        const b = e.target.closest('button[data-mes]');
+        if (!b) return;
+        mes = b.dataset.mes;
+        meses.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+        aplicar();
+    });
+    const reset = document.getElementById('cc2-reset');
+    if (reset) reset.addEventListener('click', e => {
+        e.preventDefault(); q.value = ''; prov.value = ''; mes = '';
+        meses.querySelectorAll('button').forEach((x, i) => x.classList.toggle('on', i === 0));
+        aplicar();
+    });
+    aplicar();
+});

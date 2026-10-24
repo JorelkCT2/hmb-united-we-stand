@@ -23,8 +23,13 @@ class ConcertsModel extends ListModel
         $q   = $db->getQuery(true)->select('a.*')->from('#__concerts a')->where('a.state = 1');
 
         $params = $app->getParams('com_concerts');
-        if (!$params->get('show_past', 0)) {
-            $q->where('a.date_start >= CURDATE()');
+        $past   = $app->input->getInt('past', 0) === 1;
+        if ($past) {
+            // vista «celebrados»: solo los que ya terminaron
+            $q->where('COALESCE(a.date_end, a.date_start) < CURDATE()');
+        } elseif (!$params->get('show_past', 0)) {
+            // un festival de varios dias sigue en la agenda hasta que termina
+            $q->where('COALESCE(a.date_end, a.date_start) >= CURDATE()');
         }
         $country  = $this->getState('filter.country_code');
         if (!empty($country)) $q->where('a.country_code = ' . $db->q($country));
@@ -36,7 +41,7 @@ class ConcertsModel extends ListModel
         $to   = $this->getState('filter.date_to');
         if ($from) $q->where('a.date_start >= ' . $db->q($from));
         if ($to)   $q->where('a.date_start <= ' . $db->q($to));
-        $q->order('a.date_start ASC, a.concert_time ASC');
+        $q->order($past ? 'a.date_start DESC, a.concert_time ASC' : 'a.date_start ASC, a.concert_time ASC');
         return $q;
     }
 
@@ -49,6 +54,18 @@ class ConcertsModel extends ListModel
         $this->setState('filter.date_from',    $app->input->getString('date_from', ''));
         $this->setState('filter.date_to',      $app->input->getString('date_to', ''));
         parent::populateState($ordering, $direction);
+        // la agenda se muestra completa (con filtros en pantalla), no paginada de 20 en 20
+        $this->setState('list.limit', 500);
+        $this->setState('list.start', 0);
+    }
+
+    /** ¿Hay conciertos ya celebrados? (para ofrecer el enlace «ver celebrados») */
+    public function hayPasados(): bool
+    {
+        $db = $this->getDatabase();
+
+        return (int) $db->setQuery($db->getQuery(true)->select('COUNT(*)')->from('#__concerts')
+            ->where('state = 1')->where('COALESCE(date_end, date_start) < CURDATE()'))->loadResult() > 0;
     }
 
     /** All genres from mujg_artistas_generos for filter dropdown */

@@ -39,8 +39,8 @@ Todo vive en `src/plugins/system/hmb_seo/hmb_seo.php` (v2.0.0). Desplegado solo 
 
 ## 3. Pendientes (ordenados por impacto)
 
-1. **Aplicar `.htaccess`** (yo no pude escribir en el servidor con esa operación): añadir el contenido de [`htaccess-seo.conf`](htaccess-seo.conf) al final → gzip de CSS/JS/JSON y caché de 1 mes para CSS/JS/imágenes. Copia hecha en `tmp/hmb_backups/seo/.htaccess.bak` (la original sigue sin tocar). Verificar después con `curl -sI -H "Accept-Encoding: gzip" https://www.heavymetalbrothers.com/templates/hmb/css/hmb-metal.css`.
-2. **Retirar el sitemap viejo**: `rm clickandbuilds/HMBNEW/sitemap.xml sitemap.json sitemap_urlset.xsl` (copia en `tmp/hmb_backups/seo/`). Así `/sitemap.xml` pasa a ser el dinámico. Opcional: desactivar la tarea de JLSitemap que genera `HMBSiteMap.xml`.
+1. ~~Aplicar `.htaccess`~~ **Hecho (2026-11-01)**: gzip y caché de 30 días en CSS/JS/imágenes ([`htaccess-seo.conf`](htaccess-seo.conf)); copia previa en `tmp/hmb_backups/seo/.htaccess.bak`.
+2. ~~Retirar el sitemap viejo~~ **Hecho**: `/sitemap.xml` y `/sitemap-hmb.xml` sirven ahora el sitemap dinámico (678 URL). Copia del viejo en `tmp/hmb_backups/seo/`. Opcional: desactivar la tarea de JLSitemap que genera `HMBSiteMap.xml`.
 3. **Plantilla** (rama `template`, no la toqué para no pisarla): quitar uno de los dos códigos de analítica (GTM `GTM-NR9JTB73` y gtag `G-XXP1DXHHLN` están ambos), `width/height` en imágenes, `fetchpriority="high"` + sin lazy en la primera imagen del slider (LCP), reducir a 2–3 familias de fuentes (hay 5) y servirlas en local.
 4. **Hotlinks** de imágenes de noticias (YouTube/Amazon/fbcdn/gstatic): descargarlas a `images/` al importar la noticia (cambio en `hmbnews`/BD → proponer antes de ejecutar). Las de fbcdn caducan y dejan la noticia sin imagen en Google.
 5. **WebP**: convertir `images/` pesadas (galería 281 imágenes, obituarios 122) — necesita script y copia previa.

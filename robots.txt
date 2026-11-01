@@ -27,3 +27,13 @@ Disallow: /logs/
 Disallow: /modules/
 Disallow: /plugins/
 Disallow: /tmp/
+
+# Fichas en ventana modal, filtros, búsquedas y acciones: sin valor para el buscador
+Disallow: /*hmbmodal=
+Disallow: /*?*search=
+Disallow: /*?*genero=
+Disallow: /*?*task=
+Disallow: /component/users/
+Disallow: /component/finder/
+
+Sitemap: https://www.heavymetalbrothers.com/sitemap-hmb.xml

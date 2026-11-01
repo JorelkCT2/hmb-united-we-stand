@@ -145,6 +145,26 @@ class PlgSystemHmb_seo extends CMSPlugin
         $query = array_intersect_key($uri->getQuery(true), array_flip($keep));
         $url   = self::SITE . $uri->getPath();
 
+        // Fichas de banda/músico: una sola URL canónica (la del archivo), aunque cuelguen de otras rutas de menú
+        $in0 = $app->getInput();
+
+        if ($in0->get('option') === 'com_efemerides' && in_array($in0->get('view'), ['banda', 'musico'], true) && $in0->getInt('id', 0)) {
+            try {
+                $db0 = Factory::getContainer()->get('DatabaseDriver');
+                $list = $in0->get('view') === 'banda' ? 'bandas' : 'musicos';
+                $db0->setQuery("SELECT id FROM #__menu WHERE published = 1 AND client_id = 0 AND access = 1 AND link LIKE "
+                    . $db0->quote('index.php?option=com_efemerides&view=' . $list . '%') . ' ORDER BY id LIMIT 1');
+                $mid = (int) $db0->loadResult();
+
+                if ($mid) {
+                    $base  = strtok(html_entity_decode(Route::_('index.php?Itemid=' . $mid)), '?');
+                    $query = ['view' => $in0->get('view'), 'id' => $in0->getInt('id', 0)];
+                    $url   = $this->abs($base);
+                }
+            } catch (\Throwable $e) {
+            }
+        }
+
         if ($query) {
             $url .= '?' . http_build_query($query);
         }

@@ -76,7 +76,7 @@ if ($itemId <= 0) {
 
 $rawUrl = 'index.php?option=com_concerts&view=concert&id=' . $concert->id
         . ($itemId ? '&Itemid=' . $itemId : '');
-$concert->detailUrl = Route::_($rawUrl);
+$concert->detailUrl = Route::_($rawUrl, false); // sin escapar: la plantilla ya aplica htmlspecialchars
 
 $concert->icsUrl = Route::_('index.php?option=com_concerts&task=display.ics&id=' . $concert->id);
 

@@ -643,25 +643,28 @@ class PlgSystemHmb_seo extends CMSPlugin
                     'organizer' => ['@id' => $orgId],
                 ];
 
-                if ($c->date_end && $c->date_end > $c->date_start) {
-                    $ev['endDate'] = substr((string) $c->date_end, 0, 10);
-                }
+                // endDate: la de la BD o, si es de un solo día, el mismo día de inicio
+                $ev['endDate'] = ($c->date_end && $c->date_end > $c->date_start) ? substr((string) $c->date_end, 0, 10) : substr((string) $c->date_start, 0, 10);
 
-                if ($c->poster_url) {
-                    $ev['image'] = [$this->abs($c->poster_url)];
-                }
+                // image: el cartel o, si no hay, el logo de la web
+                $ev['image'] = [$this->abs($c->poster_url ?: 'images/calaverasIA3.png')];
 
-                if ($c->description) {
-                    $ev['description'] = $this->clean($c->description, 300);
-                }
+                // description: la del concierto o la generada para la meta description
+                $ev['description'] = $c->description ? $this->clean($c->description, 300)
+                    : $this->clean((string) $doc->getDescription(), 300);
 
                 if ($c->band) {
                     $ev['performer'] = [['@type' => 'MusicGroup', 'name' => $c->band]];
                 }
 
-                if ($c->ticket_url) {
-                    $ev['offers'] = ['@type' => 'Offer', 'url' => $c->ticket_url, 'availability' => 'https://schema.org/InStock'];
+                // offers: enlace de entradas si lo hay; si no, la propia ficha. Precio solo si el texto de precios trae una cifra.
+                $offer = ['@type' => 'Offer', 'url' => $c->ticket_url ?: $canon, 'availability' => 'https://schema.org/InStock', 'priceCurrency' => 'EUR'];
+
+                if (!empty($c->prices) && preg_match('/\d+(?:[.,]\d+)?/', (string) $c->prices, $pm)) {
+                    $offer['price'] = str_replace(',', '.', $pm[0]);
                 }
+
+                $ev['offers'] = $offer;
 
                 $graph[] = $ev;
             }

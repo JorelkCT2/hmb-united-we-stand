@@ -637,8 +637,31 @@ final class SyncHelper
             $match       = max(self::parecido($e['title'], (string) $c->title), self::parecido($e['title'], (string) $c->band));
 
             if (!$match) {
-                // el titular puede figurar en el cartel de un festival ya guardado
-                $match = (strlen(self::norm($e['title'])) >= 5 && strpos(self::norm($lineup), self::norm($e['title'])) !== false && $c->event_type === 'festival') ? 0.8 : 0;
+                // otra fuente puede dar el mismo cartel con otro orden o con mas/menos bandas («A + B» frente a «B»):
+                // vale que alguna banda de uno figure en el cartel del otro, el mismo dia y ciudad
+                $enCartel = ' ' . self::norm($lineup . ' ' . $c->band) . ' ';
+
+                foreach (array_merge([$e['title']], (array) ($e['bands'] ?? [])) as $b) {
+                    $nb = self::norm((string) $b);
+
+                    if (strlen($nb) >= 5 && strpos($enCartel, ' ' . $nb . ' ') !== false) {
+                        $match = 0.8;
+                        break;
+                    }
+                }
+
+                if (!$match) {
+                    $entrada = ' ' . self::norm($e['title'] . ' ' . implode(' ', (array) ($e['bands'] ?? []))) . ' ';
+
+                    foreach ([(string) $c->band, (string) $c->title] as $cb) {
+                        $nc = self::norm($cb);
+
+                        if (strlen($nc) >= 5 && strpos($entrada, ' ' . $nc . ' ') !== false) {
+                            $match = 0.8;
+                            break;
+                        }
+                    }
+                }
             }
 
             if ($mismaCiudad && $match >= 0.6) {
@@ -1059,6 +1082,15 @@ final class SyncHelper
         foreach ($eventos as $e) {
             $res['leidos']++;
             $e['title'] = trim(html_entity_decode((string) ($e['title'] ?? ''), ENT_QUOTES, 'UTF-8'));
+
+            // webs de una sola sala: la ciudad y el nombre de la sala son los de la fuente (muchas dan la direccion o el horario como «lugar»)
+            if (!empty($p['ciudad'])) {
+                $e['city'] = (string) $p['ciudad'];
+            }
+
+            if (!empty($p['sala'])) {
+                $e['venue'] = (string) $p['sala'];
+            }
 
             if ($e['title'] === '' || empty($e['date_start']) || ($e['date_end'] ?? $e['date_start']) < $hoy) {
                 continue; // sin datos o ya pasado

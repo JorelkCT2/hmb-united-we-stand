@@ -57,6 +57,8 @@ class SourcesController extends BaseController
             'max_paginas' => $in->getInt('p_max', 0) ?: null,
             'solo_pais'   => strtoupper(substr($in->getString('p_solo', ''), 0, 2)),
             'palabras'    => $in->getString('p_palabras', ''),
+            'ciudad'      => trim($in->getString('p_ciudad', '')),
+            'sala'        => trim($in->getString('p_sala', '')),
         ], fn($v) => $v !== '' && $v !== null);
         $params['filtro_metal'] = $in->getInt('p_filtro', 0) ? 1 : 0;
 

@@ -89,6 +89,8 @@ $st = $this->stats;
                 <div class="col-md-6"><label class="form-label">Seguir enlaces que contengan… (listados sin datos propios)</label><input class="form-control" name="p_seguir" placeholder="/evento/|/concierto/"></div>
                 <div class="col-md-3"><label class="form-label">Solo eventos de (país)</label><input class="form-control" name="p_solo" maxlength="2" placeholder="ES"></div>
                 <div class="col-md-6"><label class="form-label">Palabras de estilo extra (opcional)</label><input class="form-control" name="p_palabras" placeholder="folk metal, gothic, nwobhm"></div>
+                <div class="col-md-3"><label class="form-label">Ciudad fija (web de una sala)</label><input class="form-control" name="p_ciudad" placeholder="Madrid"></div>
+                <div class="col-md-3"><label class="form-label">Sala fija (si la web la da mal)</label><input class="form-control" name="p_sala" placeholder="La Riviera"></div>
                 <div class="col-md-3 d-flex align-items-end"><div class="form-check"><input class="form-check-input" type="checkbox" name="p_filtro" value="1" id="pf" checked><label class="form-check-label" for="pf">Solo metal / rock duro (webs generalistas)</label></div></div>
                 <div class="col-md-3 d-flex align-items-end"><div class="form-check"><input class="form-check-input" type="checkbox" name="auto_publish" value="1" id="ap"><label class="form-check-label" for="ap">Publicar automáticamente lo nuevo</label></div></div>
                 <div class="col-12"><button class="btn btn-success">Guardar fuente</button>

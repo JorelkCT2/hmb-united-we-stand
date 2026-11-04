@@ -138,6 +138,11 @@ final class SyncHelper
             return null;
         }
 
+        // «2026-11-6T22:00+0:00»: el dia es el escrito, sin convertir la zona horaria (si no, 23:59+0:00 pasa al dia siguiente)
+        if (preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})(?!\d)/', $s, $m) && checkdate((int) $m[2], (int) $m[3], (int) $m[1])) {
+            return sprintf('%04d-%02d-%02d', (int) $m[1], (int) $m[2], (int) $m[3]);
+        }
+
         foreach (['Y-m-d', 'd/m/Y', 'd-m-Y', 'Y/m/d', 'Ymd'] as $f) {
             $d = \DateTime::createFromFormat($f, substr($s, 0, strlen(date($f))));
 
@@ -308,7 +313,7 @@ final class SyncHelper
             'bands'        => $perf,
             'date_start'   => $f1,
             'date_end'     => ($f2 && $f2 > $f1) ? $f2 : null,
-            'time'         => self::hora(substr((string) $n['startDate'], 11, 5)),
+            'time'         => self::hora(preg_match('/[T ](\d{1,2}:\d{2})/', (string) $n['startDate'], $th) ? $th[1] : ''),
             'venue'        => (string) ($loc['name'] ?? ''),
             'city'         => (string) ($dir['addressLocality'] ?? ''),
             'province'     => (string) ($dir['addressRegion'] ?? ''),
@@ -706,6 +711,17 @@ final class SyncHelper
 
             if (!empty($e['date_end']) && empty($dup->date_end)) {
                 $cambios['date_end'] = $e['date_end'];
+            }
+
+            // un evento de esta misma fuente que nadie ha revisado aun se corrige con lo que dice la fuente (fin y hora)
+            if ((int) $dup->state === 0 && !empty($e['ref']) && $dup->source_ref === $e['ref']) {
+                if (($e['date_end'] ?? null) !== ($dup->date_end ?: null)) {
+                    $cambios['date_end'] = $e['date_end'] ?? null;
+                }
+
+                if (!empty($e['time']) && $e['time'] !== substr((string) $dup->concert_time, 0, 5)) {
+                    $cambios['concert_time'] = $e['time'];
+                }
             }
 
             if ($bands && empty($dup->lineup) && count($bands) > 1) {

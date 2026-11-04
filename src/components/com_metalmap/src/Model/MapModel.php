@@ -37,6 +37,7 @@ final class MapModel extends ListModel
                 $db->quoteName('a.description'),
                 $db->quoteName('a.date_start', 'start_date'),
                 $db->quoteName('a.date_end', 'end_date'),
+                $db->quoteName('a.venue'),
                 $db->quoteName('a.city'),
                 $db->quoteName('a.country_name', 'country'),
                 $db->quoteName('a.country_code'),
@@ -121,8 +122,17 @@ final class MapModel extends ListModel
                 }
             }
 
+            // los carteles propios pueden guardarse como ruta relativa (images/AGENDA/...)
+            $poster = trim((string) $item->image);
+
+            if ($poster !== '' && !preg_match('#^https?://#i', $poster)) {
+                $poster = \Joomla\CMS\Uri\Uri::root() . ltrim($poster, '/');
+            }
+
             $data[] = [
                 'id'           => (int) $item->id,
+                'venue'        => trim((string) $item->venue),
+                'poster'       => $poster,
                 'name'         => $item->name,
                 'type'         => $item->event_type,
                 'description'  => strip_tags((string) $item->description),

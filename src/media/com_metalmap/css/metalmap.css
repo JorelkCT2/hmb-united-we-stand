@@ -404,6 +404,64 @@
 .mm-popup__row span {
     color: var(--mm-text);
 }
+/* Cartel en el popup: miniatura que abre el visor a pantalla completa */
+.mm-popup__poster {
+    position: relative;
+    display: block;
+    margin: 0 0 .7rem;
+    border: 1px solid var(--mm-red-dark);
+    background: var(--mm-black);
+    overflow: hidden;
+    text-decoration: none !important;
+}
+.mm-popup__poster img {
+    display: block;
+    width: 100%;
+    max-height: 190px;
+    object-fit: cover;
+    object-position: top;
+}
+.mm-popup__poster span {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: .25rem .6rem;
+    background: rgba(0, 0, 0, .8);
+    color: var(--mm-white);
+    font-family: var(--mm-font-display);
+    font-size: .65rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+.mm-popup__poster:hover span {
+    background: var(--mm-red-bright);
+}
+.mm-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .9);
+    cursor: zoom-out;
+}
+.mm-lightbox img {
+    max-width: 94vw;
+    max-height: 92vh;
+    box-shadow: 0 0 40px rgba(0, 0, 0, .8);
+}
+.mm-lightbox button {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: 0;
+    color: #fff;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
 .mm-popup__desc {
     font-size: .82rem;
     color: var(--mm-text-muted);

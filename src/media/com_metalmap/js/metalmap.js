@@ -137,7 +137,13 @@
                 ? `<img class="mm-popup__flag" src="${flagUrl(ev.country_code)}" alt="${escapeHtml(ev.country)}" onerror="this.style.display='none'">`
                 : '';
             const dates = dateRange(ev);
-            const where = [ev.city, ev.country].filter(Boolean).map(escapeHtml).join(', ');
+            // sala primero: «La Riviera, Madrid, España»
+            const where = [ev.venue, ev.city, ev.country].filter(Boolean).map(escapeHtml).join(', ');
+            const poster = ev.poster
+                ? `<a href="${escapeHtml(ev.poster)}" class="mm-popup__poster" data-mm-poster="${escapeHtml(ev.poster)}" title="Ver el cartel completo">`
+                  + `<img src="${escapeHtml(ev.poster)}" alt="Cartel de ${escapeHtml(ev.name)}" loading="lazy" onerror="this.parentNode.style.display='none'">`
+                  + `<span>🔍 Ver cartel</span></a>`
+                : '';
             const desc  = ev.description ? `<div class="mm-popup__desc">${escapeHtml(ev.description.substring(0, 200))}${ev.description.length > 200 ? '…' : ''}</div>` : '';
 
             // ─── Bandas: usar bands_list si existe (con enlaces a com_efemerides) ───
@@ -183,6 +189,7 @@
                         ${status}
                     </div>
                     <div class="mm-popup__body">
+                        ${poster}
                         ${dates ? `<div class="mm-popup__row"><strong>${escapeHtml(labels.when || 'Cuándo')}:</strong><span>${escapeHtml(dates)}</span></div>` : ''}
                         ${where ? `<div class="mm-popup__row"><strong>${escapeHtml(labels.where || 'Dónde')}:</strong><span>${where}</span></div>` : ''}
                         ${bandsHtml}
@@ -204,6 +211,26 @@
                 popupAnchor: [0, -16]
             });
         };
+
+        /* ── VISOR DEL CARTEL ───────────────────────────────────── */
+        const closePoster = () => {
+            const box = document.querySelector('.mm-lightbox');
+            if (box) box.remove();
+        };
+        document.addEventListener('click', (e) => {
+            const a = e.target.closest && e.target.closest('[data-mm-poster]');
+            if (a) {
+                e.preventDefault();
+                closePoster();
+                const box = document.createElement('div');
+                box.className = 'mm-lightbox';
+                box.innerHTML = `<img src="${escapeHtml(a.getAttribute('data-mm-poster'))}" alt="Cartel"><button type="button" aria-label="Cerrar">✕</button>`;
+                document.body.appendChild(box);
+                return;
+            }
+            if (e.target.closest && e.target.closest('.mm-lightbox')) closePoster();
+        });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePoster(); });
 
         /* ── MARKERS ────────────────────────────────────────────── */
         const markers = [];

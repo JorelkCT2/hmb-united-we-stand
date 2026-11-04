@@ -838,7 +838,14 @@ final class SyncHelper
             $f->estado = 'fail';
         }
 
-        $db->insertObject('#__hmb_geocache', $f);
+        try {
+            $db->insertObject('#__hmb_geocache', $f);
+        } catch (\Throwable $ex) {
+            // otro proceso (cron, boton «Leer») geocodifico la misma ciudad mientras esperabamos a Nominatim: vale el que llego primero
+            if (stripos($ex->getMessage(), 'Duplicate') === false) {
+                throw $ex;
+            }
+        }
 
         return $f->estado === 'ok' ? ['lat' => $f->lat, 'lng' => $f->lng, 'provincia' => $f->provincia] : null;
     }

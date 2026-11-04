@@ -25,6 +25,7 @@ final class SyncHelper
 
     public const TIPOS_FUENTE = [
         'ticketmaster' => 'Ticketmaster (API oficial)',
+        'madnesslive'  => 'Madness Live (listado de entradas, madnesslive.es)',
         'jsonld'       => 'Web con datos estructurados (JSON-LD / schema.org)',
         'ics'          => 'Calendario iCal (.ics)',
         'csvurl'       => 'CSV publicado en una dirección web',
@@ -419,6 +420,102 @@ final class SyncHelper
             }
 
             usleep(300000);
+        }
+
+        return $out;
+    }
+
+    /**
+     * Promotora Madness Live (PrestaShop, sin schema.org): cada concierto es una ficha del listado de entradas
+     * con fecha, sala, direccion y puertas en el texto corto. Todo su catalogo es rock/metal, no se filtra.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public static function leerMadnessLive(string $html): array
+    {
+        $meses = ['enero' => 1, 'febrero' => 2, 'marzo' => 3, 'abril' => 4, 'mayo' => 5, 'junio' => 6, 'julio' => 7,
+            'agosto' => 8, 'septiembre' => 9, 'setiembre' => 9, 'octubre' => 10, 'noviembre' => 11, 'diciembre' => 12];
+        $out = [];
+
+        if (!preg_match_all('#<article\b.*?</article>#is', $html, $cards)) {
+            return [];
+        }
+
+        foreach ($cards[0] as $c) {
+            if (!preg_match('#product-title"[^>]*>\s*<a href="([^"]+)"[^>]*>(.*?)</a>#is', $c, $t)
+                || !preg_match('#product-description-short">(.*?)</div>#is', $c, $d)) {
+                continue;
+            }
+
+            $url    = html_entity_decode($t[1], ENT_QUOTES, 'UTF-8');
+            $titulo = trim(html_entity_decode(strip_tags($t[2]), ENT_QUOTES, 'UTF-8'));
+            $txt    = html_entity_decode(strip_tags(preg_replace('#<br\s*/?>#i', "\n", $d[1])), ENT_QUOTES, 'UTF-8');
+            $txt    = str_replace("\xC2\xA0", ' ', $txt);
+            $lineas = array_values(array_filter(array_map('trim', explode("\n", $txt)), 'strlen'));
+
+            // variantes de entrada de un mismo evento (menores, movilidad reducida...): se queda solo la entrada general
+            if (preg_match('/^(?:menores|abono\s+(?:persona|acompa))/iu', $titulo)) {
+                continue;
+            }
+
+            // «5 de noviembre 2026», «24 y 25 de septiembre 2027», «2, 3 & 4 Julio 2027»
+            if (!preg_match('/(\d{1,2})((?:\s*(?:,|y|&|al|-|a)\s*\d{1,2})*)\s+(?:de\s+)?([[:alpha:]]+)(?:\s+de)?\s+(\d{4})/iu', $txt, $f)
+                || !isset($meses[self::norm($f[3])])) {
+                continue; // sin fecha legible
+            }
+
+            $mes   = $meses[self::norm($f[3])];
+            $ini   = sprintf('%04d-%02d-%02d', (int) $f[4], $mes, (int) $f[1]);
+            $fin   = preg_match_all('/\d{1,2}/', $f[2], $dias) ? sprintf('%04d-%02d-%02d', (int) $f[4], $mes, (int) end($dias[0])) : null;
+            $venue = '';
+            $dir   = '';
+
+            foreach ($lineas as $l) {
+                if (stripos($l, 'puertas') === 0 || strpos($l, $f[0]) !== false) {
+                    continue;
+                }
+
+                if (preg_match('/^(.*?)\s*\((.*)\)\s*$/u', $l, $v)) {
+                    $venue = trim($v[1]);
+                    $dir   = trim($v[2]);
+                } else {
+                    $venue = $l;
+                }
+
+                break;
+            }
+
+            // la ciudad va en el titulo, «Banda + Banda (Sevilla)»; la categoria a veces es una region o el nombre del festival
+            $cat    = preg_match('#product-category-name[^>]*>\s*(?:Conciertos en\s+)?(.*?)\s*</div>#is', $c, $cc) ? trim(html_entity_decode(strip_tags($cc[1]), ENT_QUOTES, 'UTF-8')) : '';
+            $ciudad = preg_match('/\(([^()]+)\)\s*$/u', $titulo, $tc) ? trim($tc[1]) : $cat;
+            $nombre = trim(preg_replace('/^abono\s+/iu', '', preg_replace('/\s*\([^()]*\)\s*$/u', '', $titulo)));
+            $bandas = array_values(array_filter(array_map('trim', explode(' + ', $nombre)), 'strlen'));
+            $foto   = preg_match('#<img[^>]+(?:data-src|src)="([^"]+\.(?:jpe?g|png|webp)[^"]*)"#i', $c, $im) ? $im[1] : '';
+            $foto   = str_replace('home_default', 'large_default', html_entity_decode($foto, ENT_QUOTES, 'UTF-8'));
+            $precio = preg_match('#class="product-price"[^>]*content="([\d.,]+)"#i', $c, $pr) ? (rtrim(rtrim($pr[1], '0'), '.') . ' EUR') : '';
+
+            $out[] = [
+                'title'        => $bandas[0] ?? $nombre,
+                'bands'        => $bandas,
+                'date_start'   => $ini,
+                'date_end'     => $fin && $fin > $ini ? $fin : null,
+                'time'         => self::hora(implode(' ', preg_grep('/^puertas/i', $lineas))),
+                'venue'        => $venue,
+                'city'         => $ciudad,
+                'province'     => '',
+                'country_code' => 'ES',
+                'address'      => $dir,
+                'lat'          => null,
+                'lng'          => null,
+                'poster'       => $foto,
+                'ticket_url'   => $url,
+                'url'          => '',
+                'precio'       => $precio,
+                'description'  => '',
+                'cancelado'    => false,
+                'tipo'         => $fin && $fin > $ini ? 'festival' : 'concert',
+                'ref'          => 'ml:' . (preg_match('#/(\d+)-#', $url, $id) ? $id[1] : md5($url)),
+            ];
         }
 
         return $out;
@@ -874,6 +971,11 @@ final class SyncHelper
                 $eventos     = self::leerTicketmaster($p, $err);
                 break;
 
+            case 'madnesslive':
+                $r = self::http($src->url);
+                $r['code'] === 200 ? $eventos = self::leerMadnessLive($r['body']) : $err = 'HTTP ' . $r['code'] . ' ' . $r['err'];
+                break;
+
             case 'ics':
                 $r = self::http($src->url);
                 $r['code'] === 200 ? $eventos = self::leerIcs($r['body']) : $err = 'HTTP ' . $r['code'] . ' ' . $r['err'];
@@ -960,7 +1062,7 @@ final class SyncHelper
             }
 
             // fuentes generalistas: solo lo que parece metal / rock duro (Ticketmaster y CSV ya vienen filtrados)
-            $filtrar = $src->type === 'ticketmaster' ? !empty($p['filtro_metal']) : ($src->type !== 'csvurl' && ($p['filtro_metal'] ?? 1));
+            $filtrar = $src->type === 'ticketmaster' ? !empty($p['filtro_metal']) : (!in_array($src->type, ['csvurl', 'madnesslive'], true) && ($p['filtro_metal'] ?? 1));
 
             if ($filtrar && !self::esMetal($e, (string) ($p['palabras'] ?? ''))) {
                 $res['descartados'] = ($res['descartados'] ?? 0) + 1;

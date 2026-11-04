@@ -437,6 +437,15 @@ final class SyncHelper
             'agosto' => 8, 'septiembre' => 9, 'setiembre' => 9, 'octubre' => 10, 'noviembre' => 11, 'diciembre' => 12];
         $out = [];
 
+        // con «Accept: application/json» PrestaShop devuelve el listado dentro de un JSON
+        if (str_starts_with(ltrim($html), '{')) {
+            $j = json_decode($html, true);
+
+            if (is_array($j) && isset($j['rendered_products'])) {
+                $html = (string) $j['rendered_products'];
+            }
+        }
+
         if (!preg_match_all('#<article\b.*?</article>#is', $html, $cards)) {
             return [];
         }

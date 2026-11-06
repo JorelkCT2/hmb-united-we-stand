@@ -70,6 +70,13 @@ class ConcertTable extends Table
             $this->prices = json_encode($prices, JSON_UNESCAPED_UNICODE);
         }
 
+        // Fechas y horas opcionales: el formulario manda '' y MySQL no lo acepta en columnas DATE/TIME
+        foreach (['date_end', 'doors_time', 'concert_time'] as $c) {
+            if (trim((string) ($this->$c ?? '')) === '') {
+                $this->$c = null;
+            }
+        }
+
         // Coordenadas: vacio = sin situar (se geolocaliza solo); con valor = manual
         foreach (['latitude', 'longitude'] as $c) {
             $v = trim((string) ($this->$c ?? ''));

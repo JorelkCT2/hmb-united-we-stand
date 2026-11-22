@@ -836,6 +836,13 @@ class PlgSystemHmb_seo extends CMSPlugin
             $menuByComp[$key] = strtok($loc, '?');
         }
 
+        // Páginas de entrada del Metal Quiz (/metal-quiz/<slug>): salen de TemasHelper, sin entradas de menú
+        if (isset($menuByComp['com_hmb_quiz|game']) && class_exists('Hmb\Component\Quiz\Site\Helper\TemasHelper')) {
+            foreach (array_keys(\Hmb\Component\Quiz\Site\Helper\TemasHelper::all()) as $slug) {
+                $add(rtrim($menuByComp['com_hmb_quiz|game'], '/') . '/' . $slug, null, 'monthly', '0.7');
+            }
+        }
+
         // Noticias y artículos
         $db->setQuery("SELECT c.id, c.alias, c.catid, GREATEST(c.created, IFNULL(c.modified, c.created), IFNULL(c.publish_up, c.created)) AS m FROM #__content AS c
             INNER JOIN #__categories AS k ON k.id = c.catid AND k.published = 1 AND k.access = 1

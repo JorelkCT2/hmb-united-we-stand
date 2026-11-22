@@ -92,4 +92,4 @@ Pendiente / siguientes pasos:
 2. MetalQuiz: páginas de entrada por tema ("test de metal", "quiz de Iron Maiden", "metal trivia"); "heavy metal quiz" está en posición ~25.
 3. Discover: imágenes de noticias de ≥1.200 px propias (hoy muchas son hotlinks pequeños) → ver §3.4.
 4. Noticias de giras y festivales con ciudad y fecha, incluyendo Latinoamérica.
-5. Search Console → Sitemaps: dejar solo `https://www.heavymetalbrothers.com/sitemap.xml` y quitar los otros dos. `HMBSiteMap.xml` reaparece en el servidor (lo regenera JLSitemap): desactivar su tarea/plugin en Joomla.
+5. ~~Search Console → Sitemaps~~ **Hecho (2026-11-22)**: quitados `https://heavymetalbrothers.com/HMBSiteMap.xml` y `https://heavymetalbrothers.com/sitemap.xml`; queda solo `https://www.heavymetalbrothers.com/sitemap.xml`. Desactivado el plugin **System - JLSitemap Cron** (el que regeneraba `HMBSiteMap.xml` en cada visita) y borrado el fichero regenerado (copia en `tmp/hmb_backups/seo/*.regen`). Si algún día se necesitara JLSitemap, reactivarlo y no enviar su sitemap.

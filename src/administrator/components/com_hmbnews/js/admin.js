@@ -59,7 +59,7 @@ window.hmbImportarSel=function(){
         log('['+k+'/'+sel.length+'] '+c.titulo.substring(0,70),'info');
         post('importarUna',{url:c.url,titulo:c.titulo,fuente:c.fuente,fecha:c.fecha,imagen:c.imagen,resumen:c.resumen,texto:c.texto,catid:cat,publicar:pub}).then(function(d){
             if(d.coste)coste+=d.coste;
-            if(d.success){ok++;hechas.push(c);log('  ✓ '+d.title.substring(0,70)+(d.imagen?'  (con imagen)':'  (sin imagen)'),'ok');if(d.hashtags)log('    '+d.hashtags,'info');}
+            if(d.success){ok++;hechas.push(c);log('  ✓ '+d.title.substring(0,70)+(d.imagen?'  (con imagen)':'  (sin imagen)'),'ok');if(d.hashtags)log('    '+d.hashtags,'info');if(!d.imagen)log('    ⚠ No se pudo descargar la imagen'+(d.imagen_origen?' ('+d.imagen_origen+')':'')+'. Sube una propia al artículo '+d.article_id+'.','err');}
             else log('  ✗ '+d.message,'err');
         }).catch(function(e){log('  ✗ Error de red: '+e.message,'err');}).finally(sig);
     }

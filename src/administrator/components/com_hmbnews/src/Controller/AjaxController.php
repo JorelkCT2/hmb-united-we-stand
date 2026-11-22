@@ -437,6 +437,11 @@ class AjaxController extends BaseController
             // Imagen real descargada a nuestro servidor (la de la pagina primero, luego la del feed)
             $slug   = FeedHelper::slug($tit);
             $imagen = FeedHelper::guardarImagen($pag['imagen'], $url, $slug) ?: FeedHelper::guardarImagen($imgFeed, $url, $slug);
+            $imgIntentada = trim((string) ($pag['imagen'] ?: $imgFeed));
+            if ($imagen === '') {
+                // Nunca se guarda la URL externa (caduca, no sirve para Discover): la noticia queda sin imagen y se avisa.
+                error_log('hmbnews: imagen no descargada para ' . $url . ' (origen: ' . $imgIntentada . ')');
+            }
 
             $alias  = $this->aliasUnico($slug);
             $now    = Factory::getDate()->toSql();
@@ -483,7 +488,7 @@ class AjaxController extends BaseController
 
             $this->jsonOut([
                 'success' => true, 'article_id' => $aid, 'title' => $tit, 'state' => $state,
-                'imagen' => $imagen !== '', 'coste' => $ia['coste'], 'tokens' => $ia['tokens'],
+                'imagen' => $imagen !== '', 'imagen_origen' => $imagen === '' ? $imgIntentada : '', 'coste' => $ia['coste'], 'tokens' => $ia['tokens'],
                 'hashtags' => FeedHelper::hashtags((string) ($d['etiquetas'] ?? '')),
             ]);
         } catch (\Throwable $e) {

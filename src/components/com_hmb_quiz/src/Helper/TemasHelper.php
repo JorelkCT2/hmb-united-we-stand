@@ -20,7 +20,7 @@ class TemasHelper
 				'h1'     => 'Test de metal para expertos',
 				'intro'  => [
 					'¿Te sabes de memoria los discos de Judas Priest, quién tocaba el bajo en la primera formación de Metallica o en qué ciudad nació cada banda de la NWOBHM? Este test de metal está pensado para quienes ya han superado el nivel básico y quieren una prueba a la altura.',
-					'En el Metal Quiz de Heavy Metal Brothers las preguntas salen de nuestra base de datos de bandas, músicos, discos y efemérides: nombres, años de formación, miembros y fechas que importan. Hay rachas, comodines y ranking para que cada partida cuente. Es gratis y puedes jugar sin registrarte.',
+					'En el Metal Quiz de Heavy Metal Brothers pones a prueba bandas, discos, años, miembros y efemérides, con rachas, comodines y ranking para que cada partida cuente. Es gratis y puedes jugar sin registrarte. Abajo tienes unas preguntas de ejemplo de nivel experto para calentar.',
 				],
 				'preguntas' => [
 					['¿Qué batería grabó «Reign in Blood» (1986) con Slayer?', 'Dave Lombardo'],
@@ -37,7 +37,7 @@ class TemasHelper
 				'h1'     => 'Quiz de Iron Maiden',
 				'intro'  => [
 					'Eddie, el bajo de Steve Harris, los galopes de guitarra, el «Scream for me»… Iron Maiden es una de las bandas que más fans de por vida ha generado en el heavy metal. Este quiz de Iron Maiden pone a prueba cuánto conoces de verdad a la Doncella de Hierro: discos, cantantes, canciones y años clave.',
-					'Entra en el Metal Quiz y elige las preguntas de heavy metal: las de Iron Maiden aparecen junto a las de Judas Priest, Saxon, Dio y el resto de la NWOBHM. Cada respuesta correcta suma puntos y racha, y puedes ver tu posición en el ranking.',
+					'Entra en el Metal Quiz y demuestra lo que sabes de heavy metal: bandas, discos, años y miembros. Cada respuesta correcta suma puntos y racha, y puedes ver tu posición en el ranking. Abajo tienes cuatro preguntas de ejemplo sobre Iron Maiden.',
 				],
 				'preguntas' => [
 					['¿Cómo se llama la mascota de Iron Maiden?', 'Eddie'],
@@ -54,7 +54,7 @@ class TemasHelper
 				'h1'     => 'Metal trivia: preguntas de heavy metal',
 				'intro'  => [
 					'Si buscas metal trivia en español, aquí tienes un juego de preguntas y respuestas sobre el género: bandas, discos, músicos, años de formación, países de origen y efemérides. Desde los gigantes del thrash hasta bandas de culto del metal extremo.',
-					'Cada ronda mezcla preguntas fáciles y difíciles, con comodines y rachas. Es el mismo Metal Quiz que usan miles de metaleros: gratis, sin instalar nada y desde el móvil. Abajo tienes unas preguntas de ejemplo para calentar y, si quieres, el enlace directo para empezar a jugar.',
+					'Cada ronda mezcla preguntas fáciles y difíciles, con comodines y rachas. Es el Metal Quiz de Heavy Metal Brothers: gratis, sin instalar nada y pensado para jugar desde el móvil. Abajo tienes unas preguntas de ejemplo para calentar y, si quieres, el enlace directo para empezar a jugar.',
 				],
 				'preguntas' => [
 					['¿Cómo se llamaba el cantante de Motörhead, fallecido en 2015?', 'Lemmy Kilmister'],
@@ -71,13 +71,13 @@ class TemasHelper
 				'h1'     => 'Quiz de heavy metal clásico',
 				'intro'  => [
 					'Del primer disco de Black Sabbath en 1970 a la explosión de la NWOBHM y el metal de los ochenta: el heavy metal clásico es la base de todo lo que vino después. Este quiz de heavy metal clásico repasa las bandas, los discos y los himnos que definieron el sonido.',
-					'Prueba con preguntas sobre Black Sabbath, Deep Purple, Judas Priest, Motörhead, Dio, Saxon o Accept y comprueba si conoces la historia como crees. Juegas gratis en el Metal Quiz, sin registrarte, y si te registras guardas tu racha y tus logros.',
+					'Aquí tienes unas preguntas de ejemplo sobre Black Sabbath, Deep Purple, Judas Priest y Motörhead para comprobar si conoces la historia como crees. Juegas gratis en el Metal Quiz, sin registrarte.',
 				],
 				'preguntas' => [
 					['¿En qué año publicó Black Sabbath su primer disco homónimo?', '1970'],
 					['¿Qué banda grabó «Smoke on the Water»?', 'Deep Purple'],
 					['¿Qué disco de Motörhead (1980) incluye «Ace of Spades»?', 'Ace of Spades'],
-					['¿Qué cantante lidera Judas Priest desde sus inicios clásicos?', 'Rob Halford'],
+					['¿Quién es el cantante de Judas Priest en «British Steel»?', 'Rob Halford'],
 				],
 				'bandas' => ['Black Sabbath', 'Deep Purple', 'Judas Priest', 'Motörhead', 'Dio', 'Saxon'],
 			],

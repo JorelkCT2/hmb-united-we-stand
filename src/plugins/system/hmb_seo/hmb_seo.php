@@ -10,6 +10,25 @@ class PlgSystemHmb_seo extends CMSPlugin
 {
     private const SITE = 'https://www.heavymetalbrothers.com';
 
+    private $quizSlug = '';
+    private $quizPath = '';
+
+    /** Carga el helper de temas del Metal Quiz sin depender del autoload de componentes (aún no listo en onAfterInitialise). */
+    private function quizTemas(): bool
+    {
+        if (!class_exists('Hmb\Component\Quiz\Site\Helper\TemasHelper', false)) {
+            $f = JPATH_SITE . '/components/com_hmb_quiz/src/Helper/TemasHelper.php';
+
+            if (!is_file($f)) {
+                return false;
+            }
+
+            require_once $f;
+        }
+
+        return true;
+    }
+
     /** Textos genéricos que Joomla pone cuando una página no tiene descripción propia. */
     private const GENERIC_DESC = ['desde Cartagena para el Mundo', 'somos dos apasionados del Rock', 'Categorías de las noticias'];
 
@@ -67,6 +86,18 @@ class PlgSystemHmb_seo extends CMSPlugin
 
         $path = rtrim(Uri::getInstance()->getPath(), '/');
 
+        // Páginas de entrada del Metal Quiz: /metal-quiz/<slug>. El router del componente no las conoce,
+        // así que se enruta como /metal-quiz y la vista «tema» se fija en onAfterRoute.
+        if (preg_match('#^(.*/metal-quiz)/([a-z0-9-]+)$#', $path, $mq)
+            && $this->quizTemas()
+            && \Hmb\Component\Quiz\Site\Helper\TemasHelper::get($mq[2])) {
+            $this->quizSlug = $mq[2];
+            $this->quizPath = $path;
+            Uri::getInstance()->setPath($mq[1]);
+
+            return;
+        }
+
         if (!in_array($path, ['/sitemap.xml', '/sitemap-hmb.xml'], true)) {
             return;
         }
@@ -82,6 +113,24 @@ class PlgSystemHmb_seo extends CMSPlugin
         header('X-Robots-Tag: noindex');
         echo $xml;
         $app->close();
+    }
+
+    /** Tras el enrutado: vista «tema» del Metal Quiz y restaurar la ruta real para canónicas y demás. */
+    public function onAfterRoute()
+    {
+        if ($this->quizSlug === '') {
+            return;
+        }
+
+        $app = Factory::getApplication();
+
+        if ($app->getInput()->get('option') !== 'com_hmb_quiz') {
+            return;
+        }
+
+        $app->getInput()->set('view', 'tema');
+        $app->getInput()->set('slug', $this->quizSlug);
+        Uri::getInstance()->setPath($this->quizPath);
     }
 
     public function onBeforeRender()
@@ -837,7 +886,7 @@ class PlgSystemHmb_seo extends CMSPlugin
         }
 
         // Páginas de entrada del Metal Quiz (/metal-quiz/<slug>): salen de TemasHelper, sin entradas de menú
-        if (isset($menuByComp['com_hmb_quiz|game']) && class_exists('Hmb\Component\Quiz\Site\Helper\TemasHelper')) {
+        if (isset($menuByComp['com_hmb_quiz|game']) && $this->quizTemas()) {
             foreach (array_keys(\Hmb\Component\Quiz\Site\Helper\TemasHelper::all()) as $slug) {
                 $add(rtrim($menuByComp['com_hmb_quiz|game'], '/') . '/' . $slug, null, 'monthly', '0.7');
             }

@@ -18,16 +18,23 @@ class HtmlView extends BaseHtmlView
 	protected $jugarUrl = '';
 	protected $efemUrl = '';
 
-	/** URL absoluta sin el prefijo de subcarpeta duplicado. */
-	private static function abs(string $link): string
+	/** Ruta amigable de la entrada de menú de com_efemerides con esa vista (misma que usa la canónica de las fichas). */
+	private function menuBase($db, string $view): string
 	{
-		$path = Route::_($link, false);
-
-		if (preg_match('#^https?://#', $path)) {
-			return $path;
+		try {
+			$db->setQuery('SELECT id FROM #__menu WHERE published = 1 AND client_id = 0 AND access = 1 AND link LIKE ' . $db->quote('index.php?option=com_efemerides&view=' . $view . '%') . ' ORDER BY id LIMIT 1');
+			$id = (int) $db->loadResult();
+		} catch (\Throwable $e) {
+			return '';
 		}
 
-		return rtrim(Uri::root(), '/') . '/' . ltrim(preg_replace('#^' . preg_quote(Uri::root(true), '#') . '#', '', $path), '/');
+		if (!$id) {
+			return '';
+		}
+
+		$u = html_entity_decode(Route::_('index.php?Itemid=' . $id), ENT_QUOTES | ENT_HTML5);
+
+		return strtok($u, '?');
 	}
 
 	public function display($tpl = null)
@@ -40,11 +47,17 @@ class HtmlView extends BaseHtmlView
 			throw new \RuntimeException('Página no encontrada', 404);
 		}
 
-		$root  = rtrim(Uri::root(), '/');
-		$base  = self::abs('index.php?option=com_hmb_quiz&view=game');
-		$canon = self::abs('index.php?option=com_hmb_quiz&view=tema&slug=' . $this->slug);
+		// Ruta de la entrada de menú del Metal Quiz (normalmente «metal-quiz»); las páginas cuelgan de ella
+		$active = $app->getMenu()->getActive();
+		$route  = ($active && $active->route) ? trim($active->route, '/') : 'metal-quiz';
+		$root   = rtrim(Uri::root(), '/');
+		$base   = $root . '/' . $route;
+		$canon  = $base . '/' . $this->slug;
 		$this->jugarUrl = $base;
-		$this->efemUrl = Route::_('index.php?option=com_efemerides&view=efemerides');
+		$db = Factory::getContainer()->get('DatabaseDriver');
+		$efem = $this->menuBase($db, 'efemerides') ?: $this->menuBase($db, 'lista');
+		$this->efemUrl = $efem ?: $base;
+		$bandasBase = $this->menuBase($db, 'bandas');
 
 		$doc = $this->getDocument();
 		$doc->setTitle($this->tema['title'] . ' | Heavy Metal Brothers');
@@ -57,8 +70,7 @@ class HtmlView extends BaseHtmlView
 		$doc->setMetaData('og:image', $root . '/media/com_hmb_quiz/mq/og.jpg', 'property');
 		$doc->setMetaData('twitter:card', 'summary_large_image');
 
-		// Bandas enlazadas: solo las que existen y están publicadas
-		$db = Factory::getContainer()->get('DatabaseDriver');
+		// Bandas enlazadas: solo las que existen y están publicadas (y solo si hay entrada de menú del archivo de bandas)
 
 		foreach ($this->tema['bandas'] as $nombre) {
 			try {
@@ -68,15 +80,15 @@ class HtmlView extends BaseHtmlView
 				$b = null;
 			}
 
-			if ($b) {
-				$this->bandas[] = ['nombre' => $b->nombre, 'url' => Route::_('index.php?option=com_efemerides&view=banda&id=' . (int) $b->id)];
+			if ($b && $bandasBase) {
+				$this->bandas[] = ['nombre' => $b->nombre, 'url' => $bandasBase . '?view=banda&id=' . (int) $b->id];
 			}
 		}
 
 		// Resto de páginas de entrada
 		foreach (TemasHelper::all() as $s => $t) {
 			if ($s !== $this->slug) {
-				$this->otros[] = ['nombre' => $t['nombre'], 'url' => Route::_('index.php?option=com_hmb_quiz&view=tema&slug=' . $s)];
+				$this->otros[] = ['nombre' => $t['nombre'], 'url' => $base . '/' . $s];
 			}
 		}
 
@@ -93,14 +105,6 @@ class HtmlView extends BaseHtmlView
 					'inLanguage'  => 'es',
 					'isPartOf'    => ['@type' => 'WebSite', 'name' => 'Heavy Metal Brothers', 'url' => $root . '/'],
 					'about'       => ['@type' => 'Thing', 'name' => 'Heavy metal'],
-				],
-				[
-					'@type'           => 'BreadcrumbList',
-					'itemListElement' => [
-						['@type' => 'ListItem', 'position' => 1, 'name' => 'Inicio', 'item' => $root . '/'],
-						['@type' => 'ListItem', 'position' => 2, 'name' => 'Metal Quiz', 'item' => $base],
-						['@type' => 'ListItem', 'position' => 3, 'name' => $this->tema['nombre'], 'item' => $canon],
-					],
 				],
 			],
 		];

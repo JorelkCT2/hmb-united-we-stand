@@ -73,6 +73,31 @@ class PlgSystemHmb_seo extends CMSPlugin
             'Christopher Lee: el actor de Saruman que grabó heavy metal',
             'El actor que fue Saruman y Drácula grabó discos de heavy metal sinfónico, como Charlemagne: By the Sword and the Cross. Así fue su faceta metalera.',
         ],
+        // Solo título (la descripción propia del artículo ya es buena): null = no se toca
+        '/noticias/conciertos/alice-cooper-actuara-en-la-plaza-de-toros-de-murcia-en-julio-de-2027' => [
+            'Alice Cooper en Murcia 2027: Plaza de Toros (julio)',
+            'Alice Cooper actuará en la Plaza de Toros de Murcia en julio de 2027, dentro del Murcia ON Festival 2027. Todos los detalles del concierto del pionero del shock rock.',
+        ],
+        '/noticias/curiosidades/peliculas-que-no-te-puedes-perder' => [
+            'Películas de heavy metal que no te puedes perder',
+            null,
+        ],
+        '/noticias/conciertos/download-festival-2026-limp-bizkit-guns-n-roses-y-linkin-park-encabezan-el-festival-mas-esperado-del' => [
+            'Download 2026: Limp Bizkit, Guns N’ Roses y Linkin Park',
+            null,
+        ],
+        '/noticias/obituarios/robbin-crosby-efemeride-de-la-muerte-del-guitarrista-de-ratt-icono-del-glam-metal' => [
+            'Robbin Crosby (Ratt): murió el 6 de junio de 2002',
+            null,
+        ],
+        '/noticias/conciertos/drums-of-war-festival-2026-presenta-su-cartel-completo-y-anuncia-conciertos-de-presentacion' => [
+            'Drums Of War Festival 2026: cartel completo (Barcelona)',
+            null,
+        ],
+        '/noticias/curiosidades/sepultura-el-significado-real-de-dead-embryonic-cells-y-su-mensaje-contra-la-manipulacion' => [
+            'Sepultura: significado de “Dead Embryonic Cells”',
+            null,
+        ],
     ];
 
     /** Sitemap dinámico en /sitemap-hmb.xml (y en /sitemap.xml cuando se retire el fichero estático obsoleto). */
@@ -250,7 +275,9 @@ class PlgSystemHmb_seo extends CMSPlugin
 
         if ($ov) {
             $document->setTitle($ov[0] . $separator . $siteName);
-            $document->setDescription($ov[1]);
+            if ($ov[1] !== null) {
+                $document->setDescription($ov[1]);
+            }
         }
 
         // Páginas sin valor para el buscador: filtros, búsquedas, acciones, cuentas
@@ -359,6 +386,8 @@ class PlgSystemHmb_seo extends CMSPlugin
 
     private function clean(?string $html, int $max = 160): string
     {
+        // Sin el contenido de <style>/<script> (strip_tags solo quita las etiquetas) ni comentarios HTML
+        $html = preg_replace('#<(style|script)\b[^>]*>.*?</\1>|<!--.*?-->#is', ' ', (string) $html);
         $t = html_entity_decode(strip_tags((string) $html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
         $t = trim(preg_replace('/\s+/u', ' ', $t));
 

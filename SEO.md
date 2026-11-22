@@ -87,6 +87,12 @@ Hecho el 2026-11-22 (plugin `hmb_seo`):
 - Títulos con intención de búsqueda en fichas: músico "Nombre (1948–2025): biografía y carrera en Banda", banda "Banda: banda de Género – miembros e historia" (más de 2.000 fichas; muchas tenían miles de impresiones y 0 clics).
 - Retoques a mano (constante `OVERRIDES`) de `/metal-quiz`, Dee Dee Ramone, Vinnie Paul y Christopher Lee (las de más impresiones y menos CTR). Para añadir más, editar `OVERRIDES` en `hmb_seo.php`.
 
+Segunda tanda (2026-11-22, tarde):
+- Corregido un fallo mío: `clean()` dejaba el texto CSS de los bloques `<style>` en las meta descriptions (p. ej. "Películas que no te puedes perder" empezaba por `.hmb-articulo{font-family...`). Ahora se eliminan `<style>`, `<script>` y comentarios antes de extraer el texto.
+- Más retoques de título en `OVERRIDES` (noticias con >1.000 impresiones y CTR <1 %): Alice Cooper en Murcia, Películas de heavy metal, Download 2026, Robbin Crosby, Drums Of War y Sepultura. Se acortaron a ~50 caracteres para que Google no los corte; solo con datos que ya salían en cada artículo.
+- Comprobado: las 91 URL con ≥60 impresiones en Search Console devuelven 200 (no hay 404 con tráfico).
+- Las 5 páginas `/metal-quiz/<tema>` aún no tienen datos en Search Console (indexación solicitada hace horas); medir en 1-2 semanas.
+
 Pendiente / siguientes pasos:
 1. Medir en 3-4 semanas el CTR de esas páginas y fichas (Rendimiento → Páginas).
 2. ~~MetalQuiz: páginas de entrada por tema~~ **Hecho (2026-11-22)**: 5 páginas activas en `/metal-quiz/<slug>` (`test-de-metal-para-expertos`, `quiz-iron-maiden`, `metal-trivia`, `quiz-heavy-metal-clasico`, `quiz-thrash-metal`), servidas por `hmb_seo` (sin router) con contenido en `TemasHelper.php`; en el sitemap; JSON-LD WebPage+BreadcrumbList validado (0 errores/0 avisos) y indexación solicitada en Search Console. Medir en 3-4 semanas.

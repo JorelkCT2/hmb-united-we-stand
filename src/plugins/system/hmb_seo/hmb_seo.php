@@ -100,6 +100,46 @@ class PlgSystemHmb_seo extends CMSPlugin
         ],
     ];
 
+    /**
+     * 301 de rutas antiguas con destino actual conocido:
+     *  - /promo/famosos?view=banda|musico&id=N, /?view=musico&id=N, /index.php?view=...  -> ficha en el archivo
+     *  - /promo/famosos?view=fallecidos                                                  -> obituario
+     *  - /portfolio/metal-quiz                                                           -> /metal-quiz
+     * Los destinos de las fichas salen de las entradas de menú publicadas (no hay rutas escritas a mano).
+     */
+    private function legacyRedirect($app, string $path): void
+    {
+        $in = Uri::getInstance();
+        $p  = preg_replace('#^/index\.php#', '', $path);
+        $q  = $in->getQuery(true);
+        $v  = $q['view'] ?? '';
+        $id = (int) ($q['id'] ?? 0);
+        $to = '';
+
+        if ($p === '/portfolio/metal-quiz' || $p === '/promo/metal-quiz') {
+            $to = self::SITE . '/metal-quiz';
+        } elseif (in_array($p, ['', '/promo/famosos', '/portfolio/famosos'], true) && in_array($v, ['banda', 'musico', 'fallecidos'], true)
+            && ($v === 'fallecidos' || $id > 0) && !isset($q['option'])) {
+            $db   = Factory::getContainer()->get('DatabaseDriver');
+            $list = ['banda' => 'bandas', 'musico' => 'musicos', 'fallecidos' => 'fallecidos'][$v];
+
+            // La ruta /portfolio/famosos ya es la actual para músico y banda: solo se corrige lo que cuelga de otra ruta
+            if ($p !== '/portfolio/famosos' || $v === 'fallecidos') {
+                $db->setQuery("SELECT path FROM #__menu WHERE published = 1 AND client_id = 0 AND access = 1 AND link LIKE "
+                    . $db->quote('index.php?option=com_efemerides&view=' . $list . '%') . ' ORDER BY id LIMIT 1');
+                $mp = (string) $db->loadResult();
+
+                if ($mp !== '') {
+                    $to = self::SITE . '/' . $mp . '?view=' . $v . ($v !== 'fallecidos' ? '&id=' . $id : '');
+                }
+            }
+        }
+
+        if ($to !== '') {
+            $app->redirect($to, 301);
+        }
+    }
+
     /** Sitemap dinámico en /sitemap-hmb.xml (y en /sitemap.xml cuando se retire el fichero estático obsoleto). */
     public function onAfterInitialise()
     {
@@ -110,6 +150,13 @@ class PlgSystemHmb_seo extends CMSPlugin
         }
 
         $path = rtrim(Uri::getInstance()->getPath(), '/');
+
+        // Rutas antiguas que Google aún conoce (404 en Search Console): 301 a su destino actual
+        try {
+            $this->legacyRedirect($app, $path);
+        } catch (\Throwable $e) {
+            // una redirección fallida nunca debe romper la página
+        }
 
         // Páginas de entrada del Metal Quiz: /metal-quiz/<slug>. El router del componente no las conoce,
         // así que se enruta como /metal-quiz y la vista «tema» se fija en onAfterRoute.
@@ -242,8 +289,15 @@ class PlgSystemHmb_seo extends CMSPlugin
         $query = array_intersect_key($uri->getQuery(true), array_flip($keep));
         $url   = self::SITE . $uri->getPath();
 
-        // Fichas de banda/músico: una sola URL canónica (la del archivo), aunque cuelguen de otras rutas de menú
+        // Agenda: /agenda y /agenda/agenda-de-conciertos muestran lo mismo (dos entradas de menú); canónica única
         $in0 = $app->getInput();
+
+        if (rtrim($uri->getPath(), '/') === '/agenda' && $in0->get('option') === 'com_concerts' && $in0->get('view') === 'concerts') {
+            $url   = self::SITE . '/agenda/agenda-de-conciertos';
+            $query = ['view' => 'concerts'];
+        }
+
+        // Fichas de banda/músico: una sola URL canónica (la del archivo), aunque cuelguen de otras rutas de menú
 
         if ($in0->get('option') === 'com_efemerides' && in_array($in0->get('view'), ['banda', 'musico'], true) && $in0->getInt('id', 0)) {
             try {

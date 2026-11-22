@@ -93,3 +93,12 @@ Pendiente / siguientes pasos:
 3. Discover: imágenes de noticias de ≥1.200 px propias (hoy muchas son hotlinks pequeños) → ver §3.4.
 4. Noticias de giras y festivales con ciudad y fecha, incluyendo Latinoamérica.
 5. ~~Search Console → Sitemaps~~ **Hecho (2026-11-22)**: quitados `https://heavymetalbrothers.com/HMBSiteMap.xml` y `https://heavymetalbrothers.com/sitemap.xml`; queda solo `https://www.heavymetalbrothers.com/sitemap.xml`. Desactivado el plugin **System - JLSitemap Cron** (el que regeneraba `HMBSiteMap.xml` en cada visita) y borrado el fichero regenerado (copia en `tmp/hmb_backups/seo/*.regen`). **2026-11-22: JLSitemap desinstalado por completo** (paquete `PKG_JLSITEMAP`: componente + 7 plugins; borradas las carpetas vacías `plugins/jlsitemap` y `layouts/plugins/system/jlsitemap_cron` y su caché de idioma; sin tareas programadas). Retirado también el acceso directo "Mapa del sitio" de `administrator/components/com_hmb/src/Helper/AreasHelper.php` (editado en el servidor, copia en `tmp/hmb_backups/seo/AreasHelper.php.bak`; **la rama que mantiene ese fichero debe borrar la línea `option=com_jlsitemap` de su copia** o volverá a aparecer al desplegar). El sitemap lo genera ahora solo el plugin `hmb_seo`.
+
+## 7. Imágenes de noticias a local (2026-11-22)
+
+Las noticias usaban 76 imágenes alojadas en otras webs (gstatic, Amazon, Facebook, Rolling Stone, etc.), que caducan y no sirven para Discover. Script de un solo uso (PHP 8.3 en el servidor, cURL + GD): descarga cada una, la valida (imagen real, ≥40 px), limita a 1.600 px de ancho y la guarda en `images/noticias/ext/<idArticulo>-<hash>.<ext>`; después repunta `images` (intro/fulltext) y las `<img>` de `introtext`/`fulltext`.
+
+- Resultado: **67 de 75 URL descargadas (65 artículos actualizados)**; 67 ficheros, 13 MB. Copia previa de las filas originales en `tmp/hmb_backups/seo/content-images-20261122-143028.json` del servidor (campos `id`, `images`, `introtext`, `fulltext`) para revertir.
+- Quedan **8 sin descargar** porque el origen ya no sirve imagen: 5 de Facebook (403, enlaces caducados), 1 de Google Share (429), 2 sin imagen válida (wixstatic, lanacion, framerusercontent). Son los artículos 180, 181, 280, 309, 318, 327, 330, 331: hay que subirles una imagen propia desde el editor.
+- Pendiente: el importador de noticias (`hmbnews`) sigue guardando enlaces externos en las noticias nuevas; conviene que descargue la imagen al importar (rama `noticias`). Hasta entonces, repetir el script cada cierto tiempo.
+- Una imagen pesa 1,9 MB (Rolling Stone, art. 310): optimizarla.

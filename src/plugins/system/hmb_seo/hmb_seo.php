@@ -33,6 +33,29 @@ class PlgSystemHmb_seo extends CMSPlugin
         'game'     => 'Metal Quiz: pon a prueba lo que sabes de metal con preguntas de bandas, discos, años y miembros.',
     ];
 
+    /**
+     * Título y descripción a mano para las páginas con muchas impresiones y poco CTR (Search Console, 2026-11).
+     * Clave: ruta exacta. Solo datos comprobables; el resto lo deducen las reglas de arriba.
+     */
+    private const OVERRIDES = [
+        '/metal-quiz' => [
+            'Metal Quiz: test de heavy metal online gratis',
+            'Test de metal: preguntas sobre bandas, discos, años y miembros del rock y el heavy metal. Juega gratis y mide cuánto sabes.',
+        ],
+        '/noticias/obituarios/la-muerte-de-dee-dee-ramone-el-adios-tragico-al-alma-salvaje-de-los-ramones' => [
+            '¿De qué murió Dee Dee Ramone? Su muerte en 2002',
+            'Dee Dee Ramone, bajista y compositor de Ramones, murió el 5 de junio de 2002 en Hollywood. Repasamos su vida, su legado en el punk y las circunstancias de su muerte.',
+        ],
+        '/noticias/obituarios/muere-vinnie-paul-bateria-de-pantera-y-figura-esencial-del-metal-moderno' => [
+            'Muere Vinnie Paul, batería de Pantera y Damageplan',
+            'Vinnie Paul, batería de Pantera y Damageplan y hermano de Dimebag Darrell, murió el 22 de junio de 2018 a los 54 años. Su vida, su legado y su huella en el metal.',
+        ],
+        '/noticias/curiosidades/christopher-lee-el-actor-de-saruman-que-sorprendio-al-mundo-con-sus-discos-de-heavy-metal' => [
+            'Christopher Lee: el actor de Saruman que grabó heavy metal',
+            'El actor que fue Saruman y Drácula grabó discos de heavy metal sinfónico, como Charlemagne: By the Sword and the Cross. Así fue su faceta metalera.',
+        ],
+    ];
+
     /** Sitemap dinámico en /sitemap-hmb.xml (y en /sitemap.xml cuando se retire el fichero estático obsoleto). */
     public function onAfterInitialise()
     {
@@ -173,12 +196,25 @@ class PlgSystemHmb_seo extends CMSPlugin
             $document->addHeadLink(htmlspecialchars($url), 'canonical');
         }
 
+        // Retoques a mano de las páginas con más impresiones (la clave es la ruta sin barra final)
+        $ov = self::OVERRIDES[rtrim($uri->getPath(), '/')] ?? null;
+
+        if ($ov) {
+            $document->setTitle($ov[0] . $separator . $siteName);
+            $document->setDescription($ov[1]);
+        }
+
         // Páginas sin valor para el buscador: filtros, búsquedas, acciones, cuentas
         $in = $app->getInput();
 
         if ($in->getInt('hmbmodal', 0) === 1 || $in->get('task') || $in->get('tmpl') || $in->get('search') !== null
             || $in->get('genero') !== null || $in->get('q') !== null || in_array($in->get('option'), ['com_users', 'com_hmb'], true)) {
             $document->setMetaData('robots', 'noindex, follow');
+        }
+
+        // Google Discover y fragmentos con imagen grande: sin tocar lo que ya sea noindex
+        if (!(string) $document->getMetaData('robots')) {
+            $document->setMetaData('robots', 'max-image-preview:large, max-snippet:-1, max-video-preview:-1');
         }
 
         // Corregir OG tags si está activado
@@ -316,14 +352,22 @@ class PlgSystemHmb_seo extends CMSPlugin
                 $db->setQuery('SELECT nombre, genero, pais FROM #__efemerides_bandas WHERE id = ' . $id . ' AND state = 1');
                 $b = $db->loadObject();
 
-                return $b ? trim($b->nombre . ' – banda' . ($b->genero ? ' de ' . $b->genero : '') . ($b->pais ? ' (' . $b->pais . ')' : '')) : '';
+                return $b ? trim($b->nombre . ': banda' . ($b->genero ? ' de ' . $b->genero : ' de rock y metal') . ' – miembros e historia') : '';
             }
 
             if ($opt === 'com_efemerides' && $view === 'musico') {
-                $db->setQuery('SELECT nombre, instrumento, banda_texto FROM #__efemerides_musicos WHERE id = ' . $id . ' AND state = 1');
+                $db->setQuery('SELECT nombre, banda_texto, fecha_nacimiento, fecha_defuncion FROM #__efemerides_musicos WHERE id = ' . $id . ' AND state = 1');
                 $m = $db->loadObject();
 
-                return $m ? trim($m->nombre . ' – ' . ($m->instrumento ?: 'músico') . ($m->banda_texto ? ' de ' . $m->banda_texto : '')) : '';
+                if (!$m) {
+                    return '';
+                }
+
+                $born = ($m->fecha_nacimiento && $m->fecha_nacimiento > '0001') ? substr((string) $m->fecha_nacimiento, 0, 4) : '';
+                $died = ($m->fecha_defuncion && $m->fecha_defuncion > '0001') ? substr((string) $m->fecha_defuncion, 0, 4) : '';
+                $span = $died ? ($born ? '(' . $born . '–' . $died . ')' : '(† ' . $died . ')') : ($born ? '(n. ' . $born . ')' : '');
+
+                return trim($m->nombre . ' ' . $span . ': biografía' . ($m->banda_texto ? ' y carrera en ' . $m->banda_texto : ' y carrera'));
             }
 
             if ($opt === 'com_concerts' && $view === 'concert') {

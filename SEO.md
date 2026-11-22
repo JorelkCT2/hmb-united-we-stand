@@ -77,3 +77,19 @@ curl -s https://www.heavymetalbrothers.com/robots.txt | tail -3
 **Google Analytics 4** (`G-XXP1DXHHLN`): comprobar en Tiempo real que llega tráfico; dejar **un solo** código (GTM *o* gtag) para no duplicar sesiones; marcar conversiones (registro, envío de contacto, partida de MetalQuiz).
 
 **Otros**: Google Business Profile no aplica; dar de alta el perfil de Instagram/YouTube/Facebook y añadirlos a `sameAs` del `Organization` (ahora solo Instagram).
+
+## 6. Crecimiento (estudio de Search Console, 21/8–20/11/2026)
+
+Datos: 1.370 clics, 129.000 impresiones, CTR 1,1 %, posición media 8,3. Móvil 70 %; España 53 % de clics y Latinoamérica (México, Argentina, Chile, Colombia, Perú) ~40 %. `/metal-quiz` aporta ~21 % de los clics con CTR del 17-19 %.
+
+Hecho el 2026-11-22 (plugin `hmb_seo`):
+- `robots: max-image-preview:large, max-snippet:-1, max-video-preview:-1` en todas las páginas indexables (requisito de Google Discover y de vistas previas grandes).
+- Títulos con intención de búsqueda en fichas: músico "Nombre (1948–2025): biografía y carrera en Banda", banda "Banda: banda de Género – miembros e historia" (más de 2.000 fichas; muchas tenían miles de impresiones y 0 clics).
+- Retoques a mano (constante `OVERRIDES`) de `/metal-quiz`, Dee Dee Ramone, Vinnie Paul y Christopher Lee (las de más impresiones y menos CTR). Para añadir más, editar `OVERRIDES` en `hmb_seo.php`.
+
+Pendiente / siguientes pasos:
+1. Medir en 3-4 semanas el CTR de esas páginas y fichas (Rendimiento → Páginas).
+2. MetalQuiz: páginas de entrada por tema ("test de metal", "quiz de Iron Maiden", "metal trivia"); "heavy metal quiz" está en posición ~25.
+3. Discover: imágenes de noticias de ≥1.200 px propias (hoy muchas son hotlinks pequeños) → ver §3.4.
+4. Noticias de giras y festivales con ciudad y fecha, incluyendo Latinoamérica.
+5. Search Console → Sitemaps: dejar solo `https://www.heavymetalbrothers.com/sitemap.xml` y quitar los otros dos. `HMBSiteMap.xml` reaparece en el servidor (lo regenera JLSitemap): desactivar su tarea/plugin en Joomla.

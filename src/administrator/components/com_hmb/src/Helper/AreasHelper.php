@@ -81,7 +81,6 @@ class AreasHelper
                     ['Menús', 'Menús y enlaces de la web.', 'option=com_menus&view=menus', ''],
                     ['Módulos', 'Módulos de la portada y las páginas.', 'option=com_modules&view=modules&client_id=0', ''],
                     ['Plantilla', 'Estilos de la plantilla HMB.', 'option=com_templates&view=styles&client_id=0', ''],
-                    ['Mapa del sitio', 'Generación del sitemap.', 'option=com_jlsitemap', ''],
                 ],
             ],
         ];

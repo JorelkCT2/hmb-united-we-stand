@@ -289,6 +289,11 @@ class PlgSystemHmb_seo extends CMSPlugin
         $query = array_intersect_key($uri->getQuery(true), array_flip($keep));
         $url   = self::SITE . $uri->getPath();
 
+        // Categorías de noticias: ?layout=blog repite la misma lista que la ruta limpia
+        if ($app->getInput()->get('option') === 'com_content' && $app->getInput()->get('view') === 'category') {
+            unset($query['layout']);
+        }
+
         // Agenda: /agenda y /agenda/agenda-de-conciertos muestran lo mismo (dos entradas de menú); canónica única
         $in0 = $app->getInput();
 

@@ -117,3 +117,10 @@ Las noticias usaban 76 imágenes alojadas en otras webs (gstatic, Amazon, Facebo
 - **Imágenes**: las 19 de `images/noticias/ext/` más pesadas se recomprimieron (6,7 MB → 3,5 MB); originales en `tmp/hmb_backups/seo/ext-orig/`.
 - **Páginas legales**: `/registro/aviso-legal` publicada el 23/11/2026 (artículo 312 + entrada de menú 3794 bajo «Registro»). Texto de proyecto personal sin ánimo de lucro, con nombre del titular y email, **sin NIF ni domicilio** por decisión del titular; si algún día hay ingresos (tienda, publicidad, patrocinios) habrá que añadirlos. Copia previa en `tmp/hmb_backups/seo/aviso-legal-20261123-090715.json`. `/registro/politica-de-imagenes` ya estaba publicada (aún muestra «[BORRADOR]» en su texto: lo decide la sesión legal).
 - **Fichas de la categoría 19** (`/component/content/article/...-hmb-NN?catid=19`, unas 25 de artistas) siguen devolviendo 404 aunque están publicadas: necesitan una entrada de menú para la categoría o despublicarlas. Están excluidas del sitemap.
+
+## Revisión de Search Console (23-nov-2026)
+- Indexadas 1.254 / no indexadas 2.863. Mayor grupo: «Descubierta: sin indexar» (1.696) y «Rastreada: sin indexar» (540): es prioridad de rastreo de Google, se mueve con contenido nuevo y enlaces internos, no con código.
+- 404 (46): URLs antiguas ya redirigidas (301) o noticias que ya no existen; se irán solas.
+- «Duplicada sin canónica» (191): rastreos de octubre, antes de la canónica única. Nuevo: las categorías con `?layout=blog` apuntan a la ruta limpia.
+- 5xx (3): `/promo/musicos-buscando-banda` responde 200 ahora.
+- Categoría 19: 22 artículos publicados que daban 404 despublicados (copia `cat19-state-20261123-211050.json`).
